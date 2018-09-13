@@ -4,19 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
+	    <groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
 		<artifactId>parent-project</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
-	<packaging>war</packaging>
-	<artifactId>web</artifactId>
+	
+	<artifactId>dao-api</artifactId>
+        
 
-	<dependencies>
-		<dependency>
-			<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
-			<artifactId>service</artifactId>
-
-		</dependency>
-	</dependencies>
 </project>

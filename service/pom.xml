@@ -9,14 +9,14 @@
 		<version>1.0.0</version>
 	</parent>
 
-	<packaging>war</packaging>
-	<artifactId>web</artifactId>
+
+	<artifactId>service</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
-			<artifactId>service</artifactId>
-
+			<artifactId>dao-jdbc-impl</artifactId>
 		</dependency>
 	</dependencies>
+
 </project>

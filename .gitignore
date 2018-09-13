@@ -3,3 +3,9 @@
 web/.settings/
 web/.project
 web/.classpath
+.settings/
+dao-api/.project
+.project
+dao-jdbc-impl/.classpath
+dao-api/.classpath
+service/.classpath
