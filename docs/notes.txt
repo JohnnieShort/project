@@ -1,5 +1,5 @@
 - roles should be enum;
-- add table - user_account(id, login, password, role_id, first_name, last_name);
+- add table - user_account(id, e_mail, password, role, first_name, last_name);
 - check train_type for enum;
 - delete passenger_order;
 - add table station(id, name, coordinats);
