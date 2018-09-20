@@ -9,3 +9,4 @@ dao-api/.project
 dao-jdbc-impl/.classpath
 dao-api/.classpath
 service/.classpath
+/.metadata/
