@@ -1,13 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
- 	<modelVersion>4.0.0</modelVersion>
- 	
- 	<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
 	<artifactId>parent-project</artifactId>
 	<version>1.0.0</version>
- 	<packaging>pom</packaging>
- 	
- 	<properties>
+	<packaging>pom</packaging>
+
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>5.0.0.RELEASE</spring.version>
 		<jetty9.version>9.2.15.v20160210</jetty9.version>
@@ -17,42 +17,74 @@
 		<jsp.version>2.3.1</jsp.version>
 		<tiles.version>3.0.8</tiles.version>
 	</properties>
- 	<modules>
+	<modules>
 		<module>dao-api</module>
 		<module>dao-jdbc-impl</module>
 		<module>service</module>
 		<module>web</module>
 	</modules>
- 	<dependencyManagement>
+	<dependencyManagement>
 		<dependencies>
 			<dependency>
-			    <groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
+				<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
 				<artifactId>dao-api</artifactId>
 				<version>1.0.0</version>
 			</dependency>
- 			<dependency>
+			<dependency>
 				<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
 				<artifactId>dao-jdbc-impl</artifactId>
 				<version>1.0.0</version>
 			</dependency>
- 			<dependency>
+			<dependency>
 				<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
 				<artifactId>service</artifactId>
 				<version>1.0.0</version>
 			</dependency>
- 			<dependency>
+			<dependency>
 				<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
 				<artifactId>web</artifactId>
 				<version>1.0.0</version>
 			</dependency>
- 			<dependency>
+			<dependency>
 				<groupId>org.postgresql</groupId>
 				<artifactId>postgresql</artifactId>
 				<version>9.4-1200-jdbc41</version>
 			</dependency>
- 		</dependencies>
+
+			<!-- JUnit -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-api</artifactId>
+				<version>5.1.0</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-engine</artifactId>
+				<version>5.1.0</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.vintage</groupId>
+				<artifactId>junit-vintage-engine</artifactId>
+				<version>5.1.0</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-launcher</artifactId>
+				<version>1.1.0</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.junit.platform</groupId>
+				<artifactId>junit-platform-runner</artifactId>
+				<version>1.1.0</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
 	</dependencyManagement>
- 	<build>
+	<build>
 		<finalName>ROOT</finalName>
 		<pluginManagement>
 			<plugins>
@@ -69,7 +101,7 @@
 						<showDeprecation>true</showDeprecation>
 					</configuration>
 				</plugin>
- 				<plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
 					<version>2.9</version>
