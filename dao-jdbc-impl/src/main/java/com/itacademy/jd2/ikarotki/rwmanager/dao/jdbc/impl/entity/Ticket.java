@@ -1,6 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.model.ITicket;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 
 public class Ticket extends BaseEntity implements ITicket{
 	private Integer passengerId;

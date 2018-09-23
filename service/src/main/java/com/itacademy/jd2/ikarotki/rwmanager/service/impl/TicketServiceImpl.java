@@ -3,7 +3,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITicketDao;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.model.ITicket;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.TicketDaoImpl;
 
 

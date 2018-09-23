@@ -1,4 +1,4 @@
-package com.itacademy.jd2.ikarotki.rwmanager.dao.api.model.base;
+package com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base;
 
 import java.util.Date;
 

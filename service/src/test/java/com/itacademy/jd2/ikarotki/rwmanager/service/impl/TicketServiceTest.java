@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.model.ITicket;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 
 public class TicketServiceTest extends AbstractTest {
 

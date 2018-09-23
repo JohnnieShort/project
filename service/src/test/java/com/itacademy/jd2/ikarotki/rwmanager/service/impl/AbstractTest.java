@@ -2,7 +2,7 @@ package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
 import java.util.Random;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.model.ITicket;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 
 
 public abstract class AbstractTest {

@@ -2,7 +2,7 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
 import java.util.Date;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.model.base.IBaseEntity;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 
 public abstract class BaseEntity implements IBaseEntity {
     private Integer id;

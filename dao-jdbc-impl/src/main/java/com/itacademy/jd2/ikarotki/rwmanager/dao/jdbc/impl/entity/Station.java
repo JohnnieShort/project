@@ -1,6 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.model.IStation;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
 public class Station extends BaseEntity implements IStation{
 	private String name;

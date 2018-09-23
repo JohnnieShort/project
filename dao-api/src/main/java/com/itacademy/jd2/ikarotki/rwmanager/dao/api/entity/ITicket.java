@@ -1,6 +1,6 @@
-package com.itacademy.jd2.ikarotki.rwmanager.dao.api.model;
+package com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.model.base.IBaseEntity;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 
 public interface ITicket extends IBaseEntity{
 	public int getPassengerId();
