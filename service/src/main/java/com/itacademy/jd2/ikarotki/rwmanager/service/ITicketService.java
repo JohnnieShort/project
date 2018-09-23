@@ -1,4 +1,4 @@
-package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
+package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 import java.util.List;
 

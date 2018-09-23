@@ -1,8 +1,10 @@
-package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
+package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 import java.util.Random;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
+import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.TicketServiceImpl;
 
 
 public abstract class AbstractTest {

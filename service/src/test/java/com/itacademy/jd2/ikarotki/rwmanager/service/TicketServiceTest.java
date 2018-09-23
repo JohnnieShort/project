@@ -1,4 +1,4 @@
-package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
+package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

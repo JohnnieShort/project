@@ -1,14 +1,14 @@
 ---------------------------18/09--------------------------
-- roles should be enum;
-- add table - user_account(id, e_mail, password, role, first_name, last_name);
-- check train_type for enum;
-- delete passenger_order;
-- add table station(id, name, coordinats);
-- add table route_item(id, route_id, st_from, st-to, num);
-- to table passenger_route add column is_actual;
+- roles should be enum;+
+- add table - user_account(id, e_mail, password, role, first_name, last_name);+
+- check train_type for enum;+
+- delete passenger_order;+
+- add table station(id, name, coordinats);+
+- add table route_item(id, route_id, st_from, st-to, num);+
+- to table passenger_route add column is_actual;+
 
 ---------------------------22/09---------------------------
-- remove "name" from passenger;
-- check data types in DM;
-- change "from", "to" to stationIdFrom, stationIdTo in "cargo_order";
-- replace "price" from "cargo_order" to "cargo_route";
+- remove "name" from passenger;+
+- check data types in DM;+
+- change "from", "to" to stationIdFrom, stationIdTo in "cargo_order";+
+- replace "price" from "cargo_order" to "cargo_route";+
