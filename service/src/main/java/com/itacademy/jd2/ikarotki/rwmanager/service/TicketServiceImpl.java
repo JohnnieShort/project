@@ -24,11 +24,11 @@ public class TicketServiceImpl implements ITicketService {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
 		if (entity.getId() == null) {
-			LOGGER.info("new brand created:" + entity);
+			LOGGER.info("new ticket created:" + entity);
 			entity.setCreated(modifedOn);
 			dao.insert(entity);
 		} else {
-			LOGGER.info("brand updated:" + entity);
+			LOGGER.info("ticket updated:" + entity);
 			dao.update(entity);
 		}
 	}
