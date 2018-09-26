@@ -1,11 +1,31 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 
-public class Ticket extends BaseEntity implements ITicket{
+public class Ticket extends BaseEntity implements ITicket {
 	private Integer passengerId;
 	private Integer passengerRouteId;
-	private Integer price;
+	private Double price;
+	IPassenger passenger;
+	IPassengerRoute passengerRoute;
+
+	public IPassenger getPassenger() {
+		return passenger;
+	}
+
+	public void setPassenger(IPassenger passenger) {
+		this.passenger = passenger;
+	}
+
+	public IPassengerRoute getPassengerRoute() {
+		return passengerRoute;
+	}
+
+	public void setPassengerRoute(IPassengerRoute passengerRoute) {
+		this.passengerRoute = passengerRoute;
+	}
 
 	public int getPassengerId() {
 		return passengerId;
@@ -23,11 +43,11 @@ public class Ticket extends BaseEntity implements ITicket{
 		this.passengerRouteId = passengerRouteId;
 	}
 
-	public int getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
