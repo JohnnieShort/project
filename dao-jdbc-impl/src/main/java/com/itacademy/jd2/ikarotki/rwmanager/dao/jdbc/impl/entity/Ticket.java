@@ -53,7 +53,7 @@ public class Ticket extends BaseEntity implements ITicket {
 
 	@Override
 	public String toString() {
-		return "Ticket [passengerId=" + passengerId + ", passengerRouteId=" + passengerRouteId + ", price=" + price
+		return "Ticket [passenger=" + passenger + ", passengerRoute=" + passengerRoute + ", price=" + price
 				+ ", getId()=" + getId() + "]";
 	}
 }

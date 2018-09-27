@@ -3,17 +3,17 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 
 public interface IRouteItem extends IBaseEntity {
-	public Integer getPassengerRouteId();
+	public IPassengerRoute getPassengerRoute();
 
-	public void setPassengerRouteId(Integer passengerRouteId);
+	public void setPassengerRoute(IPassengerRoute passengerRoute);
 
-	public Integer getStationIdFrom();
+	public IStation getStationFrom();
 
-	public void setStationIdFrom(Integer stationIdFrom);
+	public void setStationFrom(IStation stationFrom);
 
-	public Integer getStationIdTo();
+	public IStation getStationTo();
 
-	public void setStationIdTo(Integer stationIdTo);
+	public void setStationTo(IStation stationIdTo);
 
 	public Double getTime();
 

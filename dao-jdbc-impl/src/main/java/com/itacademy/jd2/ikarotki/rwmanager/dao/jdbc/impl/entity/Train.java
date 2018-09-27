@@ -1,16 +1,22 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 
-public class Train extends BaseEntity implements ITrain{
-private Integer locomotiveId;
+public class Train extends BaseEntity implements ITrain {
+	private ILocomotive locomotive;
 
-	public Integer getLocomotiveId() {
-		return locomotiveId;
+	public ILocomotive getLocomotive() {
+		return locomotive;
 	}
 
-	public void setLocomotiveId(Integer locomotiveId) {
-		this.locomotiveId = locomotiveId;
+	public void setLocomotive(ILocomotive locomotive) {
+		this.locomotive = locomotive;
+	}
+
+	@Override
+	public String toString() {
+		return "Train [locomotive=" + locomotive + ", getId()=" + getId() + "]";
 	}
 
 }

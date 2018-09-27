@@ -10,11 +10,11 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	private String firstName;
 	private String lastName;
 
-	public String geteMail() {
+	public String getEMail() {
 		return eMail;
 	}
 
-	public void seteMail(String eMail) {
+	public void setEMail(String eMail) {
 		this.eMail = eMail;
 	}
 
@@ -55,7 +55,5 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 		return "UserAccount [eMail=" + eMail + ", password=" + password + ", role=" + role + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", getId()=" + getId() + "]";
 	}
-
-	
 
 }

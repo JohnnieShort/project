@@ -1,36 +1,38 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
 public class RouteItem extends BaseEntity implements IRouteItem {
-	private Integer passengerRouteId;
-	private Integer stationIdFrom;
-	private Integer stationIdTo;
+	private IPassengerRoute passengerRoute;
+	private IStation stationFrom;
+	private IStation stationTo;
 	private Double time;
 	private Integer ordinalNum;
 
-	public Integer getPassengerRouteId() {
-		return passengerRouteId;
+	public IPassengerRoute getPassengerRoute() {
+		return passengerRoute;
 	}
 
-	public void setPassengerRouteId(Integer passengerRouteId) {
-		this.passengerRouteId = passengerRouteId;
+	public void setPassengerRoute(IPassengerRoute passengerRoute) {
+		this.passengerRoute = passengerRoute;
 	}
 
-	public Integer getStationIdFrom() {
-		return stationIdFrom;
+	public IStation getStationFrom() {
+		return stationFrom;
 	}
 
-	public void setStationIdFrom(Integer stationIdFrom) {
-		this.stationIdFrom = stationIdFrom;
+	public void setStationFrom(IStation stationFrom) {
+		this.stationFrom = stationFrom;
 	}
 
-	public Integer getStationIdTo() {
-		return stationIdTo;
+	public IStation getStationTo() {
+		return stationTo;
 	}
 
-	public void setStationIdTo(Integer stationIdTo) {
-		this.stationIdTo = stationIdTo;
+	public void setStationTo(IStation stationTo) {
+		this.stationTo = stationTo;
 	}
 
 	public Double getTime() {
@@ -51,8 +53,8 @@ public class RouteItem extends BaseEntity implements IRouteItem {
 
 	@Override
 	public String toString() {
-		return "RouteItem [passengerRouteId=" + passengerRouteId + ", stationIdFrom=" + stationIdFrom + ", stationIdTo="
-				+ stationIdTo + ", time=" + time + ", ordinalNum=" + ordinalNum + ", getId()=" + getId() + "]";
+		return "RouteItem [passengerRoute=" + passengerRoute + ", stationFrom=" + stationFrom + ", stationTo="
+				+ stationTo + ", time=" + time + ", ordinalNum=" + ordinalNum + ", getId()=" + getId() + "]";
 	}
 
 }

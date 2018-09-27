@@ -8,9 +8,9 @@ public interface IWagon extends IBaseEntity {
 
 	public void setWagonType(WagonType wagonType);;
 
-	public Integer getTrainId();
+	public ITrain getTrain();
 
-	public void setTrainId(Integer trainId);
+	public void setTrain(ITrain train);
 
 	public Double getFreightPrice();
 
