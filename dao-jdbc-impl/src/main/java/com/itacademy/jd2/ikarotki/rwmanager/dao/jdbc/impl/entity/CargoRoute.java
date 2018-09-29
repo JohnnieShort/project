@@ -1,26 +1,28 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 
 public class CargoRoute extends BaseEntity implements ICargoRoute {
-	private Integer cargoOrderId;
-	private Integer trainId;
+	private ICargoOrder cargoOrder;
+	private ITrain train;
 	private Double price;
 
-	public Integer getCargoOrderId() {
-		return cargoOrderId;
+	public ICargoOrder getCargoOrder() {
+		return cargoOrder;
 	}
 
-	public void setCargoOrderId(Integer cargoOrderId) {
-		this.cargoOrderId = cargoOrderId;
+	public void setCargoOrder(ICargoOrder cargoOrder) {
+		this.cargoOrder = cargoOrder;
 	}
 
-	public Integer getTrainId() {
-		return trainId;
+	public ITrain getTrain() {
+		return train;
 	}
 
-	public void setTrainId(Integer trainId) {
-		this.trainId = trainId;
+	public void setTrain(ITrain train) {
+		this.train = train;
 	}
 
 	public Double getPrice() {
@@ -33,7 +35,7 @@ public class CargoRoute extends BaseEntity implements ICargoRoute {
 
 	@Override
 	public String toString() {
-		return "CargoRoute [cargoOrderId=" + cargoOrderId + ", trainId=" + trainId + ", price=" + price + ", getId()="
+		return "CargoRoute [cargoOrder=" + cargoOrder + ", train=" + train + ", price=" + price + ", getId()="
 				+ getId() + "]";
 	}
 	

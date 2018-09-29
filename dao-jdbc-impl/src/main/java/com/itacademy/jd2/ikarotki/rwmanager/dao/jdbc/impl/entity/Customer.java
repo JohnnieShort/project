@@ -1,21 +1,22 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 
 public class Customer extends BaseEntity implements ICustomer {
-private Integer userAccountId;
+	private IUserAccount userAccount;
 
-public Integer getUserAccountId() {
-	return userAccountId;
-}
+	public IUserAccount getUserAccount() {
+		return userAccount;
+	}
 
-public void setUserAccountId(Integer userAccountId) {
-	this.userAccountId = userAccountId;
-}
+	public void setUserAccount(IUserAccount userAccountId) {
+		this.userAccount = userAccountId;
+	}
 
 @Override
 public String toString() {
-	return "Customer [userAccountId=" + userAccountId + ", getId()=" + getId() + "]";
+	return "Customer [userAccount=" + userAccount + ", getId()=" + getId() + "]";
 }
 
 }

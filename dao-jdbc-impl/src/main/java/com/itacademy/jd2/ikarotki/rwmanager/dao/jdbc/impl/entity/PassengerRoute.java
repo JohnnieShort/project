@@ -1,46 +1,69 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
+import java.util.Date;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 
 public class PassengerRoute extends BaseEntity implements IPassengerRoute {
-	private String from;
-	private String to;
-	private Double departure;
-	private Double arrival;
+	private IStation from;
+	private IStation to;
+	private Date departure;
+	private Date arrival;
 	private PassengerRouteType passengerRoutetype;
-	private Integer trainId;
+	private ITrain train;
 	private Boolean isActual;
+	private Frequency frequency;
+	private Integer places;
 
-	public String getFrom() {
+	public Frequency getFrequency() {
+		return frequency;
+	}
+
+	public void setFrequency(Frequency frequency) {
+		this.frequency = frequency;
+	}
+
+	public Integer getPlaces() {
+		return places;
+	}
+
+	public void setPlaces(Integer places) {
+		this.places = places;
+	}
+
+	public IStation getFrom() {
 		return from;
 	}
 
-	public void setFrom(String from) {
+	public void setFrom(IStation from) {
 		this.from = from;
 	}
 
-	public String getTo() {
+	public IStation getTo() {
 		return to;
 	}
 
-	public void setTo(String to) {
+	public void setTo(IStation to) {
 		this.to = to;
 	}
 
-	public Double getDeparture() {
+	public Date getDeparture() {
 		return departure;
 	}
 
-	public void setDeparture(Double departure) {
+	public void setDeparture(Date departure) {
 		this.departure = departure;
 	}
 
-	public Double getArrival() {
+	public Date getArrival() {
 		return arrival;
 	}
 
-	public void setArrival(Double arrival) {
+	public void setArrival(Date arrival) {
 		this.arrival = arrival;
 	}
 
@@ -52,12 +75,12 @@ public class PassengerRoute extends BaseEntity implements IPassengerRoute {
 		this.passengerRoutetype = passengerRoutetype;
 	}
 
-	public Integer getTrainId() {
-		return trainId;
+	public ITrain getTrain() {
+		return train;
 	}
 
-	public void setTrainId(Integer trainId) {
-		this.trainId = trainId;
+	public void setTrain(ITrain train) {
+		this.train = train;
 	}
 
 	public Boolean getIsActual() {
@@ -71,8 +94,8 @@ public class PassengerRoute extends BaseEntity implements IPassengerRoute {
 	@Override
 	public String toString() {
 		return "PassengerRoute [from=" + from + ", to=" + to + ", departure=" + departure + ", arrival=" + arrival
-				+ ", passengerRoutetype=" + passengerRoutetype + ", trainId=" + trainId + ", isActual=" + isActual
-				+ ", getId()=" + getId() + "]";
+				+ ", passengerRoutetype=" + passengerRoutetype + ", train=" + train + ", isActual=" + isActual
+				+ ", frequency=" + frequency + ", places=" + places + ", getId()=" + getId() + "]";
 	}
 
 }

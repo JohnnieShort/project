@@ -1,8 +1,21 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.Set;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoOrderDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.CargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Customer;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.UserAccount;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
 
 public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> implements ICargoOrderDao {
 
@@ -14,14 +27,72 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 
 	@Override
 	public void update(ICargoOrder entity) {
-		// TODO Auto-generated method stub
+		try (Connection c = getConnection();
+				PreparedStatement pStmt = c.prepareStatement(
+						String.format("update %s set customer_id=?, updated=?, cargo_type=?, station_id_from=?,"
+								+ " station_id_to=?, date=?, weight=? where id=?", getTableName()))) {
+			c.setAutoCommit(false);
+			try {
+
+				pStmt.setInt(1, entity.getCustomer().getId());
+
+				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(3, entity.getCargoType().ordinal());
+				pStmt.setInt(4, entity.getStationFrom().getId());
+				pStmt.setInt(5, entity.getStationTo().getId());
+				pStmt.setObject(6, entity.getDate(), Types.TIMESTAMP);
+
+				pStmt.setDouble(7, entity.getWeight());
+				pStmt.setInt(8, entity.getId());
+				pStmt.executeUpdate();
+				c.commit();
+			} catch (final Exception e) {
+				c.rollback();
+				throw new RuntimeException(e);
+			}
+
+		} catch (final SQLException e) {
+			throw new SQLExecutionException(e);
+		}
 
 	}
 
 	@Override
 	public void insert(ICargoOrder entity) {
-		// TODO Auto-generated method stub
+		try (Connection c = getConnection();
+				PreparedStatement pStmt = c.prepareStatement(String.format(
+						"insert into %s (customer_id, created, updated, cargo_type, station_id_from, station_id_to, date,"
+								+ "weight) values(?,?,?,?,?,?,?,?)",
+						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
+			c.setAutoCommit(false);
+			try {
+				pStmt.setInt(1, entity.getCustomer().getId());
+				pStmt.setObject(2, entity.getCreated(), Types.TIMESTAMP);
+				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(4, entity.getCargoType().ordinal());
+				pStmt.setInt(5, entity.getStationFrom().getId());
+				pStmt.setInt(6, entity.getStationTo().getId());
+				pStmt.setObject(7, entity.getDate(), Types.TIMESTAMP);
+				pStmt.setDouble(8, entity.getWeight());
 
+				pStmt.executeUpdate();
+
+				final ResultSet rs = pStmt.getGeneratedKeys();
+				rs.next();
+				final int id = rs.getInt("id");
+
+				rs.close();
+				entity.setId(id);
+
+				c.commit();
+			} catch (final Exception e) {
+				c.rollback();
+				throw new RuntimeException(e);
+			}
+
+		} catch (final SQLException e) {
+			throw new SQLExecutionException(e);
+		}
 	}
 
 	@Override
@@ -30,4 +101,57 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 		return "cargo_order";
 	}
 
+	@Override
+	protected ICargoOrder parseRow(final ResultSet resultSet, final Set<String> columns) throws SQLException {
+		final ICargoOrder entity = createEntity();
+		entity.setId((Integer) resultSet.getObject("id"));
+		entity.setCargoType(CargoType.values()[resultSet.getInt("cargo_type")]);
+		;
+		entity.setCreated(resultSet.getTimestamp("created"));
+		entity.setUpdated(resultSet.getTimestamp("updated"));
+		entity.setDate(resultSet.getTimestamp("date"));
+		entity.setWeight(resultSet.getDouble("weight"));
+
+		final Integer customerId = (Integer) resultSet.getObject("customer_id");
+		if (customerId != null) {
+			final Customer customer = new Customer();
+			customer.setId(customerId);
+
+			if (columns.contains("user_account_id")) {
+				Integer userAccountId = (Integer) resultSet.getObject("user_account_id");
+				if (userAccountId != null) {
+					UserAccount userAI = new UserAccount();
+					userAI.setId(userAccountId);
+					customer.setUserAccount(userAI);
+				}
+
+			}
+			entity.setCustomer(customer);
+		}
+		final Integer fromId = (Integer) resultSet.getObject("station_id_from");
+		if (fromId != null) {
+			Station from = new Station();
+			from.setId(fromId);
+			if (columns.contains("from_name")) {
+				from.setName(resultSet.getString("from_name"));
+			}
+			if (columns.contains("from_coordinates")) {
+				from.setCoordinates(resultSet.getDouble("from_coordinates"));
+			}
+			entity.setStationFrom(from);
+		}
+		final Integer toId = (Integer) resultSet.getObject("station_to_id");
+		if (toId != null) {
+			Station to = new Station();
+			to.setId(toId);
+			if (columns.contains("to_name")) {
+				to.setName(resultSet.getString("to_name"));
+			}
+			if (columns.contains("to_coordinates")) {
+				to.setCoordinates(resultSet.getDouble("to_coordinates"));
+			}
+			entity.setStationTo(to);
+		}
+		return entity;
+	}
 }

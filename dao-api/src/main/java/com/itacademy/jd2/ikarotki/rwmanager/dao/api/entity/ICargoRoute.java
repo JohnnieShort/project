@@ -3,13 +3,13 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 
 public interface ICargoRoute extends IBaseEntity {
-	public Integer getCargoOrderId();
+	public ICargoOrder getCargoOrder();
 
-	public void setCargoOrderId(Integer cargoOrderId);
+	public void setCargoOrder(ICargoOrder cargoOrderId);
 
-	public Integer getTrainId();
+	public ITrain getTrain();
 
-	public void setTrainId(Integer trainId);
+	public void setTrain(ITrain trainId);
 
 	public Double getPrice();
 

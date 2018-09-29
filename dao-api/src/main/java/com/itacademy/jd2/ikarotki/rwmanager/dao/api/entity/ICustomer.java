@@ -4,7 +4,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 
 public interface ICustomer extends IBaseEntity {
 
-	public Integer getUserAccountId();
+	public IUserAccount getUserAccount();
 
-	public void setUserAccountId(Integer userAccountId);
+	public void setUserAccount(IUserAccount userAccountd);
 }

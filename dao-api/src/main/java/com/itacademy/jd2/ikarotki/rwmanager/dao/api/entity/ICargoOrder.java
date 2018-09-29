@@ -6,21 +6,21 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 
 public interface ICargoOrder extends IBaseEntity {
-	public Integer getCustomerId();
+	public ICustomer getCustomer();
 
-	public void setCustomerId(Integer customerId);
+	public void setCustomer(ICustomer customerId);
 
 	public CargoType getCargoType();
 
 	public void setCargoType(CargoType cargoType);
 
-	public Integer getStationIdFrom();
+	public IStation getStationFrom();
 
-	public void setStationIdFrom(Integer stationIdFrom);
+	public void setStationFrom(IStation stationFrom);
 
-	public Integer getStationIdTo();
+	public IStation getStationTo();
 
-	public void setStationIdTo(Integer stationIdTo);
+	public void setStationTo(IStation stationTo);
 
 	public Date getDate();
 

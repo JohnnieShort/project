@@ -108,10 +108,32 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 			final PassengerRoute passengerRoute = new PassengerRoute();
 			passengerRoute.setId(passengerRouteId);
 			if (columns.contains("passenger_route_from")) {
-				passengerRoute.setFrom(resultSet.getString("passenger_route_from"));
+
+				Integer fromId = resultSet.getInt("passenger_route_from");
+				Station routeFrom = new Station();
+				routeFrom.setId(fromId);
+				if (columns.contains("from_name")) {
+					routeFrom.setName(resultSet.getString("from_name"));
+				}
+				if (columns.contains("from_coordinates")) {
+					routeFrom.setCoordinates(resultSet.getDouble("from_coordinates"));
+				}
+
+				passengerRoute.setFrom(routeFrom);
 			}
 			if (columns.contains("passenger_route_to")) {
-				passengerRoute.setFrom(resultSet.getString("passenger_route_to"));
+
+				final Integer toId = (Integer) resultSet.getObject("to_id");
+				Station routeTo = new Station();
+				routeTo.setId(toId);
+				if (columns.contains("to_name")) {
+					routeTo.setName(resultSet.getString("to_name"));
+				}
+				if (columns.contains("to_coordinates")) {
+					routeTo.setCoordinates(resultSet.getDouble("to_coordinates"));
+				}
+
+				passengerRoute.setTo(routeTo);
 			}
 			entity.setPassengerRoute(passengerRoute);
 		}

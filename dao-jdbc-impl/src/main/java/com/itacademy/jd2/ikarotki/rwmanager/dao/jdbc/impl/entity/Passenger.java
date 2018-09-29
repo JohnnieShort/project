@@ -1,21 +1,22 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 
 public class Passenger extends BaseEntity implements IPassenger{
-private Integer userAccountId;
+private IUserAccount userAccount;
 
-public Integer getUserAccountId() {
-	return userAccountId;
+public IUserAccount getUserAccount() {
+	return userAccount;
 }
 
-public void setUserAccountId(Integer userAccountId) {
-	this.userAccountId = userAccountId;
+public void setUserAccount(IUserAccount userAccountId) {
+	this.userAccount = userAccountId;
 }
 
 @Override
 public String toString() {
-	return "Passenger [userAccountId=" + userAccountId + ", getId()=" + getId() + "]";
+	return "Passenger [userAccount=" + userAccount + ", getId()=" + getId() + "]";
 }
 
 }
