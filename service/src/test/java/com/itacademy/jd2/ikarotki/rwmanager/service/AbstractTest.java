@@ -6,7 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
-import com.itacademy.jd2.ikarotki.rwmanager.service.TicketServiceImpl;
+import com.itacademy.jd2.ikarotki.rwmanager.service.impl.TicketServiceImpl;
 
 
 public abstract class AbstractTest {

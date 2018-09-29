@@ -13,5 +13,5 @@
 - change "from", "to" to stationIdFrom, stationIdTo in "cargo_order";+
 - replace "price" from "cargo_order" to "cargo_route";+
 ---------------------------27.09---------------------------
-- ask Dima about "parseRows"(what in "columns") and "deleteAll";
+- ask Dima about "parseRows"(what in "columns") and "deleteAll";+
 - ask Dima about object-fields in entities;

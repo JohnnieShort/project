@@ -29,16 +29,19 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 	@Override
 	public void update(ITicket entity) {
 		try (Connection c = getConnection();
-				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"update %s set passenger_id=?, updated=?, passenger_route_id=?, price=? where id=?",
-						getTableName()))) {
+				PreparedStatement pStmt = c.prepareStatement(String
+						.format("update %s set passenger_id=?, updated=?, passenger_route_id=?, price=?, from=?, to=?"
+								+ " where id=?", getTableName()))) {
 			c.setAutoCommit(false);
 			try {
 				pStmt.setInt(1, entity.getPassenger().getId());
 				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(3, entity.getPassengerRoute().getId());
 				pStmt.setDouble(4, entity.getPrice());
-				pStmt.setInt(5, entity.getId());
+				pStmt.setInt(5, entity.getFrom().getId());
+				pStmt.setInt(6, entity.getTo().getId());
+
+				pStmt.setInt(7, entity.getId());
 				pStmt.executeUpdate();
 				c.commit();
 			} catch (final Exception e) {
@@ -54,9 +57,10 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 	@Override
 	public void insert(ITicket entity) {
 		try (Connection c = getConnection();
-				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (pasenger_id, created, updated, passenger_route_id, price) values(?,?,?,?,?)",
-						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
+				PreparedStatement pStmt = c.prepareStatement(
+						String.format("insert into %s (pasenger_id, created, updated, passenger_route_id, price, "
+								+ "from=?, to=?) values(?,?,?,?,?,?,?)", getTableName()),
+						Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
 				pStmt.setInt(1, entity.getPassenger().getId());
@@ -64,6 +68,8 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(4, entity.getPassengerRoute().getId());
 				pStmt.setDouble(5, entity.getPrice());
+				pStmt.setInt(6, entity.getFrom().getId());
+				pStmt.setInt(7, entity.getTo().getId());
 
 				pStmt.executeUpdate();
 
