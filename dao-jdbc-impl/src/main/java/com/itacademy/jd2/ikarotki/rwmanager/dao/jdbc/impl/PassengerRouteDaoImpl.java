@@ -141,8 +141,11 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			if (columns.contains("from_name")) {
 				from.setName(resultSet.getString("from_name"));
 			}
-			if (columns.contains("from_coordinates")) {
-				from.setCoordinates(resultSet.getDouble("from_coordinates"));
+			if (columns.contains("from_longitude")) {
+				from.setLongitude(resultSet.getDouble("from_longitude"));
+			}
+			if (columns.contains("from_latitude")) {
+				from.setLatitude(resultSet.getDouble("from_latitude"));
 			}
 			entity.setFrom(from);
 		}
@@ -153,8 +156,11 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			if (columns.contains("to_name")) {
 				to.setName(resultSet.getString("to_name"));
 			}
-			if (columns.contains("to_coordinates")) {
-				to.setCoordinates(resultSet.getDouble("to_coordinates"));
+			if (columns.contains("to_longitude")) {
+				to.setLongitude(resultSet.getDouble("to_longitude"));
+			}
+			if (columns.contains("to_latitude")) {
+				to.setLatitude(resultSet.getDouble("to_latitude"));
 			}
 			entity.setFrom(to);
 		}

@@ -24,14 +24,15 @@ public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implement
 	@Override
 	public void update(IStation entity) {
 		try (Connection c = getConnection();
-				PreparedStatement pStmt = c.prepareStatement(
-						String.format("update %s set name=?, updated=?, coordinates=? where id=?", getTableName()))) {
+				PreparedStatement pStmt = c.prepareStatement(String.format(
+						"update %s set name=?, updated=?, longitude=?, latitude=? where id=?", getTableName()))) {
 			c.setAutoCommit(false);
 			try {
 				pStmt.setString(1, entity.getName());
 				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setDouble(3, entity.getCoordinates());
-				pStmt.setInt(4, entity.getId());
+				pStmt.setDouble(3, entity.getLongitude());
+				pStmt.setDouble(4, entity.getLatitude());
+				pStmt.setInt(5, entity.getId());
 				pStmt.executeUpdate();
 				c.commit();
 			} catch (final Exception e) {
@@ -48,15 +49,17 @@ public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implement
 	@Override
 	public void insert(IStation entity) {
 		try (Connection c = getConnection();
-				PreparedStatement pStmt = c.prepareStatement(String
-						.format("insert into %s (name, created, updated, coordinates) values(?,?,?,?)", getTableName()),
+				PreparedStatement pStmt = c.prepareStatement(
+						String.format("insert into %s (name, created, updated, longitude, latitude) values(?,?,?,?,?)",
+								getTableName()),
 						Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
 				pStmt.setString(1, entity.getName());
 				pStmt.setObject(2, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setDouble(4, entity.getCoordinates());
+				pStmt.setDouble(4, entity.getLongitude());
+				pStmt.setDouble(4, entity.getLatitude());
 
 				pStmt.executeUpdate();
 
@@ -91,7 +94,8 @@ public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implement
 		entity.setName(resultSet.getString("name"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
-		entity.setCoordinates(resultSet.getDouble("coordinates"));
+		entity.setLongitude(resultSet.getDouble("longitude"));
+		entity.setLatitude(resultSet.getDouble("latitude"));
 
 		return entity;
 	}

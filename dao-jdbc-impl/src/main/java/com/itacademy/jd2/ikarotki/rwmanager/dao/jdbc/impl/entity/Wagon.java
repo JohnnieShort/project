@@ -8,6 +8,15 @@ public class Wagon extends BaseEntity implements IWagon {
 	private WagonType wagonType;
 	private ITrain train;
 	private Double freightPrice;
+	private Double capacity;
+
+	public Double getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Double capacity) {
+		this.capacity = capacity;
+	}
 
 	public WagonType getWagonType() {
 		return wagonType;
@@ -35,8 +44,8 @@ public class Wagon extends BaseEntity implements IWagon {
 
 	@Override
 	public String toString() {
-		return "Wagon [wagonType=" + wagonType + ", train=" + train + ", freightPrice=" + freightPrice + ", getId()="
-				+ getId() + "]";
+		return "Wagon [wagonType=" + wagonType + ", train=" + train + ", freightPrice=" + freightPrice + ", capacity="
+				+ capacity + ", getId()=" + getId() + "]";
 	}
 
 }

@@ -2,9 +2,18 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
-public class Station extends BaseEntity implements IStation{
+public class Station extends BaseEntity implements IStation {
 	private String name;
-	private Double coordinates;
+	private Double longitude;
+	private Double latitude;
+
+	public Double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
 
 	public String getName() {
 		return name;
@@ -14,17 +23,18 @@ public class Station extends BaseEntity implements IStation{
 		this.name = name;
 	}
 
-	public Double getCoordinates() {
-		return coordinates;
+	public Double getLongitude() {
+		return longitude;
 	}
 
-	public void setCoordinates(Double coordinates) {
-		this.coordinates = coordinates;
+	public void setLongitude(Double coordinates) {
+		this.longitude = coordinates;
 	}
 
 	@Override
 	public String toString() {
-		return "Station [name=" + name + ", coordinates=" + coordinates + ", getId()=" + getId() + "]";
+		return "Station [name=" + name + ", longitude=" + longitude + ", latitude=" + latitude + ", getId()=" + getId()
+				+ "]";
 	}
 
 }

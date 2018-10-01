@@ -15,4 +15,8 @@ public interface IWagon extends IBaseEntity {
 	public Double getFreightPrice();
 
 	public void setFreightPrice(Double freightPrice);
+
+	public Double getCapacity();
+
+	public void setCapacity(Double capacity);
 }

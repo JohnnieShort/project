@@ -26,15 +26,18 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 	@Override
 	public void update(IWagon entity) {
 		try (Connection c = getConnection();
-				PreparedStatement pStmt = c.prepareStatement(
-						String.format("update %s set wagon_type=?, updated=?, train_id=?, freight_price=? where id=?",
-								getTableName()))) {
+				PreparedStatement pStmt = c.prepareStatement(String.format(
+						"update %s set wagon_type=?, updated=?, train_id=?, freight_price=?, capacity=? where id=?",
+						getTableName()))) {
 			c.setAutoCommit(false);
 			try {
 				pStmt.setInt(1, entity.getWagonType().ordinal());
 				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(3, entity.getTrain().getId());
 				pStmt.setDouble(4, entity.getFreightPrice());
+				pStmt.setDouble(5, entity.getCapacity());
+
+				pStmt.setInt(6, entity.getId());
 				pStmt.executeUpdate();
 				c.commit();
 			} catch (final Exception e) {
@@ -52,7 +55,7 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 	public void insert(IWagon entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (wagon_type, created, updated, train_id, freight_price) values(?,?,?,?,?)",
+						"insert into %s (wagon_type, created, updated, train_id, freight_price, capacity) values(?,?,?,?,?.?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
@@ -61,6 +64,7 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(4, entity.getTrain().getId());
 				pStmt.setDouble(5, entity.getFreightPrice());
+				pStmt.setDouble(6, entity.getCapacity());
 
 				pStmt.executeUpdate();
 
@@ -97,6 +101,7 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 		entity.setFreightPrice(resultSet.getDouble("freight_price"));
+		entity.setCapacity(resultSet.getDouble("capacity"));
 
 		final Integer trainId = (Integer) resultSet.getObject("train_id");
 		if (trainId != null) {

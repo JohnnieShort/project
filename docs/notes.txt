@@ -14,4 +14,12 @@
 - replace "price" from "cargo_order" to "cargo_route";+
 ---------------------------27.09---------------------------
 - ask Dima about "parseRows"(what in "columns") and "deleteAll";+
+
+---------------------------30.09---------------------------
+- add "capacity" to wagon and DM;+
+- change in DM "departure" and "arrival" type to date from time;+
+- change in DM "weight" type to Double from int;+
+- in Ticket in DM "price" change type to Double from int;+
+---------------------------01.10---------------------------
 - ask Dima about object-fields in entities;
+- ask Dima about equals and hash-code;

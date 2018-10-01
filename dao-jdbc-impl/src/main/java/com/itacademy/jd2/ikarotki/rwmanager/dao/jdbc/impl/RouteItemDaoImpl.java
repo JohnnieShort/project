@@ -115,8 +115,11 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				if (columns.contains("from_name")) {
 					routeFrom.setName(resultSet.getString("from_name"));
 				}
-				if (columns.contains("from_coordinates")) {
-					routeFrom.setCoordinates(resultSet.getDouble("from_coordinates"));
+				if (columns.contains("from_longitude")) {
+					routeFrom.setLongitude(resultSet.getDouble("from_longitude"));
+				}
+				if (columns.contains("from_latitude")) {
+					routeFrom.setLatitude(resultSet.getDouble("from_latitude"));
 				}
 
 				passengerRoute.setFrom(routeFrom);
@@ -129,8 +132,11 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				if (columns.contains("to_name")) {
 					routeTo.setName(resultSet.getString("to_name"));
 				}
-				if (columns.contains("to_coordinates")) {
-					routeTo.setCoordinates(resultSet.getDouble("to_coordinates"));
+				if (columns.contains("to_longitude")) {
+					routeTo.setLongitude(resultSet.getDouble("to_longitude"));
+				}
+				if (columns.contains("to_latitude")) {
+					routeTo.setLatitude(resultSet.getDouble("to_latitude"));
 				}
 
 				passengerRoute.setTo(routeTo);
