@@ -23,3 +23,5 @@
 ---------------------------01.10---------------------------
 - ask Dima about object-fields in entities;
 - ask Dima about equals and hash-code;
+---------------------------02.10---------------------------
+- learn IOC->DI->Spring_Container;

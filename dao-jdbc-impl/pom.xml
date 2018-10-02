@@ -4,17 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-	    <groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
+		<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
 		<artifactId>parent-project</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
 
 	<artifactId>dao-jdbc-impl</artifactId>
-	
+
 	<dependencies>
 		<dependency>
-		    <groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
+			<groupId>com.itacademy.jd2.ikarotki.rwmanager</groupId>
 			<artifactId>dao-api</artifactId>
 		</dependency>
 		<dependency>
@@ -26,6 +26,10 @@
 					<artifactId>slf4j-simple</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
 		</dependency>
 	</dependencies>
 

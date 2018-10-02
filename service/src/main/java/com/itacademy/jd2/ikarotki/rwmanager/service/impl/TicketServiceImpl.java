@@ -5,15 +5,35 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITicketDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.TicketDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 
+@Service
 public class TicketServiceImpl implements ITicketService {
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(TicketServiceImpl.class);
-	private ITicketDao dao = new TicketDaoImpl();
+	
+	private ITicketDao dao;
+
+	@Autowired
+	public TicketServiceImpl(ITicketDao dao) {
+		super();
+		this.dao = dao;
+	}
+	
+	
+
+	public TicketServiceImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	@Override
 	public ITicket createEntity() {

@@ -5,12 +5,13 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.CargoRouteDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICargoRouteService;
-
+@Service
 public class CargoRouteServiceImpl implements ICargoRouteService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CargoRouteServiceImpl.class);
 	private ICargoRouteDao dao = new CargoRouteDaoImpl();

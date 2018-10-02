@@ -1,9 +1,12 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 import java.util.Date;
+
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
@@ -36,19 +39,33 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.impl.TrainServiceImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.impl.UserAccountServiceImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.impl.WagonServiceImpl;
 
+@SpringJUnitConfig(locations = "classpath:service-context.xml")
+
 public abstract class AbstractTest {
-	protected ICargoOrderService cargoOrderService = new CargoOrderServiceImpl();
-	protected ICargoRouteService cargoRouteService = new CargoRouteServiceImpl();
-	protected ICustomerService customerService = new CustomerServiceImpl();
-	protected ILocomotiveService locomotiveService = new LocomotiveServiceImpl();
-	protected IPassengerRouteService passengerRouteService = new PassengerRouteServiceImpl();
-	protected IPassengerService passengerService = new PassengerServiceImpl();
-	protected IRouteItemService routeItemService = new RouteItemServiceImpl();
-	protected IStationService stationService = new StationServiceImpl();
-	protected ITicketService ticketService = new TicketServiceImpl();
-	protected ITrainService trainService = new TrainServiceImpl();
-	protected IUserAccountService userAccountService = new UserAccountServiceImpl();
-	protected IWagonService wagonService = new WagonServiceImpl();
+	@Autowired
+	protected ICargoOrderService cargoOrderService;
+	@Autowired
+	protected ICargoRouteService cargoRouteService;
+	@Autowired
+	protected ICustomerService customerService;
+	@Autowired
+	protected ILocomotiveService locomotiveService;
+	@Autowired
+	protected IPassengerRouteService passengerRouteService;
+	@Autowired
+	protected IPassengerService passengerService;
+	@Autowired
+	protected IRouteItemService routeItemService;
+	@Autowired
+	protected IStationService stationService;
+	@Autowired
+	protected ITicketService ticketService;
+	@Autowired
+	protected ITrainService trainService;
+	@Autowired
+	protected IUserAccountService userAccountService;
+	@Autowired
+	protected IWagonService wagonService;
 
 	private static final Random RANDOM = new Random();
 
