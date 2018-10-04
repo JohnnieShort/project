@@ -27,7 +27,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 
-@SpringJUnitConfig(locations = "classpath:service-context.xml")
+@SpringJUnitConfig(locations="classpath:service-context-test.xml")
 
 public abstract class AbstractTest {
 	@Autowired
