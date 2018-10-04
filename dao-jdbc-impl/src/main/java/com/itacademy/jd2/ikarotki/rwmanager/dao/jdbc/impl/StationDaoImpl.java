@@ -8,12 +8,14 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IStationDao;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
-
+@Repository
 public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implements IStationDao {
 
 	@Override

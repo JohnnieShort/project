@@ -5,17 +5,28 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoOrderDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.CargoOrderDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICargoOrderService;
 
 @Service
 public class CargoOrderServiceImpl implements ICargoOrderService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CargoOrderServiceImpl.class);
-	private ICargoOrderDao dao = new CargoOrderDaoImpl();
+	private ICargoOrderDao dao;
+
+	@Autowired
+	public CargoOrderServiceImpl(ICargoOrderDao dao) {
+		super();
+		this.dao = dao;
+	}
+
+	public CargoOrderServiceImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public ICargoOrder createEntity() {

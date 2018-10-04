@@ -8,12 +8,14 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITrainDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Locomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
-
+@Repository
 public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements ITrainDao {
 
 	@Override

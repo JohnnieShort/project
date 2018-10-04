@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
 
-@Service
 public interface ICargoRouteService {
 	ICargoRoute get(Integer id);
 

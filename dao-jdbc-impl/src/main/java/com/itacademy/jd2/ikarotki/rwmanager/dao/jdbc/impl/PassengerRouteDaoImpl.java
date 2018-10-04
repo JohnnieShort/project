@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IPassengerRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
@@ -17,7 +19,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.PassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
-
+@Repository
 public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Integer> implements IPassengerRouteDao {
 
 	@Override

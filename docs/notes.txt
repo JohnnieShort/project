@@ -23,5 +23,9 @@
 ---------------------------01.10---------------------------
 - ask Dima about object-fields in entities;
 - ask Dima about equals and hash-code;
----------------------------02.10---------------------------
-- learn IOC->DI->Spring_Container;
+---------------------------03.10---------------------------
+- remove from route_item column "time";+
+- add to route_item columns "arrival" and "departure";+
+- learn maven structure;
+- learn IoC, DI, Spring...;
+- ask Dima about delete_all and delete;

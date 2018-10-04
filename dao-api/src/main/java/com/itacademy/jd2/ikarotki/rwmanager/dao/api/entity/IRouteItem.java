@@ -1,5 +1,7 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity;
 
+import java.util.Date;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 
 public interface IRouteItem extends IBaseEntity {
@@ -15,9 +17,13 @@ public interface IRouteItem extends IBaseEntity {
 
 	public void setStationTo(IStation stationIdTo);
 
-	public Double getTime();
+	public Date getDeparture();
 
-	public void setTime(Double time);
+	public void setDeparture(Date departure);
+
+	public Date getArrival();
+
+	public void setArrival(Date arrival);
 
 	public Integer getOrdinalNum();
 

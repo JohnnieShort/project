@@ -5,15 +5,28 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IPassengerRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.PassengerRouteDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
 
+@Service
 public class PassengerRouteServiceImpl implements IPassengerRouteService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PassengerRouteServiceImpl.class);
-	private IPassengerRouteDao dao = new PassengerRouteDaoImpl();
+	private IPassengerRouteDao dao;
+
+	@Autowired
+	public PassengerRouteServiceImpl(IPassengerRouteDao dao) {
+		super();
+		this.dao = dao;
+	}
+
+	public PassengerRouteServiceImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public IPassengerRoute createEntity() {

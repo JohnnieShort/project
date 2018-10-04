@@ -9,6 +9,8 @@ import java.sql.Types;
 import java.util.Date;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
@@ -19,7 +21,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Locomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
-
+@Repository
 public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> implements ICargoRouteDao {
 
 	@Override

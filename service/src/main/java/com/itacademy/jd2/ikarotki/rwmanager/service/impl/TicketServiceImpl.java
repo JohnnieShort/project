@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITicketDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.TicketDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 
 @Service

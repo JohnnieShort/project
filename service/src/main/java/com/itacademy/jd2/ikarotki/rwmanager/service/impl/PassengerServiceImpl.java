@@ -5,15 +5,28 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IPassengerDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.PassengerDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerService;
 
+@Service
 public class PassengerServiceImpl implements IPassengerService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(PassengerServiceImpl.class);
-	private IPassengerDao dao = new PassengerDaoImpl();
+	private IPassengerDao dao;
+
+	@Autowired
+	public PassengerServiceImpl(IPassengerDao dao) {
+		super();
+		this.dao = dao;
+	}
+
+	public PassengerServiceImpl() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public IPassenger createEntity() {

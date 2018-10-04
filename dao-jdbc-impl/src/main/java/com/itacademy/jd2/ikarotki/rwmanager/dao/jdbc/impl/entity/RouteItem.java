@@ -1,5 +1,7 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
+import java.util.Date;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
@@ -8,7 +10,8 @@ public class RouteItem extends BaseEntity implements IRouteItem {
 	private IPassengerRoute passengerRoute;
 	private IStation stationFrom;
 	private IStation stationTo;
-	private Double time;
+	private Date departure;
+	private Date arrival;
 	private Integer ordinalNum;
 
 	public IPassengerRoute getPassengerRoute() {
@@ -35,12 +38,20 @@ public class RouteItem extends BaseEntity implements IRouteItem {
 		this.stationTo = stationTo;
 	}
 
-	public Double getTime() {
-		return time;
+	public Date getDeparture() {
+		return departure;
 	}
 
-	public void setTime(Double time) {
-		this.time = time;
+	public void setDeparture(Date departure) {
+		this.departure = departure;
+	}
+
+	public Date getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(Date arrival) {
+		this.arrival = arrival;
 	}
 
 	public Integer getOrdinalNum() {
@@ -54,7 +65,8 @@ public class RouteItem extends BaseEntity implements IRouteItem {
 	@Override
 	public String toString() {
 		return "RouteItem [passengerRoute=" + passengerRoute + ", stationFrom=" + stationFrom + ", stationTo="
-				+ stationTo + ", time=" + time + ", ordinalNum=" + ordinalNum + ", getId()=" + getId() + "]";
+				+ stationTo + ", departure=" + departure + ", arrival=" + arrival + ", ordinalNum=" + ordinalNum
+				+ ", getId()=" + getId() + "]";
 	}
 
 }

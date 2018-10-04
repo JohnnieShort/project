@@ -5,16 +5,27 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IWagonDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.WagonDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IWagonService;
-
+@Service
 public class WagonServiceImpl implements IWagonService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WagonServiceImpl.class);
-	private IWagonDao dao = new WagonDaoImpl();
+	private IWagonDao dao;
 
+	
+	@Autowired
+	public WagonServiceImpl(IWagonDao dao) {
+		super();
+		this.dao = dao;
+	}
+	public WagonServiceImpl() {
+		super();
+		
+	}
 	@Override
 	public IWagon createEntity() {
 		return dao.createEntity();

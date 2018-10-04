@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoOrderDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
@@ -16,7 +18,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.UserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
-
+@Repository
 public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> implements ICargoOrderDao {
 
 	@Override

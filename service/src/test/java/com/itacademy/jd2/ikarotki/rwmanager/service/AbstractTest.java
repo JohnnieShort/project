@@ -26,18 +26,6 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerR
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.CargoOrderServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.CargoRouteServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.CustomerServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.LocomotiveServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.PassengerRouteServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.PassengerServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.RouteItemServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.StationServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.TicketServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.TrainServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.UserAccountServiceImpl;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.WagonServiceImpl;
 
 @SpringJUnitConfig(locations = "classpath:service-context.xml")
 
@@ -221,10 +209,14 @@ public abstract class AbstractTest {
 			toEntity = saveNewStation();
 		} while (fromEntity.getName().equals(toEntity.getName()));
 		entity.setStationTo(toEntity);
-		entity.setTime(20.0);
-		entity.setOrdinalNum(getRANDOM().nextInt(100));
 		Date date = new Date();
+		entity.setArrival(date);
+		date = new Date();
+		entity.setDeparture(date);
+		entity.setOrdinalNum(getRANDOM().nextInt(100));
+		date = new Date();
 		entity.setCreated(date);
+
 		entity.setUpdated(date);
 
 		routeItemService.save(entity);

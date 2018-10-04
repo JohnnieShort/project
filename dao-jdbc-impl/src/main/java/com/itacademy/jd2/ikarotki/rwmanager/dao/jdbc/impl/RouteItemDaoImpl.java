@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IRouteItemDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.PassengerRoute;
@@ -15,6 +17,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.RouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
 
+@Repository
 public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> implements IRouteItemDao {
 
 	@Override
@@ -26,7 +29,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 	public void update(IRouteItem entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"update %s set passenger_route_id=?, updated=?, station_id_from=?, station_id_to=?, time=?, ordinal_num=? "
+						"update %s set passenger_route_id=?, updated=?, station_id_from=?, station_id_to=?, arrival=?, departure=?, ordinal_num=? "
 								+ "where id=?",
 						getTableName()))) {
 			c.setAutoCommit(false);
@@ -35,10 +38,11 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(3, entity.getStationFrom().getId());
 				pStmt.setInt(4, entity.getStationTo().getId());
-				pStmt.setDouble(5, entity.getTime());
-				pStmt.setInt(6, entity.getOrdinalNum());
+				pStmt.setObject(5, entity.getArrival(), Types.TIMESTAMP);
+				pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
+				pStmt.setInt(7, entity.getOrdinalNum());
 
-				pStmt.setInt(7, entity.getId());
+				pStmt.setInt(8, entity.getId());
 				pStmt.executeUpdate();
 				c.commit();
 			} catch (final Exception e) {
@@ -55,8 +59,8 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 	public void insert(IRouteItem entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (passenger_route_id, created, updated, station_id_from, station_id_to, time, ordinal_num) "
-								+ "values(?,?,?,?,?,?,?)",
+						"insert into %s (passenger_route_id, created, updated, station_id_from, station_id_to, arrival, departure, ordinal_num) "
+								+ "values(?,?,?,?,?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
@@ -65,8 +69,9 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(4, entity.getStationFrom().getId());
 				pStmt.setInt(5, entity.getStationTo().getId());
-				pStmt.setDouble(6, entity.getTime());
-				pStmt.setInt(7, entity.getOrdinalNum());
+				pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
+				pStmt.setObject(7, entity.getDeparture(), Types.TIMESTAMP);
+				pStmt.setInt(8, entity.getOrdinalNum());
 
 				pStmt.executeUpdate();
 
@@ -98,7 +103,8 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 	protected IRouteItem parseRow(final ResultSet resultSet, final Set<String> columns) throws SQLException {
 		final IRouteItem entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
-		entity.setTime(resultSet.getDouble("time"));
+		entity.setArrival(resultSet.getTimestamp("arrival"));
+		entity.setDeparture(resultSet.getTimestamp("departure"));
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 		entity.setOrdinalNum(resultSet.getInt("ordinal_num"));

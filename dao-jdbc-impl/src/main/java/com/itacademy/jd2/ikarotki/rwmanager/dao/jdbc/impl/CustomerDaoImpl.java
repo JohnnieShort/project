@@ -8,13 +8,15 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Set;
 
+import org.springframework.stereotype.Repository;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICustomerDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.UserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
-
+@Repository
 public class CustomerDaoImpl extends AbstractDaoImpl<ICustomer, Integer> implements ICustomerDao {
 
 	@Override
