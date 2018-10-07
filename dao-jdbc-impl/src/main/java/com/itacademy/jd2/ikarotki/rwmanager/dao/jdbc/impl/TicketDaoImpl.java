@@ -3,9 +3,11 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Passenger;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Ticket;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.StatementAction;
 
 @Repository
 public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements ITicketDao {
@@ -94,7 +97,73 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 		}
 
 	}
+	@Override
+	public ITicket get(final Integer id) {
+		StatementAction<ITicket> action = (statement) -> {
+			statement.executeQuery("select * from " + getTableName() + " where id=" + id);
+/*"SELECT t.id as ticket_id, t.price as ticket_price, t.created as ticket_created, t.updated as ticket_updated, 
+ * 
+ * st.id as ticket_station_from_id, st.name as ticket_station_from_name, st.longitude as ticket_station_from_longitude, 
+ * st.latitude as ticket_station_from_latitude, st.created as ticket_station_from_created, st.updated as ticket_station_from_updated,
+ * 
+ * st1.id as ticket_station_to_id, st1.name as ticket_station_to_name, st1.longitude as ticket_station_to_longitude, 
+ * st1.latitude as ticket_station_to_latitude, st1.created as ticket_station_to_created, st1.updated as ticket_station_to_updated,
+ * 
+ *  p.id as passenger_id, p.created as passenger_created, p.updated as passenger_updated, 
+ * 
+ * ua.id as user_account_id, ua.e_mail as user_account_e_mail, ua.password as user_account_password, ua.role as user_account_role, 
+ * ua.first_name as user_account_first_name, ua.last_name as user_account_last_name, ua.created as user_account_created, 
+ * ua.updated as user_account_updated, 
+ *  
+ *  pr.id as passenger_route_id, pr.departure as as passenger_route_depatture, pr.arrival as passenger_route_arrival,
+ * pr.passenger_route_type as passenger_route_route_type, pr.is_actual as passenger_route_is_actual, pr.created as passenger_route_created,
+ * pr.updated as passenger_route_updated,
+ * pr.frequency, pr.places,
+ * st2.id as pasenger_route_from_id, st2.name as pasenger_route_from_name, st2.longitude as pasenger_route_from_longitude, 
+ * st2.latitude as pasenger_route_from_latitude, st2.created as pasenger_route_from_created, st2.updated as pasenger_route_from_updated,
+ * 
+ * st3.id as pasenger_route_to_id, st3.name as pasenger_route_to_name, st3.longitude as pasenger_route_to_longitude, 
+ * st3.latitude as pasenger_route_to_latitude, st3.created as pasenger_route_to_created, st3.updated as pasenger_route_to_updated,
+ *  
+ *  tr.id as train_id, tr.created as train.created, tr.updated as train_updated,
+ *  
+ *  loc.id as locomotive_id, loc.name as locomotive_name, loc.created as locomotive_created, loc.updated as locomotive_updated
+ *  
+     
+    JOIN station st ON t.id =" + id " AND st.id = t.from
+    JOIN station st2 ON t.id =" + id " AND st2.id = t.to
+    JOIN passenger p ON t.id =" + id " AND p.id = t.passenger_id
+    JOIN user_account ua ON t.id =" + id " AND t.passenger_id = p.id AND p.user_account_id = ua.id 
+    JOIN passenger_route pr ON t.id =" + id " AND t.passenger_route_id = pr.id
+    JOIN station st2 ON t.id =" + id " AND t.passenger_route = pr.id AND pr.from = st2.id 
+    JOIN station st3 ON t.id =" + id " AND t.passenger_route = pr.id AND pr.to = st3.id
+    JOIN train tr ON t.id =" + id " AND t.passenger_route = pr.id AND pr.train_id = tr.id
+    JOIN locomotive loc ON t.id =" + id " AND t.passenger_route = pr.id AND pr.train_id = tr.id AND tr.locomotive_id = loc.id
+         */
+			final ResultSet resultSet = statement.getResultSet();
+			final Set<String> columns = resolveColumnNames(resultSet);
 
+			final boolean hasNext = resultSet.next();
+			ITicket result = null;
+			if (hasNext) {
+				result = parseRow(resultSet, columns);
+			}
+
+			resultSet.close();
+			return result;
+		};
+		ITicket entityById = executeStatement(action);
+		return entityById;
+	}
+	private Set<String> resolveColumnNames(final ResultSet resultSet) throws SQLException {
+		final ResultSetMetaData rsMetaData = resultSet.getMetaData();
+		final int numberOfColumns = rsMetaData.getColumnCount();
+		final Set<String> columns = new HashSet<>();
+		for (int i = 1; i <= numberOfColumns; i++) {
+			columns.add(rsMetaData.getColumnName(i));
+		}
+		return columns;
+	}
 	@Override
 	protected ITicket parseRow(final ResultSet resultSet, final Set<String> columns) throws SQLException {
 		final ITicket entity = createEntity();
