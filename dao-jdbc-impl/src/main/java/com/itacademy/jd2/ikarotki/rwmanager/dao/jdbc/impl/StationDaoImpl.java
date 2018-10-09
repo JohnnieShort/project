@@ -61,7 +61,7 @@ public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implement
 				pStmt.setObject(2, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setDouble(4, entity.getLongitude());
-				pStmt.setDouble(4, entity.getLatitude());
+				pStmt.setDouble(5, entity.getLatitude());
 
 				pStmt.executeUpdate();
 
