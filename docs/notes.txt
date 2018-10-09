@@ -28,4 +28,4 @@
 - add to route_item columns "arrival" and "departure";+
 - learn maven structure;
 - learn IoC, DI, Spring...;
-- ask Dima about delete_all and delete;
+- ask Dima about delete_all and delete;+
