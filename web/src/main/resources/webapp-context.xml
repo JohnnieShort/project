@@ -13,6 +13,8 @@
 
 
 	<import resource="service-context.xml" />
+	
+	 <context:component-scan base-package="com.itacademy.jd2.ikarotki.rwmanager.web.converter" />
 
 
 </beans>
