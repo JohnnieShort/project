@@ -33,7 +33,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c
 						.prepareStatement(String.format(
-								"update %s set from=?, to=?, updated=?, departure=?, arrival=?, passenger_route_type=?,"
+								"update %s set st_from=?, st_to=?, updated=?, departure=?, arrival=?, passenger_route_type=?,"
 										+ "train_id=?, is_actual=?, frequency=?, places=?  where id=?",
 								getTableName()))) {
 			c.setAutoCommit(false);
@@ -67,7 +67,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 	public void insert(IPassengerRoute entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (from, to, created, updated, departure, arrival, passenger_route_type,"
+						"insert into %s (st_from, st_to, created, updated, departure, arrival, passenger_route_type,"
 								+ "train_id, is_actual, frequency, places) values(?,?,?,?,?,?,?,?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
@@ -136,7 +136,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			}
 			entity.setTrain(train);
 		}
-		final Integer fromId = (Integer) resultSet.getObject("from_id");
+		final Integer fromId = (Integer) resultSet.getObject("st_from");
 		if (fromId != null) {
 			Station from = new Station();
 			from.setId(fromId);
@@ -151,7 +151,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			}
 			entity.setFrom(from);
 		}
-		final Integer toId = (Integer) resultSet.getObject("to_id");
+		final Integer toId = (Integer) resultSet.getObject("st_to");
 		if (toId != null) {
 			Station to = new Station();
 			to.setId(toId);

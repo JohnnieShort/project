@@ -18,6 +18,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.UserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
+
 @Repository
 public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> implements ICargoOrderDao {
 
@@ -30,9 +31,11 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 	@Override
 	public void update(ICargoOrder entity) {
 		try (Connection c = getConnection();
-				PreparedStatement pStmt = c.prepareStatement(
-						String.format("update %s set customer_id=?, updated=?, cargo_type=?, station_id_from=?,"
-								+ " station_id_to=?, date=?, weight=? where id=?", getTableName()))) {
+				PreparedStatement pStmt = c
+						.prepareStatement(String.format(
+								"update %s set customer_id=?, updated=?, cargo_type=?, station_id_from=?,"
+										+ " station_id_to=?, date=?, weight=?, cargo_route_id=? where id=?",
+								getTableName()))) {
 			c.setAutoCommit(false);
 			try {
 
@@ -45,7 +48,8 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 				pStmt.setObject(6, entity.getDate(), Types.TIMESTAMP);
 
 				pStmt.setDouble(7, entity.getWeight());
-				pStmt.setInt(8, entity.getId());
+				pStmt.setInt(8, entity.getCargoRoute().getId());
+				pStmt.setInt(9, entity.getId());
 				pStmt.executeUpdate();
 				c.commit();
 			} catch (final Exception e) {
@@ -64,7 +68,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
 						"insert into %s (customer_id, created, updated, cargo_type, station_id_from, station_id_to, date,"
-								+ "weight) values(?,?,?,?,?,?,?,?)",
+								+ "weight, cargo_route_id) values(?,?,?,?,?,?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
@@ -76,6 +80,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 				pStmt.setInt(6, entity.getStationTo().getId());
 				pStmt.setObject(7, entity.getDate(), Types.TIMESTAMP);
 				pStmt.setDouble(8, entity.getWeight());
+				pStmt.setInt(9, entity.getCargoRoute().getId());
 
 				pStmt.executeUpdate();
 
@@ -108,7 +113,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 		final ICargoOrder entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
 		entity.setCargoType(CargoType.values()[resultSet.getInt("cargo_type")]);
-		;
+
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 		entity.setDate(resultSet.getTimestamp("date"));
@@ -145,7 +150,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 			}
 			entity.setStationFrom(from);
 		}
-		final Integer toId = (Integer) resultSet.getObject("station_to_id");
+		final Integer toId = (Integer) resultSet.getObject("station_id_to");
 		if (toId != null) {
 			Station to = new Station();
 			to.setId(toId);

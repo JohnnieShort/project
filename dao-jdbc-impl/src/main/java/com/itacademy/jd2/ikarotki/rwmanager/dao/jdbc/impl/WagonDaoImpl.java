@@ -57,7 +57,7 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 	public void insert(IWagon entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (wagon_type, created, updated, train_id, freight_price, capacity) values(?,?,?,?,?.?)",
+						"insert into %s (wagon_type, created, updated, train_id, freight_price, capacity) values(?,?,?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {

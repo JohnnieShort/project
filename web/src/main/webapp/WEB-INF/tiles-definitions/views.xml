@@ -6,7 +6,7 @@
 	
 
 	<definition name="DefaultTemplate" template="/WEB-INF/views/main-template.jsp">
-		<put-attribute name="title" value="EaF Rail Ways" />
+		<put-attribute name="title" value="FaE Rail Ways" />
 		<put-attribute name="header" value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
@@ -15,6 +15,11 @@
 	<definition name="station.list" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/station/list.jsp" />
 	</definition>
+	
+	<definition name="wagon.list" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/wagon/list.jsp" />
+	</definition>
+	
 	<definition name="index" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
 	</definition>

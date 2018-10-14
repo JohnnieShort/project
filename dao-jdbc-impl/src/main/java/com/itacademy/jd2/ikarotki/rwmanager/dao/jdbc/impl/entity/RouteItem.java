@@ -13,6 +13,25 @@ public class RouteItem extends BaseEntity implements IRouteItem {
 	private Date departure;
 	private Date arrival;
 	private Integer ordinalNum;
+	private Boolean isFirst;
+	
+	private Boolean isLast;
+	
+	public Boolean getIsFirst() {
+		return isFirst;
+	}
+
+	public void setIsFirst(Boolean isFirst) {
+		this.isFirst = isFirst;
+	}
+
+	public Boolean getIsLast() {
+		return isLast;
+	}
+
+	public void setIsLast(Boolean isLast) {
+		this.isLast = isLast;
+	}
 
 	public IPassengerRoute getPassengerRoute() {
 		return passengerRoute;
@@ -66,7 +85,9 @@ public class RouteItem extends BaseEntity implements IRouteItem {
 	public String toString() {
 		return "RouteItem [passengerRoute=" + passengerRoute + ", stationFrom=" + stationFrom + ", stationTo="
 				+ stationTo + ", departure=" + departure + ", arrival=" + arrival + ", ordinalNum=" + ordinalNum
-				+ ", getId()=" + getId() + "]";
+				+ ", isFirst=" + isFirst + ", isLast=" + isLast + ", getId()=" + getId() + "]";
 	}
+
+	
 
 }

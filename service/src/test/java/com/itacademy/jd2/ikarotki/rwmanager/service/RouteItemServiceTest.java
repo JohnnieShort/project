@@ -30,6 +30,8 @@ public class RouteItemServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getArrival());
 		assertNotNull(entityFromDb.getDeparture());
 		assertNotNull(entityFromDb.getOrdinalNum());
+		assertNotNull(entityFromDb.getIsFirst());
+		assertNotNull(entityFromDb.getIsLast());
 		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
 		assertTrue(entityFromDb.getStationFrom().getId().equals(entity.getStationFrom().getId()));
 		assertTrue(entityFromDb.getStationTo().getId().equals(entity.getStationTo().getId()));
@@ -58,6 +60,8 @@ public class RouteItemServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getArrival());
 		assertNotNull(entityFromDb.getDeparture());
 		assertNotNull(entityFromDb.getOrdinalNum());
+		assertNotNull(entityFromDb.getIsFirst());
+		assertNotNull(entityFromDb.getIsLast());
 	}
 
 	@Test
@@ -80,6 +84,8 @@ public class RouteItemServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getArrival());
 			assertNotNull(entityFromDb.getDeparture());
 			assertNotNull(entityFromDb.getOrdinalNum());
+			assertNotNull(entityFromDb.getIsFirst());
+			assertNotNull(entityFromDb.getIsLast());
 			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
 
 		}

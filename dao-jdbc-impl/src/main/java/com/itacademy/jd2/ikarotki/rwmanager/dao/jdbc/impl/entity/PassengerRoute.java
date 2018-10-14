@@ -9,6 +9,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 
 public class PassengerRoute extends BaseEntity implements IPassengerRoute {
+	
 	private IStation from;
 	private IStation to;
 	private Date departure;

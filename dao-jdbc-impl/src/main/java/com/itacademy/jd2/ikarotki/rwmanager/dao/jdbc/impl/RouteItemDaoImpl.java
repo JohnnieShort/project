@@ -29,8 +29,8 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 	public void update(IRouteItem entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"update %s set passenger_route_id=?, updated=?, station_id_from=?, station_id_to=?, arrival=?, departure=?, ordinal_num=? "
-								+ "where id=?",
+						"update %s set passenger_route_id=?, updated=?, station_id_from=?, station_id_to=?, arrival=?, departure=?, ordinal_num=?, "
+								+ " is_first=?, is_last=? where id=?",
 						getTableName()))) {
 			c.setAutoCommit(false);
 			try {
@@ -41,8 +41,11 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				pStmt.setObject(5, entity.getArrival(), Types.TIMESTAMP);
 				pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
 				pStmt.setInt(7, entity.getOrdinalNum());
+				pStmt.setBoolean(8, entity.getIsFirst());
 
-				pStmt.setInt(8, entity.getId());
+				pStmt.setBoolean(9, entity.getIsLast());
+
+				pStmt.setInt(10, entity.getId());
 				pStmt.executeUpdate();
 				c.commit();
 			} catch (final Exception e) {
@@ -59,8 +62,8 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 	public void insert(IRouteItem entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (passenger_route_id, created, updated, station_id_from, station_id_to, arrival, departure, ordinal_num) "
-								+ "values(?,?,?,?,?,?,?,?)",
+						"insert into %s (passenger_route_id, created, updated, station_id_from, station_id_to, arrival, "
+								+ "departure, ordinal_num, is_first, is_last) " + "values(?,?,?,?,?,?,?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
@@ -72,6 +75,9 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
 				pStmt.setObject(7, entity.getDeparture(), Types.TIMESTAMP);
 				pStmt.setInt(8, entity.getOrdinalNum());
+				pStmt.setBoolean(9, entity.getIsFirst());
+
+				pStmt.setBoolean(10, entity.getIsLast());
 
 				pStmt.executeUpdate();
 
@@ -108,6 +114,8 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 		entity.setOrdinalNum(resultSet.getInt("ordinal_num"));
+		entity.setIsFirst(resultSet.getBoolean("is_first"));
+		entity.setIsLast(resultSet.getBoolean("is_last"));
 
 		final Integer passengerRouteId = (Integer) resultSet.getObject("passenger_route_id");
 		if (passengerRouteId != null) {

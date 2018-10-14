@@ -6,19 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
-import java.util.Date;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.CargoOrder;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.CargoRoute;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Locomotive;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
 @Repository
@@ -34,15 +29,15 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 	public void update(ICargoRoute entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"update %s set cargo_order_id=?, updated=?, train_id=?, price=? where id=?", getTableName()))) {
+						"update %s set  updated=?, train_id=?, price=? where id=?", getTableName()))) {
 			c.setAutoCommit(false);
 			try {
-				pStmt.setInt(1, entity.getCargoOrder().getId());
-				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(3, entity.getTrain().getId());
-				pStmt.setDouble(4, entity.getPrice());
+				
+				pStmt.setObject(1, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(2, entity.getTrain().getId());
+				pStmt.setDouble(3, entity.getPrice());
 
-				pStmt.setInt(5, entity.getId());
+				pStmt.setInt(4, entity.getId());
 
 				pStmt.executeUpdate();
 				c.commit();
@@ -61,15 +56,15 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 	public void insert(ICargoRoute entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (cargo_order_id, created, updated, train_id, price) values(?,?,?,?,?)",
+						"insert into %s (created, updated, train_id, price) values(?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
-				pStmt.setInt(1, entity.getCargoOrder().getId());
-				pStmt.setObject(2, entity.getCreated(), Types.TIMESTAMP);
-				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setInt(4, entity.getTrain().getId());
-				pStmt.setDouble(5, entity.getPrice());
+				
+				pStmt.setObject(1, entity.getCreated(), Types.TIMESTAMP);
+				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
+				pStmt.setInt(3, entity.getTrain().getId());
+				pStmt.setDouble(4, entity.getPrice());
 
 				pStmt.executeUpdate();
 
@@ -106,7 +101,7 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 
-		final Integer cargoOrderId = (Integer) resultSet.getObject("cargo_order_id");
+		/*final Integer cargoOrderId = (Integer) resultSet.getObject("cargo_order_id");
 		if (cargoOrderId != null) {
 			final CargoOrder cargoOrder = new CargoOrder();
 			cargoOrder.setId(cargoOrderId);
@@ -159,7 +154,7 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 
 			}
 			entity.setCargoOrder(cargoOrder);
-		}
+		}*/
 		final Integer trainId = (Integer) resultSet.getObject("train_id");
 		Train train = new Train();
 		train.setId(trainId);

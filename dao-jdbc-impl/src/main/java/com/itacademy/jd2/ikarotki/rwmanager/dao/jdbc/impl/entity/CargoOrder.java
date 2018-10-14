@@ -3,17 +3,28 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 import java.util.Date;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 
 public class CargoOrder extends BaseEntity implements ICargoOrder {
+	private ICargoRoute cargoRoute;
+
 	private ICustomer customer;
 	private CargoType cargoType;
 	private IStation stationFrom;
 	private IStation stationTo;
 	private Date date;
 	private Double weight;
+
+	public ICargoRoute getCargoRoute() {
+		return cargoRoute;
+	}
+
+	public void setCargoRoute(ICargoRoute cargoRoute) {
+		this.cargoRoute = cargoRoute;
+	}
 
 	public ICustomer getCustomer() {
 		return customer;
@@ -65,8 +76,9 @@ public class CargoOrder extends BaseEntity implements ICargoOrder {
 
 	@Override
 	public String toString() {
-		return "CargoOrder [customer=" + customer + ", cargoType=" + cargoType + ", stationFrom=" + stationFrom
-				+ ", stationTo=" + stationTo + ", date=" + date + ", weight=" + weight + ", getId()=" + getId() + "]";
+		return "CargoOrder [cargoRoute=" + cargoRoute + ", customer=" + customer + ", cargoType=" + cargoType
+				+ ", stationFrom=" + stationFrom + ", stationTo=" + stationTo + ", date=" + date + ", weight=" + weight
+				+ ", getId()=" + getId() + "]";
 	}
 
 }

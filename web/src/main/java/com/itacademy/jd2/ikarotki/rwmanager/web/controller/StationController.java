@@ -12,28 +12,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
-import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.StationDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 
 @Controller
 @RequestMapping(value = "/station")
 public class StationController {
+	private IStationService stationService;
+	StationToDTOConverter toDtoConverter;
+
 	@Autowired
-    private IStationService stationService;
+	private StationController(IStationService stationService, StationToDTOConverter toDtoConverter) {
+		super();
+		this.stationService = stationService;
+		this.toDtoConverter = toDtoConverter;
+	}
 
-    @Autowired
-    private StationToDTOConverter toDtoConverter;
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView index(final HttpServletRequest req) {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index(final HttpServletRequest req) {
+		final List<IStation> entities = stationService.getAll();
+		List<StationDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
 
-        final List<IStation> entities = stationService.getAll();
-        List<StationDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
-
-        final HashMap<String, Object> models = new HashMap<>();
-        models.put("list", dtos);
-        return new ModelAndView("station.list", models);
-    }
+		final HashMap<String, Object> models = new HashMap<>();
+		models.put("list", dtos);
+		return new ModelAndView("station.list", models);
+	}
 }

@@ -27,7 +27,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 
-@SpringJUnitConfig(locations="classpath:service-context-test.xml")
+@SpringJUnitConfig(locations = "classpath:service-context-test.xml")
 
 public abstract class AbstractTest {
 	@Autowired
@@ -59,7 +59,7 @@ public abstract class AbstractTest {
 
 	@BeforeEach
 	public void setUpMethod() {
-		// clean DB recursive
+		
 		cargoOrderService.deleteAll();
 		cargoRouteService.deleteAll();
 		customerService.deleteAll();
@@ -120,6 +120,7 @@ public abstract class AbstractTest {
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
+		entity.setPower(10000.0 * getRANDOM().nextDouble());
 		locomotiveService.save(entity);
 		return entity;
 	}
@@ -218,6 +219,8 @@ public abstract class AbstractTest {
 		entity.setCreated(date);
 
 		entity.setUpdated(date);
+		entity.setIsFirst(false);
+		entity.setIsLast(false);
 
 		routeItemService.save(entity);
 		return entity;
@@ -225,6 +228,8 @@ public abstract class AbstractTest {
 
 	protected ICargoOrder saveNewCargoOrder() {
 		final ICargoOrder entity = cargoOrderService.createEntity();
+		ICargoRoute CREntity = saveNewCargoRoute();
+		entity.setCargoRoute(CREntity);
 		ICustomer customerEntity = saveNewCustomer();
 		entity.setCustomer(customerEntity);
 		entity.setCargoType(CargoType.values()[getRANDOM().nextInt(2)]);
@@ -248,8 +253,7 @@ public abstract class AbstractTest {
 
 	protected ICargoRoute saveNewCargoRoute() {
 		final ICargoRoute entity = cargoRouteService.createEntity();
-		ICargoOrder COEntity = saveNewCargoOrder();
-		entity.setCargoOrder(COEntity);
+
 		ITrain trainEntity = saveNewTrain();
 		entity.setTrain(trainEntity);
 		entity.setPrice(getRANDOM().nextDouble() * 1000000);

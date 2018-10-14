@@ -5,10 +5,11 @@
 		<div class="nav-wrapper container">
 			<ul class="left hide-on-med-and-down">
 				<li><a href="${baseUrl}/">Home</a></li>
-				<li><a href="${baseUrl}/shcedule">Train Schedule</a></li>
-				<li><a href="${baseUrl}/ticket">Tickets</a></li>
-				<li><a href="${baseUrl}/cargo">Cargo transportation</a></li>
-				<li><a href="${baseUrl}/news">News</a></li>
+				
+				<li><a href="${baseUrl}/station">Stations</a></li>
+				<li><a href="${baseUrl}/wagon">Wagons</a></li>
+				
+				
 			</ul>
 		</div>
 	</nav>

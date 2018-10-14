@@ -26,10 +26,10 @@ public class CargoRouteServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
 		assertNotNull(entityFromDb.getTrain());
-		assertNotNull(entityFromDb.getCargoOrder());
+
 		assertNotNull(entityFromDb.getPrice());
 		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
-		assertTrue(entityFromDb.getCargoOrder().getId().equals(entity.getCargoOrder().getId()));
+
 		assertTrue(entityFromDb.getTrain().getId().equals(entity.getTrain().getId()));
 	}
 
@@ -50,7 +50,7 @@ public class CargoRouteServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
 		assertNotNull(entityFromDb.getTrain());
-		assertNotNull(entityFromDb.getCargoOrder());
+
 		assertEquals(entity.getCreated(), entityFromDb.getCreated());
 		assertTrue(entityFromDb.getUpdated().after(entity.getCreated()));
 		assertFalse(entity.getPrice().equals(entityFromDb.getPrice()));
@@ -73,7 +73,7 @@ public class CargoRouteServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getCreated());
 			assertNotNull(entityFromDb.getUpdated());
 			assertNotNull(entityFromDb.getTrain());
-			assertNotNull(entityFromDb.getCargoOrder());
+
 			assertNotNull(entityFromDb.getPrice());
 			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
 
