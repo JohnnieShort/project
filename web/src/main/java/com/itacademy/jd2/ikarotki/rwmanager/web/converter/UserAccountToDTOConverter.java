@@ -8,7 +8,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.UserAccountDTO;
 
 @Component
-public class UserAccounToDTOConverter implements Function<IUserAccount, UserAccountDTO> {
+public class UserAccountToDTOConverter implements Function<IUserAccount, UserAccountDTO> {
 	@Override
 	public UserAccountDTO apply(final IUserAccount entity) {
 		final UserAccountDTO dto = new UserAccountDTO();

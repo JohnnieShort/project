@@ -3,25 +3,83 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	
 
-	<definition name="DefaultTemplate" template="/WEB-INF/views/main-template.jsp">
+
+	<definition name="DefaultTemplate"
+		template="/WEB-INF/views/main-template.jsp">
 		<put-attribute name="title" value="FaE Rail Ways" />
-		<put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/footer.jsp" />
+	</definition>
+
+	<definition name="cargoOrder.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoOrder/list.jsp" />
+	</definition>
+
+	<definition name="cargoRoute.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoRoute/list.jsp" />
+	</definition>
+
+	<definition name="customer.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/customer/list.jsp" />
+	</definition>
+
+	<definition name="locomotive.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/locomotive/list.jsp" />
+	</definition>
+
+	<definition name="passenger.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/passenger/list.jsp" />
+	</definition>
+
+	<definition name="passengerRoute.list"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/passengerRoute/list.jsp" />
+	</definition>
+
+	<definition name="routeItem.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/routeItem/list.jsp" />
 	</definition>
 
 	<definition name="station.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/station/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/station/list.jsp" />
 	</definition>
-	
+
+	<definition name="ticket.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/ticket/list.jsp" />
+	</definition>
+
+	<definition name="train.list" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/train/list.jsp" />
+	</definition>
+
+	<definition name="userAccount.list"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/userAccount/list.jsp" />
+	</definition>
+
 	<definition name="wagon.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/wagon/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/wagon/list.jsp" />
 	</definition>
-	
+
 	<definition name="index" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/index.jsp" />
 	</definition>
 
 
