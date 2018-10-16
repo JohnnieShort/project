@@ -1,5 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <footer class="page-footer">
-	
+<c:set var="baseUrl" value="${pageContext.request.contextPath}" />	
 		<div class="nav-wrapper container">
 			<ul class="left hide-on-med-and-down">
 				

@@ -76,6 +76,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/wagon/list.jsp" />
 	</definition>
+	
+	<definition name="station.edit" extends="DefaultTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/station/form.jsp" />
+    </definition>
+	
 
 	<definition name="index" extends="DefaultTemplate">
 		<put-attribute name="body"

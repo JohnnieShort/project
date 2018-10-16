@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IStationDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 
 @Service
@@ -25,7 +27,7 @@ public class StationServiceImpl implements IStationService {
 
 	public StationServiceImpl() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -71,6 +73,11 @@ public class StationServiceImpl implements IStationService {
 		final List<IStation> all = dao.selectAll();
 		LOGGER.debug("requested list of stations {}", all);
 		return all;
+	}
+
+	@Override
+	public List<IStation> find(StationFilter filter) {
+		return dao.find(filter);
 	}
 
 }

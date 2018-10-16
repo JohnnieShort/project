@@ -18,6 +18,7 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Value;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IDao;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.AbstractFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.PreparedStatementAction;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.StatementAction;
@@ -216,6 +217,20 @@ public abstract class AbstractDaoImpl<ENTITY, ID> implements IDao<ENTITY, ID> {
 				"this method should be overriden in particular *Impl class or use alternative "
 						+ "com.itacademy.jd2.dz.cardealer.dao.jdbc.AbstractDaoImpl.parseRow(ResultSet, List<String>)");
 	};
+	
+	 protected void appendSort(final AbstractFilter filter, final StringBuilder sql) {
+	        final String sortColumn = filter.getSortColumn();
+	        final Boolean sortOrder = filter.getSortOrder();
+
+	        if (sortColumn != null) {
+	            sql.append(String.format(" order by %s", sortColumn));
+
+	            if (sortOrder != null) {
+	                sql.append(" ");
+	                sql.append(sortOrder ? "asc" : "desc");
+	            }
+	        }
+	    }
 
 	protected ENTITY parseRow(final ResultSet resultSet, final Set<String> columns) throws SQLException {
 		// this method allows to specify in particular DAO the parser which

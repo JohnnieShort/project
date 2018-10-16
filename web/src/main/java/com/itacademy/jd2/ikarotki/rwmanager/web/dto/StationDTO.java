@@ -2,8 +2,11 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class StationDTO {
 	private Integer id;
+	 @Size(min = 1, max = 50)
 	private String name;
 	private Double longitude;
 	private Double latitude;
