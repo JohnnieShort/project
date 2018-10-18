@@ -15,6 +15,8 @@
 			value="/WEB-INF/views/footer.jsp" />
 	</definition>
 
+	<!-- Lists -->
+
 	<definition name="cargoOrder.list" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/cargoOrder/list.jsp" />
@@ -76,11 +78,64 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/wagon/list.jsp" />
 	</definition>
-	
+
+	<!-- Forms -->
+
+	<definition name="cargoOrder.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoOrder/form.jsp" />
+	</definition>
+
+	<definition name="cargoRoute.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoRoute/form.jsp" />
+	</definition>
+
+	<definition name="customer.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/customer/form.jsp" />
+	</definition>
+
+	<definition name="locomotive.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/locomotive/form.jsp" />
+	</definition>
+
+	<definition name="passenger.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/passenger/form.jsp" />
+	</definition>
+
+	<definition name="routeItem.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/routeItem/form.jsp" />
+	</definition>
+
 	<definition name="station.edit" extends="DefaultTemplate">
-        <put-attribute name="body" value="/WEB-INF/views/station/form.jsp" />
-    </definition>
-	
+		<put-attribute name="body"
+			value="/WEB-INF/views/station/form.jsp" />
+	</definition>
+
+	<definition name="ticket.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/ticket/form.jsp" />
+	</definition>
+
+	<definition name="train.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/train/form.jsp" />
+	</definition>
+
+	<definition name="userAccount.edit"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/userAccount/form.jsp" />
+	</definition>
+
+	<definition name="wagon.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/wagon/form.jsp" />
+	</definition>
 
 	<definition name="index" extends="DefaultTemplate">
 		<put-attribute name="body"

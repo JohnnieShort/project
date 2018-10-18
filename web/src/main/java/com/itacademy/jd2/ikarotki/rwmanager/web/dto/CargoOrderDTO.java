@@ -2,12 +2,15 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 
 public class CargoOrderDTO {
+	//@Size(min = 1, max = 50)
 	private Integer id;
 	private Date created;
 	private Date updated;

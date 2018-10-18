@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICustomerDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CustomerFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICustomerService;
 
 @Service
@@ -71,6 +72,11 @@ public class CustomerServiceImpl implements ICustomerService {
 		final List<ICustomer> all = dao.selectAll();
 		LOGGER.debug("requested list of customerts {}", all);
 		return all;
+	}
+
+	@Override
+	public List<ICustomer> find(CustomerFilter filter) {
+		return dao.find(filter);
 	}
 
 }

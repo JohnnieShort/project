@@ -10,16 +10,20 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICargoRouteService;
+
 @Service
 public class CargoRouteServiceImpl implements ICargoRouteService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CargoRouteServiceImpl.class);
 	private ICargoRouteDao dao;
+
 	@Autowired
 	public CargoRouteServiceImpl(ICargoRouteDao dao) {
 		super();
 		this.dao = dao;
 	}
+
 	public CargoRouteServiceImpl() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -68,6 +72,11 @@ public class CargoRouteServiceImpl implements ICargoRouteService {
 		final List<ICargoRoute> all = dao.selectAll();
 		LOGGER.debug("requested list of cargo routes {}", all);
 		return all;
+	}
+
+	@Override
+	public List<ICargoRoute> find(CargoRouteFilter filter) {
+		return dao.find(filter);
 	}
 
 }

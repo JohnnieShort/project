@@ -2,12 +2,15 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 
 public class UserAccountDTO {
 	private Integer id;
 	private Date created;
 	private Date updated;
+	@Size(min = 1, max = 50)
 	private String eMail;
 	private String password;
 	private Role role;

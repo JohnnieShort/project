@@ -6,15 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITrainDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Locomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
+
 @Repository
 public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements ITrainDao {
 
@@ -105,5 +108,13 @@ public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements IT
 			;
 		}
 		return entity;
+	}
+
+	@Override
+	public List<ITrain> find(TrainFilter filter) {
+		final StringBuilder sqlTile = new StringBuilder("");
+		appendSort(filter, sqlTile);
+		// appendPaging(filter, sqlTile);
+		return executeFindQuery(sqlTile.toString());
 	}
 }

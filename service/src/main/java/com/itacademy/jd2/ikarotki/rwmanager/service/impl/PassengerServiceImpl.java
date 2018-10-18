@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IPassengerDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerService;
 
 @Service
@@ -71,6 +72,11 @@ public class PassengerServiceImpl implements IPassengerService {
 		final List<IPassenger> all = dao.selectAll();
 		LOGGER.debug("requested list of passengers {}", all);
 		return all;
+	}
+
+	@Override
+	public List<IPassenger> find(PassengerFilter filter) {
+		return dao.find(filter);
 	}
 
 }

@@ -8,12 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITicketDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TicketFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Passenger;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.PassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
@@ -236,8 +238,15 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 			}
 			entity.setFrom(to);
 		}
-		
+
 		return entity;
 	}
 
+	@Override
+	public List<ITicket> find(TicketFilter filter) {
+		final StringBuilder sqlTile = new StringBuilder("");
+		appendSort(filter, sqlTile);
+		// appendPaging(filter, sqlTile);
+		return executeFindQuery(sqlTile.toString());
+	}
 }

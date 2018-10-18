@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoOrderDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoOrderFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICargoOrderService;
 
 @Service
@@ -71,6 +72,11 @@ public class CargoOrderServiceImpl implements ICargoOrderService {
 		final List<ICargoOrder> all = dao.selectAll();
 		LOGGER.debug("requested list of cargo orders {}", all);
 		return all;
+	}
+
+	@Override
+	public List<ICargoOrder> find(CargoOrderFilter filter) {
+		return dao.find(filter);
 	}
 
 }

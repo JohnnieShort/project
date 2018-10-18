@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,11 @@ import org.springframework.stereotype.Repository;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IWagonDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.WagonFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Wagon;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
+
 @Repository
 public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IWagonDao {
 
@@ -115,5 +118,13 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 			entity.setTrain(train);
 		}
 		return entity;
+	}
+
+	@Override
+	public List<IWagon> find(WagonFilter filter) {
+		final StringBuilder sqlTile = new StringBuilder("");
+		appendSort(filter, sqlTile);
+		// appendPaging(filter, sqlTile);
+		return executeFindQuery(sqlTile.toString());
 	}
 }

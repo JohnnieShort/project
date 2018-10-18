@@ -16,7 +16,7 @@
         <div class="row">
             <div class="input-field col s12">
                 <form:input path="longitude" type="text" disabled="${readonly}" />
-                <form:errors path="name" cssClass="red-text" />
+                <form:errors path="longitude" cssClass="red-text" />
                 <label for="name">Longitude</label>
             </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="row">
             <div class="input-field col s12">
                 <form:input path="latitude" type="text" disabled="${readonly}" />
-                <form:errors path="name" cssClass="red-text" />
+                <form:errors path="latitude" cssClass="red-text" />
                 <label for="name">Latitude</label>
             </div>
         </div>

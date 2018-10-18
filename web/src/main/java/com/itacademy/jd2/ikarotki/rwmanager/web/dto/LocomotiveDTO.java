@@ -2,11 +2,14 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 public class LocomotiveDTO {
 
 	private Integer id;
 	private Date created;
 	private Date updated;
+	@Size(min = 1, max = 50)
 	private String name;
 	private Double power;
 
@@ -33,8 +36,6 @@ public class LocomotiveDTO {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-
-	
 
 	public Double getPower() {
 		return power;

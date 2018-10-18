@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IUserAccountDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.UserAccountFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
 
 @Service
@@ -71,6 +72,11 @@ public class UserAccountServiceImpl implements IUserAccountService {
 		final List<IUserAccount> all = dao.selectAll();
 		LOGGER.debug("requested list of users accounts {}", all);
 		return all;
+	}
+
+	@Override
+	public List<IUserAccount> find(UserAccountFilter filter) {
+		return dao.find(filter);
 	}
 
 }

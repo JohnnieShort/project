@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoOrderDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoOrderFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.CargoOrder;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
@@ -166,5 +168,12 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 			entity.setStationTo(to);
 		}
 		return entity;
+	}
+	@Override
+	public List<ICargoOrder> find(CargoOrderFilter filter) {
+		final StringBuilder sqlTile = new StringBuilder("");
+        appendSort(filter, sqlTile);
+        // appendPaging(filter, sqlTile);
+        return executeFindQuery(sqlTile.toString());
 	}
 }

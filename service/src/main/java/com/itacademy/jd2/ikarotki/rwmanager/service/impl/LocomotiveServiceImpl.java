@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ILocomotiveDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.LocomotiveFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ILocomotiveService;
 
 @Service
@@ -71,6 +72,11 @@ public class LocomotiveServiceImpl implements ILocomotiveService {
 		final List<ILocomotive> all = dao.selectAll();
 		LOGGER.debug("requested list of locomotives {}", all);
 		return all;
+	}
+
+	@Override
+	public List<ILocomotive> find(LocomotiveFilter filter) {
+		return dao.find(filter);
 	}
 
 }

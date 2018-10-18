@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
@@ -14,11 +15,13 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IPassengerRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Locomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.PassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
+
 @Repository
 public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Integer> implements IPassengerRouteDao {
 
@@ -31,11 +34,10 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 	@Override
 	public void update(IPassengerRoute entity) {
 		try (Connection c = getConnection();
-				PreparedStatement pStmt = c
-						.prepareStatement(String.format(
-								"update %s set st_from=?, st_to=?, updated=?, departure=?, arrival=?, passenger_route_type=?,"
-										+ "train_id=?, is_actual=?, frequency=?, places=?  where id=?",
-								getTableName()))) {
+				PreparedStatement pStmt = c.prepareStatement(String.format(
+						"update %s set st_from=?, st_to=?, updated=?, departure=?, arrival=?, passenger_route_type=?,"
+								+ "train_id=?, is_actual=?, frequency=?, places=?  where id=?",
+						getTableName()))) {
 			c.setAutoCommit(false);
 			try {
 				pStmt.setInt(1, entity.getFrom().getId());
@@ -167,5 +169,13 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			entity.setFrom(to);
 		}
 		return entity;
+	}
+
+	@Override
+	public List<IPassengerRoute> find(PassengerRouteFilter filter) {
+		final StringBuilder sqlTile = new StringBuilder("");
+		appendSort(filter, sqlTile);
+		// appendPaging(filter, sqlTile);
+		return executeFindQuery(sqlTile.toString());
 	}
 }

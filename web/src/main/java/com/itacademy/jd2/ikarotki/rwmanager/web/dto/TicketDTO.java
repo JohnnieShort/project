@@ -2,11 +2,14 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
 public class TicketDTO {
+	//@Size(min = 1, max = 50)
 	private Integer id;
 	private Date created;
 	private Date updated;

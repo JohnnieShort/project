@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IRouteItemDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IRouteItemService;
 
 @Service
@@ -71,6 +72,11 @@ public class RouteItemServiceImpl implements IRouteItemService {
 		final List<IRouteItem> all = dao.selectAll();
 		LOGGER.debug("requested list of route items {}", all);
 		return all;
+	}
+
+	@Override
+	public List<IRouteItem> find(RouteItemFilter filter) {
+		return dao.find(filter);
 	}
 
 }

@@ -1,21 +1,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 
 <c:set var="baseUrl" value="${contextPath}/customer" />
 <h4 class="header">Customers</h4>
 <table class="bordered highlight">
 	<tbody>
 		<tr>
-			<th>id</th>
-		<%--<th>user account id</th>--%>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
+		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="user_account_id">user account id</mytaglib:sort-link></th>--%>
 			
 			
-			<th>created</th>
-			<th>updated</th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
 			<th></th>
 		</tr>
-		<c:forEach var="customer" items="${list}" varStatus="loopCounter">
+		<c:forEach var="customer" items="${listDTO.list}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${customer.id}" /></td>
 			<%--<td><c:out value="${customer.userAccount.id}" /></td>--%>
@@ -29,7 +30,7 @@
 					href="${baseUrl}/${customer.id}"><i class="material-icons">info</i></a>
 					<a class="btn-floating" href="${baseUrl}/${customer.id}/edit"><i
 						class="material-icons">edit</i></a> <a
-					class="btn-floating red disabled"
+					class="btn-floating red "
 					href="${baseUrl}/${customer.id}/delete"><i class="material-icons">delete</i></a></td>
 			</tr>
 		</c:forEach>

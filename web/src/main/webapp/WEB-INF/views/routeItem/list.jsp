@@ -1,29 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 
 <c:set var="baseUrl" value="${contextPath}/routeItem" />
 <h4 class="header">Items of Routes</h4>
 <table class="bordered highlight">
 	<tbody>
 		<tr>
-			<th>id</th>
-		<%--<th>station from</th>--%>
-		<%--<th>station to</th>--%>
-		<%--<th>passenger route id</th>--%>
-			<th>arrival</th>
-			<th>departure</th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
+		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from">station from</mytaglib:sort-link></th>--%>
+		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to">station to</mytaglib:sort-link></th>--%>
+		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id">passenger route id</mytaglib:sort-link></th>--%>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="arrival">arrival</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="departure">departure</mytaglib:sort-link></th>
 			
-			<th>ordinal number</th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="ordinal_num">ordinal number</mytaglib:sort-link></th>
 		
-			<th>is first</th>
-			<th>is last</th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="is_first">is first</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="is_last">is last</mytaglib:sort-link></th>
 			
-			<th>created</th>
-			<th>updated</th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
 			<th></th>
 		</tr>
-		<c:forEach var="routeItem" items="${list}" varStatus="loopCounter">
+		<c:forEach var="routeItem" items="${listDTO.list}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${routeItem.id}" /></td>
 			<%--<td><c:out value="${routeItem.stationFrom.id}" /></td>--%>
@@ -46,7 +47,7 @@
 					href="${baseUrl}/${routeItem.id}"><i class="material-icons">info</i></a>
 					<a class="btn-floating" href="${baseUrl}/${routeItem.id}/edit"><i
 						class="material-icons">edit</i></a> <a
-					class="btn-floating red disabled"
+					class="btn-floating red "
 					href="${baseUrl}/${routeItem.id}/delete"><i class="material-icons">delete</i></a></td>
 			</tr>
 		</c:forEach>

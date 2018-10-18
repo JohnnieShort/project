@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IPassengerRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
 
 @Service
@@ -71,6 +72,11 @@ public class PassengerRouteServiceImpl implements IPassengerRouteService {
 		final List<IPassengerRoute> all = dao.selectAll();
 		LOGGER.debug("requested list of passenger routes {}", all);
 		return all;
+	}
+
+	@Override
+	public List<IPassengerRoute> find(PassengerRouteFilter filter) {
+		return dao.find(filter);
 	}
 
 }

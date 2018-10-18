@@ -10,22 +10,25 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IWagonDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.WagonFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IWagonService;
+
 @Service
 public class WagonServiceImpl implements IWagonService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WagonServiceImpl.class);
 	private IWagonDao dao;
 
-	
 	@Autowired
 	public WagonServiceImpl(IWagonDao dao) {
 		super();
 		this.dao = dao;
 	}
+
 	public WagonServiceImpl() {
 		super();
-		
+
 	}
+
 	@Override
 	public IWagon createEntity() {
 		return dao.createEntity();
@@ -69,6 +72,11 @@ public class WagonServiceImpl implements IWagonService {
 		final List<IWagon> all = dao.selectAll();
 		LOGGER.debug("requested list of wagons {}", all);
 		return all;
+	}
+
+	@Override
+	public List<IWagon> find(WagonFilter filter) {
+		return dao.find(filter);
 	}
 
 }

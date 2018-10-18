@@ -2,6 +2,8 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Size;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
@@ -14,11 +16,11 @@ public class RouteItemDTO {
 	private IStation stationTo;
 	private Date departure;
 	private Date arrival;
+	//@Size(min = 1, max = 50)
 	private Integer ordinalNum;
 	private Boolean isFirst;
 
 	private Boolean isLast;
-	
 
 	public Integer getId() {
 		return id;
@@ -43,8 +45,6 @@ public class RouteItemDTO {
 	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
-
-	
 
 	public Boolean getIsFirst() {
 		return isFirst;

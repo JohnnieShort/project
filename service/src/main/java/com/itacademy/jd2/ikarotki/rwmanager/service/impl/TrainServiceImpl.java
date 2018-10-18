@@ -10,16 +10,20 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITrainDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITrainService;
+
 @Service
 public class TrainServiceImpl implements ITrainService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TrainServiceImpl.class);
 	private ITrainDao dao;
+
 	@Autowired
 	public TrainServiceImpl(ITrainDao dao) {
 		super();
 		this.dao = dao;
 	}
+
 	public TrainServiceImpl() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -68,6 +72,11 @@ public class TrainServiceImpl implements ITrainService {
 		final List<ITrain> all = dao.selectAll();
 		LOGGER.debug("requested list of trains {}", all);
 		return all;
+	}
+
+	@Override
+	public List<ITrain> find(TrainFilter filter) {
+		return dao.find(filter);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.itacademy.jd2.ikarotki.rwmanager.service;
 import java.util.List;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoOrderFilter;
 
 public interface ICargoOrderService {
 	ICargoOrder get(Integer id);
@@ -16,4 +17,6 @@ public interface ICargoOrderService {
 	void deleteAll();
 
 	ICargoOrder createEntity();
+
+	List<ICargoOrder> find(CargoOrderFilter filter);
 }

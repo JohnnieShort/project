@@ -3,17 +3,20 @@ package com.itacademy.jd2.ikarotki.rwmanager.service;
 import java.util.List;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
 
 public interface IRouteItemService {
 	IRouteItem get(Integer id);
 
-    List<IRouteItem> getAll();
+	List<IRouteItem> getAll();
 
-    void save(IRouteItem entity);
+	void save(IRouteItem entity);
 
-    void delete(Integer id);
+	void delete(Integer id);
 
-    void deleteAll();
+	void deleteAll();
 
-    IRouteItem createEntity();
+	IRouteItem createEntity();
+
+	List<IRouteItem> find(RouteItemFilter filter);
 }

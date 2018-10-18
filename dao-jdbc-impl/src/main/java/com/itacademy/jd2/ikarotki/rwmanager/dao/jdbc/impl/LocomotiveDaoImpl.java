@@ -6,12 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ILocomotiveDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.LocomotiveFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Locomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
 
@@ -98,5 +100,13 @@ public class LocomotiveDaoImpl extends AbstractDaoImpl<ILocomotive, Integer> imp
 		entity.setPower(resultSet.getDouble("power"));
 
 		return entity;
+	}
+
+	@Override
+	public List<ILocomotive> find(LocomotiveFilter filter) {
+		final StringBuilder sqlTile = new StringBuilder("");
+		appendSort(filter, sqlTile);
+		// appendPaging(filter, sqlTile);
+		return executeFindQuery(sqlTile.toString());
 	}
 }
