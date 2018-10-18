@@ -238,6 +238,19 @@ public abstract class AbstractDaoImpl<ENTITY, ID> implements IDao<ENTITY, ID> {
 		// com.itacademy.jd2.dz.cardealer.dao.jdbc.AbstractDaoImpl.parseRow(ResultSet)
 		return parseRow(resultSet);
 	};
+	
+	protected void appendPaging(final AbstractFilter filter, final StringBuilder sql) {
+        final Integer limit = filter.getLimit();
+        final Integer offset = filter.getOffset();
+
+        if (limit != null) {
+            sql.append(" limit " + limit);
+        }
+
+        if (offset != null) {
+            sql.append(" offset " + offset);
+        }
+    }
 
 	protected abstract String getTableName();
 }

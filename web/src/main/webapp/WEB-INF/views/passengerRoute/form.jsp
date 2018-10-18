@@ -45,7 +45,7 @@
             <div class="input-field col s12">
                 <form:input path="places" type="text" disabled="${readonly}" />
                 <form:errors path="places" cssClass="red-text" />
-                <label for="places">N</label>
+                <label for="places">Number of places</label>
             </div>
         </div>
         <div class="row">

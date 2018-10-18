@@ -8,5 +8,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 public interface IStationDao extends IDao<IStation, Integer> {
 
 	List<IStation> find(StationFilter filter);
+	
+	long getCount(StationFilter filter);
 
 }

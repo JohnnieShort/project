@@ -45,16 +45,19 @@ public class StationController extends AbstractController<StationDTO>{
 
 	@RequestMapping(method = RequestMethod.GET)
     public ModelAndView index(final HttpServletRequest req,
+    		@RequestParam(name = "page", required = false) final Integer pageNumber,
             @RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
-
+ 
         final ListDTO<StationDTO> listDTO = getListDTO(req);
         listDTO.setSort(sortColumn);
-
+        listDTO.setPage(pageNumber);
+        
         final StationFilter filter = new StationFilter();
         prepareFilter(listDTO, filter);
 
         final List<IStation> entities = stationService.find(filter);
         listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+        listDTO.setTotalCount(stationService.getCount(filter));
 
         final HashMap<String, Object> models = new HashMap<>();
         models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);

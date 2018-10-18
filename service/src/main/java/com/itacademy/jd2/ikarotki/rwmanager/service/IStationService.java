@@ -19,4 +19,6 @@ public interface IStationService {
 	IStation createEntity();
 
 	List<IStation> find(StationFilter filter);
+	
+	long getCount(StationFilter filter);
 }

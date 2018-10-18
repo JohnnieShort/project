@@ -10,7 +10,21 @@ public class ListDTO<T> {
 
     private SortDTO sort;
 
+    private long pageCount;
+
+    private int page = 1;
+
+    private int itemsPerPage;
+
+    private long totalCount;
+
+    public ListDTO(final int itemsPerPage) {
+        super();
+        this.itemsPerPage = itemsPerPage;
+    }
+
     public ListDTO() {
+        this(5);
     }
 
     public List<T> getList() {
@@ -41,5 +55,45 @@ public class ListDTO<T> {
         } else {
             setSort(new SortDTO(sortParams[0], "asc".equals(sortParams[1])));
         }
+    }
+    
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(final Integer pageNumber) {
+        if ((pageNumber == null) || (pageNumber == 0)) {
+            return;
+        }
+
+        this.page = pageNumber;
+    }
+
+    public int getItemsPerPage() {
+        return itemsPerPage;
+    }
+
+    public boolean getFirstPage() {
+        return getPage() == 1;
+    }
+
+    public boolean getLastPage() {
+        return getPage() >= this.pageCount;
+    }
+
+    public long getPageCount() {
+        return pageCount;
+    }
+
+    public void setTotalCount(final long totalCount) {
+        this.totalCount = totalCount;
+        this.pageCount = (totalCount / itemsPerPage);
+        if ((totalCount % itemsPerPage) > 0) {
+            this.pageCount++;
+        }
+    }
+
+    public long getTotalCount() {
+        return totalCount;
     }
 }

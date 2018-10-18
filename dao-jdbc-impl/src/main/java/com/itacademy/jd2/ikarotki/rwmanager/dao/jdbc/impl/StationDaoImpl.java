@@ -12,7 +12,6 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IStationDao;
-
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
@@ -108,7 +107,11 @@ public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implement
 	public List<IStation> find(StationFilter filter) {
 		final StringBuilder sqlTile = new StringBuilder("");
         appendSort(filter, sqlTile);
-        // appendPaging(filter, sqlTile);
+        appendPaging(filter, sqlTile);
         return executeFindQuery(sqlTile.toString());
 	}
+	@Override
+    public long getCount(final StationFilter filter) {
+        return executeCountQuery("");
+    }
 }

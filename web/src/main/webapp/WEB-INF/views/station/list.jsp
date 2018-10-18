@@ -2,6 +2,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
+<%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
+
 
 <c:set var="baseUrl" value="${contextPath}/station" />
 <h4 class="header">Stations</h4>
@@ -36,5 +38,6 @@
 		</c:forEach>
 	</tbody>
 </table>
+<jspFragments:paging />
 <a class="waves-effect waves-light btn right" href="${baseUrl}/add"><i
 	class="material-icons">add</i></a>

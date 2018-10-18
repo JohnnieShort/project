@@ -1,6 +1,5 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class StationServiceImpl implements IStationService {
 
 	public StationServiceImpl() {
 		super();
-		
+
 	}
 
 	@Override
@@ -78,6 +77,11 @@ public class StationServiceImpl implements IStationService {
 	@Override
 	public List<IStation> find(StationFilter filter) {
 		return dao.find(filter);
+	}
+
+	@Override
+	public long getCount(StationFilter filter) {
+		return dao.getCount(filter);
 	}
 
 }
