@@ -12,6 +12,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
 <link rel="stylesheet" href="${contextPath}/resources/css/custom.css">
+
+
+
 <script src="${contextPath}/resources/js/init-materialize-forms.js"></script>
 <script src="${contextPath}/resources/js/init-menu.js"></script>
 </head>
