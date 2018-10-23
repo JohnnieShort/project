@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.ICargoOrderService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CargoOrderFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CargoOrderToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.CargoOrderDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/cargoOrder")
@@ -44,20 +44,24 @@ public class CargoOrderController extends AbstractController<CargoOrderDTO> {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
-			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
+			@RequestParam(name = "page", required = false) final Integer pageNumber,
+            @RequestParam(name = "sort", required = false) final String sortColumn) {
 
-		final ListDTO<CargoOrderDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO gridState = getListDTO(req);
+		gridState.setPage(pageNumber);
+		gridState.setSort(sortColumn, "id");
 
 		final CargoOrderFilter filter = new CargoOrderFilter();
-		prepareFilter(listDTO, filter);
+		prepareFilter(gridState, filter);
 
 		final List<ICargoOrder> entities = cargoOrderService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		List<CargoOrderDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+        gridState.setTotalCount(cargoOrderService.getCount(filter));
 
-		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
-		return new ModelAndView("cargoOrder.list", models);
+
+        final Map<String, Object> models = new HashMap<>();
+        models.put("gridItems", dtos);
+        return new ModelAndView("cargoOrder.list", models);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

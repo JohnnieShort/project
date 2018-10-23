@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IRouteItemService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.RouteItemFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.RouteItemToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.RouteItemDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/routeItem")
@@ -46,17 +46,16 @@ public class RouteItemController extends AbstractController<RouteItemDTO> {
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final ListDTO<RouteItemDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO listDTO = getListDTO(req);
+		listDTO.setSort(sortColumn, "id");
 
 		final RouteItemFilter filter = new RouteItemFilter();
 		prepareFilter(listDTO, filter);
 
 		final List<IRouteItem> entities = routeItemService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
+		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 		return new ModelAndView("routeItem.list", models);
 	}
 

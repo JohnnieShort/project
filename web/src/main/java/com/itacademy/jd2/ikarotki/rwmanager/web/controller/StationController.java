@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.StationDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
@@ -48,19 +48,19 @@ public class StationController extends AbstractController<StationDTO>{
     		@RequestParam(name = "page", required = false) final Integer pageNumber,
             @RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
  
-        final ListDTO<StationDTO> listDTO = getListDTO(req);
-        listDTO.setSort(sortColumn);
+        final GridStateDTO listDTO = getListDTO(req);
+        listDTO.setSort(sortColumn, "id");
         listDTO.setPage(pageNumber);
         
         final StationFilter filter = new StationFilter();
         prepareFilter(listDTO, filter);
 
         final List<IStation> entities = stationService.find(filter);
-        listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+        
         listDTO.setTotalCount(stationService.getCount(filter));
 
         final HashMap<String, Object> models = new HashMap<>();
-        models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
+        models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
         return new ModelAndView("station.list", models);
     }
 

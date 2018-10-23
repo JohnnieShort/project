@@ -79,4 +79,10 @@ public class CargoOrderServiceImpl implements ICargoOrderService {
 		return dao.find(filter);
 	}
 
+	@Override
+	public long getCount(CargoOrderFilter filter) {
+		// TODO Auto-generated method stub
+		throw new RuntimeException("this method is not implemented");
+	}
+
 }

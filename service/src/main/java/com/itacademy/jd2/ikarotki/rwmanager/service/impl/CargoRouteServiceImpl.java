@@ -79,4 +79,9 @@ public class CargoRouteServiceImpl implements ICargoRouteService {
 		return dao.find(filter);
 	}
 
+	@Override
+	public long getCount(CargoRouteFilter filter) {
+		throw new RuntimeException("this method is not implemented");
+	}
+
 }

@@ -19,4 +19,6 @@ public interface ICargoRouteService {
 	ICargoRoute createEntity();
 
 	List<ICargoRoute> find(CargoRouteFilter filter);
+
+	long getCount(CargoRouteFilter filter);
 }

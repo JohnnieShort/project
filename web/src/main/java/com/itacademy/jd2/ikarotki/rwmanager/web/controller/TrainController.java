@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.ITrainService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TrainFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TrainToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.TrainDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/train")
@@ -47,17 +47,16 @@ public class TrainController extends AbstractController<TrainDTO> {
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final ListDTO<TrainDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO listDTO = getListDTO(req);
+		listDTO.setSort(sortColumn, "id");
 
 		final TrainFilter filter = new TrainFilter();
 		prepareFilter(listDTO, filter);
 
 		final List<ITrain> entities = trainService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
+		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 		return new ModelAndView("train.list", models);
 	}
 

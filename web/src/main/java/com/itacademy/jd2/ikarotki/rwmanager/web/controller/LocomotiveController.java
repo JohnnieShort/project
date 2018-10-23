@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.ILocomotiveService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.LocomotiveFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.LocomotiveToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.LocomotiveDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/locomotive")
@@ -44,20 +44,24 @@ public class LocomotiveController extends AbstractController<LocomotiveDTO> {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
-			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
+			 @RequestParam(name = "page", required = false) final Integer pageNumber,
+	            @RequestParam(name = "sort", required = false) final String sortColumn) {
 
-		final ListDTO<LocomotiveDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO gridState = getListDTO(req);
+		gridState.setPage(pageNumber);
+        gridState.setSort(sortColumn, "id");
 
 		final LocomotiveFilter filter = new LocomotiveFilter();
-		prepareFilter(listDTO, filter);
+		prepareFilter(gridState, filter);
 
 		final List<ILocomotive> entities = locomotiveService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		List<LocomotiveDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+        gridState.setTotalCount(locomotiveService.getCount(filter));
+
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
-		return new ModelAndView("locomotive.list", models);
+		models.put("gridItems", dtos);
+        return new ModelAndView("locomotive.list", models);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

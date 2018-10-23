@@ -19,4 +19,6 @@ public interface ILocomotiveService {
 	ILocomotive createEntity();
 
 	List<ILocomotive> find(LocomotiveFilter filter);
+
+	long getCount(LocomotiveFilter filter);
 }

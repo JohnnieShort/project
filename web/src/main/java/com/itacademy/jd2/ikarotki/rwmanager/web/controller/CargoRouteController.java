@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.ICargoRouteService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CargoRouteFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CargoRouteToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.CargoRouteDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/cargoRoute")
@@ -44,20 +44,23 @@ public class CargoRouteController extends AbstractController<CargoRouteDTO> {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
-			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
+			@RequestParam(name = "page", required = false) final Integer pageNumber,
+            @RequestParam(name = "sort", required = false) final String sortColumn) {
 
-		final ListDTO<CargoRouteDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO gridState = getListDTO(req);
+		 gridState.setPage(pageNumber);
+	        gridState.setSort(sortColumn, "id");
 
 		final CargoRouteFilter filter = new CargoRouteFilter();
-		prepareFilter(listDTO, filter);
+		prepareFilter(gridState, filter);
 
 		final List<ICargoRoute> entities = cargoRouteService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		List<CargoRouteDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+        gridState.setTotalCount(cargoRouteService.getCount(filter));
 
-		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
-		return new ModelAndView("cargoRoute.list", models);
+		final Map<String, Object> models = new HashMap<>();
+		 models.put("gridItems", dtos);
+	        return new ModelAndView("cargoRoute.list", models);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

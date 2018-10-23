@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TicketFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TicketToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.TicketDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/ticket")
@@ -46,17 +46,16 @@ public class TicketController extends AbstractController<TicketDTO> {
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final ListDTO<TicketDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO listDTO = getListDTO(req);
+		listDTO.setSort(sortColumn, "id");
 
 		final TicketFilter filter = new TicketFilter();
 		prepareFilter(listDTO, filter);
 
 		final List<ITicket> entities = ticketService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
+		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 		return new ModelAndView("ticket.list", models);
 	}
 

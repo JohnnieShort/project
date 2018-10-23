@@ -19,4 +19,6 @@ public interface ICargoOrderService {
 	ICargoOrder createEntity();
 
 	List<ICargoOrder> find(CargoOrderFilter filter);
+
+	long getCount(CargoOrderFilter filter);
 }

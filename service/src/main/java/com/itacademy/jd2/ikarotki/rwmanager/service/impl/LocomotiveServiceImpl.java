@@ -3,6 +3,8 @@ package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import javax.management.RuntimeErrorException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +79,12 @@ public class LocomotiveServiceImpl implements ILocomotiveService {
 	@Override
 	public List<ILocomotive> find(LocomotiveFilter filter) {
 		return dao.find(filter);
+	}
+
+	@Override
+	public long getCount(LocomotiveFilter filter) {
+		// TODO Auto-generated method stub
+		throw new RuntimeException("this method is not implemented");
 	}
 
 }

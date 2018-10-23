@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.UserAccountFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.UserAccountToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.UserAccountDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/userAccount")
@@ -47,17 +47,16 @@ public class UserAccountController extends AbstractController<UserAccountDTO> {
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final ListDTO<UserAccountDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO listDTO = getListDTO(req);
+		listDTO.setSort(sortColumn, "id");
 
 		final UserAccountFilter filter = new UserAccountFilter();
 		prepareFilter(listDTO, filter);
 
 		final List<IUserAccount> entities = userAccountService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
+		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 		return new ModelAndView("userAccount.list", models);
 	}
 

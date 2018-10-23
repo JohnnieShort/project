@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.PassengerDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/passenger")
@@ -47,17 +47,16 @@ public class PassengerController extends AbstractController<PassengerDTO> {
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final ListDTO<PassengerDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO listDTO = getListDTO(req);
+		listDTO.setSort(sortColumn,"id");
 
 		final PassengerFilter filter = new PassengerFilter();
 		prepareFilter(listDTO, filter);
 
 		final List<IPassenger> entities = passengerService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
+		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 		return new ModelAndView("passenger.list", models);
 	}
 

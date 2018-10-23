@@ -1,12 +1,10 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.dto.list;
 
-import java.util.List;
+public class GridStateDTO {
 
-public class ListDTO<T> {
+    public static final String GRID_STATE_SESSION_KEY = "currentPageGridState";
 
-    public static final String LIST_MODEL_ATTRIBUTE = "listDTO";
-
-    private List<T> list;
+    
 
     private SortDTO sort;
 
@@ -18,22 +16,16 @@ public class ListDTO<T> {
 
     private long totalCount;
 
-    public ListDTO(final int itemsPerPage) {
+    public GridStateDTO(final int itemsPerPage) {
         super();
         this.itemsPerPage = itemsPerPage;
     }
 
-    public ListDTO() {
+    public GridStateDTO() {
         this(5);
     }
 
-    public List<T> getList() {
-        return list;
-    }
-
-    public void setList(final List<T> list) {
-        this.list = list;
-    }
+   
 
     public SortDTO getSort() {
         return sort;
@@ -43,12 +35,15 @@ public class ListDTO<T> {
         this.sort = sort;
     }
 
-    public void setSort(final String sort) {
-        if (sort == null) {
+    public void setSort(final String sortColumn, String defaultSortColumn) {
+        if (sortColumn == null) {
+            if (getSort() == null) {
+                setSort(new SortDTO(defaultSortColumn));
+            }
             return;
         }
 
-        final String[] sortParams = sort.split(":");
+        final String[] sortParams = sortColumn.split(":");
         // unsafe operation below but assumes that JSP doesn't have bugs
         if (sortParams.length == 1) {
             setSort(new SortDTO(sortParams[0]));
@@ -56,6 +51,7 @@ public class ListDTO<T> {
             setSort(new SortDTO(sortParams[0], "asc".equals(sortParams[1])));
         }
     }
+
     
     public int getPage() {
         return page;

@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.ICustomerService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CustomerFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CustomerToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.CustomerDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/customer")
@@ -46,17 +46,16 @@ public class CustomerController extends AbstractController<CustomerDTO> {
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final ListDTO<CustomerDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO listDTO = getListDTO(req);
+		listDTO.setSort(sortColumn, "id");
 
 		final CustomerFilter filter = new CustomerFilter();
 		prepareFilter(listDTO, filter);
 
 		final List<ICustomer> entities = customerService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
+		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 		return new ModelAndView("customer.list", models);
 	}
 

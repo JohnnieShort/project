@@ -24,7 +24,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IWagonService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.WagonFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.WagonToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.WagonDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
 @RequestMapping(value = "/wagon")
@@ -46,17 +46,16 @@ public class WagonController extends AbstractController<WagonDTO> {
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final ListDTO<WagonDTO> listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn);
+		final GridStateDTO listDTO = getListDTO(req);
+		listDTO.setSort(sortColumn, "list");
 
 		final WagonFilter filter = new WagonFilter();
 		prepareFilter(listDTO, filter);
 
 		final List<IWagon> entities = wagonService.find(filter);
-		listDTO.setList(entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put(ListDTO.LIST_MODEL_ATTRIBUTE, listDTO);
+		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 		return new ModelAndView("wagon.list", models);
 	}
 

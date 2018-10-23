@@ -3,22 +3,23 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.AbstractFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.ListDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.SortDTO;
 
 public abstract class AbstractController<DTO> {
-	protected ListDTO<DTO> getListDTO(final HttpServletRequest req) {
+	protected GridStateDTO getListDTO(final HttpServletRequest req) {
 		final String sessionModelName = getClass().getSimpleName() + "_LIST_MODEL";
 
-		ListDTO<DTO> listModel = (ListDTO<DTO>) req.getSession().getAttribute(sessionModelName);
+		GridStateDTO listModel = (GridStateDTO) req.getSession().getAttribute(sessionModelName);
 		if (listModel == null) {
-			listModel = new ListDTO<DTO>();
+			listModel = new GridStateDTO();
 			req.getSession().setAttribute(sessionModelName, listModel);
 		}
+		req.setAttribute(GridStateDTO.GRID_STATE_SESSION_KEY, listModel);
 		return listModel;
 	}
 
-	protected void prepareFilter(ListDTO<DTO> listDTO, AbstractFilter filter) {
+	protected void prepareFilter(GridStateDTO listDTO, AbstractFilter filter) {
 		filter.setLimit(listDTO.getItemsPerPage());
         int offset = listDTO.getItemsPerPage() * (listDTO.getPage() - 1);
         filter.setOffset(listDTO.getTotalCount() < offset ? 0 : offset);
