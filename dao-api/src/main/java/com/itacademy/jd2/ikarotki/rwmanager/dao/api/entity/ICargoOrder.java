@@ -10,6 +10,10 @@ public interface ICargoOrder extends IBaseEntity {
 
 	public void setCargoRoute(ICargoRoute cargoRoute);
 
+	public void setPrice(Double price);
+
+	public Double getPrice();
+
 	public ICustomer getCustomer();
 
 	public void setCustomer(ICustomer customerId);

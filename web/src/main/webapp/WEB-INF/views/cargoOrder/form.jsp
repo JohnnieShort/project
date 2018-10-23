@@ -7,9 +7,39 @@
         <form:input path="id" type="hidden" />
         <div class="row">
             <div class="input-field col s12">
+                <form:input path="cargoRoute" type="text" disabled="${readonly}" />
+                <form:errors path="cargoRoute" cssClass="red-text" />
+                <label for="cargoRoute">Cargo route id</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="customer" type="text" disabled="${readonly}" />
+                <form:errors path="customer" cssClass="red-text" />
+                <label for="customer">Customer id</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
                 <form:input path="cargoType" type="text" disabled="${readonly}" />
                 <form:errors path="cargoType" cssClass="red-text" />
-                <label for="name">Type of cargo</label>
+                <label for="cargoType">Type of cargo</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="stationFrom" type="text" disabled="${readonly}" />
+                <form:errors path="stationFrom" cssClass="red-text" />
+                <label for="stationFrom">Station from id</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="stationTo" type="text" disabled="${readonly}" />
+                <form:errors path="stationTo" cssClass="red-text" />
+                <label for="stationTo">Station to id</label>
             </div>
         </div>
         
@@ -26,6 +56,14 @@
                 <form:input path="weight" type="text" disabled="${readonly}" />
                 <form:errors path="weight" cssClass="red-text" />
                 <label for="weight">weight</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="price" type="text" disabled="${readonly}" />
+                <form:errors path="price" cssClass="red-text" />
+                <label for="price">Price</label>
             </div>
         </div>
         

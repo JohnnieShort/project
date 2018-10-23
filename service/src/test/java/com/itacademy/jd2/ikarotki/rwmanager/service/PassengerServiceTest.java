@@ -52,7 +52,7 @@ public class PassengerServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getUpdated());
 		assertEquals(entity.getCreated(), entityFromDb.getCreated());
 		assertTrue(entityFromDb.getUpdated().after(entity.getCreated()));
-		assertFalse(entity.getUserAccount().getId().equals(entityFromDb.getUserAccount().getId()));
+		assertTrue(entity.getUserAccount().getId().equals(entityFromDb.getUserAccount().getId()));
 	}
 
 	@Test

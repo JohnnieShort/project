@@ -1,7 +1,8 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
-
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,6 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
-import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 
 @SpringJUnitConfig(locations = "classpath:service-context-test.xml")
 
@@ -90,8 +90,8 @@ public abstract class AbstractTest {
 	protected IStation saveNewStation() {
 		final IStation entity = stationService.createEntity();
 		entity.setName("station - " + getRandomPrefix());
-		entity.setLongitude(getRANDOM().nextDouble() * 100);
-		entity.setLatitude(getRANDOM().nextDouble() * 100);
+		entity.setLongitude(new BigDecimal(getRANDOM().nextDouble() * 100).setScale(2, RoundingMode.UP).doubleValue());
+		entity.setLatitude(new BigDecimal(getRANDOM().nextDouble() * 100).setScale(2, RoundingMode.UP).doubleValue());
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
@@ -120,7 +120,7 @@ public abstract class AbstractTest {
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
-		entity.setPower(10000.0 * getRANDOM().nextDouble());
+		entity.setPower(new BigDecimal(10000.0 * getRANDOM().nextDouble()).setScale(2, RoundingMode.UP).doubleValue());
 		locomotiveService.save(entity);
 		return entity;
 	}
@@ -141,8 +141,8 @@ public abstract class AbstractTest {
 		entity.setWagonType(WagonType.values()[getRANDOM().nextInt(2)]);
 		ITrain trainEntity = saveNewTrain();
 		entity.setTrain(trainEntity);
-		entity.setFreightPrice(10000.0 + getRANDOM().nextDouble());
-		entity.setCapacity(10000.0 * getRANDOM().nextDouble());
+		entity.setFreightPrice(new BigDecimal(10000.0 * getRANDOM().nextDouble()).setScale(2, RoundingMode.UP).doubleValue());
+		entity.setCapacity(new BigDecimal(10000.0 * getRANDOM().nextDouble()).setScale(2, RoundingMode.UP).doubleValue());
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
@@ -164,12 +164,12 @@ public abstract class AbstractTest {
 	protected IPassengerRoute saveNewPassengerRoute() {
 		final IPassengerRoute entity = passengerRouteService.createEntity();
 		IStation fromEntity = saveNewStation();
-		entity.setFrom(fromEntity);
+		entity.setStationFrom(fromEntity);
 		IStation toEntity;
 		do {
 			toEntity = saveNewStation();
 		} while (fromEntity.getName().equals(toEntity.getName()));
-		entity.setTo(toEntity);
+		entity.setStationTo(toEntity);
 		Date departure = new Date();
 		entity.setDeparture(departure);
 		entity.setArrival(departure);
@@ -242,7 +242,8 @@ public abstract class AbstractTest {
 		entity.setStationTo(toEntity);
 		Date dateArrival = new Date();
 		entity.setDate(dateArrival);
-		entity.setWeight(getRANDOM().nextDouble() * 1000000);
+		entity.setWeight(new BigDecimal(getRANDOM().nextDouble() * 1000000).setScale(2, RoundingMode.UP).doubleValue());
+		entity.setPrice(new BigDecimal(10000.0 * getRANDOM().nextDouble()).setScale(2, RoundingMode.UP).doubleValue());
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
@@ -256,7 +257,7 @@ public abstract class AbstractTest {
 
 		ITrain trainEntity = saveNewTrain();
 		entity.setTrain(trainEntity);
-		entity.setPrice(getRANDOM().nextDouble() * 1000000);
+		
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
@@ -271,14 +272,14 @@ public abstract class AbstractTest {
 		entity.setPassenger(passengerEntity);
 		IPassengerRoute PREntity = saveNewPassengerRoute();
 		entity.setPassengerRoute(PREntity);
-		entity.setPrice(getRANDOM().nextDouble() * 100);
+		entity.setPrice(new BigDecimal(getRANDOM().nextDouble() * 100).setScale(2, RoundingMode.UP).doubleValue());
 		IStation fromEntity = saveNewStation();
-		entity.setFrom(fromEntity);
+		entity.setStationFrom(fromEntity);
 		IStation toEntity;
 		do {
 			toEntity = saveNewStation();
 		} while (fromEntity.getName().equals(toEntity.getName()));
-		entity.setTo(toEntity);
+		entity.setStationTo(toEntity);
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);

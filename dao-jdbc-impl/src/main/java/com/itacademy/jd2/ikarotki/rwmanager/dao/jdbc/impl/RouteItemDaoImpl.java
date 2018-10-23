@@ -31,7 +31,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 	public void update(IRouteItem entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"update %s set passenger_route_id=?, updated=?, station_id_from=?, station_id_to=?, arrival=?, departure=?, ordinal_num=?, "
+						"update %s set passenger_route_id=?, updated=?, station_from=?, station_to=?, arrival=?, departure=?, ordinal_num=?, "
 								+ " is_first=?, is_last=? where id=?",
 						getTableName()))) {
 			c.setAutoCommit(false);
@@ -64,7 +64,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 	public void insert(IRouteItem entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (passenger_route_id, created, updated, station_id_from, station_id_to, arrival, "
+						"insert into %s (passenger_route_id, created, updated, station_from, station_to, arrival, "
 								+ "departure, ordinal_num, is_first, is_last) " + "values(?,?,?,?,?,?,?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
@@ -138,7 +138,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 					routeFrom.setLatitude(resultSet.getDouble("from_latitude"));
 				}
 
-				passengerRoute.setFrom(routeFrom);
+				passengerRoute.setStationFrom(routeFrom);
 			}
 			if (columns.contains("passenger_route_to")) {
 
@@ -155,11 +155,11 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 					routeTo.setLatitude(resultSet.getDouble("to_latitude"));
 				}
 
-				passengerRoute.setTo(routeTo);
+				passengerRoute.setStationTo(routeTo);
 			}
 			entity.setPassengerRoute(passengerRoute);
 		}
-		final Integer stationIdFrom = (Integer) resultSet.getObject("station_id_from");
+		final Integer stationIdFrom = (Integer) resultSet.getObject("station_from");
 		if (stationIdFrom != null) {
 			final Station stationFrom = new Station();
 			stationFrom.setId(stationIdFrom);
@@ -169,7 +169,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 
 			entity.setStationFrom(stationFrom);
 		}
-		final Integer stationIdTo = (Integer) resultSet.getObject("station_id_to");
+		final Integer stationIdTo = (Integer) resultSet.getObject("station_to");
 		if (stationIdTo != null) {
 			final Station stationTo = new Station();
 			stationTo.setId(stationIdTo);
@@ -177,7 +177,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				stationTo.setName(resultSet.getString("station_name_to"));
 			}
 
-			entity.setStationFrom(stationTo);
+			entity.setStationTo(stationTo);
 		}
 		return entity;
 	}

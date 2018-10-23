@@ -24,8 +24,8 @@ public class TicketFromDTOConverter implements Function<TicketDTO, ITicket> {
 		entity.setPrice(dto.getPrice());
 		entity.setPassenger(dto.getPassenger());
 		entity.setPassengerRoute(dto.getPassengerRoute());
-		entity.setTo(dto.getTo());
-		entity.setFrom(dto.getFrom());
+		entity.setStationTo(dto.getStationTo());
+		entity.setStationFrom(dto.getStationFrom());
 
 		return entity;
 	}

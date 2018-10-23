@@ -9,9 +9,9 @@
 	<tbody>
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from">station from</mytaglib:sort-link></th>--%>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to">station to</mytaglib:sort-link></th>--%>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id">passenger route id</mytaglib:sort-link></th>--%>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from">station from</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to">station to</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id">passenger route id</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="arrival">arrival</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="departure">departure</mytaglib:sort-link></th>
 			
@@ -27,9 +27,9 @@
 		<c:forEach var="routeItem" items="${listDTO.list}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${routeItem.id}" /></td>
-			<%--<td><c:out value="${routeItem.stationFrom.id}" /></td>--%>
-			<%--<td><c:out value="${routeItem.stationTo.id}" /></td>--%>
-			<%--<td><c:out value="${routeItem.passengerRoute.id}" /></td>--%>
+				<td><c:out value="${routeItem.stationFrom.id}" /></td>
+				<td><c:out value="${routeItem.stationTo.id}" /></td>
+				<td><c:out value="${routeItem.passengerRoute.id}" /></td>
 				<td><c:out value="${routeItem.arrival}" /></td>
 				<td><c:out value="${routeItem.departure}" /></td>
 				

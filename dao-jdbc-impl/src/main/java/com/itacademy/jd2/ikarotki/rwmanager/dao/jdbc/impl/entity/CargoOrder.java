@@ -17,6 +17,17 @@ public class CargoOrder extends BaseEntity implements ICargoOrder {
 	private IStation stationTo;
 	private Date date;
 	private Double weight;
+	private Double price;
+
+	
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
 
 	public ICargoRoute getCargoRoute() {
 		return cargoRoute;
@@ -78,7 +89,7 @@ public class CargoOrder extends BaseEntity implements ICargoOrder {
 	public String toString() {
 		return "CargoOrder [cargoRoute=" + cargoRoute + ", customer=" + customer + ", cargoType=" + cargoType
 				+ ", stationFrom=" + stationFrom + ", stationTo=" + stationTo + ", date=" + date + ", weight=" + weight
-				+ ", getId()=" + getId() + "]";
+				+ ", price=" + price + ", getId()=" + getId() + "]";
 	}
 
 }

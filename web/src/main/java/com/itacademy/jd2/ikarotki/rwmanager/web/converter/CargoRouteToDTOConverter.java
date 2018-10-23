@@ -17,7 +17,7 @@ public class CargoRouteToDTOConverter implements Function<ICargoRoute, CargoRout
 		dto.setUpdated(entity.getUpdated());
 
 		dto.setTrain(entity.getTrain());
-		dto.setPrice(entity.getPrice());
+		
 
 		return dto;
 	}

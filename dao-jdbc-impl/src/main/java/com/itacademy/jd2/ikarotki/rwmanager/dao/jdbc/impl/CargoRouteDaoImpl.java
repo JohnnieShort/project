@@ -32,15 +32,15 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 	public void update(ICargoRoute entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(
-						String.format("update %s set  updated=?, train_id=?, price=? where id=?", getTableName()))) {
+						String.format("update %s set  updated=?, train_id=? where id=?", getTableName()))) {
 			c.setAutoCommit(false);
 			try {
 
 				pStmt.setObject(1, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(2, entity.getTrain().getId());
-				pStmt.setDouble(3, entity.getPrice());
+				
 
-				pStmt.setInt(4, entity.getId());
+				pStmt.setInt(3, entity.getId());
 
 				pStmt.executeUpdate();
 				c.commit();
@@ -59,7 +59,7 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 	public void insert(ICargoRoute entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String
-						.format("insert into %s (created, updated, train_id, price) values(?,?,?,?)", getTableName()),
+						.format("insert into %s (created, updated, train_id) values(?,?,?)", getTableName()),
 						Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
@@ -67,7 +67,7 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 				pStmt.setObject(1, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(3, entity.getTrain().getId());
-				pStmt.setDouble(4, entity.getPrice());
+				
 
 				pStmt.executeUpdate();
 
@@ -100,7 +100,7 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 	protected ICargoRoute parseRow(final ResultSet resultSet, final Set<String> columns) throws SQLException {
 		final ICargoRoute entity = createEntity();
 		entity.setId((Integer) resultSet.getObject("id"));
-		entity.setPrice(resultSet.getDouble("price"));
+		
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 

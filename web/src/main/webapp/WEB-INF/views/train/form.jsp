@@ -6,6 +6,13 @@
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
         <form:input path="id" type="hidden" />
         
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="locomotive" type="text" disabled="${readonly}" />
+                <form:errors path="locomotive" cssClass="red-text" />
+                <label for="locomotive">Locomotive id</label>
+            </div>
+        </div>
         
         <div class="row">
             <div class="col s6"></div>

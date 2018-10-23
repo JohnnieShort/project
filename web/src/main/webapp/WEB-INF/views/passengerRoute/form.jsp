@@ -9,6 +9,22 @@
         
         <div class="row">
             <div class="input-field col s12">
+                <form:input path="stationFrom" type="text" disabled="${readonly}" />
+                <form:errors path="stationFrom" cssClass="red-text" />
+                <label for="stationFrom">Station from id</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="stationTo" type="text" disabled="${readonly}" />
+                <form:errors path="stationTo" cssClass="red-text" />
+                <label for="stationTo">Station to id</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
                 <form:input path="departure" type="text" disabled="${readonly}" />
                 <form:errors path="departure" cssClass="red-text" />
                 <label for="departure">Departure</label>
@@ -23,7 +39,21 @@
             </div>
         </div>
         
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="train" type="text" disabled="${readonly}" />
+                <form:errors path="train" cssClass="red-text" />
+                <label for="train">Train id</label>
+            </div>
+        </div>
         
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="passengerRoutetype" type="text" disabled="${readonly}" />
+                <form:errors path="passengerRoutetype" cssClass="red-text" />
+                <label for="passengerRoutetype">Passenger route type</label>
+            </div>
+        </div>
         
         <div class="row">
             <div class="input-field col s12">

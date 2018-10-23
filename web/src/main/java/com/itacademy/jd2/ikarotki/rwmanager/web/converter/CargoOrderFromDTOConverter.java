@@ -27,6 +27,8 @@ public class CargoOrderFromDTOConverter implements Function<CargoOrderDTO, ICarg
         entity.setStationTo(dto.getStationTo());
         entity.setDate(dto.getDate());
         entity.setWeight(dto.getWeight());
+        entity.setPrice(dto.getPrice());
+
         
         
         return entity;

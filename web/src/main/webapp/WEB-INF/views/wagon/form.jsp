@@ -5,6 +5,15 @@
 <div class="row">
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
         <form:input path="id" type="hidden" />
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="train" type="text" disabled="${readonly}" />
+                <form:errors path="train" cssClass="red-text" />
+                <label for="train">Train id</label>
+            </div>
+        </div>
+        
         <div class="row">
             <div class="input-field col s12">
                 <form:input path="wagonType" type="text" disabled="${readonly}" />

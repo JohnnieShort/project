@@ -25,10 +25,13 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.StatementAction;
 
 public abstract class AbstractDaoImpl<ENTITY, ID> implements IDao<ENTITY, ID> {
 	@Value("${jdbc.url}")
+	
 	private String url;
+	
 	@Value("${jdbc.user}")
 
 	private String user;
+	
 	@Value("${jdbc.password}")
 
 	private String password;

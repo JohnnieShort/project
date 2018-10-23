@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="baseUrl" value="${pageContext.request.contextPath}" />
 <h2>Login with Username and Password</h2>
 <div class="row">
     <div class="col s3"></div>
@@ -36,4 +37,8 @@
         </form>
     </div>
     <div class="col s3"></div>
+    
 </div>
+<div class="row">
+	<a href="${baseUrl}/register">Register</a>
+</div>     

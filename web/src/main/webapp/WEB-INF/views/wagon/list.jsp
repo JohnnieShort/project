@@ -10,7 +10,7 @@
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="wagon_type">wagon_type</mytaglib:sort-link></th>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="train_idd">train_id</mytaglib:sort-link></th>--%>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="train_idd">train_id</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="freight_price">freight_price</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="capacity">capacity</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
@@ -21,7 +21,7 @@
 			<tr>
 				<td><c:out value="${wagon.id}" /></td>
 				<td><c:out value="${wagon.wagonType}" /></td>
-				<%--<td><c:out value="${wagon.Train.id}" /></td>--%>
+				<td><c:out value="${wagon.Train.id}" /></td>
 				<td><c:out value="${wagon.freightPrice}" /></td>
 				<td><c:out value="${wagon.capacity}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"

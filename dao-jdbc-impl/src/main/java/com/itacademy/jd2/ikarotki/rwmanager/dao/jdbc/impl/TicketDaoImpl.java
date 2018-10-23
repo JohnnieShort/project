@@ -41,15 +41,15 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(
 						String.format("update %s set passenger_id=?, updated=?, passenger_route_id=?, price=?, "
-								+ "st_from=?, st_to=? where id=?", getTableName()))) {
+								+ "station_from=?, station_to=? where id=?", getTableName()))) {
 			c.setAutoCommit(false);
 			try {
 				pStmt.setInt(1, entity.getPassenger().getId());
 				pStmt.setObject(2, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(3, entity.getPassengerRoute().getId());
 				pStmt.setDouble(4, entity.getPrice());
-				pStmt.setInt(5, entity.getFrom().getId());
-				pStmt.setInt(6, entity.getTo().getId());
+				pStmt.setInt(5, entity.getStationFrom().getId());
+				pStmt.setInt(6, entity.getStationTo().getId());
 
 				pStmt.setInt(7, entity.getId());
 				pStmt.executeUpdate();
@@ -69,7 +69,7 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(
 						String.format("insert into %s (passenger_id, created, updated, passenger_route_id, price, "
-								+ "st_from, st_to) values(?,?,?,?,?,?,?)", getTableName()),
+								+ "station_from, station_to) values(?,?,?,?,?,?,?)", getTableName()),
 						Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
@@ -78,8 +78,8 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setInt(4, entity.getPassengerRoute().getId());
 				pStmt.setDouble(5, entity.getPrice());
-				pStmt.setInt(6, entity.getFrom().getId());
-				pStmt.setInt(7, entity.getTo().getId());
+				pStmt.setInt(6, entity.getStationFrom().getId());
+				pStmt.setInt(7, entity.getStationTo().getId());
 				pStmt.executeUpdate();
 
 				final ResultSet rs = pStmt.getGeneratedKeys();
@@ -208,7 +208,7 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 			entity.setPassengerRoute(passengerRoute);
 
 		}
-		final Integer fromId = (Integer) resultSet.getObject("st_from");
+		final Integer fromId = (Integer) resultSet.getObject("station_from");
 		if (fromId != null) {
 			Station from = new Station();
 			from.setId(fromId);
@@ -221,9 +221,9 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 			if (columns.contains("from_latitude")) {
 				from.setLatitude(resultSet.getDouble("from_latitude"));
 			}
-			entity.setFrom(from);
+			entity.setStationFrom(from);
 		}
-		final Integer toId = (Integer) resultSet.getObject("st_to");
+		final Integer toId = (Integer) resultSet.getObject("station_to");
 		if (toId != null) {
 			Station to = new Station();
 			to.setId(toId);
@@ -236,7 +236,7 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 			if (columns.contains("to_latitude")) {
 				to.setLatitude(resultSet.getDouble("to_latitude"));
 			}
-			entity.setFrom(to);
+			entity.setStationTo(to);
 		}
 
 		return entity;

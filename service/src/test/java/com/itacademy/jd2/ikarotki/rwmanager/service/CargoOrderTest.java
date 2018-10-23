@@ -1,7 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -31,6 +30,7 @@ public class CargoOrderTest extends AbstractTest {
 		assertNotNull(entityFromDb.getWeight());
 		assertNotNull(entityFromDb.getCargoType());
 		assertNotNull(entityFromDb.getCargoRoute());
+		assertNotNull(entityFromDb.getPrice());
 		assertNotNull(entityFromDb.getDate());
 
 		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
@@ -47,6 +47,8 @@ public class CargoOrderTest extends AbstractTest {
 
 		Double newWeight = entity.getWeight() + 100.0;
 		entity.setWeight(newWeight);
+		Double newPrice = entity.getPrice() + 100.0;
+		entity.setPrice(newPrice);
 		Thread.sleep(2000);
 		cargoOrderService.save(entity);
 
@@ -54,6 +56,7 @@ public class CargoOrderTest extends AbstractTest {
 
 		assertNotNull(entityFromDb);
 		assertEquals(newWeight, entityFromDb.getWeight());
+		assertEquals(newPrice, entityFromDb.getPrice());
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
@@ -67,7 +70,7 @@ public class CargoOrderTest extends AbstractTest {
 
 		assertEquals(entity.getCreated(), entityFromDb.getCreated());
 		assertTrue(entityFromDb.getUpdated().after(entity.getCreated()));
-		assertFalse(entity.getWeight().equals(entityFromDb.getWeight()));
+		assertTrue(entity.getWeight().equals(entityFromDb.getWeight()));
 	}
 
 	@Test

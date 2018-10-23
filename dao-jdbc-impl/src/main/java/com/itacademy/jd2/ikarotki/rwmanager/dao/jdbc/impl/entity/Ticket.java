@@ -10,8 +10,8 @@ public class Ticket extends BaseEntity implements ITicket {
 	private Double price;
 	private IPassenger passenger;
 	private IPassengerRoute passengerRoute;
-	private IStation from;
-	private IStation to;
+	private IStation stationFrom;
+	private IStation stationTo;
 
 	public Double getPrice() {
 		return price;
@@ -37,26 +37,28 @@ public class Ticket extends BaseEntity implements ITicket {
 		this.passengerRoute = passengerRoute;
 	}
 
-	public IStation getFrom() {
-		return from;
+	public IStation getStationFrom() {
+		return stationFrom;
 	}
 
-	public void setFrom(IStation from) {
-		this.from = from;
+	public void setStationFrom(IStation stationFrom) {
+		this.stationFrom = stationFrom;
 	}
 
-	public IStation getTo() {
-		return to;
+	public IStation getStationTo() {
+		return stationTo;
 	}
 
-	public void setTo(IStation to) {
-		this.to = to;
+	public void setStationTo(IStation stationTo) {
+		this.stationTo = stationTo;
 	}
 
 	@Override
 	public String toString() {
-		return "Ticket [price=" + price + ", passenger=" + passenger + ", passengerRoute=" + passengerRoute + ", from="
-				+ from + ", to=" + to + ", getId()=" + getId() + "]";
+		return "Ticket [price=" + price + ", passenger=" + passenger + ", passengerRoute=" + passengerRoute
+				+ ", stationFrom=" + stationFrom + ", stationTo=" + stationTo + ", getId()=" + getId() + "]";
 	}
+
+	
 
 }

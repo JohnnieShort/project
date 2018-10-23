@@ -4,13 +4,13 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 
 public interface ITicket extends IBaseEntity {
 
-	public IStation getFrom();
+	public IStation getStationFrom();
 
-	public void setFrom(IStation from);
+	public void setStationFrom(IStation from);
 
-	public IStation getTo();
+	public IStation getStationTo();
 
-	public void setTo(IStation to);
+	public void setStationTo(IStation to);
 
 	public Double getPrice();
 

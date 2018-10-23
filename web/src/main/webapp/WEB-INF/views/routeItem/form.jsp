@@ -5,6 +5,30 @@
 <div class="row">
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
         <form:input path="id" type="hidden" />
+        
+         <div class="row">
+            <div class="input-field col s12">
+                <form:input path="passengerRoute" type="text" disabled="${readonly}" />
+                <form:errors path="passengerRoute" cssClass="red-text" />
+                <label for="passengerRoute">Passenger route id</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="stationFrom" type="text" disabled="${readonly}" />
+                <form:errors path="stationFrom" cssClass="red-text" />
+                <label for="stationFrom">Station from id</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+                <form:input path="stationTo" type="text" disabled="${readonly}" />
+                <form:errors path="stationTo" cssClass="red-text" />
+                <label for="stationTo">Station to id</label>
+            </div>
+        </div>
         <div class="row">
             <div class="input-field col s12">
                 <form:input path="arrival" type="text" disabled="${readonly}" />

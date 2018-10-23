@@ -2,8 +2,6 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.Size;
-
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
@@ -14,8 +12,8 @@ public class PassengerRouteDTO {
 	private Integer id;
 	private Date created;
 	private Date updated;
-	private IStation from;
-	private IStation to;
+	private IStation stationFrom;
+	private IStation stationTo;
 	private Date departure;
 	private Date arrival;
 	private PassengerRouteType passengerRoutetype;
@@ -64,20 +62,20 @@ public class PassengerRouteDTO {
 		this.places = places;
 	}
 
-	public IStation getFrom() {
-		return from;
+	public IStation getStationFrom() {
+		return stationFrom;
 	}
 
-	public void setFrom(IStation from) {
-		this.from = from;
+	public void setStationFrom(IStation stationFrom) {
+		this.stationFrom = stationFrom;
 	}
 
-	public IStation getTo() {
-		return to;
+	public IStation getStationTo() {
+		return stationTo;
 	}
 
-	public void setTo(IStation to) {
-		this.to = to;
+	public void setStationTo(IStation stationTo) {
+		this.stationTo = stationTo;
 	}
 
 	public Date getDeparture() {
@@ -122,10 +120,12 @@ public class PassengerRouteDTO {
 
 	@Override
 	public String toString() {
-		return "PassengerRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", from=" + from
-				+ ", to=" + to + ", departure=" + departure + ", arrival=" + arrival + ", passengerRoutetype="
-				+ passengerRoutetype + ", train=" + train + ", isActual=" + isActual + ", frequency=" + frequency
-				+ ", places=" + places + "]";
+		return "PassengerRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", stationFrom="
+				+ stationFrom + ", stationTo=" + stationTo + ", departure=" + departure + ", arrival=" + arrival
+				+ ", passengerRoutetype=" + passengerRoutetype + ", train=" + train + ", isActual=" + isActual
+				+ ", frequency=" + frequency + ", places=" + places + "]";
 	}
+
+	
 
 }

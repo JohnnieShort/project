@@ -2,18 +2,14 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.Size;
-
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 
 public class CargoRouteDTO {
-	 //@Size(min = 1, max = 50)
+	// @Size(min = 1, max = 50)
 	private Integer id;
 	private Date created;
 	private Date updated;
 	private ITrain train;
-	private Double price;
-
 
 	public Integer getId() {
 		return id;
@@ -39,7 +35,6 @@ public class CargoRouteDTO {
 		this.updated = updated;
 	}
 
-	
 	public ITrain getTrain() {
 		return train;
 	}
@@ -48,18 +43,9 @@ public class CargoRouteDTO {
 		this.train = train;
 	}
 
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
 	@Override
 	public String toString() {
-		return "CargoRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", train=" + train
-				+ ", price=" + price + "]";
+		return "CargoRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", train=" + train + "]";
 	}
 
 }

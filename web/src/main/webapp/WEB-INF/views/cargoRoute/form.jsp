@@ -7,9 +7,9 @@
         <form:input path="id" type="hidden" />
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="price" type="text" disabled="${readonly}" />
-                <form:errors path="price" cssClass="red-text" />
-                <label for="price">price</label>
+                <form:input path="train" type="text" disabled="${readonly}" />
+                <form:errors path="train" cssClass="red-text" />
+                <label for="train">Train id</label>
             </div>
         </div>
         

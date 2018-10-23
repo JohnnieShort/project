@@ -9,8 +9,8 @@
 	<tbody>
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="train_id">train id</mytaglib:sort-link></th>--%>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="price">price</mytaglib:sort-link></th>
+		<th><mytaglib:sort-link pageUrl="${baseUrl}" column="train_id">train id</mytaglib:sort-link></th>
+			
 			
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
@@ -19,8 +19,8 @@
 		<c:forEach var="cargoRoute" items="${listDTO.list}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${cargoRoute.id}" /></td>
-			<%--<td><c:out value="${cargoRoute.train.id}" /></td>--%>
-				<td><c:out value="${cargoRoute.price}" /></td>
+			<td><c:out value="${cargoRoute.train.id}" /></td>
+				
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${cargoRoute.created}" /></td>

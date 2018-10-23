@@ -1,7 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -53,7 +52,7 @@ public class StationServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getLatitude());
 		assertEquals(entity.getCreated(), entityFromDb.getCreated());
 		assertTrue(entityFromDb.getUpdated().after(entity.getCreated()));
-		assertFalse(entity.getName().equals(entityFromDb.getName()));
+		assertTrue(entity.getName().equals(entityFromDb.getName()));
 	}
 
 	@Test

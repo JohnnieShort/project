@@ -1,7 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -51,7 +50,7 @@ public class TicketServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getUpdated());
 		assertEquals(entity.getCreated(), entityFromDb.getCreated());
 		assertTrue(entityFromDb.getUpdated().after(entity.getCreated()));
-		assertFalse(entity.getPrice().equals(entityFromDb.getPrice()));
+		assertTrue(entity.getPrice().equals(entityFromDb.getPrice()));
 	}
 
 	@Test

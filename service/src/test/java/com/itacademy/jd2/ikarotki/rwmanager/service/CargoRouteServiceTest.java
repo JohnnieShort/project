@@ -27,7 +27,7 @@ public class CargoRouteServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getUpdated());
 		assertNotNull(entityFromDb.getTrain());
 
-		assertNotNull(entityFromDb.getPrice());
+		
 		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
 
 		assertTrue(entityFromDb.getTrain().getId().equals(entity.getTrain().getId()));
@@ -37,15 +37,14 @@ public class CargoRouteServiceTest extends AbstractTest {
 	public void testUpdate() throws InterruptedException {
 		final ICargoRoute entity = saveNewCargoRoute();
 
-		Double newPrice = entity.getPrice() + 100.0;
-		entity.setPrice(newPrice);
+		
 		Thread.sleep(2000);
 		cargoRouteService.save(entity);
 
 		final ICargoRoute entityFromDb = cargoRouteService.get(entity.getId());
 
 		assertNotNull(entityFromDb);
-		assertEquals(newPrice, entityFromDb.getPrice());
+		
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
@@ -53,7 +52,7 @@ public class CargoRouteServiceTest extends AbstractTest {
 
 		assertEquals(entity.getCreated(), entityFromDb.getCreated());
 		assertTrue(entityFromDb.getUpdated().after(entity.getCreated()));
-		assertFalse(entity.getPrice().equals(entityFromDb.getPrice()));
+		
 	}
 
 	@Test
@@ -74,7 +73,7 @@ public class CargoRouteServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getUpdated());
 			assertNotNull(entityFromDb.getTrain());
 
-			assertNotNull(entityFromDb.getPrice());
+			
 			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
 
 		}

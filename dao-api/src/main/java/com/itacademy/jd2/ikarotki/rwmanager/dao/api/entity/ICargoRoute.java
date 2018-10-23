@@ -8,7 +8,7 @@ public interface ICargoRoute extends IBaseEntity {
 
 	public void setTrain(ITrain trainId);
 
-	public Double getPrice();
+	
 
-	public void setPrice(Double price);
+	
 }

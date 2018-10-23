@@ -1,10 +1,9 @@
 CREATE TABLE "train" (
 	"id" serial NOT NULL,
 	"locomotive_id" int NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT train_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -14,11 +13,10 @@ CREATE TABLE "train" (
 CREATE TABLE "locomotive" (
 	"id" serial NOT NULL,
 	"name" varchar(50) NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
-	"power" float4 NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
+	"power" numeric(15, 2) NOT NULL,
 	CONSTRAINT locomotive_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -28,10 +26,9 @@ CREATE TABLE "locomotive" (
 CREATE TABLE "passenger" (
 	"id" serial NOT NULL,
 	"user_account_id" int NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT passenger_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -40,19 +37,18 @@ CREATE TABLE "passenger" (
 
 CREATE TABLE "passenger_route" (
 	"id" serial NOT NULL,
-	"st_from" int NOT NULL,
-	"st_to" int NOT NULL,
-	"departure" DATE NOT NULL,
+	"station_from" int NOT NULL,
+	"station_to" int NOT NULL,
+	"departure" TIMESTAMP NOT NULL,
 	"passenger_route_type" int NOT NULL,
 	"train_id" int NOT NULL,
-	"arrival" DATE NOT NULL,
+	"arrival" TIMESTAMP NOT NULL,
 	"is_actual" BOOLEAN NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
 	"frequency" int NOT NULL,
 	"places" int NOT NULL,
 	CONSTRAINT passenger_route_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -63,13 +59,12 @@ CREATE TABLE "ticket" (
 	"id" serial NOT NULL,
 	"passenger_id" int NOT NULL,
 	"passenger_route_id" int NOT NULL,
-	"price" float4 NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
-	"st_from" int NOT NULL,
-	"st_to" int NOT NULL,
+	"price" numeric(15,2) NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
+	"station_from" int NOT NULL,
+	"station_to" int NOT NULL,
 	CONSTRAINT ticket_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -79,10 +74,9 @@ CREATE TABLE "ticket" (
 CREATE TABLE "customer" (
 	"id" serial NOT NULL,
 	"user_account_id" int NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT customer_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -94,14 +88,14 @@ CREATE TABLE "cargo_order" (
 	"cargo_route_id" int NOT NULL,
 	"customer_id" serial NOT NULL,
 	"cargo_type" int NOT NULL,
-	"station_id_from" int NOT NULL,
-	"station_id_to" int NOT NULL,
-	"date" DATE NOT NULL,
-	"weight" float4 NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"station_from" int NOT NULL,
+	"station_to" int NOT NULL,
+	"date" TIMESTAMP NOT NULL,
+	"weight" numeric(15, 2) NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
+	"price" numeric(15, 2) NOT NULL,
 	CONSTRAINT cargo_order_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -111,11 +105,9 @@ CREATE TABLE "cargo_order" (
 CREATE TABLE "cargo_route" (
 	"id" serial NOT NULL,
 	"train_id" int NOT NULL,
-	"price" float4 NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT cargo_route_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -126,12 +118,11 @@ CREATE TABLE "wagon" (
 	"id" serial NOT NULL,
 	"wagon_type" int NOT NULL,
 	"train_id" int NOT NULL,
-	"freight_price" float4 NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
-	"capacity" float4 NOT NULL,
+	"freight_price" numeric(15, 2) NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
+	"capacity" numeric(15, 2) NOT NULL,
 	CONSTRAINT wagon_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -145,10 +136,9 @@ CREATE TABLE "user_account" (
 	"role" int NOT NULL,
 	"first_name" varchar(50) NOT NULL,
 	"last_name" varchar(50) NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT user_account_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -158,12 +148,11 @@ CREATE TABLE "user_account" (
 CREATE TABLE "station" (
 	"id" serial NOT NULL,
 	"name" varchar(50) NOT NULL,
-	"longitude" float4 NOT NULL,
-	"latitude" float4 NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"longitude" numeric(15, 2) NOT NULL,
+	"latitude" numeric(15, 2) NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
 	CONSTRAINT station_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
@@ -173,20 +162,25 @@ CREATE TABLE "station" (
 CREATE TABLE "route_item" (
 	"id" serial NOT NULL,
 	"passenger_route_id" int NOT NULL,
-	"station_id_from" int NOT NULL,
-	"station_id_to" int NOT NULL,
-	"arrival" DATE NOT NULL,
-	"departure" DATE NOT NULL,
+	"station_from" int NOT NULL,
+	"station_to" int NOT NULL,
+	"arrival" TIMESTAMP NOT NULL,
+	"departure" TIMESTAMP NOT NULL,
 	"ordinal_num" int NOT NULL,
-	"created" DATE NOT NULL,
-	"updated" DATE NOT NULL,
+	"created" TIMESTAMP NOT NULL,
+	"updated" TIMESTAMP NOT NULL,
 	"is_first" BOOLEAN NOT NULL,
 	"is_last" BOOLEAN NOT NULL,
 	CONSTRAINT route_item_pk PRIMARY KEY ("id")
-	
 ) WITH (
   OIDS=FALSE
 );
+
+
+
+
+
+
 
 
 

@@ -9,7 +9,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
 public class TicketDTO {
-	//@Size(min = 1, max = 50)
+	// @Size(min = 1, max = 50)
 	private Integer id;
 	private Date created;
 	private Date updated;
@@ -17,8 +17,8 @@ public class TicketDTO {
 	private Double price;
 	private IPassenger passenger;
 	private IPassengerRoute passengerRoute;
-	private IStation from;
-	private IStation to;
+	private IStation stationFrom;
+	private IStation stationTo;
 
 	public Integer getId() {
 		return id;
@@ -68,27 +68,29 @@ public class TicketDTO {
 		this.passengerRoute = passengerRoute;
 	}
 
-	public IStation getFrom() {
-		return from;
+	public IStation getStationFrom() {
+		return stationFrom;
 	}
 
-	public void setFrom(IStation from) {
-		this.from = from;
+	public void setFrom(IStation stationFrom) {
+		this.stationFrom = stationFrom;
 	}
 
-	public IStation getTo() {
-		return to;
+	public IStation getStationTo() {
+		return stationTo;
 	}
 
-	public void setTo(IStation to) {
-		this.to = to;
+	public void setTo(IStation stationTo) {
+		this.stationTo = stationTo;
 	}
 
 	@Override
 	public String toString() {
 		return "TicketDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", price=" + price
-				+ ", passenger=" + passenger + ", passengerRoute=" + passengerRoute + ", from=" + from + ", to=" + to
-				+ "]";
+				+ ", passenger=" + passenger + ", passengerRoute=" + passengerRoute + ", stationFrom=" + stationFrom
+				+ ", stationTo=" + stationTo + "]";
 	}
+
+	
 
 }

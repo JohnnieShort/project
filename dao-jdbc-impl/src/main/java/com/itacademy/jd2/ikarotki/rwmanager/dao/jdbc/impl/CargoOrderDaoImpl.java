@@ -13,9 +13,11 @@ import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoOrderDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoOrderFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.CargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.CargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.UserAccount;
@@ -35,8 +37,8 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c
 						.prepareStatement(String.format(
-								"update %s set customer_id=?, updated=?, cargo_type=?, station_id_from=?,"
-										+ " station_id_to=?, date=?, weight=?, cargo_route_id=? where id=?",
+								"update %s set customer_id=?, updated=?, cargo_type=?, station_from=?,"
+										+ " station_to=?, date=?, weight=?, cargo_route_id=?, price=? where id=?",
 								getTableName()))) {
 			c.setAutoCommit(false);
 			try {
@@ -51,7 +53,8 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 
 				pStmt.setDouble(7, entity.getWeight());
 				pStmt.setInt(8, entity.getCargoRoute().getId());
-				pStmt.setInt(9, entity.getId());
+				pStmt.setDouble(9, entity.getPrice());
+				pStmt.setInt(10, entity.getId());
 				pStmt.executeUpdate();
 				c.commit();
 			} catch (final Exception e) {
@@ -69,8 +72,8 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 	public void insert(ICargoOrder entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (customer_id, created, updated, cargo_type, station_id_from, station_id_to, date,"
-								+ "weight, cargo_route_id) values(?,?,?,?,?,?,?,?,?)",
+						"insert into %s (customer_id, created, updated, cargo_type, station_from, station_to, date,"
+								+ "weight, cargo_route_id, price) values(?,?,?,?,?,?,?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
@@ -83,6 +86,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 				pStmt.setObject(7, entity.getDate(), Types.TIMESTAMP);
 				pStmt.setDouble(8, entity.getWeight());
 				pStmt.setInt(9, entity.getCargoRoute().getId());
+				pStmt.setDouble(10, entity.getPrice());
 
 				pStmt.executeUpdate();
 
@@ -120,7 +124,17 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 		entity.setDate(resultSet.getTimestamp("date"));
 		entity.setWeight(resultSet.getDouble("weight"));
+		entity.setPrice(resultSet.getDouble("price"));
 
+
+		final Integer cargoRouteId = (Integer) resultSet.getObject("cargo_route_id");
+		if (cargoRouteId != null) {
+			final ICargoRoute cargoRoute = new CargoRoute();
+			cargoRoute.setId(cargoRouteId);
+
+			
+			entity.setCargoRoute(cargoRoute);;
+		}
 		final Integer customerId = (Integer) resultSet.getObject("customer_id");
 		if (customerId != null) {
 			final Customer customer = new Customer();
@@ -137,7 +151,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 			}
 			entity.setCustomer(customer);
 		}
-		final Integer fromId = (Integer) resultSet.getObject("station_id_from");
+		final Integer fromId = (Integer) resultSet.getObject("station_from");
 		if (fromId != null) {
 			Station from = new Station();
 			from.setId(fromId);
@@ -152,7 +166,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 			}
 			entity.setStationFrom(from);
 		}
-		final Integer toId = (Integer) resultSet.getObject("station_id_to");
+		final Integer toId = (Integer) resultSet.getObject("station_to");
 		if (toId != null) {
 			Station to = new Station();
 			to.setId(toId);

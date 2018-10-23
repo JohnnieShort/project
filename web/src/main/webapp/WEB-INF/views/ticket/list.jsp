@@ -9,11 +9,11 @@
 	<tbody>
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_id">passenger id</mytaglib:sort-link></th>--%>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id">passenger route id</mytaglib:sort-link></th>--%>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_id">passenger id</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id">passenger route id</mytaglib:sort-link></th>
 			
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from">station from</mytaglib:sort-link></th>--%>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to">station to</mytaglib:sort-link></th>--%>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from">station from</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to">station to</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="price">price</mytaglib:sort-link></th>
 			
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
@@ -23,11 +23,11 @@
 		<c:forEach var="ticket" items="${listDTO.list}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${ticket.id}" /></td>
-			<%--<td><c:out value="${ticket.passenger.id}" /></td>--%>
-			<%--<td><c:out value="${ticket.passengerRoute.id}" /></td>--%>
+				<td><c:out value="${ticket.passenger.id}" /></td>
+				<td><c:out value="${ticket.passengerRoute.id}" /></td>
 			
-			<%--<td><c:out value="${ticket.stationFrom.id}" /></td>--%>
-			<%--<td><c:out value="${ticket.StationTo.id}" /></td>--%>
+				<td><c:out value="${ticket.stationFrom.id}" /></td>
+				<td><c:out value="${ticket.StationTo.id}" /></td>
 				<td><c:out value="${ticket.price}" /></td>
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd"

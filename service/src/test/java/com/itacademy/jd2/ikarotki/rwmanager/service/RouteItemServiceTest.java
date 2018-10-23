@@ -97,7 +97,7 @@ public class RouteItemServiceTest extends AbstractTest {
 	public void testDelete() {
 		final IRouteItem entity = saveNewRouteItem();
 
-		assertNotNull(ticketService.get(entity.getId()));
+		assertNotNull(routeItemService.get(entity.getId()));
 
 		routeItemService.delete(entity.getId());
 		assertNull(routeItemService.get(entity.getId()));

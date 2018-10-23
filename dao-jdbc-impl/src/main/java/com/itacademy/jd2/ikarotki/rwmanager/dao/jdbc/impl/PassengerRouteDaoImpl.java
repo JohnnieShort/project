@@ -35,13 +35,13 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 	public void update(IPassengerRoute entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"update %s set st_from=?, st_to=?, updated=?, departure=?, arrival=?, passenger_route_type=?,"
+						"update %s set station_from=?, station_to=?, updated=?, departure=?, arrival=?, passenger_route_type=?,"
 								+ "train_id=?, is_actual=?, frequency=?, places=?  where id=?",
 						getTableName()))) {
 			c.setAutoCommit(false);
 			try {
-				pStmt.setInt(1, entity.getFrom().getId());
-				pStmt.setInt(2, entity.getTo().getId());
+				pStmt.setInt(1, entity.getStationFrom().getId());
+				pStmt.setInt(2, entity.getStationTo().getId());
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setObject(4, entity.getDeparture(), Types.TIMESTAMP);
 				pStmt.setObject(5, entity.getArrival(), Types.TIMESTAMP);
@@ -69,13 +69,13 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 	public void insert(IPassengerRoute entity) {
 		try (Connection c = getConnection();
 				PreparedStatement pStmt = c.prepareStatement(String.format(
-						"insert into %s (st_from, st_to, created, updated, departure, arrival, passenger_route_type,"
+						"insert into %s (station_from, station_to, created, updated, departure, arrival, passenger_route_type,"
 								+ "train_id, is_actual, frequency, places) values(?,?,?,?,?,?,?,?,?,?,?)",
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
-				pStmt.setInt(1, entity.getFrom().getId());
-				pStmt.setInt(2, entity.getTo().getId());
+				pStmt.setInt(1, entity.getStationFrom().getId());
+				pStmt.setInt(2, entity.getStationTo().getId());
 				pStmt.setObject(3, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setObject(5, entity.getDeparture(), Types.TIMESTAMP);
@@ -138,7 +138,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			}
 			entity.setTrain(train);
 		}
-		final Integer fromId = (Integer) resultSet.getObject("st_from");
+		final Integer fromId = (Integer) resultSet.getObject("station_from");
 		if (fromId != null) {
 			Station from = new Station();
 			from.setId(fromId);
@@ -151,9 +151,9 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			if (columns.contains("from_latitude")) {
 				from.setLatitude(resultSet.getDouble("from_latitude"));
 			}
-			entity.setFrom(from);
+			entity.setStationFrom(from);
 		}
-		final Integer toId = (Integer) resultSet.getObject("st_to");
+		final Integer toId = (Integer) resultSet.getObject("station_to");
 		if (toId != null) {
 			Station to = new Station();
 			to.setId(toId);
@@ -166,7 +166,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			if (columns.contains("to_latitude")) {
 				to.setLatitude(resultSet.getDouble("to_latitude"));
 			}
-			entity.setFrom(to);
+			entity.setStationTo(to);
 		}
 		return entity;
 	}

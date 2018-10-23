@@ -9,7 +9,7 @@
 	<tbody>
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-		<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="user_account_id">user account id</mytaglib:sort-link></th>--%>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="user_account_id">user account id</mytaglib:sort-link></th>
 			
 			
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
@@ -19,7 +19,7 @@
 		<c:forEach var="customer" items="${listDTO.list}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${customer.id}" /></td>
-			<%--<td><c:out value="${customer.userAccount.id}" /></td>--%>
+				<td><c:out value="${customer.userAccount.id}" /></td>
 				
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
