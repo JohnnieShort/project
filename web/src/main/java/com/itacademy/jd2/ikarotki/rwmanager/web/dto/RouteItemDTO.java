@@ -16,7 +16,7 @@ public class RouteItemDTO {
 	private IStation stationTo;
 	private Date departure;
 	private Date arrival;
-	//@Size(min = 1, max = 50)
+	// @Size(min = 1, max = 50)
 	private Integer ordinalNum;
 	private Boolean isFirst;
 

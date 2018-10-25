@@ -44,24 +44,23 @@ public class LocomotiveController extends AbstractController<LocomotiveDTO> {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
-			 @RequestParam(name = "page", required = false) final Integer pageNumber,
-	            @RequestParam(name = "sort", required = false) final String sortColumn) {
+			@RequestParam(name = "page", required = false) final Integer pageNumber,
+			@RequestParam(name = "sort", required = false) final String sortColumn) {
 
 		final GridStateDTO gridState = getListDTO(req);
 		gridState.setPage(pageNumber);
-        gridState.setSort(sortColumn, "id");
+		gridState.setSort(sortColumn, "id");
 
 		final LocomotiveFilter filter = new LocomotiveFilter();
 		prepareFilter(gridState, filter);
 
 		final List<ILocomotive> entities = locomotiveService.find(filter);
 		List<LocomotiveDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
-        gridState.setTotalCount(locomotiveService.getCount(filter));
-
+		gridState.setTotalCount(locomotiveService.getCount(filter));
 
 		final HashMap<String, Object> models = new HashMap<>();
 		models.put("gridItems", dtos);
-        return new ModelAndView("locomotive.list", models);
+		return new ModelAndView("locomotive.list", models);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

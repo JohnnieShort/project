@@ -8,7 +8,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 
 public class PassengerRouteDTO {
-	//@Size(min = 1, max = 50)
+	// @Size(min = 1, max = 50)
 	private Integer id;
 	private Date created;
 	private Date updated;
@@ -125,7 +125,5 @@ public class PassengerRouteDTO {
 				+ ", passengerRoutetype=" + passengerRoutetype + ", train=" + train + ", isActual=" + isActual
 				+ ", frequency=" + frequency + ", places=" + places + "]";
 	}
-
-	
 
 }

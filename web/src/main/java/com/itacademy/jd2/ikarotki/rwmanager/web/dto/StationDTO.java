@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class StationDTO {
 	private Integer id;
-	 @Size(min = 1, max = 50)
+	@Size(min = 1, max = 50)
 	private String name;
 	private Double longitude;
 	private Double latitude;
@@ -67,7 +67,4 @@ public class StationDTO {
 				+ ", created=" + created + ", updated=" + updated + "]";
 	}
 
-	
-
 }
-

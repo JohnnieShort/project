@@ -53,7 +53,6 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		prepareFilter(listDTO, filter);
 
 		final List<IPassengerRoute> entities = passengerRouteService.find(filter);
-		
 
 		final HashMap<String, Object> models = new HashMap<>();
 		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
