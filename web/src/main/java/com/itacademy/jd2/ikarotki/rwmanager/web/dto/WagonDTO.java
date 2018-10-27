@@ -8,7 +8,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 
 public class WagonDTO {
-	//@Size(min = 1, max = 50)
+	// @Size(min = 1, max = 50)
 	private Integer id;
 	private WagonType wagonType;
 	private ITrain train;

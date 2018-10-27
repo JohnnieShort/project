@@ -11,7 +11,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 
 public class CargoOrderDTO {
-	
+
 	private Integer id;
 	@NotNull
 	private Date created;
@@ -33,7 +33,7 @@ public class CargoOrderDTO {
 	private Double weight;
 	@NotNull
 	private Double price;
-	
+
 	public Double getPrice() {
 		return price;
 	}
@@ -128,8 +128,5 @@ public class CargoOrderDTO {
 				+ cargoRoute + ", customer=" + customer + ", cargoType=" + cargoType + ", stationFrom=" + stationFrom
 				+ ", stationTo=" + stationTo + ", date=" + date + ", weight=" + weight + ", price=" + price + "]";
 	}
-
-	
-	
 
 }

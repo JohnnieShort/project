@@ -29,3 +29,5 @@
 - learn maven structure;
 - learn IoC, DI, Spring...;
 - ask Dima about delete_all and delete;+
+---------------------------25.10---------------------------
+- realize passenger route insert by adding combos with stations names, realize map which will dinamic build rout.

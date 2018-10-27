@@ -22,7 +22,7 @@ public class CargoRouteFromDTOConverter implements Function<CargoRouteDTO, ICarg
 		entity.setUpdated(dto.getUpdated());
 
 		entity.setTrain(dto.getTrain());
-		
+
 		return entity;
 	}
 }

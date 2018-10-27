@@ -45,7 +45,7 @@ public class CargoOrderController extends AbstractController<CargoOrderDTO> {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "page", required = false) final Integer pageNumber,
-            @RequestParam(name = "sort", required = false) final String sortColumn) {
+			@RequestParam(name = "sort", required = false) final String sortColumn) {
 
 		final GridStateDTO gridState = getListDTO(req);
 		gridState.setPage(pageNumber);
@@ -56,12 +56,11 @@ public class CargoOrderController extends AbstractController<CargoOrderDTO> {
 
 		final List<ICargoOrder> entities = cargoOrderService.find(filter);
 		List<CargoOrderDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
-        gridState.setTotalCount(cargoOrderService.getCount(filter));
+		gridState.setTotalCount(cargoOrderService.getCount(filter));
 
-
-        final Map<String, Object> models = new HashMap<>();
-        models.put("gridItems", dtos);
-        return new ModelAndView("cargoOrder.list", models);
+		final Map<String, Object> models = new HashMap<>();
+		models.put("gridItems", dtos);
+		return new ModelAndView("cargoOrder.list", models);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

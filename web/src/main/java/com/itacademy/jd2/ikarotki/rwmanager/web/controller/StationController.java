@@ -28,7 +28,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 
 @Controller
 @RequestMapping(value = "/station")
-public class StationController extends AbstractController<StationDTO>{
+public class StationController extends AbstractController<StationDTO> {
 	private IStationService stationService;
 	private StationToDTOConverter toDtoConverter;
 	private StationFromDTOConverter fromDtoConverter;
@@ -44,25 +44,25 @@ public class StationController extends AbstractController<StationDTO>{
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-    public ModelAndView index(final HttpServletRequest req,
-    		@RequestParam(name = "page", required = false) final Integer pageNumber,
-            @RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
- 
-        final GridStateDTO listDTO = getListDTO(req);
-        listDTO.setSort(sortColumn, "id");
-        listDTO.setPage(pageNumber);
-        
-        final StationFilter filter = new StationFilter();
-        prepareFilter(listDTO, filter);
+	public ModelAndView index(final HttpServletRequest req,
+			@RequestParam(name = "page", required = false) final Integer pageNumber,
+			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-        final List<IStation> entities = stationService.find(filter);
-        
-        listDTO.setTotalCount(stationService.getCount(filter));
+		final GridStateDTO listDTO = getListDTO(req);
+		listDTO.setSort(sortColumn, "id");
+		listDTO.setPage(pageNumber);
 
-        final HashMap<String, Object> models = new HashMap<>();
-        models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
-        return new ModelAndView("station.list", models);
-    }
+		final StationFilter filter = new StationFilter();
+		prepareFilter(listDTO, filter);
+
+		final List<IStation> entities = stationService.find(filter);
+
+		listDTO.setTotalCount(stationService.getCount(filter));
+
+		final HashMap<String, Object> models = new HashMap<>();
+		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		return new ModelAndView("station.list", models);
+	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {

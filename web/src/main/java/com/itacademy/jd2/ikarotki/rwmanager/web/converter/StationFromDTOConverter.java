@@ -12,18 +12,18 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.StationDTO;
 @Component
 public class StationFromDTOConverter implements Function<StationDTO, IStation> {
 
-    @Autowired
-    private IStationService stationService;
+	@Autowired
+	private IStationService stationService;
 
-    @Override
-    public IStation apply(final StationDTO dto) {
-        final IStation entity = stationService.createEntity();
-        entity.setId(dto.getId());
-        entity.setName(dto.getName());
-        entity.setLongitude(dto.getLongitude());
-        entity.setLatitude(dto.getLatitude());
-        entity.setCreated(dto.getCreated());
-        entity.setUpdated(dto.getUpdated());
-        return entity;
-    }
+	@Override
+	public IStation apply(final StationDTO dto) {
+		final IStation entity = stationService.createEntity();
+		entity.setId(dto.getId());
+		entity.setName(dto.getName());
+		entity.setLongitude(dto.getLongitude());
+		entity.setLatitude(dto.getLatitude());
+		entity.setCreated(dto.getCreated());
+		entity.setUpdated(dto.getUpdated());
+		return entity;
+	}
 }

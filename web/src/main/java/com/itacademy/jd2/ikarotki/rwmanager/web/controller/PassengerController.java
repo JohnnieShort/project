@@ -48,7 +48,7 @@ public class PassengerController extends AbstractController<PassengerDTO> {
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
 		final GridStateDTO listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn,"id");
+		listDTO.setSort(sortColumn, "id");
 
 		final PassengerFilter filter = new PassengerFilter();
 		prepareFilter(listDTO, filter);

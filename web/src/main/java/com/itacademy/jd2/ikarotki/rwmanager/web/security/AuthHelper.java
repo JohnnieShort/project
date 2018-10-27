@@ -4,7 +4,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class AuthHelper {
-	
+
 	private AuthHelper() {
 	}
 
