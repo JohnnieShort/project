@@ -26,7 +26,7 @@
             <div class="input-field col s12">
                 <form:input path="firstName" type="text" disabled="${readonly}" />
                 <form:errors path="firstName" cssClass="red-text" />
-                <label for="firstName">First nam</label>
+                <label for="firstName">First name</label>
             </div>
         </div>
         

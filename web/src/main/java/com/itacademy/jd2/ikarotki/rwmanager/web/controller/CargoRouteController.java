@@ -45,22 +45,22 @@ public class CargoRouteController extends AbstractController<CargoRouteDTO> {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "page", required = false) final Integer pageNumber,
-            @RequestParam(name = "sort", required = false) final String sortColumn) {
+			@RequestParam(name = "sort", required = false) final String sortColumn) {
 
 		final GridStateDTO gridState = getListDTO(req);
-		 gridState.setPage(pageNumber);
-	        gridState.setSort(sortColumn, "id");
+		gridState.setPage(pageNumber);
+		gridState.setSort(sortColumn, "id");
 
 		final CargoRouteFilter filter = new CargoRouteFilter();
 		prepareFilter(gridState, filter);
 
 		final List<ICargoRoute> entities = cargoRouteService.find(filter);
 		List<CargoRouteDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
-        gridState.setTotalCount(cargoRouteService.getCount(filter));
+		gridState.setTotalCount(cargoRouteService.getCount(filter));
 
 		final Map<String, Object> models = new HashMap<>();
-		 models.put("gridItems", dtos);
-	        return new ModelAndView("cargoRoute.list", models);
+		models.put("gridItems", dtos);
+		return new ModelAndView("cargoRoute.list", models);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)

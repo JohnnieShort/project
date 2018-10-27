@@ -20,6 +20,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.converter.UserAccountToDTOConver
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.UserAccountDTO;
 
 @Controller
+@RequestMapping(value = "/register")
 public class RegisterController {
 	private IUserAccountService userAccountService;
 	private UserAccountToDTOConverter toDtoConverter;
@@ -33,7 +34,7 @@ public class RegisterController {
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 	}
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping( method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
 		final IUserAccount newEntity = userAccountService.createEntity();

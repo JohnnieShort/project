@@ -23,6 +23,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CustomerFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICustomerService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CustomerFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CustomerToDTOConverter;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.CargoRouteDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.CustomerDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
@@ -44,17 +45,21 @@ public class CustomerController extends AbstractController<CustomerDTO> {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
-			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
+			@RequestParam(name = "page", required = false) final Integer pageNumber,
+            @RequestParam(name = "sort", required = false) final String sortColumn) {
 
-		final GridStateDTO listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn, "id");
+		final GridStateDTO gridState = getListDTO(req);
+		gridState.setPage(pageNumber);
+		gridState.setSort(sortColumn, "id");
 
 		final CustomerFilter filter = new CustomerFilter();
-		prepareFilter(listDTO, filter);
+		prepareFilter(gridState, filter);
 
 		final List<ICustomer> entities = customerService.find(filter);
+		List<CustomerDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+		gridState.setTotalCount(customerService.getCount(filter));
 
-		final HashMap<String, Object> models = new HashMap<>();
+		final Map<String, Object> models = new HashMap<>();
 		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
 		return new ModelAndView("customer.list", models);
 	}
