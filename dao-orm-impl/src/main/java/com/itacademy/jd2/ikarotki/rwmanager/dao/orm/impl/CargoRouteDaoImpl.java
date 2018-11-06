@@ -11,6 +11,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICargoRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
@@ -18,10 +19,10 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoRoute_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train_;
-
+@Repository
 public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> implements ICargoRouteDao {
 
-	protected CargoRouteDaoImpl(Class<? extends ICargoRoute> entityClass) {
+	protected CargoRouteDaoImpl() {
 		super(CargoRoute.class);
 
 	}

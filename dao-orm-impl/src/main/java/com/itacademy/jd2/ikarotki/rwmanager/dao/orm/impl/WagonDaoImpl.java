@@ -11,6 +11,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IWagonDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
@@ -20,9 +21,10 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Wagon;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Wagon_;
 
+@Repository
 public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IWagonDao {
 
-	protected WagonDaoImpl(Class<? extends IWagon> entityClass) {
+	protected WagonDaoImpl() {
 		super(Wagon.class);
 
 	}

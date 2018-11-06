@@ -11,6 +11,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITrainDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
@@ -19,10 +20,10 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoOrder_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Locomotive_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train_;
-
+@Repository
 public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements ITrainDao {
 
-	protected TrainDaoImpl(Class<? extends ITrain> entityClass) {
+	protected TrainDaoImpl() {
 		super(Train.class);
 
 	}

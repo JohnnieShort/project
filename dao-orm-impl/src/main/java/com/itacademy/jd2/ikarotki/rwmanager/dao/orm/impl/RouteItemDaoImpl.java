@@ -11,6 +11,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IRouteItemDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
@@ -20,10 +21,10 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.RouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.RouteItem_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Station_;
-
+@Repository
 public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> implements IRouteItemDao {
 
-	protected RouteItemDaoImpl(Class<? extends IRouteItem> entityClass) {
+	protected RouteItemDaoImpl() {
 		super(RouteItem.class);
 
 	}

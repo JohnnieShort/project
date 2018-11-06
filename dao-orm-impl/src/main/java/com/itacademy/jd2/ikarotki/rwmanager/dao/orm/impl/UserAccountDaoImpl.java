@@ -11,16 +11,17 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IUserAccountDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.UserAccountFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.UserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.UserAccount_;
-
+@Repository
 public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> implements IUserAccountDao {
 
-	protected UserAccountDaoImpl(Class<? extends IUserAccount> entityClass) {
+	protected UserAccountDaoImpl() {
 		super(UserAccount.class);
 
 	}

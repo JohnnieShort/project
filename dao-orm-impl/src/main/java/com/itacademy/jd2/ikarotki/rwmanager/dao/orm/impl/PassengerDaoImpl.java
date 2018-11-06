@@ -11,6 +11,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IPassengerDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
@@ -19,10 +20,10 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Customer_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Passenger;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Passenger_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.UserAccount_;
-
+@Repository
 public class PassengerDaoImpl extends AbstractDaoImpl<IPassenger, Integer> implements IPassengerDao {
 
-	protected PassengerDaoImpl(Class<? extends IPassenger> entityClass) {
+	protected PassengerDaoImpl() {
 		super(Passenger.class);
 
 	}

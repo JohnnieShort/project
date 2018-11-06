@@ -11,6 +11,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICustomerDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
@@ -18,10 +19,10 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CustomerFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Customer_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.UserAccount_;
-
+@Repository
 public class CustomerDaoImpl extends AbstractDaoImpl<ICustomer, Integer> implements ICustomerDao {
 
-	protected CustomerDaoImpl(Class<? extends ICustomer> entityClass) {
+	protected CustomerDaoImpl() {
 		super(Customer.class);
 		// TODO Auto-generated constructor stub
 	}

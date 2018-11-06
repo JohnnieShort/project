@@ -11,16 +11,17 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ILocomotiveDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.LocomotiveFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Locomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Locomotive_;
-
+@Repository
 public class LocomotiveDaoImpl extends AbstractDaoImpl<ILocomotive, Integer> implements ILocomotiveDao {
 
-	protected LocomotiveDaoImpl(Class<? extends ILocomotive> entityClass) {
+	protected LocomotiveDaoImpl() {
 		super(Locomotive.class);
 
 	}

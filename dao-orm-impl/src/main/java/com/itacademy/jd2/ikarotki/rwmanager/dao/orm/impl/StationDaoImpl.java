@@ -11,16 +11,17 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
 import org.hibernate.jpa.criteria.OrderImpl;
+import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IStationDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Station;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Station_;
-
+@Repository
 public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implements IStationDao{
 
-	protected StationDaoImpl(Class<? extends IStation> entityClass) {
+	protected StationDaoImpl() {
 		super(Station.class);
 		
 	}
