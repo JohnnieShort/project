@@ -15,6 +15,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICustomerDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CustomerFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity.UserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.util.SQLExecutionException;
@@ -131,4 +132,9 @@ public class CustomerDaoImpl extends AbstractDaoImpl<ICustomer, Integer> impleme
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final CustomerFilter filter) {
+        return executeCountQuery("");
+    }
 }

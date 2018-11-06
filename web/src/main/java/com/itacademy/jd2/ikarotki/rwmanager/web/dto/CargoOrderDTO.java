@@ -5,33 +5,42 @@ import java.util.Date;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 
 public class CargoOrderDTO {
-
+	@NotNull
 	private Integer id;
 	@NotNull
 	private Date created;
 	@NotNull
 	private Date updated;
-	@Digits(fraction = 0, integer = 0)
+	@NotNull
+	@Range(min=0)
 	private ICargoRoute cargoRoute;
 	@NotNull
+	@Range(min=0)
 	private ICustomer customer;
 	@NotNull
+	@Range(min=0, max=2)
 	private CargoType cargoType;
 	@NotNull
+	@Range(min=0)
 	private IStation stationFrom;
 	@NotNull
+	@Range(min=0)
 	private IStation stationTo;
 	@NotNull
 	private Date date;
 	@NotNull
+	@Digits(integer=15, fraction=2)
 	private Double weight;
 	@NotNull
+	@Digits(integer=15, fraction=2)
 	private Double price;
 
 	public Double getPrice() {

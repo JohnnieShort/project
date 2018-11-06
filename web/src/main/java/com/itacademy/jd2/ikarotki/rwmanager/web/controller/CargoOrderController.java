@@ -46,7 +46,7 @@ public class CargoOrderController extends AbstractController<CargoOrderDTO> {
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "page", required = false) final Integer pageNumber,
 			@RequestParam(name = "sort", required = false) final String sortColumn) {
-
+		
 		final GridStateDTO gridState = getListDTO(req);
 		gridState.setPage(pageNumber);
 		gridState.setSort(sortColumn, "id");
@@ -94,7 +94,7 @@ public class CargoOrderController extends AbstractController<CargoOrderDTO> {
 	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
 		final ICargoOrder dbModel = cargoOrderService.get(id);
 		final CargoOrderDTO dto = toDtoConverter.apply(dbModel);
-		final HashMap<String, Object> hashMap = new HashMap<>();
+		final Map<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
 

@@ -109,4 +109,9 @@ public class LocomotiveDaoImpl extends AbstractDaoImpl<ILocomotive, Integer> imp
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final LocomotiveFilter filter) {
+        return executeCountQuery("");
+    }
 }

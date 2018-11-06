@@ -29,7 +29,6 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 @Controller
 @RequestMapping(value = "/userAccount")
 public class UserAccountController extends AbstractController<UserAccountDTO> {
-
 	private IUserAccountService userAccountService;
 	private UserAccountToDTOConverter toDtoConverter;
 	private UserAccountFromDTOConverter fromDtoConverter;
@@ -45,18 +44,22 @@ public class UserAccountController extends AbstractController<UserAccountDTO> {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
+			@RequestParam(name = "page", required = false) final Integer pageNumber,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final GridStateDTO listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn, "id");
+		final GridStateDTO gridState = getListDTO(req);
+		gridState.setPage(pageNumber);
+		gridState.setSort(sortColumn, "id");
 
 		final UserAccountFilter filter = new UserAccountFilter();
-		prepareFilter(listDTO, filter);
+		prepareFilter(gridState, filter);
 
 		final List<IUserAccount> entities = userAccountService.find(filter);
+		List<UserAccountDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+		gridState.setTotalCount(userAccountService.getCount(filter));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		models.put("gridItems", dtos);
 		return new ModelAndView("userAccount.list", models);
 	}
 

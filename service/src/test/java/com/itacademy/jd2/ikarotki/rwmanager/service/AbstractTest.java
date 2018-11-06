@@ -102,7 +102,8 @@ public abstract class AbstractTest {
 	protected IUserAccount saveNewUserAccount() {
 		final IUserAccount entity = userAccountService.createEntity();
 		entity.setEMail("e-mail - " + getRandomPrefix());
-		entity.setPassword("pass - " + getRandomPrefix());
+		String pass = "pass - " + getRandomPrefix();
+		entity.setPassword(pass);
 
 		entity.setRole(Role.values()[getRANDOM().nextInt(3)]);
 		entity.setFirstName("name - " + getRandomPrefix());
@@ -111,6 +112,7 @@ public abstract class AbstractTest {
 		entity.setCreated(date);
 		entity.setUpdated(date);
 		userAccountService.save(entity);
+		entity.setPassword(pass);
 		return entity;
 	}
 

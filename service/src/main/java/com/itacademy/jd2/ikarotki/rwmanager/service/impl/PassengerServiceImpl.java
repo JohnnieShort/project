@@ -36,11 +36,11 @@ public class PassengerServiceImpl implements IPassengerService {
 
 	@Override
 	public void save(final IPassenger entity) {
-		final Date modifedOn = new Date();
-		entity.setUpdated(modifedOn);
+		final Date modifiedOn = new Date();
+		entity.setUpdated(modifiedOn);
 		if (entity.getId() == null) {
 			LOGGER.info("new passenger created: {}", entity);
-			entity.setCreated(modifedOn);
+			entity.setCreated(modifiedOn);
 			dao.insert(entity);
 		} else {
 			LOGGER.info("passenger updated: {}", entity);
@@ -79,4 +79,8 @@ public class PassengerServiceImpl implements IPassengerService {
 		return dao.find(filter);
 	}
 
+	@Override
+	public long getCount(PassengerFilter filter) {
+		return dao.getCount(filter);
+	}
 }

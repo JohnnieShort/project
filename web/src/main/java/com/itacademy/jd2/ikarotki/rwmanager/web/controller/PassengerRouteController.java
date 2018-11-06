@@ -44,18 +44,22 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
+			@RequestParam(name = "page", required = false) final Integer pageNumber,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final GridStateDTO listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn, "id");
+		final GridStateDTO gridState = getListDTO(req);
+		gridState.setPage(pageNumber);
+		gridState.setSort(sortColumn, "id");
 
 		final PassengerRouteFilter filter = new PassengerRouteFilter();
-		prepareFilter(listDTO, filter);
+		prepareFilter(gridState, filter);
 
 		final List<IPassengerRoute> entities = passengerRouteService.find(filter);
+		List<PassengerRouteDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+		gridState.setTotalCount(passengerRouteService.getCount(filter));
 
-		final HashMap<String, Object> models = new HashMap<>();
-		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		final Map<String, Object> models = new HashMap<>();
+		models.put("gridItems", dtos);
 		return new ModelAndView("passengerRoute.list", models);
 	}
 

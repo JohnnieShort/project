@@ -190,4 +190,9 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
         // appendPaging(filter, sqlTile);
         return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final CargoOrderFilter filter) {
+        return executeCountQuery("");
+    }
 }

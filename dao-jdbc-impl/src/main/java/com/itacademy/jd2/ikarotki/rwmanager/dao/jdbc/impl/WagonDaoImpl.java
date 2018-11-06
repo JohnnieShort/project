@@ -127,4 +127,9 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final WagonFilter filter) {
+        return executeCountQuery("");
+    }
 }

@@ -117,4 +117,9 @@ public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements IT
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final TrainFilter filter) {
+        return executeCountQuery("");
+    }
 }

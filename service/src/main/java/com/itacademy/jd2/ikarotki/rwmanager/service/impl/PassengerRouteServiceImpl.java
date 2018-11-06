@@ -78,5 +78,10 @@ public class PassengerRouteServiceImpl implements IPassengerRouteService {
 	public List<IPassengerRoute> find(PassengerRouteFilter filter) {
 		return dao.find(filter);
 	}
+	
+	@Override
+	public long getCount(PassengerRouteFilter filter) {
+		return dao.getCount(filter);
+	}
 
 }

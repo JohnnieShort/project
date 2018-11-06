@@ -2,15 +2,22 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 
 public class PassengerDTO {
-	// @Size(min = 1, max = 50)
+	@NotNull
 	private Integer id;
+	@NotNull
 	private Date created;
+	@NotNull
 	private Date updated;
+	@NotNull
+	@Range(min=0)
 	private IUserAccount userAccount;
 
 	public IUserAccount getUserAccount() {

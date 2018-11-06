@@ -1,15 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <footer class="page-footer">
 <c:set var="baseUrl" value="${pageContext.request.contextPath}" />	
-		<div class="nav-wrapper container">
-			<ul class="left hide-on-med-and-down">
-				
-			<li><a href="${baseUrl}/passenger">Passengers</a></li>
-			<li><a href="${baseUrl}/passengerRoute">Passenger Routes</a></li>
-			<li><a href="${baseUrl}/routeItem">Items of routs</a></li>
-				
-			</ul>
-		</div>
+		
 	
     <div class="container">
         <div class="row">

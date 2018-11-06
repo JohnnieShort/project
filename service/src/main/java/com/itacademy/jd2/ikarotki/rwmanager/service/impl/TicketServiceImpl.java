@@ -81,4 +81,8 @@ public class TicketServiceImpl implements ITicketService {
 		return dao.find(filter);
 	}
 
+	@Override
+	public long getCount(TicketFilter filter) {
+		return dao.getCount(filter);
+	}
 }

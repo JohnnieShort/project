@@ -7,4 +7,6 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CustomerFilter;
 
 public interface ICustomerDao extends IDao<ICustomer, Integer> {
 	List<ICustomer> find(CustomerFilter filter);
+	
+	long getCount(CustomerFilter filter);
 }

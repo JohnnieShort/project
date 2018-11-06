@@ -189,4 +189,9 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final RouteItemFilter filter) {
+        return executeCountQuery("");
+    }
 }

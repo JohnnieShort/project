@@ -45,18 +45,22 @@ public class TrainController extends AbstractController<TrainDTO> {
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
+			@RequestParam(name = "page", required = false) final Integer pageNumber,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final GridStateDTO listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn, "id");
+		final GridStateDTO gridState = getListDTO(req);
+		gridState.setPage(pageNumber);
+		gridState.setSort(sortColumn, "id");
 
 		final TrainFilter filter = new TrainFilter();
-		prepareFilter(listDTO, filter);
+		prepareFilter(gridState, filter);
 
 		final List<ITrain> entities = trainService.find(filter);
+		List<TrainDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+		gridState.setTotalCount(trainService.getCount(filter));
 
 		final HashMap<String, Object> models = new HashMap<>();
-		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		models.put("gridItems", dtos);
 		return new ModelAndView("train.list", models);
 	}
 

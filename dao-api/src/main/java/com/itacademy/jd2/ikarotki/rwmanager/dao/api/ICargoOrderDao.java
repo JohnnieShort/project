@@ -7,4 +7,6 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoOrderFilter;
 
 public interface ICargoOrderDao extends IDao<ICargoOrder, Integer> {
 	List<ICargoOrder> find(CargoOrderFilter filter);
+	
+	long getCount(CargoOrderFilter filter);
 }

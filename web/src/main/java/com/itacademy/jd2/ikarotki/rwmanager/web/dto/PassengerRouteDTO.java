@@ -2,24 +2,45 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 
 public class PassengerRouteDTO {
-	// @Size(min = 1, max = 50)
+	@NotNull
 	private Integer id;
+	@NotNull
 	private Date created;
+	@NotNull
 	private Date updated;
+	@NotNull
+	@Range(min=0)
 	private IStation stationFrom;
+	@NotNull
+	@Range(min=0)
 	private IStation stationTo;
+	@NotNull
 	private Date departure;
+	@NotNull
 	private Date arrival;
+	@NotNull
 	private PassengerRouteType passengerRoutetype;
+	@NotNull
+	@Range(min=0)
 	private ITrain train;
+	@NotNull
+	@Range(min=0)
 	private Boolean isActual;
+	@NotNull
+	@Range(min=0)
 	private Frequency frequency;
+	@NotNull
+	@Range(min=0)
 	private Integer places;
 
 	public Integer getId() {

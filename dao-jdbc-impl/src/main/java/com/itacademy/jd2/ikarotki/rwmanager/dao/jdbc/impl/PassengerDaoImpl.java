@@ -130,4 +130,9 @@ public class PassengerDaoImpl extends AbstractDaoImpl<IPassenger, Integer> imple
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final PassengerFilter filter) {
+        return executeCountQuery("");
+    }
 }

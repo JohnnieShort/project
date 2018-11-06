@@ -12,5 +12,14 @@ public class DefaultController {
 	public String index() {
 		return "index";
 	}
-
+	
+	@RequestMapping(value = "/administratorPage", method = RequestMethod.GET)
+	public String dataManagement() {
+		return "administratorPage";
+	}
+	
+	@RequestMapping(value = "/schedule", method = RequestMethod.GET)
+	public String checkSchedule() {
+		return "schedule";
+	}
 }

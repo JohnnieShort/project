@@ -79,4 +79,8 @@ public class RouteItemServiceImpl implements IRouteItemService {
 		return dao.find(filter);
 	}
 
+	@Override
+	public long getCount(RouteItemFilter filter) {
+		return dao.getCount(filter);
+	}
 }

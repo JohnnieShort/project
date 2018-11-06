@@ -178,4 +178,9 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final PassengerRouteFilter filter) {
+        return executeCountQuery("");
+    }
 }

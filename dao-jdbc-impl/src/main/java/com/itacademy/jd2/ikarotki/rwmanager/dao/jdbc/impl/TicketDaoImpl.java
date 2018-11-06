@@ -249,4 +249,9 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	
+	@Override
+    public long getCount(final TicketFilter filter) {
+        return executeCountQuery("");
+    }
 }

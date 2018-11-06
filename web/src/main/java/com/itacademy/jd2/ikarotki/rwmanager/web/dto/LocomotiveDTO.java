@@ -2,15 +2,21 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class LocomotiveDTO {
-
+	@NotNull
 	private Integer id;
+	@NotNull
 	private Date created;
+	@NotNull
 	private Date updated;
 	@Size(min = 1, max = 50)
 	private String name;
+	@NotNull
+	@Digits(integer=15, fraction=2)
 	private Double power;
 
 	public Integer getId() {

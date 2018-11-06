@@ -79,4 +79,8 @@ public class TrainServiceImpl implements ITrainService {
 		return dao.find(filter);
 	}
 
+	@Override
+	public long getCount(TrainFilter filter) {
+		return dao.getCount(filter);
+	}
 }

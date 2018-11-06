@@ -2,19 +2,32 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 
 public class WagonDTO {
-	// @Size(min = 1, max = 50)
+	@NotNull
 	private Integer id;
+	@NotNull
+	@Range(min = 0)
 	private WagonType wagonType;
+	@NotNull
+	@Range(min = 0)
 	private ITrain train;
+	@NotNull
+	@Digits(integer = 15, fraction = 2)
 	private Double freightPrice;
+	@NotNull
+	@Digits(integer = 15, fraction = 2)
 	private Double capacity;
+	@NotNull
 	private Date created;
+	@NotNull
 	private Date updated;
 
 	public Date getCreated() {

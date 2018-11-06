@@ -2,15 +2,28 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
+
 public class StationDTO {
+	@NotNull
+	@Range(min=0)
 	private Integer id;
+	@NotNull
 	@Size(min = 1, max = 50)
 	private String name;
+	@NotNull
+	@Digits(integer=15, fraction=2)
 	private Double longitude;
+	@NotNull
+	@Digits(integer=15, fraction=2)
 	private Double latitude;
+	@NotNull
 	private Date created;
+	@NotNull
 	private Date updated;
 
 	public Integer getId() {

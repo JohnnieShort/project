@@ -165,4 +165,8 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 		// appendPaging(filter, sqlTile);
 		return executeFindQuery(sqlTile.toString());
 	}
+	@Override
+    public long getCount(final CargoRouteFilter filter) {
+        return executeCountQuery("");
+    }
 }

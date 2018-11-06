@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IUserAccountDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.UserAccountFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.impl.utils.Password;
 
 @Service
 public class UserAccountServiceImpl implements IUserAccountService {
@@ -38,6 +40,10 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	public void save(final IUserAccount entity) {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
+		entity.setPassword(Password.hashPassword(entity.getPassword()));
+		if (entity.getRole() == null) {
+			entity.setRole(Role.ROLE_USER);
+		}
 		if (entity.getId() == null) {
 			LOGGER.info("new user account created: {}", entity);
 			entity.setCreated(modifedOn);
@@ -79,4 +85,8 @@ public class UserAccountServiceImpl implements IUserAccountService {
 		return dao.find(filter);
 	}
 
+	@Override
+	public long getCount(UserAccountFilter filter) {
+		return dao.getCount(filter);
+	}
 }

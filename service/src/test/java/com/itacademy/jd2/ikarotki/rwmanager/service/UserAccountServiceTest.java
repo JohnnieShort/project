@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
+import com.itacademy.jd2.ikarotki.rwmanager.service.impl.utils.Password;
 
 public class UserAccountServiceTest extends AbstractTest {
 
@@ -29,8 +30,10 @@ public class UserAccountServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getRole());
 		assertNotNull(entityFromDb.getFirstName());
 		assertNotNull(entityFromDb.getLastName());
+		assertNotEquals(entity.getPassword(),entityFromDb.getPassword());
+		assertTrue(Password.checkPassword(entity.getPassword(), entityFromDb.getPassword()));
 		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
-		assertTrue(entityFromDb.getPassword().equals(entity.getPassword()));
+		
 		assertTrue(entityFromDb.getLastName().equals(entity.getLastName()));
 	}
 

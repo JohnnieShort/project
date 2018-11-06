@@ -79,4 +79,9 @@ public class WagonServiceImpl implements IWagonService {
 		return dao.find(filter);
 	}
 
+	
+	@Override
+	public long getCount(WagonFilter filter) {
+		return dao.getCount(filter);
+	}
 }

@@ -23,7 +23,6 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CustomerFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICustomerService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CustomerFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CustomerToDTOConverter;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.CargoRouteDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.CustomerDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
@@ -60,7 +59,7 @@ public class CustomerController extends AbstractController<CustomerDTO> {
 		gridState.setTotalCount(customerService.getCount(filter));
 
 		final Map<String, Object> models = new HashMap<>();
-		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		models.put("gridItems", dtos);
 		return new ModelAndView("customer.list", models);
 	}
 

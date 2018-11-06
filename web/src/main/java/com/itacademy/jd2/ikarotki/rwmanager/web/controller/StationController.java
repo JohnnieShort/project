@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.StationDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 
 @Controller
 @RequestMapping(value = "/station")
@@ -40,7 +40,6 @@ public class StationController extends AbstractController<StationDTO> {
 		this.stationService = stationService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
-
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -48,19 +47,19 @@ public class StationController extends AbstractController<StationDTO> {
 			@RequestParam(name = "page", required = false) final Integer pageNumber,
 			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
 
-		final GridStateDTO listDTO = getListDTO(req);
-		listDTO.setSort(sortColumn, "id");
-		listDTO.setPage(pageNumber);
+		final GridStateDTO gridState = getListDTO(req);
+		gridState.setSort(sortColumn, "id");
+		gridState.setPage(pageNumber);
 
 		final StationFilter filter = new StationFilter();
-		prepareFilter(listDTO, filter);
+		prepareFilter(gridState, filter);
 
 		final List<IStation> entities = stationService.find(filter);
+		List<StationDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+		gridState.setTotalCount(stationService.getCount(filter));
 
-		listDTO.setTotalCount(stationService.getCount(filter));
-
-		final HashMap<String, Object> models = new HashMap<>();
-		models.put("list", entities.stream().map(toDtoConverter).collect(Collectors.toList()));
+		final Map<String, Object> models = new HashMap<>();
+		models.put("gridItems", dtos);
 		return new ModelAndView("station.list", models);
 	}
 

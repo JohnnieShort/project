@@ -2,24 +2,41 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
 public class RouteItemDTO {
+	@NotNull
 	private Integer id;
+	@NotNull
 	private Date created;
+	@NotNull
 	private Date updated;
+	@NotNull
+	@Range(min=0)
 	private IPassengerRoute passengerRoute;
+	@NotNull
+	@Range(min=0)
 	private IStation stationFrom;
+	@NotNull
+	@Range(min=0)
 	private IStation stationTo;
+	@NotNull
 	private Date departure;
+	@NotNull
 	private Date arrival;
-	// @Size(min = 1, max = 50)
+	@NotNull
+	@Range(min=0)
 	private Integer ordinalNum;
+	@NotNull
+	
 	private Boolean isFirst;
-
+	@NotNull
+	
 	private Boolean isLast;
 
 	public Integer getId() {

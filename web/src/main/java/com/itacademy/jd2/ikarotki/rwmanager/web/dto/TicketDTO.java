@@ -2,22 +2,37 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Range;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
 public class TicketDTO {
-	// @Size(min = 1, max = 50)
+	@NotNull
 	private Integer id;
+	@NotNull
 	private Date created;
+	@NotNull
 	private Date updated;
-
+	@NotNull
+	@Digits(integer=15, fraction=2)
 	private Double price;
+	@NotNull
+	@Range(min=0)
 	private IPassenger passenger;
+	@NotNull
+	@Range(min=0)
 	private IPassengerRoute passengerRoute;
+	@NotNull
+	@Range(min=0)
 	private IStation stationFrom;
+	@NotNull
+	@Range(min=0)
 	private IStation stationTo;
 
 	public Integer getId() {
