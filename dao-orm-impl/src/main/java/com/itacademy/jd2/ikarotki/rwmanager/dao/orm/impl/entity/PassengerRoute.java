@@ -89,8 +89,10 @@ public class PassengerRoute extends BaseEntity implements IPassengerRoute {
 		return passengerRouteType;
 	}
 
+
 	public void setPassengerRoutetype(PassengerRouteType passengerRouteType) {
 		this.passengerRouteType = passengerRouteType;
+
 	}
 
 	public ITrain getTrain() {

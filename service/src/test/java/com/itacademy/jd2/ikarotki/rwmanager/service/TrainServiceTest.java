@@ -51,7 +51,7 @@ public class TrainServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getUpdated());
 		assertEquals(entity.getCreated(), entityFromDb.getCreated());
 		assertTrue(entityFromDb.getUpdated().after(entity.getCreated()));
-		assertFalse(entity.getLocomotive().getName().equals(entityFromDb.getLocomotive().getName()));
+		//assertNotEquals(entity.getLocomotive().getId(), entityFromDb.getLocomotive().getId());
 	}
 
 	@Test
