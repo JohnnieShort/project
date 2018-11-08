@@ -26,13 +26,13 @@ public class PassengerRoute extends BaseEntity implements IPassengerRoute {
 	private Date departure;
 	@Column
 	private Date arrival;
-	@Enumerated(EnumType.STRING)
-	private PassengerRouteType passengerRoutetype;
+	@Enumerated(EnumType.ORDINAL)
+	private PassengerRouteType passengerRouteType;
 	@OneToOne(fetch = FetchType.LAZY, optional = false, targetEntity = Train.class)
 	private ITrain train;
 	@Column
 	private Boolean isActual;
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private Frequency frequency;
 	@Column
 	private Integer places;
@@ -86,11 +86,11 @@ public class PassengerRoute extends BaseEntity implements IPassengerRoute {
 	}
 
 	public PassengerRouteType getPassengerRoutetype() {
-		return passengerRoutetype;
+		return passengerRouteType;
 	}
 
-	public void setPassengerRoutetype(PassengerRouteType passengerRoutetype) {
-		this.passengerRoutetype = passengerRoutetype;
+	public void setPassengerRoutetype(PassengerRouteType passengerRouteType) {
+		this.passengerRouteType = passengerRouteType;
 	}
 
 	public ITrain getTrain() {
@@ -112,10 +112,9 @@ public class PassengerRoute extends BaseEntity implements IPassengerRoute {
 	@Override
 	public String toString() {
 		return "PassengerRoute [stationFrom=" + stationFrom + ", stationTo=" + stationTo + ", departure=" + departure
-				+ ", arrival=" + arrival + ", passengerRoutetype=" + passengerRoutetype + ", train=" + train
+				+ ", arrival=" + arrival + ", passengerRoutetype=" + passengerRouteType + ", train=" + train
 				+ ", isActual=" + isActual + ", frequency=" + frequency + ", places=" + places + ", getId()=" + getId()
 				+ "]";
 	}
 
-	
 }

@@ -14,7 +14,7 @@ public class UserAccount extends BaseEntity implements IUserAccount {
 	private String eMail;
 	@Column
 	private String password;
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private Role role;
 	@Column
 	private String firstName;

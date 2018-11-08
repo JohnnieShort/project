@@ -20,7 +20,7 @@ public class CargoOrder extends BaseEntity implements ICargoOrder {
 	private ICargoRoute cargoRoute;
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Customer.class)
 	private ICustomer customer;
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	private CargoType cargoType;
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Station.class)
 	private IStation stationFrom;
