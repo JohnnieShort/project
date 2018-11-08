@@ -2,6 +2,8 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity;
 
 import java.util.Date;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,44 +11,46 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
+
 @MappedSuperclass
 public abstract class BaseEntity implements IBaseEntity {
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Access(value = AccessType.PROPERTY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	@Column(updatable = false)
-    private Date created;
+	private Date created;
 	@Column
-    private Date updated;
+	private Date updated;
 
-    @Override
-    public Integer getId() {
-        return id;
-    }
+	@Override
+	public Integer getId() {
+		return id;
+	}
 
-    @Override
-    public void setId(final Integer id) {
-        this.id = id;
-    }
+	@Override
+	public void setId(final Integer id) {
+		this.id = id;
+	}
 
-    @Override
-    public Date getCreated() {
-        return created;
-    }
+	@Override
+	public Date getCreated() {
+		return created;
+	}
 
-    @Override
-    public void setCreated(final Date created) {
-        this.created = created;
-    }
+	@Override
+	public void setCreated(final Date created) {
+		this.created = created;
+	}
 
-    @Override
-    public Date getUpdated() {
-        return updated;
-    }
+	@Override
+	public Date getUpdated() {
+		return updated;
+	}
 
-    @Override
-    public void setUpdated(final Date updated) {
-        this.updated = updated;
-    }
+	@Override
+	public void setUpdated(final Date updated) {
+		this.updated = updated;
+	}
 
 }

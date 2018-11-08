@@ -32,6 +32,6 @@
 ---------------------------25.10---------------------------
 - realize passenger route insert by adding combos with stations names, realize map which will dinamic build route.
 ---------------------------05.11---------------------------
-- ask why no breaks in switch;
-- ask about getFullInfo() @Overrided;
+- ask why no breaks in switch;+
+- ask about getFullInfo() @Overrided;+
 - ask about Entity/IEntity;
