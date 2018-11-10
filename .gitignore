@@ -12,3 +12,4 @@ service/.classpath
 /.metadata/
 dao-orm-impl/bin/src/main/java/com/itacademy/jd2/ikarotki/rwmanager/dao/orm/impl/CargoOrderDaoImpl.class
 dao-orm-impl/bin/
+*.classpath
