@@ -21,6 +21,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoOrder_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoRoute_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Customer_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Station_;
+
 @Repository
 public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> implements ICargoOrderDao {
 
@@ -35,6 +36,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 		return cargoOrder;
 	}
 
+	@Override
 	public ICargoOrder getFullInfo(final Integer id) {
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();

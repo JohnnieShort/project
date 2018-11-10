@@ -135,4 +135,10 @@ public class PassengerDaoImpl extends AbstractDaoImpl<IPassenger, Integer> imple
     public long getCount(final PassengerFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public IPassenger getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

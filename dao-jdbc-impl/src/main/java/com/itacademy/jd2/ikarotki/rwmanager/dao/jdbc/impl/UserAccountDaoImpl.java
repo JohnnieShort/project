@@ -125,4 +125,16 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
     public long getCount(final UserAccountFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public IUserAccount getByEMail(String eMail) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public IUserAccount getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

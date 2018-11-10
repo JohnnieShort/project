@@ -9,7 +9,9 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.UserAccountFilter;
 
 public interface IUserAccountService {
 	IUserAccount get(Integer id);
-
+	
+	boolean checkPassword(String eMail, String password);
+	
 	List<IUserAccount> getAll();
 	@Transactional
 	void save(IUserAccount entity);
@@ -23,4 +25,6 @@ public interface IUserAccountService {
 	List<IUserAccount> find(UserAccountFilter filter);
 	
 	long getCount(UserAccountFilter filter);
+
+	IUserAccount getByEmail(String eMail);
 }

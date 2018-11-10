@@ -7,7 +7,7 @@
         <form name='loginForm' action="<c:url value='login' />" method='POST'>
             <div class="row">
                 <div class="input-field col s12 center">
-                    <input type='text' name='username' value=''> <label for="username">User:</label>
+                    <input type='text' name='username' value=''> <label for="username">E-Mail:</label>
                 </div>
             </div>
             <div class="row">

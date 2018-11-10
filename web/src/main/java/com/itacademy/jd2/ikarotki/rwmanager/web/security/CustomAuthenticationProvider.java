@@ -3,6 +3,7 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,18 +12,33 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
+
 @Component("customAuthenticationProvider")
 public class CustomAuthenticationProvider implements AuthenticationProvider {
+	private IUserAccountService userAccountService;
 
 	// TODO inject UserService
+	@Autowired
+	public CustomAuthenticationProvider(IUserAccountService userAccountService) {
+		this.userAccountService = userAccountService;
+	}
 
 	@Override
 	public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
-		final String username = authentication.getPrincipal() + "";
+		final String eMail = authentication.getPrincipal() + "";
 		final String password = authentication.getCredentials() + "";
 
 		// TODO find use by login
-		if (!"admin".equals(username)) {
+		if (!"admin".equals(eMail)) {
+			if (userAccountService.checkPassword(eMail, password)) {
+				IUserAccount userAccount = userAccountService.getByEmail(eMail);
+				final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+				authorities.add(new SimpleGrantedAuthority(userAccount.getRole().toString()));
+				return new ExtendedUsernamePasswordAuthenticationToken(userAccount.getId(), eMail, password,
+						authorities);
+			}
 			throw new BadCredentialsException("1000");
 		}
 
@@ -41,7 +57,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		for (String roleName : userRoles) {
 			authorities.add(new SimpleGrantedAuthority(roleName));
 		}
-		return new ExtendedUsernamePasswordAuthenticationToken(userId, username, password, authorities);
+		return new ExtendedUsernamePasswordAuthenticationToken(userId, eMail, password, authorities);
 
 	}
 

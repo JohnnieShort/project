@@ -16,10 +16,10 @@ public class StationDTO {
 	@Size(min = 1, max = 50)
 	private String name;
 	@NotNull
-	@Digits(integer=15, fraction=2)
+	@Digits(integer=8, fraction=6)
 	private Double longitude;
 	@NotNull
-	@Digits(integer=15, fraction=2)
+	@Digits(integer=8, fraction=6)
 	private Double latitude;
 	@NotNull
 	private Date created;

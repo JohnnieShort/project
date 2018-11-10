@@ -3,7 +3,8 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.api;
 import java.util.List;
 
 public interface IDao<ENTITY, ID> {
-
+	ENTITY getFullInfo(Integer id);
+	
     ENTITY createEntity();
 
     ENTITY get(ID id);

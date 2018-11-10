@@ -34,4 +34,4 @@
 ---------------------------05.11---------------------------
 - ask why no breaks in switch;+
 - ask about getFullInfo() @Overrided;+
-- ask about Entity/IEntity;
+- ask about Entity/IEntity;+

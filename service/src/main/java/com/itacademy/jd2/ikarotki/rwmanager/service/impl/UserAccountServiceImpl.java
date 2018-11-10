@@ -54,6 +54,15 @@ public class UserAccountServiceImpl implements IUserAccountService {
 		}
 	}
 
+	public boolean checkPassword(String eMail, String password) {
+		boolean checked;
+		IUserAccount userAccount = dao.getByEMail(eMail);
+		checked = Password.checkPassword(password, userAccount.getPassword());
+
+		return checked;
+
+	}
+
 	@Override
 	public IUserAccount get(final Integer id) {
 		final IUserAccount entity = dao.get(id);
@@ -88,5 +97,11 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	@Override
 	public long getCount(UserAccountFilter filter) {
 		return dao.getCount(filter);
+	}
+
+	@Override
+	public IUserAccount getByEmail(String eMail) {
+
+		return dao.getByEMail(eMail);
 	}
 }

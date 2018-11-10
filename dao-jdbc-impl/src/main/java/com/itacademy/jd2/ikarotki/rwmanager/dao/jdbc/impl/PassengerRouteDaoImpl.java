@@ -183,4 +183,10 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
     public long getCount(final PassengerRouteFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public IPassengerRoute getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -19,6 +19,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CustomerFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Customer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Customer_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.UserAccount_;
+
 @Repository
 public class CustomerDaoImpl extends AbstractDaoImpl<ICustomer, Integer> implements ICustomerDao {
 
@@ -57,6 +58,7 @@ public class CustomerDaoImpl extends AbstractDaoImpl<ICustomer, Integer> impleme
 		return q.getResultList();
 	}
 
+	@Override
 	public ICustomer getFullInfo(final Integer id) {
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -77,7 +79,7 @@ public class CustomerDaoImpl extends AbstractDaoImpl<ICustomer, Integer> impleme
 
 		return getSingleResult(q);
 	}
-	
+
 	private Path<?> getSortPath(Root<Customer> from, String sortColumn) {
 		switch (sortColumn) {
 

@@ -122,4 +122,10 @@ public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements IT
     public long getCount(final TrainFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public ITrain getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

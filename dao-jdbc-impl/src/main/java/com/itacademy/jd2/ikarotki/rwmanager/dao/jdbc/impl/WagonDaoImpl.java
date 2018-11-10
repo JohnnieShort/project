@@ -132,4 +132,10 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
     public long getCount(final WagonFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public IWagon getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

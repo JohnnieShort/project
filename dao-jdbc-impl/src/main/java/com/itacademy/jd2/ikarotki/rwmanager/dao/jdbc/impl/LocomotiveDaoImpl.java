@@ -114,4 +114,10 @@ public class LocomotiveDaoImpl extends AbstractDaoImpl<ILocomotive, Integer> imp
     public long getCount(final LocomotiveFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public ILocomotive getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

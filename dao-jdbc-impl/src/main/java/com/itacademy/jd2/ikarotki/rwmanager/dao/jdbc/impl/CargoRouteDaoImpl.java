@@ -169,4 +169,10 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
     public long getCount(final CargoRouteFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public ICargoRoute getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -18,6 +18,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.UserAccountFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.UserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.UserAccount_;
+
 @Repository
 public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> implements IUserAccountDao {
 
@@ -30,6 +31,26 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 	public IUserAccount createEntity() {
 		IUserAccount userAccount = new UserAccount();
 		return userAccount;
+	}
+
+	@Override
+	public IUserAccount getFullInfo(final Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IUserAccount> cq = cb.createQuery(IUserAccount.class); // define returning result
+		final Root<UserAccount> from = cq.from(UserAccount.class); // define table for select
+
+		cq.select(from); // define what need to be selected
+
+		cq.distinct(true); // to avoid duplicate rows in result
+
+		// .. where id=...
+		cq.where(cb.equal(from.get(UserAccount_.id), id)); // where id=?
+
+		final TypedQuery<IUserAccount> q = em.createQuery(cq);
+
+		return getSingleResult(q);
 	}
 
 	@Override
@@ -83,6 +104,26 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 		cq.select(cb.count(from)); // select what? select count(*)
 		final TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult(); // execute query
+	}
+
+	@Override
+	public IUserAccount getByEMail(String eMail) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<IUserAccount> cq = cb.createQuery(IUserAccount.class); // define returning result
+		final Root<UserAccount> from = cq.from(UserAccount.class); // define table for select
+
+		cq.select(from); // define what need to be selected
+
+		cq.distinct(true); // to avoid duplicate rows in result
+
+		// .. where id=...
+		cq.where(cb.equal(from.get(UserAccount_.eMail), eMail)); // where eMail=?
+
+		final TypedQuery<IUserAccount> q = em.createQuery(cq);
+
+		return getSingleResult(q);
 	}
 
 }

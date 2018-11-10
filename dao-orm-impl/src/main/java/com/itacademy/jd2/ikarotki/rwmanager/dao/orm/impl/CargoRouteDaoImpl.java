@@ -19,6 +19,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoRoute_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train_;
+
 @Repository
 public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> implements ICargoRouteDao {
 
@@ -56,7 +57,8 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 		setPaging(filter, q);
 		return q.getResultList();
 	}
-
+	
+	@Override
 	public ICargoRoute getFullInfo(final Integer id) {
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();

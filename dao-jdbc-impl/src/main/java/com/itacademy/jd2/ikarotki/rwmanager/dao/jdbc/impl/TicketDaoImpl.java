@@ -254,4 +254,10 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
     public long getCount(final TicketFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public ITicket getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

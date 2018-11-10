@@ -194,4 +194,10 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
     public long getCount(final RouteItemFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public IRouteItem getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

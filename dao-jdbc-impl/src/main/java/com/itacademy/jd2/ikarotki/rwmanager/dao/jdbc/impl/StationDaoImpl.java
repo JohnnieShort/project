@@ -114,4 +114,10 @@ public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implement
     public long getCount(final StationFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public IStation getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

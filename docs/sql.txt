@@ -189,23 +189,23 @@ ALTER TABLE "train" ADD CONSTRAINT "train_fk0" FOREIGN KEY ("locomotive_id") REF
 
 ALTER TABLE "passenger" ADD CONSTRAINT "passenger_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
 
-ALTER TABLE "passenger_route" ADD CONSTRAINT "passenger_route_fk0" FOREIGN KEY ("station_from") REFERENCES "station"("id");
-ALTER TABLE "passenger_route" ADD CONSTRAINT "passenger_route_fk1" FOREIGN KEY ("station_to") REFERENCES "station"("id");
+ALTER TABLE "passenger_route" ADD CONSTRAINT "passenger_route_fk0" FOREIGN KEY ("station_from_id") REFERENCES "station"("id");
+ALTER TABLE "passenger_route" ADD CONSTRAINT "passenger_route_fk1" FOREIGN KEY ("station_to_id") REFERENCES "station"("id");
 
 ALTER TABLE "passenger_route" ADD CONSTRAINT "passenger_route_fk3" FOREIGN KEY ("train_id") REFERENCES "train"("id");
 
 ALTER TABLE "ticket" ADD CONSTRAINT "ticket_fk0" FOREIGN KEY ("passenger_id") REFERENCES "passenger"("id");
 ALTER TABLE "ticket" ADD CONSTRAINT "ticket_fk1" FOREIGN KEY ("passenger_route_id") REFERENCES "passenger_route"("id");
-ALTER TABLE "ticket" ADD CONSTRAINT "ticket_fk2" FOREIGN KEY ("station_from") REFERENCES "station"("id");
-ALTER TABLE "ticket" ADD CONSTRAINT "ticket_fk3" FOREIGN KEY ("station_to") REFERENCES "station"("id");
+ALTER TABLE "ticket" ADD CONSTRAINT "ticket_fk2" FOREIGN KEY ("station_from_id") REFERENCES "station"("id");
+ALTER TABLE "ticket" ADD CONSTRAINT "ticket_fk3" FOREIGN KEY ("station_to_id") REFERENCES "station"("id");
 
 ALTER TABLE "customer" ADD CONSTRAINT "customer_fk0" FOREIGN KEY ("user_account_id") REFERENCES "user_account"("id");
 
 ALTER TABLE "cargo_order" ADD CONSTRAINT "cargo_order_fk0" FOREIGN KEY ("cargo_route_id") REFERENCES "cargo_route"("id");
 ALTER TABLE "cargo_order" ADD CONSTRAINT "cargo_order_fk1" FOREIGN KEY ("customer_id") REFERENCES "customer"("id");
 
-ALTER TABLE "cargo_order" ADD CONSTRAINT "cargo_order_fk3" FOREIGN KEY ("station_from") REFERENCES "station"("id");
-ALTER TABLE "cargo_order" ADD CONSTRAINT "cargo_order_fk4" FOREIGN KEY ("station_to") REFERENCES "station"("id");
+ALTER TABLE "cargo_order" ADD CONSTRAINT "cargo_order_fk3" FOREIGN KEY ("station_from_id") REFERENCES "station"("id");
+ALTER TABLE "cargo_order" ADD CONSTRAINT "cargo_order_fk4" FOREIGN KEY ("station_to_id") REFERENCES "station"("id");
 
 ALTER TABLE "cargo_route" ADD CONSTRAINT "cargo_route_fk0" FOREIGN KEY ("train_id") REFERENCES "train"("id");
 
@@ -215,6 +215,6 @@ ALTER TABLE "wagon" ADD CONSTRAINT "wagon_fk1" FOREIGN KEY ("train_id") REFERENC
 
 
 ALTER TABLE "route_item" ADD CONSTRAINT "route_item_fk0" FOREIGN KEY ("passenger_route_id") REFERENCES "passenger_route"("id");
-ALTER TABLE "route_item" ADD CONSTRAINT "route_item_fk1" FOREIGN KEY ("station_from") REFERENCES "station"("id");
-ALTER TABLE "route_item" ADD CONSTRAINT "route_item_fk2" FOREIGN KEY ("station_to") REFERENCES "station"("id");
+ALTER TABLE "route_item" ADD CONSTRAINT "route_item_fk1" FOREIGN KEY ("station_from_id") REFERENCES "station"("id");
+ALTER TABLE "route_item" ADD CONSTRAINT "route_item_fk2" FOREIGN KEY ("station_to_id") REFERENCES "station"("id");
 

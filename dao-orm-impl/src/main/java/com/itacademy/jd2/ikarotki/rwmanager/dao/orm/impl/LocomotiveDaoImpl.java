@@ -18,6 +18,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.LocomotiveFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Locomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Locomotive_;
+
 @Repository
 public class LocomotiveDaoImpl extends AbstractDaoImpl<ILocomotive, Integer> implements ILocomotiveDao {
 
@@ -30,6 +31,26 @@ public class LocomotiveDaoImpl extends AbstractDaoImpl<ILocomotive, Integer> imp
 	public ILocomotive createEntity() {
 		ILocomotive locomotive = new Locomotive();
 		return locomotive;
+	}
+
+	@Override
+	public ILocomotive getFullInfo(final Integer id) {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+
+		final CriteriaQuery<ILocomotive> cq = cb.createQuery(ILocomotive.class); // define returning result
+		final Root<Locomotive> from = cq.from(Locomotive.class); // define table for select
+
+		cq.select(from); // define what need to be selected
+
+		cq.distinct(true); // to avoid duplicate rows in result
+
+		// .. where id=...
+		cq.where(cb.equal(from.get(Locomotive_.id), id)); // where id=?
+
+		final TypedQuery<ILocomotive> q = em.createQuery(cq);
+
+		return getSingleResult(q);
 	}
 
 	@Override

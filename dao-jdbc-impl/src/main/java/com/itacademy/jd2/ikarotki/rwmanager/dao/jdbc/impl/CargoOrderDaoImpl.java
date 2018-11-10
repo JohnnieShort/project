@@ -195,4 +195,10 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
     public long getCount(final CargoOrderFilter filter) {
         return executeCountQuery("");
     }
+
+	@Override
+	public ICargoOrder getFullInfo(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
