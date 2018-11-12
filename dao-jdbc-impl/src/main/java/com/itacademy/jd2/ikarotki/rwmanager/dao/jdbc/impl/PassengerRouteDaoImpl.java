@@ -45,7 +45,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setObject(4, entity.getDeparture(), Types.TIMESTAMP);
 				pStmt.setObject(5, entity.getArrival(), Types.TIMESTAMP);
-				pStmt.setInt(6, entity.getPassengerRoutetype().ordinal());
+				pStmt.setInt(6, entity.getPassengerRouteType().ordinal());
 				pStmt.setInt(7, entity.getTrain().getId());
 				pStmt.setBoolean(8, entity.getIsActual());
 				pStmt.setInt(9, entity.getFrequency().ordinal());
@@ -80,7 +80,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
 				pStmt.setObject(5, entity.getDeparture(), Types.TIMESTAMP);
 				pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
-				pStmt.setInt(7, entity.getPassengerRoutetype().ordinal());
+				pStmt.setInt(7, entity.getPassengerRouteType().ordinal());
 				pStmt.setInt(8, entity.getTrain().getId());
 				pStmt.setBoolean(9, entity.getIsActual());
 				pStmt.setInt(10, entity.getFrequency().ordinal());
@@ -122,7 +122,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 		entity.setDeparture(resultSet.getTimestamp("departure"));
 		entity.setArrival(resultSet.getTimestamp("arrival"));
-		entity.setPassengerRoutetype(PassengerRouteType.values()[resultSet.getInt("passenger_route_type")]);
+		entity.setPassengerRouteType(PassengerRouteType.values()[resultSet.getInt("passenger_route_type")]);
 		entity.setIsActual(resultSet.getBoolean("is_actual"));
 		entity.setFrequency(Frequency.values()[resultSet.getInt("frequency")]);
 		entity.setPlaces(resultSet.getInt("places"));

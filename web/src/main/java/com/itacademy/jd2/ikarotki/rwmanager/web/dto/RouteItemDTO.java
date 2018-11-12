@@ -10,11 +10,11 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
 public class RouteItemDTO {
-	@NotNull
+	
 	private Integer id;
-	@NotNull
+	
 	private Date created;
-	@NotNull
+	
 	private Date updated;
 	@NotNull
 	@Range(min=0)

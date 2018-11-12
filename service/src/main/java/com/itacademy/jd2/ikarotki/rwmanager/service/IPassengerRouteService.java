@@ -9,6 +9,9 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 
 public interface IPassengerRouteService {
 	IPassengerRoute get(Integer id);
+	
+	IPassengerRoute getFullInfo(Integer id);
+
 
 	List<IPassengerRoute> getAll();
 	@Transactional

@@ -85,12 +85,12 @@ public class PassengerRoute extends BaseEntity implements IPassengerRoute {
 		this.arrival = arrival;
 	}
 
-	public PassengerRouteType getPassengerRoutetype() {
+	public PassengerRouteType getPassengerRouteType() {
 		return passengerRouteType;
 	}
 
 
-	public void setPassengerRoutetype(PassengerRouteType passengerRouteType) {
+	public void setPassengerRouteType(PassengerRouteType passengerRouteType) {
 		this.passengerRouteType = passengerRouteType;
 
 	}

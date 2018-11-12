@@ -22,7 +22,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Station_;
 @Repository
 public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implements IStationDao {
 
-	protected StationDaoImpl() {
+	public StationDaoImpl() {
 		super(Station.class);
 
 	}
@@ -96,7 +96,7 @@ public class StationDaoImpl extends AbstractDaoImpl<IStation, Integer> implement
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 		final CriteriaQuery<Long> cq = cb.createQuery(Long.class); // define type of result
-		final Root<Station> from = cq.from(Station.class); // select from brand
+		final Root<Station> from = cq.from(Station.class); // select from station
 		cq.select(cb.count(from)); // select what? select count(*)
 		final TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult(); // execute query

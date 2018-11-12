@@ -11,11 +11,11 @@ import org.hibernate.validator.constraints.Range;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 
 public class UserAccountDTO {
-	@NotNull
+	
 	private Integer id;
-	@NotNull
+	
 	private Date created;
-	@NotNull
+	
 	private Date updated;
 	@Email
 	private String eMail;

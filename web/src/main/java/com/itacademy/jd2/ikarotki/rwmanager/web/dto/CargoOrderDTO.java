@@ -13,11 +13,11 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 
 public class CargoOrderDTO {
-	@NotNull
+	
 	private Integer id;
-	@NotNull
+	
 	private Date created;
-	@NotNull
+	
 	private Date updated;
 	@NotNull
 	@Range(min=0)

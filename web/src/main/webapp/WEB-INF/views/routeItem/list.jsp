@@ -25,7 +25,7 @@
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
 			<th></th>
 		</tr>
-		<c:forEach var="routeItem" items="${list}" varStatus="loopCounter">
+		<c:forEach var="routeItem" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${routeItem.id}" /></td>
 				<td><c:out value="${routeItem.stationFrom.id}" /></td>

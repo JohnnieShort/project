@@ -11,7 +11,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 
 public class WagonDTO {
-	@NotNull
+	
 	private Integer id;
 	@NotNull
 	@Range(min = 0)
@@ -25,9 +25,9 @@ public class WagonDTO {
 	@NotNull
 	@Digits(integer = 15, fraction = 2)
 	private Double capacity;
-	@NotNull
+	
 	private Date created;
-	@NotNull
+	
 	private Date updated;
 
 	public Date getCreated() {

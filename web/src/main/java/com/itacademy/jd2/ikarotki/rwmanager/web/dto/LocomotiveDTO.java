@@ -7,11 +7,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class LocomotiveDTO {
-	@NotNull
+	
 	private Integer id;
-	@NotNull
+	
 	private Date created;
-	@NotNull
+	
 	private Date updated;
 	@Size(min = 1, max = 50)
 	private String name;

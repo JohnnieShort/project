@@ -1,5 +1,7 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +20,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IStationDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.StationDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.impl.StationServiceImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.PassengerRouteDTO;
@@ -69,7 +77,13 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		final IPassengerRoute newEntity = passengerRouteService.createEntity();
 		PassengerRouteDTO dto = toDtoConverter.apply(newEntity);
 		hashMap.put("formModel", dto);
-
+		List<PassengerRouteType> passengerRouteTypes = new ArrayList<PassengerRouteType>();
+		passengerRouteTypes = Arrays.asList(PassengerRouteType.values());
+		hashMap.put("routeTypeList", passengerRouteTypes);
+		
+		IStationDao stationDao = new StationDaoImpl();
+		IStationService stationService = new StationServiceImpl(stationDao);
+		hashMap.put("stationsList", stationService.find(new StationFilter()));
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
 

@@ -175,7 +175,7 @@ public abstract class AbstractTest {
 		Date departure = new Date();
 		entity.setDeparture(departure);
 		entity.setArrival(departure);
-		entity.setPassengerRoutetype(PassengerRouteType.values()[getRANDOM().nextInt(2)]);
+		entity.setPassengerRouteType(PassengerRouteType.values()[getRANDOM().nextInt(2)]);
 		ITrain trainEntity = saveNewTrain();
 		entity.setTrain(trainEntity);
 		entity.setIsActual(true);

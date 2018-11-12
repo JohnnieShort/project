@@ -12,11 +12,11 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 
 public class PassengerRouteDTO {
-	@NotNull
+	
 	private Integer id;
-	@NotNull
+	
 	private Date created;
-	@NotNull
+	
 	private Date updated;
 	@NotNull
 	@Range(min=0)
@@ -29,7 +29,7 @@ public class PassengerRouteDTO {
 	@NotNull
 	private Date arrival;
 	@NotNull
-	private PassengerRouteType passengerRoutetype;
+	private PassengerRouteType passengerRouteType;
 	@NotNull
 	@Range(min=0)
 	private ITrain train;
@@ -115,12 +115,12 @@ public class PassengerRouteDTO {
 		this.arrival = arrival;
 	}
 
-	public PassengerRouteType getPassengerRoutetype() {
-		return passengerRoutetype;
+	public PassengerRouteType getPassengerRouteType() {
+		return passengerRouteType;
 	}
 
-	public void setPassengerRoutetype(PassengerRouteType passengerRoutetype) {
-		this.passengerRoutetype = passengerRoutetype;
+	public void setPassengerRoutetype(PassengerRouteType passengerRouteType) {
+		this.passengerRouteType = passengerRouteType;
 	}
 
 	public ITrain getTrain() {
@@ -143,7 +143,7 @@ public class PassengerRouteDTO {
 	public String toString() {
 		return "PassengerRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", stationFrom="
 				+ stationFrom + ", stationTo=" + stationTo + ", departure=" + departure + ", arrival=" + arrival
-				+ ", passengerRoutetype=" + passengerRoutetype + ", train=" + train + ", isActual=" + isActual
+				+ ", passengerRoutetype=" + passengerRouteType + ", train=" + train + ", isActual=" + isActual
 				+ ", frequency=" + frequency + ", places=" + places + "]";
 	}
 

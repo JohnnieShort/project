@@ -9,11 +9,11 @@ import org.hibernate.validator.constraints.Range;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 
 public class TrainDTO {
-	@NotNull
+	
 	private Integer id;
-	@NotNull
+	
 	private Date created;
-	@NotNull
+	
 	private Date updated;
 	@NotNull
 	@Range(min=0)

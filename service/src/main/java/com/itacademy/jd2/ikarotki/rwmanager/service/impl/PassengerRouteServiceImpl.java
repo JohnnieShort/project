@@ -84,4 +84,11 @@ public class PassengerRouteServiceImpl implements IPassengerRouteService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public IPassengerRoute getFullInfo(Integer id) {
+		final IPassengerRoute entity = dao.getFullInfo(id);
+		LOGGER.info("requested passenger route: {}", entity);
+		return entity;
+	}
+
 }

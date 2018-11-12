@@ -23,9 +23,9 @@ public interface IPassengerRoute extends IBaseEntity {
 
 	public void setArrival(Date arrival);
 
-	public PassengerRouteType getPassengerRoutetype();
+	public PassengerRouteType getPassengerRouteType();
 
-	public void setPassengerRoutetype(PassengerRouteType passengerRoutetype);
+	public void setPassengerRouteType(PassengerRouteType passengerRoutetype);
 
 	public ITrain getTrain();
 
