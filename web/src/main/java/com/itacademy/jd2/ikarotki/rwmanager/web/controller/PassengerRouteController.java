@@ -20,15 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IStationDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.StationDaoImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
-import com.itacademy.jd2.ikarotki.rwmanager.service.impl.StationServiceImpl;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.PassengerRouteDTO;
@@ -38,16 +35,18 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 @RequestMapping(value = "/passengerRoute")
 public class PassengerRouteController extends AbstractController<PassengerRouteDTO> {
 	private IPassengerRouteService passengerRouteService;
+	private IStationService stationService;
 	private PassengerRouteToDTOConverter toDtoConverter;
 	private PassengerRouteFromDTOConverter fromDtoConverter;
 
 	@Autowired
-	private PassengerRouteController(IPassengerRouteService pasengerRouteService,
+	private PassengerRouteController(IPassengerRouteService pasengerRouteService, IStationService stationService,
 			PassengerRouteToDTOConverter toDtoConverter, PassengerRouteFromDTOConverter fromDtoConverter) {
 		super();
 		this.passengerRouteService = pasengerRouteService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
+		this.stationService = stationService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -81,8 +80,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		passengerRouteTypes = Arrays.asList(PassengerRouteType.values());
 		hashMap.put("routeTypeList", passengerRouteTypes);
 		
-		IStationDao stationDao = new StationDaoImpl();
-		IStationService stationService = new StationServiceImpl(stationDao);
+		
 		hashMap.put("stationsList", stationService.find(new StationFilter()));
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}

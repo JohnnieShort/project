@@ -45,9 +45,9 @@ public class StationController extends AbstractController<StationDTO> {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "page", required = false) final Integer pageNumber,
-			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
+			@RequestParam(name = "sort", required = false) final String sortColumn) {
 
-		final GridStateDTO gridState = getListDTO(req);
+		final GridStateDTO  gridState = getListDTO(req);
 		gridState.setSort(sortColumn, "id");
 		gridState.setPage(pageNumber);
 
