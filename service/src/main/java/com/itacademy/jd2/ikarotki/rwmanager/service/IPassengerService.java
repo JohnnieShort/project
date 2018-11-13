@@ -23,4 +23,6 @@ public interface IPassengerService {
 	List<IPassenger> find(PassengerFilter filter);
 	
 	long getCount(PassengerFilter filter);
+
+	IPassenger getFullInfo(Integer id);
 }

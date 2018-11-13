@@ -84,4 +84,11 @@ public class CargoRouteServiceImpl implements ICargoRouteService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public ICargoRoute getFullInfo(Integer id) {
+		final ICargoRoute entity = dao.getFullInfo(id);
+		LOGGER.info("requested cargo route: {}", entity);
+		return entity;
+	}
+
 }

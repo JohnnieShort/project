@@ -86,4 +86,11 @@ public class LocomotiveServiceImpl implements ILocomotiveService {
 		
 	}
 
+	@Override
+	public ILocomotive getFullInfo(Integer id) {
+		final ILocomotive entity = dao.getFullInfo(id);
+		LOGGER.info("requested locomotive: {}", entity);
+		return entity;
+	}
+
 }

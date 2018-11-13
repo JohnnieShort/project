@@ -24,4 +24,6 @@ public interface IStationService {
 	List<IStation> find(StationFilter filter);
 	
 	long getCount(StationFilter filter);
+
+	IStation getFullInfo(Integer id);
 }

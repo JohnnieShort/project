@@ -24,4 +24,6 @@ public interface ITicketService {
 	List<ITicket> find(TicketFilter filter);
 	
 	long getCount(TicketFilter filter);
+
+	ITicket getFullInfo(Integer id);
 }

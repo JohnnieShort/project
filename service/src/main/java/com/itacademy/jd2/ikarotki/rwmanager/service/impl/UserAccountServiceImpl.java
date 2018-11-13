@@ -104,4 +104,11 @@ public class UserAccountServiceImpl implements IUserAccountService {
 
 		return dao.getByEMail(eMail);
 	}
+
+	@Override
+	public IUserAccount getFullInfo(Integer id) {
+		final IUserAccount entity = dao.getFullInfo(id);
+		LOGGER.info("requested user account: {}", entity);
+		return entity;
+	}
 }

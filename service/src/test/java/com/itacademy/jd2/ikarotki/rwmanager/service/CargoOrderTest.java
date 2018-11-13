@@ -11,6 +11,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.AbstractFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoOrderFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 
 public class CargoOrderTest extends AbstractTest {
 
@@ -103,6 +106,134 @@ public class CargoOrderTest extends AbstractTest {
 		assertEquals(randomObjectsCount + intialCount, allEntities.size());
 	}
 
+	@Test
+	public void testFind() {
+		CargoOrderFilter filter = new CargoOrderFilter();
+		filter.setFetchCargoRoute(true);
+		filter.setFetchCustomer(true);
+		filter.setFetchStationFrom(true);
+		filter.setFetchStationTo(true);
+		filter.setSortColumn("created");
+		filter.setSortOrder(true);
+		
+		final int intialCount = cargoOrderService.find(filter).size();
+
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewCargoOrder();
+		}
+
+		final List<ICargoOrder> allEntities = cargoOrderService.find(filter);
+
+		for (final ICargoOrder entityFromDb : allEntities) {
+			assertNotNull(entityFromDb);
+			assertNotNull(entityFromDb.getId());
+			assertNotNull(entityFromDb.getCreated());
+			assertNotNull(entityFromDb.getUpdated());
+			assertNotNull(entityFromDb.getCustomer());
+			assertNotNull(entityFromDb.getStationFrom());
+			assertNotNull(entityFromDb.getStationTo());
+			assertNotNull(entityFromDb.getWeight());
+			assertNotNull(entityFromDb.getCargoType());
+			assertNotNull(entityFromDb.getCargoRoute());
+			assertNotNull(entityFromDb.getDate());
+			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+			
+			assertNotNull(entityFromDb.getCargoRoute().getId());
+			assertNotNull(entityFromDb.getCargoRoute().getTrain());
+			assertNotNull(entityFromDb.getCargoRoute().getCreated());
+			assertNotNull(entityFromDb.getCargoRoute().getUpdated());
+			
+			assertNotNull(entityFromDb.getCustomer().getId());
+			assertNotNull(entityFromDb.getCustomer().getUserAccount());
+			assertNotNull(entityFromDb.getCustomer().getCreated());
+			assertNotNull(entityFromDb.getCustomer().getUpdated());
+			
+			assertNotNull(entityFromDb.getStationFrom());
+			assertNotNull(entityFromDb.getStationFrom().getId());
+			assertNotNull(entityFromDb.getStationFrom().getName());
+			assertNotNull(entityFromDb.getStationFrom().getLatitude());
+			assertNotNull(entityFromDb.getStationFrom().getLongitude());
+			assertNotNull(entityFromDb.getStationFrom().getCreated());
+			assertNotNull(entityFromDb.getStationFrom().getUpdated());
+			
+			assertNotNull(entityFromDb.getStationTo());
+			assertNotNull(entityFromDb.getStationTo().getId());
+			assertNotNull(entityFromDb.getStationTo().getName());
+			assertNotNull(entityFromDb.getStationTo().getLatitude());
+			assertNotNull(entityFromDb.getStationTo().getLongitude());
+			assertNotNull(entityFromDb.getStationTo().getCreated());
+			assertNotNull(entityFromDb.getStationTo().getUpdated());
+		}
+
+		assertEquals(randomObjectsCount + intialCount, allEntities.size());
+	}
+	
+	@Test
+	public void testGetCount() {
+		final long intialCount = cargoOrderService.getCount(new CargoOrderFilter());
+
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewCargoOrder();
+		}
+
+		
+
+		assertEquals(randomObjectsCount + intialCount, cargoOrderService.getCount(new CargoOrderFilter()));
+	}
+	
+	@Test
+	public void testgetFullInfo() {
+		final ICargoOrder entity = saveNewCargoOrder();
+
+		final ICargoOrder entityFromDb = cargoOrderService.getFullInfo(entity.getId());
+		assertNotNull(entity);
+		assertNotNull(entityFromDb);
+		assertNotNull(entityFromDb.getId());
+		assertNotNull(entityFromDb.getCreated());
+		assertNotNull(entityFromDb.getUpdated());
+		assertNotNull(entityFromDb.getCustomer());
+		
+		assertNotNull(entityFromDb.getWeight());
+		assertNotNull(entityFromDb.getCargoType());
+		assertNotNull(entityFromDb.getCargoRoute());
+		assertNotNull(entityFromDb.getPrice());
+		assertNotNull(entityFromDb.getDate());
+
+		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+		
+		assertTrue(entityFromDb.getCustomer().getId().equals(entity.getCustomer().getId()));
+		assertNotNull(entityFromDb.getCustomer().getUserAccount());
+		assertNotNull(entityFromDb.getCustomer().getCreated());
+		assertNotNull(entityFromDb.getCustomer().getUpdated());
+		
+		assertNotNull(entityFromDb.getStationFrom());
+		assertNotNull(entityFromDb.getStationFrom().getId());
+		assertNotNull(entityFromDb.getStationFrom().getName());
+		assertNotNull(entityFromDb.getStationFrom().getLatitude());
+		assertNotNull(entityFromDb.getStationFrom().getLongitude());
+		assertNotNull(entityFromDb.getStationFrom().getCreated());
+		assertNotNull(entityFromDb.getStationFrom().getUpdated());
+		
+		assertNotNull(entityFromDb.getStationTo());
+		assertNotNull(entityFromDb.getStationTo().getId());
+		assertNotNull(entityFromDb.getStationTo().getName());
+		assertNotNull(entityFromDb.getStationTo().getLatitude());
+		assertNotNull(entityFromDb.getStationTo().getLongitude());
+		assertNotNull(entityFromDb.getStationTo().getCreated());
+		assertNotNull(entityFromDb.getStationTo().getUpdated());
+		
+		
+		assertTrue(entityFromDb.getCargoRoute().getId().equals(entity.getCargoRoute().getId()));
+		assertNotNull(entityFromDb.getCargoRoute().getTrain());
+		assertNotNull(entityFromDb.getCargoRoute().getCreated());
+		assertNotNull(entityFromDb.getCargoRoute().getUpdated());
+		
+		
+		
+	}
+	
 	@Test
 	public void testDelete() {
 		final ICargoOrder entity = saveNewCargoOrder();

@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.LocomotiveFilter;
 
 public class LocomotiveServiceTest extends AbstractTest {
 
@@ -19,6 +20,22 @@ public class LocomotiveServiceTest extends AbstractTest {
 		final ILocomotive entity = saveNewLocomotive();
 
 		final ILocomotive entityFromDb = locomotiveService.get(entity.getId());
+		assertNotNull(entity);
+		assertNotNull(entityFromDb);
+		assertNotNull(entityFromDb.getId());
+		assertNotNull(entityFromDb.getCreated());
+		assertNotNull(entityFromDb.getUpdated());
+		assertNotNull(entityFromDb.getName());
+
+		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+
+	}
+	
+	@Test
+	public void testGetFullInfo() {
+		final ILocomotive entity = saveNewLocomotive();
+
+		final ILocomotive entityFromDb = locomotiveService.getFullInfo(entity.getId());
 		assertNotNull(entity);
 		assertNotNull(entityFromDb);
 		assertNotNull(entityFromDb.getId());
@@ -73,6 +90,49 @@ public class LocomotiveServiceTest extends AbstractTest {
 		}
 
 		assertEquals(randomObjectsCount + intialCount, allEntities.size());
+	}
+	
+	@Test
+	public void testFind() {
+		LocomotiveFilter filter = new LocomotiveFilter();
+		filter.setSortColumn("created");
+		filter.setSortOrder(true);
+		
+		final int intialCount = locomotiveService.find(filter).size();
+
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewLocomotive();
+		}
+
+		final List<ILocomotive> allEntities = locomotiveService.find(filter);
+
+		for (final ILocomotive entityFromDb : allEntities) {
+			assertNotNull(entityFromDb);
+			assertNotNull(entityFromDb.getId());
+			assertNotNull(entityFromDb.getCreated());
+			assertNotNull(entityFromDb.getUpdated());
+			assertNotNull(entityFromDb.getName());
+			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+
+		}
+
+		assertEquals(randomObjectsCount + intialCount, allEntities.size());
+	}
+	
+	@Test
+	public void testGetCount() {
+		
+		final int intialCount = locomotiveService.find(new LocomotiveFilter()).size();
+
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewLocomotive();
+		}
+
+		
+
+		assertEquals(randomObjectsCount + intialCount, locomotiveService.find(new LocomotiveFilter()).size());
 	}
 
 	@Test

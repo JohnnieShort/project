@@ -84,4 +84,11 @@ public class CargoOrderServiceImpl implements ICargoOrderService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public ICargoOrder getFullInfo(Integer id) {
+		final ICargoOrder entity = dao.getFullInfo(id);
+		LOGGER.info("requested cargo order: {}", entity);
+		return entity;
+	}
+
 }

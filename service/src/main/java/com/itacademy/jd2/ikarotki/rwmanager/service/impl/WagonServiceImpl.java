@@ -84,4 +84,11 @@ public class WagonServiceImpl implements IWagonService {
 	public long getCount(WagonFilter filter) {
 		return dao.getCount(filter);
 	}
+
+	@Override
+	public IWagon getFullInfo(Integer id) {
+		final IWagon entity = dao.getFullInfo(id);
+		LOGGER.info("requested wagon: {}", entity);
+		return entity;
+	}
 }

@@ -84,4 +84,11 @@ public class StationServiceImpl implements IStationService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public IStation getFullInfo(Integer id) {
+		final IStation entity = dao.getFullInfo(id);
+		LOGGER.info("requested station: {}", entity);
+		return entity;
+	}
+
 }

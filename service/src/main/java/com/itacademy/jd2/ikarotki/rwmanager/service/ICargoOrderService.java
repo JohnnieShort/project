@@ -23,4 +23,6 @@ public interface ICargoOrderService {
 	List<ICargoOrder> find(CargoOrderFilter filter);
 
 	long getCount(CargoOrderFilter filter);
+
+	ICargoOrder getFullInfo(Integer id);
 }

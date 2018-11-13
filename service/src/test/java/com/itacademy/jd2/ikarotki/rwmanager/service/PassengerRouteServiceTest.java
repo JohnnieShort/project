@@ -62,6 +62,8 @@ public class PassengerRouteServiceTest extends AbstractTest {
 
 		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
 		assertTrue(entityFromDb.getTrain().getId().equals(entity.getTrain().getId()));
+		assertTrue(entityFromDb.getStationFrom().getName().equals(entity.getStationFrom().getName()));
+		assertTrue(entityFromDb.getStationTo().getName().equals(entity.getStationTo().getName()));
 		
 		assertNotNull(entityFromDb.getStationFrom());
 		assertNotNull(entityFromDb.getStationFrom().getId());

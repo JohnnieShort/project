@@ -83,4 +83,11 @@ public class RouteItemServiceImpl implements IRouteItemService {
 	public long getCount(RouteItemFilter filter) {
 		return dao.getCount(filter);
 	}
+
+	@Override
+	public IRouteItem getFullInfo(Integer id) {
+		final IRouteItem entity = dao.getFullInfo(id);
+		LOGGER.info("requested route item: {}", entity);
+		return entity;
+	}
 }

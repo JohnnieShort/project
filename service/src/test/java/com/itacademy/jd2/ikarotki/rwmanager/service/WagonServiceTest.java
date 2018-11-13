@@ -11,6 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.WagonFilter;
 
 public class WagonServiceTest extends AbstractTest {
 
@@ -29,6 +30,29 @@ public class WagonServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getFreightPrice());
 		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
 		assertTrue(entityFromDb.getTrain().getId().equals(entity.getTrain().getId()));
+
+	}
+
+	@Test
+	public void testGetFullInfo() {
+		final IWagon entity = saveNewWagon();
+
+		final IWagon entityFromDb = wagonService.getFullInfo(entity.getId());
+		assertNotNull(entity);
+		assertNotNull(entityFromDb);
+		assertNotNull(entityFromDb.getId());
+		assertNotNull(entityFromDb.getCreated());
+		assertNotNull(entityFromDb.getUpdated());
+		assertNotNull(entityFromDb.getTrain());
+		assertNotNull(entityFromDb.getCapacity());
+		assertNotNull(entityFromDb.getFreightPrice());
+		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+		assertTrue(entityFromDb.getTrain().getId().equals(entity.getTrain().getId()));
+		
+		assertNotNull(entityFromDb.getTrain().getCreated());
+		assertNotNull(entityFromDb.getTrain().getUpdated());
+		assertNotNull(entityFromDb.getTrain().getLocomotive());
+		assertNotNull(entityFromDb.getTrain().getId());
 
 	}
 
@@ -73,6 +97,55 @@ public class WagonServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getCapacity());
 			assertNotNull(entityFromDb.getFreightPrice());
 			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+
+		}
+
+		assertEquals(randomObjectsCount + intialCount, allEntities.size());
+	}
+
+	@Test
+	public void testGetCount() {
+		final long intialCount = wagonService.getCount(new WagonFilter());
+
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewWagon();
+		}
+
+		assertEquals(randomObjectsCount + intialCount, wagonService.getCount(new WagonFilter()));
+	}
+
+	@Test
+	public void testFind() {
+		WagonFilter filter = new WagonFilter();
+		filter.setFetchTrain(true);
+		filter.setSortColumn("created");
+		filter.setSortOrder(true);
+
+		final int intialCount = wagonService.find(filter).size();
+
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewWagon();
+		}
+
+		final List<IWagon> allEntities = wagonService.find(filter);
+
+		for (final IWagon entityFromDb : allEntities) {
+			assertNotNull(entityFromDb);
+			assertNotNull(entityFromDb.getId());
+			assertNotNull(entityFromDb.getCreated());
+			assertNotNull(entityFromDb.getUpdated());
+
+			assertNotNull(entityFromDb.getCapacity());
+			assertNotNull(entityFromDb.getFreightPrice());
+			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+
+			assertNotNull(entityFromDb.getTrain());
+			assertNotNull(entityFromDb.getTrain().getId());
+			assertNotNull(entityFromDb.getTrain().getCreated());
+			assertNotNull(entityFromDb.getTrain().getUpdated());
+			assertNotNull(entityFromDb.getTrain().getLocomotive());
 
 		}
 

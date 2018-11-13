@@ -23,4 +23,6 @@ public interface ITrainService {
 	List<ITrain> find(TrainFilter filter);
 	
 	long getCount(TrainFilter filter);
+
+	ITrain getFullInfo(Integer id);
 }

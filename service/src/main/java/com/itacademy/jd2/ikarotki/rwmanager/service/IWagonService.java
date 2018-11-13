@@ -23,4 +23,6 @@ public interface IWagonService {
 	List<IWagon> find(WagonFilter filter);
 	
 	long getCount(WagonFilter filter);
+
+	IWagon getFullInfo(Integer id);
 }

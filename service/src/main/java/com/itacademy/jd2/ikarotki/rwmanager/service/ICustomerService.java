@@ -23,4 +23,6 @@ public interface ICustomerService {
 	List<ICustomer> find(CustomerFilter filter);
 	long getCount(CustomerFilter filter);
 
+	ICustomer getFullInfo(Integer id);
+
 }

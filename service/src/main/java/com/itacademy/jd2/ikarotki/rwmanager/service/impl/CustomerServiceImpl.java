@@ -85,4 +85,11 @@ public class CustomerServiceImpl implements ICustomerService {
 		return dao.getCount(filter);
 	}
 
+	@Override
+	public ICustomer getFullInfo(Integer id) {
+		final ICustomer entity = dao.getFullInfo(id);
+		LOGGER.info("requested customer: {}", entity);
+		return entity;
+	}
+
 }

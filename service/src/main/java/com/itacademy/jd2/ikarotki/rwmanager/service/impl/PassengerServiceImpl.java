@@ -83,4 +83,11 @@ public class PassengerServiceImpl implements IPassengerService {
 	public long getCount(PassengerFilter filter) {
 		return dao.getCount(filter);
 	}
+
+	@Override
+	public IPassenger getFullInfo(Integer id) {
+		final IPassenger entity = dao.getFullInfo(id);
+		LOGGER.info("requested passenger: {}", entity);
+		return entity;
+	}
 }

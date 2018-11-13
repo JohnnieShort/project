@@ -67,7 +67,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 		final CriteriaQuery<ICargoOrder> cq = cb.createQuery(ICargoOrder.class); // define type of result
-		final Root<CargoOrder> from = cq.from(CargoOrder.class);// select from brand
+		final Root<CargoOrder> from = cq.from(CargoOrder.class);// select from cargo_order
 		cq.select(from); // select what? select *
 
 		if (filter.isFetchCargoRoute()) {

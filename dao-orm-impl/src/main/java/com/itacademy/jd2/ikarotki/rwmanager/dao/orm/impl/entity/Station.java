@@ -3,11 +3,18 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
+
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 
 @Entity
+@Indexed
 public class Station extends BaseEntity implements IStation {
 	@Column
+	@Field(index = Index.YES, store = Store.NO)
 	private String name;
 	@Column
 	private Double longitude;

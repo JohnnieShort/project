@@ -27,4 +27,6 @@ public interface IUserAccountService {
 	long getCount(UserAccountFilter filter);
 
 	IUserAccount getByEmail(String eMail);
+
+	IUserAccount getFullInfo(Integer id);
 }

@@ -23,4 +23,6 @@ public interface ILocomotiveService {
 	List<ILocomotive> find(LocomotiveFilter filter);
 
 	long getCount(LocomotiveFilter filter);
+
+	ILocomotive getFullInfo(Integer id);
 }

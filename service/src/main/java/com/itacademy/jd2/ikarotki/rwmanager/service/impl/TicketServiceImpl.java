@@ -85,4 +85,11 @@ public class TicketServiceImpl implements ITicketService {
 	public long getCount(TicketFilter filter) {
 		return dao.getCount(filter);
 	}
+
+	@Override
+	public ITicket getFullInfo(Integer id) {
+		final ITicket entity = dao.getFullInfo(id);
+		LOGGER.info("requested ticket: {}", entity);
+		return entity;
+	}
 }

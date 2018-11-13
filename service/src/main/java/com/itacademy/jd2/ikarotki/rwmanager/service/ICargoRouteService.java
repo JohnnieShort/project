@@ -23,4 +23,6 @@ public interface ICargoRouteService {
 	List<ICargoRoute> find(CargoRouteFilter filter);
 
 	long getCount(CargoRouteFilter filter);
+
+	ICargoRoute getFullInfo(Integer id);
 }

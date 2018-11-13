@@ -83,4 +83,11 @@ public class TrainServiceImpl implements ITrainService {
 	public long getCount(TrainFilter filter) {
 		return dao.getCount(filter);
 	}
+
+	@Override
+	public ITrain getFullInfo(Integer id) {
+		final ITrain entity = dao.getFullInfo(id);
+		LOGGER.info("requested train: {}", entity);
+		return entity;
+	}
 }

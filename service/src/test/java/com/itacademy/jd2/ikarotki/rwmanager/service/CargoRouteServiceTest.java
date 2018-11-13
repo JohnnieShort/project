@@ -12,6 +12,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoRouteFilter;
 
 public class CargoRouteServiceTest extends AbstractTest {
 
@@ -33,6 +34,27 @@ public class CargoRouteServiceTest extends AbstractTest {
 		assertTrue(entityFromDb.getTrain().getId().equals(entity.getTrain().getId()));
 	}
 
+	@Test
+	public void testgetFullInfo() {
+		final ICargoRoute entity = saveNewCargoRoute();
+
+		final ICargoRoute entityFromDb = cargoRouteService.getFullInfo(entity.getId());
+		assertNotNull(entity);
+		assertNotNull(entityFromDb);
+		assertNotNull(entityFromDb.getId());
+		assertNotNull(entityFromDb.getCreated());
+		assertNotNull(entityFromDb.getUpdated());
+		assertNotNull(entityFromDb.getTrain());
+
+		
+		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+
+		assertTrue(entityFromDb.getTrain().getId().equals(entity.getTrain().getId()));
+		assertNotNull(entityFromDb.getTrain().getLocomotive());
+		assertNotNull(entityFromDb.getTrain().getCreated());
+		assertNotNull(entityFromDb.getTrain().getUpdated());
+	}
+	
 	@Test
 	public void testUpdate() throws InterruptedException {
 		final ICargoRoute entity = saveNewCargoRoute();
@@ -79,6 +101,57 @@ public class CargoRouteServiceTest extends AbstractTest {
 		}
 
 		assertEquals(randomObjectsCount + intialCount, allEntities.size());
+	}
+	
+
+	@Test
+	public void testfind() {
+		CargoRouteFilter filter = new CargoRouteFilter();
+		filter.setFetchTrain(true);
+		filter.setSortColumn("created");
+		filter.setSortOrder(true);
+		
+		final int intialCount = cargoRouteService.find(filter).size();
+
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewCargoRoute();
+		}
+
+		final List<ICargoRoute> allEntities = cargoRouteService.find(filter);
+
+		for (final ICargoRoute entityFromDb : allEntities) {
+			assertNotNull(entityFromDb);
+			assertNotNull(entityFromDb.getId());
+			assertNotNull(entityFromDb.getCreated());
+			assertNotNull(entityFromDb.getUpdated());
+			assertNotNull(entityFromDb.getTrain());
+
+			assertNotNull(entityFromDb.getTrain().getId());
+			assertNotNull(entityFromDb.getTrain().getLocomotive());
+			assertNotNull(entityFromDb.getTrain().getCreated());
+			assertNotNull(entityFromDb.getTrain().getUpdated());
+			
+			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
+
+		}
+
+		assertEquals(randomObjectsCount + intialCount, allEntities.size());
+	}
+	
+	@Test
+	public void testGetCount() {
+		
+		
+		final long intialCount = cargoRouteService.getCount(new CargoRouteFilter());
+
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewCargoRoute();
+		}
+
+		
+		assertEquals(randomObjectsCount + intialCount, cargoRouteService.getCount(new CargoRouteFilter()));
 	}
 
 	@Test
