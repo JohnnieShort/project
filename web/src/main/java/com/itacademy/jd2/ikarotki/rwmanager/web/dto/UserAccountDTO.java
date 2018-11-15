@@ -19,7 +19,7 @@ public class UserAccountDTO {
 	
 	private Date updated;
 	@Email
-	private String eMail;
+	private String mail;
 	@NotNull
 	@Size(min = 1, max = 50)
 	private String password;
@@ -33,12 +33,12 @@ public class UserAccountDTO {
 	@Size(min = 1, max = 50)
 	private String lastName;
 
-	public String getEMail() {
-		return eMail;
+	public String getMail() {
+		return mail;
 	}
 
-	public void setEMail(String eMail) {
-		this.eMail = eMail;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	public String getPassword() {
@@ -99,7 +99,7 @@ public class UserAccountDTO {
 
 	@Override
 	public String toString() {
-		return "UserAccountDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", eMail=" + eMail
+		return "UserAccountDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", eMail=" + mail
 				+ ", password=" + password + ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName
 				+ "]";
 	}

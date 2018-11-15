@@ -22,7 +22,7 @@
 		<c:forEach var="userAccount" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${userAccount.id}" /></td>
-				<td><c:out value="${userAccount.eMail}" /></td>
+				<td><c:out value="${userAccount.mail}" /></td>
 				<td><c:out value="${userAccount.password}" /></td>
 				<td><c:out value="${userAccount.role}" /></td>
 				<td><c:out value="${userAccount.firstName}" /></td>

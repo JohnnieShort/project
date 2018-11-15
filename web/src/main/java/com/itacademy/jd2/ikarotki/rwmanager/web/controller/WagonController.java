@@ -49,7 +49,7 @@ public class WagonController extends AbstractController<WagonDTO> {
 
 		final GridStateDTO gridState = getListDTO(req);
 		gridState.setPage(pageNumber);
-		gridState.setSort(sortColumn, "list");
+		gridState.setSort(sortColumn, "id");
 
 		final WagonFilter filter = new WagonFilter();
 		prepareFilter(gridState, filter);

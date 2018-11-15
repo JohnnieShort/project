@@ -107,13 +107,13 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 			return from.get(CargoOrder_.updated);
 		case "id":
 			return from.get(CargoOrder_.id);
-		case "cargoRoute":
+		case "cargo_route":
 			return from.get(CargoOrder_.cargoRoute).get(CargoRoute_.id);
-		case "customer":
+		case "customer_id":
 			return from.get(CargoOrder_.customer).get(Customer_.id);
-		case "stationFrom":
+		case "station_from":
 			return from.get(CargoOrder_.stationFrom).get(Station_.id);
-		case "stationTo":
+		case "station_to":
 			return from.get(CargoOrder_.stationTo).get(Station_.id);
 		case "date":
 			return from.get(CargoOrder_.date);
@@ -136,7 +136,7 @@ public class CargoOrderDaoImpl extends AbstractDaoImpl<ICargoOrder, Integer> imp
 //			return CargoOrder_.id;
 //		case "cargoRoute":
 //			return CargoOrder_.cargoRoute;
-//		case "customer":
+//		case "customer_id":
 //			return CargoOrder_.customer;
 //		case "cargoType":
 //			return CargoOrder_.cargoType;

@@ -21,7 +21,7 @@ public class UserAccountFromDTOConverter implements Function<UserAccountDTO, IUs
 		entity.setCreated(dto.getCreated());
 		entity.setUpdated(dto.getUpdated());
 
-		entity.setEMail(dto.getEMail());
+		entity.setEMail(dto.getMail());
 		entity.setPassword(dto.getPassword());
 		entity.setRole(dto.getRole());
 		entity.setFirstName(dto.getFirstName());
