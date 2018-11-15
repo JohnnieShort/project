@@ -163,7 +163,10 @@
 			value="/WEB-INF/views/wagon/form.jsp" />
 	</definition>
 
-	
+	<definition name="stations.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/passengerRoute/formStList.jsp" />
+	</definition>
 
 
 </tiles-definitions>

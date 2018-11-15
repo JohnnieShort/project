@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
@@ -28,7 +29,9 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteToDTOConverter;
+import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.PassengerRouteDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.StationDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
@@ -37,22 +40,25 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 	private IPassengerRouteService passengerRouteService;
 	private IStationService stationService;
 	private PassengerRouteToDTOConverter toDtoConverter;
+	private StationToDTOConverter stationToDtoConverter;
 	private PassengerRouteFromDTOConverter fromDtoConverter;
 
 	@Autowired
 	private PassengerRouteController(IPassengerRouteService pasengerRouteService, IStationService stationService,
-			PassengerRouteToDTOConverter toDtoConverter, PassengerRouteFromDTOConverter fromDtoConverter) {
+			PassengerRouteToDTOConverter toDtoConverter, PassengerRouteFromDTOConverter fromDtoConverter,
+			StationToDTOConverter stationToDtoConverter) {
 		super();
 		this.passengerRouteService = pasengerRouteService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 		this.stationService = stationService;
+		this.stationToDtoConverter = stationToDtoConverter;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView index(final HttpServletRequest req,
 			@RequestParam(name = "page", required = false) final Integer pageNumber,
-			@RequestParam(name = "sort", required = false, defaultValue = "id") final String sortColumn) {
+			@RequestParam(name = "sort", required = false) final String sortColumn) {
 
 		final GridStateDTO gridState = getListDTO(req);
 		gridState.setPage(pageNumber);
@@ -80,10 +86,21 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		passengerRouteTypes = Arrays.asList(PassengerRouteType.values());
 		hashMap.put("routeTypeList", passengerRouteTypes);
 		
-		
-		hashMap.put("stationsList", stationService.find(new StationFilter()));
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
+	
+	@RequestMapping(value = "/addSt", method = RequestMethod.GET)
+	public ModelAndView showStForm() {
+		final Map<String, Object> hashMap = new HashMap<>();
+		final IPassengerRoute newEntity = passengerRouteService.createEntity();
+		PassengerRouteDTO dto = toDtoConverter.apply(newEntity);
+		hashMap.put("formModel", dto);
+		List<IStation> stationsList = stationService.find(new StationFilter());
+		List<StationDTO> stDtos = stationsList.stream().map(stationToDtoConverter).collect(Collectors.toList());
+		hashMap.put("stationsList", stDtos);
+		return new ModelAndView("stations.edit", hashMap);
+	}
+
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String save(@Valid @ModelAttribute("formModel") final PassengerRouteDTO formModel,

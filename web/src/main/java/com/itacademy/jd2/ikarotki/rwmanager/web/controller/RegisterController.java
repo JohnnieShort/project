@@ -52,7 +52,7 @@ public class RegisterController {
 		} else {
 			final IUserAccount entity = fromDtoConverter.apply(formModel);
 			userAccountService.save(entity);
-			return "redirect:/userAccount";
+			return "redirect:/login";
 		}
 	}
 }

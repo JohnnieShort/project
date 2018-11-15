@@ -35,3 +35,7 @@
 - ask why no breaks in switch;+
 - ask about getFullInfo() @Overrided;+
 - ask about Entity/IEntity;+
+---------------------------14.11---------------------------
+- ask about dispather servlet;
+- ask about formModel;
+- assword field;

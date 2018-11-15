@@ -2,6 +2,8 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
@@ -29,6 +31,7 @@ public class PassengerRouteDTO {
 	@NotNull
 	private Date arrival;
 	@NotNull
+	@Enumerated(EnumType.ORDINAL)
 	private PassengerRouteType passengerRouteType;
 	@NotNull
 	@Range(min=0)
@@ -37,7 +40,7 @@ public class PassengerRouteDTO {
 	@Range(min=0)
 	private Boolean isActual;
 	@NotNull
-	@Range(min=0)
+	@Enumerated(EnumType.ORDINAL)
 	private Frequency frequency;
 	@NotNull
 	@Range(min=0)

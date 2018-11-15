@@ -5,27 +5,29 @@
 
 <h4 class="header">Edit passenger route</h4>
 <div class="row">
+
+
+   
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
-    <div id="map" style="width: 600px; height: 400px"></div>
     
-            <form:input path="id" type="hidden" />
+    
+        <form:input path="id" type="hidden" />
         
         <div class="row">
             <div class="input-field col s12">
-            	<form:select path="stationFrom">
-            		<form:option value="0" label="Select station of departure" />
-            			<c:forEach var="station" items="${stationsList}">
-    						<option value="${station}">"${station.name}"</option>
-						</c:forEach>
-            	</form:select>
+            	<div class="input-field col s12">
+                <form:input path="stationFrom" type="text" disabled="true" />
+                <form:errors path="stationFrom" cssClass="red-text" />
+                <label for="stationTo">Station from</label>
             </div>
         </div>
         
+        
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="stationTo" type="text" disabled="${readonly}" />
+                <form:input path="stationTo" type="text" disabled="true" />
                 <form:errors path="stationTo" cssClass="red-text" />
-                <label for="stationTo">Station to id</label>
+                <label for="stationTo">Station to</label>
             </div>
         </div>
         

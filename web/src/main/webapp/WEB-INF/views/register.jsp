@@ -45,7 +45,10 @@
                     <button class="btn waves-effect waves-light right" type="submit">сохранить</button>
                 </c:if>
             </div>
-            
+            <div class="col s3">
+                <a class="btn waves-effect waves-light right" href="${baseUrl}">к списку<i class="material-icons right"></i>
+                </a>
+            </div>
         </div>
     </form:form>
 </div>
