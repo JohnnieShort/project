@@ -40,16 +40,15 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 						getTableName()))) {
 			c.setAutoCommit(false);
 			try {
-				pStmt.setInt(1, entity.getStationFrom().getId());
-				pStmt.setInt(2, entity.getStationTo().getId());
-				pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setObject(4, entity.getDeparture(), Types.TIMESTAMP);
-				pStmt.setObject(5, entity.getArrival(), Types.TIMESTAMP);
+				//pStmt.setInt(2, entity.getStationTo().getId());
+				//pStmt.setObject(3, entity.getUpdated(), Types.TIMESTAMP);
+				//pStmt.setObject(4, entity.getDeparture(), Types.TIMESTAMP);
+				//pStmt.setObject(5, entity.getArrival(), Types.TIMESTAMP);
 				pStmt.setInt(6, entity.getPassengerRouteType().ordinal());
 				pStmt.setInt(7, entity.getTrain().getId());
 				pStmt.setBoolean(8, entity.getIsActual());
 				pStmt.setInt(9, entity.getFrequency().ordinal());
-				pStmt.setInt(10, entity.getPlaces());
+				//pStmt.setInt(10, entity.getPlaces());
 
 				pStmt.setInt(11, entity.getId());
 
@@ -74,17 +73,17 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 						getTableName()), Statement.RETURN_GENERATED_KEYS)) {
 			c.setAutoCommit(false);
 			try {
-				pStmt.setInt(1, entity.getStationFrom().getId());
-				pStmt.setInt(2, entity.getStationTo().getId());
+				//pStmt.setInt(1, entity.getStationFrom().getId());
+				//pStmt.setInt(2, entity.getStationTo().getId());
 				pStmt.setObject(3, entity.getCreated(), Types.TIMESTAMP);
 				pStmt.setObject(4, entity.getUpdated(), Types.TIMESTAMP);
-				pStmt.setObject(5, entity.getDeparture(), Types.TIMESTAMP);
-				pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
+				//pStmt.setObject(5, entity.getDeparture(), Types.TIMESTAMP);
+				//pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
 				pStmt.setInt(7, entity.getPassengerRouteType().ordinal());
 				pStmt.setInt(8, entity.getTrain().getId());
 				pStmt.setBoolean(9, entity.getIsActual());
 				pStmt.setInt(10, entity.getFrequency().ordinal());
-				pStmt.setInt(11, entity.getPlaces());
+				//pStmt.setInt(11, entity.getPlaces());
 
 				pStmt.executeUpdate();
 
@@ -120,12 +119,12 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
-		entity.setDeparture(resultSet.getTimestamp("departure"));
-		entity.setArrival(resultSet.getTimestamp("arrival"));
+		//entity.setDeparture(resultSet.getTimestamp("departure"));
+		//entity.setArrival(resultSet.getTimestamp("arrival"));
 		entity.setPassengerRouteType(PassengerRouteType.values()[resultSet.getInt("passenger_route_type")]);
 		entity.setIsActual(resultSet.getBoolean("is_actual"));
 		entity.setFrequency(Frequency.values()[resultSet.getInt("frequency")]);
-		entity.setPlaces(resultSet.getInt("places"));
+		//entity.setPlaces(resultSet.getInt("places"));
 
 		final Integer trainId = (Integer) resultSet.getObject("train_id");
 		if (trainId != null) {
@@ -151,7 +150,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			if (columns.contains("from_latitude")) {
 				from.setLatitude(resultSet.getDouble("from_latitude"));
 			}
-			entity.setStationFrom(from);
+			//entity.setStationFrom(from);
 		}
 		final Integer toId = (Integer) resultSet.getObject("station_to");
 		if (toId != null) {
@@ -166,7 +165,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 			if (columns.contains("to_latitude")) {
 				to.setLatitude(resultSet.getDouble("to_latitude"));
 			}
-			entity.setStationTo(to);
+			//entity.setStationTo(to);
 		}
 		return entity;
 	}

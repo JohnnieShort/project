@@ -32,12 +32,7 @@ public class RouteItemDTO {
 	@NotNull
 	@Range(min=0)
 	private Integer ordinalNum;
-	@NotNull
 	
-	private Boolean isFirst;
-	@NotNull
-	
-	private Boolean isLast;
 
 	public Integer getId() {
 		return id;
@@ -63,21 +58,7 @@ public class RouteItemDTO {
 		this.updated = updated;
 	}
 
-	public Boolean getIsFirst() {
-		return isFirst;
-	}
-
-	public void setIsFirst(Boolean isFirst) {
-		this.isFirst = isFirst;
-	}
-
-	public Boolean getIsLast() {
-		return isLast;
-	}
-
-	public void setIsLast(Boolean isLast) {
-		this.isLast = isLast;
-	}
+	
 
 	public IPassengerRoute getPassengerRoute() {
 		return passengerRoute;
@@ -131,8 +112,9 @@ public class RouteItemDTO {
 	public String toString() {
 		return "RouteItemDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", passengerRoute="
 				+ passengerRoute + ", stationFrom=" + stationFrom + ", stationTo=" + stationTo + ", departure="
-				+ departure + ", arrival=" + arrival + ", ordinalNum=" + ordinalNum + ", isFirst=" + isFirst
-				+ ", isLast=" + isLast + "]";
+				+ departure + ", arrival=" + arrival + ", ordinalNum=" + ordinalNum + "]";
 	}
+
+	
 
 }

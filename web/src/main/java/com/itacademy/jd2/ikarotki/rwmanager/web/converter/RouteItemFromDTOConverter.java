@@ -28,8 +28,7 @@ public class RouteItemFromDTOConverter implements Function<RouteItemDTO, IRouteI
 		entity.setStationTo(dto.getStationTo());
 
 		entity.setOrdinalNum(dto.getOrdinalNum());
-		entity.setIsFirst(dto.getIsFirst());
-		entity.setIsLast(dto.getIsLast());
+		
 
 		return entity;
 	}

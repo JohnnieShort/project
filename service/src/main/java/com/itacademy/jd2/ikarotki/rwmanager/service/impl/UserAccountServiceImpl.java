@@ -14,6 +14,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.UserAccountFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.impl.utils.Password;
+import com.itacademy.jd2.ikarotki.rwmanager.service.impl.utils.SendMailTLS;
 
 @Service
 public class UserAccountServiceImpl implements IUserAccountService {
@@ -48,9 +49,11 @@ public class UserAccountServiceImpl implements IUserAccountService {
 			LOGGER.info("new user account created: {}", entity);
 			entity.setCreated(modifedOn);
 			dao.insert(entity);
+			SendMailTLS.sendMail(entity.getEMail(), "Registration", "Congratulations, you are registered!!!");
 		} else {
 			LOGGER.info("user account updated: {}", entity);
 			dao.update(entity);
+
 		}
 	}
 

@@ -89,7 +89,7 @@ public class CargoRouteDaoImpl extends AbstractDaoImpl<ICargoRoute, Integer> imp
 			return from.get(CargoRoute_.updated);
 		case "id":
 			return from.get(CargoRoute_.id);
-		case "cargoRoute":
+		case "train_id":
 			return from.get(CargoRoute_.train).get(Train_.id);
 
 		default:

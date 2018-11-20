@@ -43,9 +43,9 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				pStmt.setObject(5, entity.getArrival(), Types.TIMESTAMP);
 				pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
 				pStmt.setInt(7, entity.getOrdinalNum());
-				pStmt.setBoolean(8, entity.getIsFirst());
+				//pStmt.setBoolean(8, entity.getIsFirst());
 
-				pStmt.setBoolean(9, entity.getIsLast());
+				//pStmt.setBoolean(9, entity.getIsLast());
 
 				pStmt.setInt(10, entity.getId());
 				pStmt.executeUpdate();
@@ -77,9 +77,9 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 				pStmt.setObject(6, entity.getArrival(), Types.TIMESTAMP);
 				pStmt.setObject(7, entity.getDeparture(), Types.TIMESTAMP);
 				pStmt.setInt(8, entity.getOrdinalNum());
-				pStmt.setBoolean(9, entity.getIsFirst());
+				//pStmt.setBoolean(9, entity.getIsFirst());
 
-				pStmt.setBoolean(10, entity.getIsLast());
+				//pStmt.setBoolean(10, entity.getIsLast());
 
 				pStmt.executeUpdate();
 
@@ -116,8 +116,8 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		entity.setCreated(resultSet.getTimestamp("created"));
 		entity.setUpdated(resultSet.getTimestamp("updated"));
 		entity.setOrdinalNum(resultSet.getInt("ordinal_num"));
-		entity.setIsFirst(resultSet.getBoolean("is_first"));
-		entity.setIsLast(resultSet.getBoolean("is_last"));
+		//entity.setIsFirst(resultSet.getBoolean("is_first"));
+		//entity.setIsLast(resultSet.getBoolean("is_last"));
 
 		final Integer passengerRouteId = (Integer) resultSet.getObject("passenger_route_id");
 		if (passengerRouteId != null) {

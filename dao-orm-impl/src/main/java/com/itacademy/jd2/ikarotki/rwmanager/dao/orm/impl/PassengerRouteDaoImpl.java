@@ -52,8 +52,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
         cq.select(from); // define what need to be selected
 
         from.fetch(PassengerRoute_.train, JoinType.LEFT);
-        from.fetch(PassengerRoute_.stationFrom, JoinType.LEFT);
-        from.fetch(PassengerRoute_.stationTo, JoinType.LEFT);
+        
 
         cq.distinct(true); // to avoid duplicate rows in result
 
@@ -83,15 +82,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
             from.fetch(PassengerRoute_.train, JoinType.LEFT);
         }
 
-        if (filter.isFetchStationFrom()) {
-
-            from.fetch(PassengerRoute_.stationFrom, JoinType.LEFT);
-        }
-        if (filter.isFetchStationTo()) {
-
-            from.fetch(PassengerRoute_.stationTo, JoinType.LEFT);
-        }
-
+        
         final String sortColumn = filter.getSortColumn();
         if (sortColumn != null) {
             final Path<?> expression = getSortPath(from, sortColumn);

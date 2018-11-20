@@ -58,8 +58,8 @@
 				<version>9.4-1200-jdbc41</version>
 			</dependency>
 
-			
-			
+
+
 
 			<!-- JUnit -->
 			<dependency>
@@ -228,7 +228,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-search-orm</artifactId>
-				 <version>5.0.1.Final</version>
+				<version>5.0.1.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -367,6 +367,21 @@
 				<groupId>org.mindrot</groupId>
 				<artifactId>jbcrypt</artifactId>
 				<version>0.3m</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/javax/javaee-api -->
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>7.0</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>1.4</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -70,15 +70,18 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 
 			from.fetch(RouteItem_.passengerRoute, JoinType.LEFT);
 		}
-
+		
 		if (filter.isFetchStationFrom()) {
 
 			from.fetch(RouteItem_.stationFrom, JoinType.LEFT);
 		}
+		
 		if (filter.isFetchStationTo()) {
 
 			from.fetch(RouteItem_.stationTo, JoinType.LEFT);
 		}
+
+		
 
 		final String sortColumn = filter.getSortColumn();
 		if (sortColumn != null) {
@@ -113,10 +116,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 			return from.get(RouteItem_.departure);
 		case "ordinalNum":
 			return from.get(RouteItem_.ordinalNum);
-		case "isFirst":
-			return from.get(RouteItem_.isFirst);
-		case "isLast":
-			return from.get(RouteItem_.isLast);
+		
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
 		}

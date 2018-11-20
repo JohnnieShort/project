@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
@@ -20,16 +19,7 @@ public class PassengerRouteDTO {
 	private Date created;
 	
 	private Date updated;
-	@NotNull
-	@Range(min=0)
-	private IStation stationFrom;
-	@NotNull
-	@Range(min=0)
-	private IStation stationTo;
-	@NotNull
-	private Date departure;
-	@NotNull
-	private Date arrival;
+	
 	@NotNull
 	@Enumerated(EnumType.ORDINAL)
 	private PassengerRouteType passengerRouteType;
@@ -42,9 +32,7 @@ public class PassengerRouteDTO {
 	@NotNull
 	@Enumerated(EnumType.ORDINAL)
 	private Frequency frequency;
-	@NotNull
-	@Range(min=0)
-	private Integer places;
+	
 
 	public Integer getId() {
 		return id;
@@ -78,45 +66,7 @@ public class PassengerRouteDTO {
 		this.frequency = frequency;
 	}
 
-	public Integer getPlaces() {
-		return places;
-	}
-
-	public void setPlaces(Integer places) {
-		this.places = places;
-	}
-
-	public IStation getStationFrom() {
-		return stationFrom;
-	}
-
-	public void setStationFrom(IStation stationFrom) {
-		this.stationFrom = stationFrom;
-	}
-
-	public IStation getStationTo() {
-		return stationTo;
-	}
-
-	public void setStationTo(IStation stationTo) {
-		this.stationTo = stationTo;
-	}
-
-	public Date getDeparture() {
-		return departure;
-	}
-
-	public void setDeparture(Date departure) {
-		this.departure = departure;
-	}
-
-	public Date getArrival() {
-		return arrival;
-	}
-
-	public void setArrival(Date arrival) {
-		this.arrival = arrival;
-	}
+	
 
 	public PassengerRouteType getPassengerRouteType() {
 		return passengerRouteType;
@@ -144,10 +94,10 @@ public class PassengerRouteDTO {
 
 	@Override
 	public String toString() {
-		return "PassengerRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", stationFrom="
-				+ stationFrom + ", stationTo=" + stationTo + ", departure=" + departure + ", arrival=" + arrival
-				+ ", passengerRoutetype=" + passengerRouteType + ", train=" + train + ", isActual=" + isActual
-				+ ", frequency=" + frequency + ", places=" + places + "]";
+		return "PassengerRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", passengerRouteType="
+				+ passengerRouteType + ", train=" + train + ", isActual=" + isActual + ", frequency=" + frequency + "]";
 	}
+
+	
 
 }

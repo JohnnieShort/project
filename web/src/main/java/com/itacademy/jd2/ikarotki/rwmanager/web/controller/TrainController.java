@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.LocomotiveFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.service.ILocomotiveService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITrainService;
+import com.itacademy.jd2.ikarotki.rwmanager.web.converter.LocomotiveToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TrainFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TrainToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.TrainDTO;
@@ -31,14 +35,17 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 public class TrainController extends AbstractController<TrainDTO> {
 
 	private ITrainService trainService;
+	private ILocomotiveService locomotiveService;
 	private TrainToDTOConverter toDtoConverter;
 	private TrainFromDTOConverter fromDtoConverter;
 
 	@Autowired
 	private TrainController(ITrainService trainService, TrainToDTOConverter toDtoConverter,
-			TrainFromDTOConverter fromDtoConverter) {
+			TrainFromDTOConverter fromDtoConverter, ILocomotiveService locomotiveService,
+			LocomotiveToDTOConverter locToDtoConverter) {
 		super();
 		this.trainService = trainService;
+		this.locomotiveService = locomotiveService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 	}
@@ -67,17 +74,21 @@ public class TrainController extends AbstractController<TrainDTO> {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		final ITrain newEntity = trainService.createEntity();
-		TrainDTO dto = toDtoConverter.apply(newEntity);
-		hashMap.put("formModel", dto);
 
+		//final ITrain newEntity = trainService.createEntity();
+		TrainDTO dto = new TrainDTO();
+		hashMap.put("formModel", dto);
+		loadCommonFormModels(hashMap);
 		return new ModelAndView("train.edit", hashMap);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(@Valid @ModelAttribute("formModel") final TrainDTO formModel, final BindingResult result) {
+	public Object save(@Valid @ModelAttribute("formModel") final TrainDTO formModel, final BindingResult result) {
 		if (result.hasErrors()) {
-			return "train.edit";
+			final Map<String, Object> hashMap = new HashMap<>();
+            hashMap.put("formModel", formModel);
+            loadCommonFormModels(hashMap);
+            return new ModelAndView("train.edit", hashMap);
 		} else {
 			final ITrain entity = fromDtoConverter.apply(formModel);
 			trainService.save(entity);
@@ -112,4 +123,12 @@ public class TrainController extends AbstractController<TrainDTO> {
 		return new ModelAndView("train.edit", hashMap);
 	}
 
+	private void loadCommonFormModels(final Map<String, Object> hashMap) {
+
+		final Map<Integer, String> locomotives = locomotiveService.find(new LocomotiveFilter()).stream()
+				.collect(Collectors.toMap(ILocomotive::getId, ILocomotive::getName));
+
+		hashMap.put("modelsLocomotive", locomotives);
+
+	}
 }

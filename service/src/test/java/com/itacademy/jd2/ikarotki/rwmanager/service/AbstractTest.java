@@ -134,6 +134,7 @@ public abstract class AbstractTest {
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
+		entity.setTrack(new BigDecimal(10000.0 * getRANDOM().nextDouble()).setScale(6, RoundingMode.UP).doubleValue());
 		trainService.save(entity);
 		return entity;
 	}
@@ -165,22 +166,15 @@ public abstract class AbstractTest {
 
 	protected IPassengerRoute saveNewPassengerRoute() {
 		final IPassengerRoute entity = passengerRouteService.createEntity();
-		IStation fromEntity = saveNewStation();
-		entity.setStationFrom(fromEntity);
-		IStation toEntity;
-		do {
-			toEntity = saveNewStation();
-		} while (fromEntity.getName().equals(toEntity.getName()));
-		entity.setStationTo(toEntity);
-		Date departure = new Date();
-		entity.setDeparture(departure);
-		entity.setArrival(departure);
+		
+		
+		
 		entity.setPassengerRouteType(PassengerRouteType.values()[getRANDOM().nextInt(2)]);
 		ITrain trainEntity = saveNewTrain();
 		entity.setTrain(trainEntity);
 		entity.setIsActual(true);
 		entity.setFrequency(Frequency.values()[getRANDOM().nextInt(2)]);
-		entity.setPlaces(getRANDOM().nextInt(200));
+		
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
@@ -221,8 +215,7 @@ public abstract class AbstractTest {
 		entity.setCreated(date);
 
 		entity.setUpdated(date);
-		entity.setIsFirst(false);
-		entity.setIsLast(false);
+		
 
 		routeItemService.save(entity);
 		return entity;

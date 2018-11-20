@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Range;
-
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 
 public class TrainDTO {
@@ -16,8 +14,20 @@ public class TrainDTO {
 	
 	private Date updated;
 	@NotNull
-	@Range(min=0)
+	
 	private ILocomotive locomotive;
+	
+	private Double track;
+	
+	
+
+	public Double getTrack() {
+		return track;
+	}
+
+	public void setTrack(Double track) {
+		this.track = track;
+	}
 
 	public Integer getId() {
 		return id;
@@ -54,7 +64,9 @@ public class TrainDTO {
 	@Override
 	public String toString() {
 		return "TrainDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", locomotive=" + locomotive
-				+ "]";
+				+ ", track=" + track + "]";
 	}
+
+	
 
 }

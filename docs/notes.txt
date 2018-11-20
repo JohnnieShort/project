@@ -38,4 +38,9 @@
 ---------------------------14.11---------------------------
 - ask about dispather servlet;+
 - ask about formModel;
-- password field;
+- password field;+
+
+---------------------------18.11---------------------------
+- ask about model-shhmodel naming(modelsChoices);
+- ask about controller mapping (value=/add);
+- ask about spring tags;

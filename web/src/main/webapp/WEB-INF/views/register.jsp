@@ -7,15 +7,15 @@
         <form:input path="id" type="hidden" />
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="eMail" type="text" disabled="${readonly}" />
-                <form:errors path="eMail" cssClass="red-text" />
+                <form:input path="Mail" type="text" disabled="${readonly}" />
+                <form:errors path="Mail" cssClass="red-text" />
                 <label for="eMail">E-Mail</label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="password" type="text" disabled="${readonly}" />
+                <form:input path="password" type="password" disabled="${readonly}" />
                 <form:errors path="password" cssClass="red-text" />
                 <label for="password">Password</label>
             </div>
@@ -40,14 +40,11 @@
         
         <div class="row">
             <div class="col s6"></div>
-            <div class="col s3">
-                <c:if test="${!readonly}">
-                    <button class="btn waves-effect waves-light right" type="submit">сохранить</button>
-                </c:if>
-            </div>
-            <div class="col s3">
-                <a class="btn waves-effect waves-light right" href="${baseUrl}">к списку<i class="material-icons right"></i>
-                </a>
+            	<div class="col s3">
+                	<c:if test="${!readonly}">
+                   		 <button class="btn waves-effect waves-light right" type="submit">сохранить</button>
+               		</c:if>
+            	</div>
             </div>
         </div>
     </form:form>

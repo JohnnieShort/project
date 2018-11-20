@@ -29,21 +29,17 @@
                 <label for="stationTo">Station to id</label>
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <form:input path="arrival" type="text" disabled="${readonly}" />
-                <form:errors path="arrival" cssClass="red-text" />
-                <label for="arrival">Arrival</label>
-            </div>
-        </div>
+        <div class="input-field col s6">
+			<form:input path="arrival" type="text" disabled="${readonly}" cssClass="timepicker" />
+				<form:errors path="arrival" cssClass="red-text" />
+				<label for="arrival">arrival</label>
+		</div>
         
-        <div class="row">
-            <div class="input-field col s12">
-                <form:input path="departure" type="text" disabled="${readonly}" />
-                <form:errors path="departure" cssClass="red-text" />
-                <label for="departure">Departure</label>
-            </div>
-        </div>
+        <div class="input-field col s6">
+			<form:input path="departure" type="text" disabled="${readonly}" cssClass="timepicker" />
+				<form:errors path="departure" cssClass="red-text" />
+				<label for="soldTime">departure</label>
+		</div>
         
         <div class="row">
             <div class="input-field col s12">
@@ -53,21 +49,7 @@
             </div>
         </div>
         
-        <div class="row">
-            <div class="input-field col s12">
-                <form:input path="isFirst" type="text" disabled="${readonly}" />
-                <form:errors path="isFirst" cssClass="red-text" />
-                <label for="isFirst">Is it first item of route</label>
-            </div>
-        </div>
         
-        <div class="row">
-            <div class="input-field col s12">
-                <form:input path="isLast" type="text" disabled="${readonly}" />
-                <form:errors path="isLast" cssClass="red-text" />
-                <label for="isLast">Is it last item of route</label>
-            </div>
-        </div>
         
         <div class="row">
             <div class="col s6"></div>

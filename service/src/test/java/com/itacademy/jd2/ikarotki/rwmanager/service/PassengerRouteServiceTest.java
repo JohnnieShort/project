@@ -25,13 +25,11 @@ public class PassengerRouteServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
-		assertNotNull(entityFromDb.getStationFrom());
-		assertNotNull(entityFromDb.getStationTo());
+		
 		assertNotNull(entityFromDb.getTrain());
-		assertNotNull(entityFromDb.getDeparture());
-		assertNotNull(entityFromDb.getArrival());
+		
 		assertNotNull(entityFromDb.getFrequency());
-		assertNotNull(entityFromDb.getPlaces());
+		
 		assertNotNull(entityFromDb.getPassengerRouteType());
 		assertNotNull(entityFromDb.getIsActual());
 
@@ -50,36 +48,19 @@ public class PassengerRouteServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
-		assertNotNull(entityFromDb.getStationFrom());
-		assertNotNull(entityFromDb.getStationTo());
+		
 		assertNotNull(entityFromDb.getTrain());
-		assertNotNull(entityFromDb.getDeparture());
-		assertNotNull(entityFromDb.getArrival());
+		
 		assertNotNull(entityFromDb.getFrequency());
-		assertNotNull(entityFromDb.getPlaces());
+		
 		assertNotNull(entityFromDb.getPassengerRouteType());
 		assertNotNull(entityFromDb.getIsActual());
 
 		assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
 		assertTrue(entityFromDb.getTrain().getId().equals(entity.getTrain().getId()));
-		assertTrue(entityFromDb.getStationFrom().getName().equals(entity.getStationFrom().getName()));
-		assertTrue(entityFromDb.getStationTo().getName().equals(entity.getStationTo().getName()));
 		
-		assertNotNull(entityFromDb.getStationFrom());
-		assertNotNull(entityFromDb.getStationFrom().getId());
-		assertNotNull(entityFromDb.getStationFrom().getName());
-		assertNotNull(entityFromDb.getStationFrom().getLatitude());
-		assertNotNull(entityFromDb.getStationFrom().getLongitude());
-		assertNotNull(entityFromDb.getStationFrom().getCreated());
-		assertNotNull(entityFromDb.getStationFrom().getUpdated());
 		
-		assertNotNull(entityFromDb.getStationTo());
-		assertNotNull(entityFromDb.getStationTo().getId());
-		assertNotNull(entityFromDb.getStationTo().getName());
-		assertNotNull(entityFromDb.getStationTo().getLatitude());
-		assertNotNull(entityFromDb.getStationTo().getLongitude());
-		assertNotNull(entityFromDb.getStationTo().getCreated());
-		assertNotNull(entityFromDb.getStationTo().getUpdated());
+		
 		
 		assertNotNull(entityFromDb.getTrain());
 		assertNotNull(entityFromDb.getTrain().getId());
@@ -105,13 +86,11 @@ public class PassengerRouteServiceTest extends AbstractTest {
 		assertNotNull(entityFromDb.getId());
 		assertNotNull(entityFromDb.getCreated());
 		assertNotNull(entityFromDb.getUpdated());
-		assertNotNull(entityFromDb.getStationFrom());
-		assertNotNull(entityFromDb.getStationTo());
+		
 		assertNotNull(entityFromDb.getTrain());
-		assertNotNull(entityFromDb.getDeparture());
-		assertNotNull(entityFromDb.getArrival());
+		
 		assertNotNull(entityFromDb.getFrequency());
-		assertNotNull(entityFromDb.getPlaces());
+		
 		assertNotNull(entityFromDb.getPassengerRouteType());
 		assertNotNull(entityFromDb.getIsActual());
 
@@ -138,13 +117,11 @@ public class PassengerRouteServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getId());
 			assertNotNull(entityFromDb.getCreated());
 			assertNotNull(entityFromDb.getUpdated());
-			assertNotNull(entityFromDb.getStationFrom());
-			assertNotNull(entityFromDb.getStationTo());
+			
 			assertNotNull(entityFromDb.getTrain());
-			assertNotNull(entityFromDb.getDeparture());
-			assertNotNull(entityFromDb.getArrival());
+			
 			assertNotNull(entityFromDb.getFrequency());
-			assertNotNull(entityFromDb.getPlaces());
+			
 			assertNotNull(entityFromDb.getPassengerRouteType());
 			assertNotNull(entityFromDb.getIsActual());
 			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
@@ -171,8 +148,7 @@ public class PassengerRouteServiceTest extends AbstractTest {
 	@Test
 	public void testFind() {
 		PassengerRouteFilter passengerRouteFilter = new PassengerRouteFilter();
-		passengerRouteFilter.setFetchStationFrom(true);
-		passengerRouteFilter.setFetchStationTo(true);
+		
 		passengerRouteFilter.setFetchTrain(true);
 		passengerRouteFilter.setSortColumn("created");
 		passengerRouteFilter.setSortOrder(true);
@@ -191,29 +167,12 @@ public class PassengerRouteServiceTest extends AbstractTest {
 			assertNotNull(entityFromDb.getId());
 			assertNotNull(entityFromDb.getCreated());
 			assertNotNull(entityFromDb.getUpdated());
-			assertNotNull(entityFromDb.getDeparture());
-			assertNotNull(entityFromDb.getArrival());
+			
 			assertNotNull(entityFromDb.getFrequency());
-			assertNotNull(entityFromDb.getPlaces());
+			
 			assertNotNull(entityFromDb.getPassengerRouteType());
 			assertNotNull(entityFromDb.getIsActual());
 			assertTrue(entityFromDb.getCreated().equals(entityFromDb.getUpdated()));
-			
-			assertNotNull(entityFromDb.getStationFrom());
-			assertNotNull(entityFromDb.getStationFrom().getId());
-			assertNotNull(entityFromDb.getStationFrom().getName());
-			assertNotNull(entityFromDb.getStationFrom().getLatitude());
-			assertNotNull(entityFromDb.getStationFrom().getLongitude());
-			assertNotNull(entityFromDb.getStationFrom().getCreated());
-			assertNotNull(entityFromDb.getStationFrom().getUpdated());
-			
-			assertNotNull(entityFromDb.getStationTo());
-			assertNotNull(entityFromDb.getStationTo().getId());
-			assertNotNull(entityFromDb.getStationTo().getName());
-			assertNotNull(entityFromDb.getStationTo().getLatitude());
-			assertNotNull(entityFromDb.getStationTo().getLongitude());
-			assertNotNull(entityFromDb.getStationTo().getCreated());
-			assertNotNull(entityFromDb.getStationTo().getUpdated());
 			
 			assertNotNull(entityFromDb.getTrain());
 			assertNotNull(entityFromDb.getTrain().getId());

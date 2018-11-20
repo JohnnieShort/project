@@ -51,5 +51,5 @@
 	</tbody>
 </table>
 <jspFragments:paging />
-<a class="waves-effect waves-light btn right" href="${baseUrl}/addSt"><i
+<a class="waves-effect waves-light btn right" href="${baseUrl}/add"><i
 	class="material-icons">add</i></a>

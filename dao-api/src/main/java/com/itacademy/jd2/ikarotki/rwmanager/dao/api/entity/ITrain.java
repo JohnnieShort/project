@@ -7,4 +7,8 @@ public interface ITrain extends IBaseEntity {
 	public ILocomotive getLocomotive();
 
 	public void setLocomotive(ILocomotive locomotive);
+	
+	public Double getTrack();
+
+	public void setTrack(Double track);
 }

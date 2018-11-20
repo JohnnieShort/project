@@ -5,14 +5,7 @@ import java.util.Date;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.IBaseEntity;
 
 public interface IRouteItem extends IBaseEntity {
-	public Boolean getIsFirst();
-
-	public void setIsFirst(Boolean isFirst);
-
-	public Boolean getIsLast();
-
-	public void setIsLast(Boolean isLast);
-
+	
 	public IPassengerRoute getPassengerRoute();
 
 	public void setPassengerRoute(IPassengerRoute passengerRoute);

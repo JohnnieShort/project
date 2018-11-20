@@ -7,8 +7,8 @@
         <form:input path="id" type="hidden" />
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="eMail" type="text" disabled="${readonly}" />
-                <form:errors path="eMail" cssClass="red-text" />
+                <form:input path="Mail" type="text" disabled="${readonly}" />
+                <form:errors path="Mail" cssClass="red-text" />
                 <label for="eMail">E-Mail</label>
             </div>
         </div>
