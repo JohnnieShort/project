@@ -9,11 +9,11 @@
         
         <div class="row">
             <div class="input-field col s12">
-                <form:select path="locomotive" disabled="${readonly}" >
+                <form:select path="locomotiveId" disabled="${readonly}" >
                 	<form:option value="0" label="Select locomotive" />
 					<form:options items="${modelsLocomotive}" />
 				</form:select>
-				<form:errors path="locomotive" cssClass="red-text" />
+				<form:errors path="locomotiveId" cssClass="red-text" />
 				<label for="locomotive">locomotive</label>
             </div>
         </div>

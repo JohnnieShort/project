@@ -89,7 +89,7 @@ public class CustomerDaoImpl extends AbstractDaoImpl<ICustomer, Integer> impleme
 			return from.get(Customer_.updated);
 		case "id":
 			return from.get(Customer_.id);
-		case "userAccount":
+		case "user_account_id":
 			return from.get(Customer_.userAccount).get(UserAccount_.id);
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);

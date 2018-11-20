@@ -5,7 +5,9 @@ import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.service.ILocomotiveService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITrainService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.TrainDTO;
 
@@ -13,17 +15,20 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.TrainDTO;
 public class TrainFromDTOConverter implements Function<TrainDTO, ITrain> {
 	@Autowired
 	private ITrainService trainService;
+	@Autowired
+	private ILocomotiveService locomotiveService;
 
 	@Override
 	public ITrain apply(final TrainDTO dto) {
 		final ITrain entity = trainService.createEntity();
-		entity.setId(dto.getId());
-		entity.setCreated(dto.getCreated());
-		entity.setUpdated(dto.getUpdated());
-		entity.setTrack(dto.getTrack());
+		entity.setId(dto.getId() != null ? dto.getId() : null);
+		entity.setCreated(dto.getCreated() != null ? dto.getCreated() : null);
+		entity.setUpdated(dto.getUpdated() != null ? dto.getUpdated() : null);
+		entity.setTrack(dto.getTrack() != null ? dto.getTrack() : null);
 
-
-		entity.setLocomotive(dto.getLocomotive());
+		final ILocomotive locomotive = locomotiveService.createEntity();
+		locomotive.setId(dto.getLocomotiveId());
+		entity.setLocomotive(locomotive);
 
 		return entity;
 	}

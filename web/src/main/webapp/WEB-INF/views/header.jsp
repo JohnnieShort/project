@@ -3,15 +3,15 @@
 <%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
-<fmt:setLocale value="${key}" />
-<fmt:setBundle basename="text" />
+<%-- <fmt:setLocale value="${key}" />
+<fmt:setBundle basename="text" /> --%>
 <header>
 	<nav>
 		<div class="nav-wrapper container">
 		<ul id="dropdown1" class="dropdown-content">
-				<li><mytaglib:i18n key="ru">RU</mytaglib:i18n></li>
+				<li><mytaglib:i18n key="menu.link.ru"/></li>
 				<li class="divider"></li>
-				<li><mytaglib:i18n key="en">EN</mytaglib:i18n></li>
+				<li><mytaglib:i18n key="menu.link.en"/></li>
 				
 			</ul>
 			<ul class="left hide-on-med-and-down">

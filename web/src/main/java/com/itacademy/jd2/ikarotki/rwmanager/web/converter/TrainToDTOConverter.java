@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 import org.springframework.stereotype.Component;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.TrainDTO;
 
@@ -17,8 +18,10 @@ public class TrainToDTOConverter implements Function<ITrain, TrainDTO> {
 		dto.setUpdated(entity.getUpdated());
 		dto.setTrack(entity.getTrack());
 
-		dto.setLocomotive(entity.getLocomotive());
-
+		ILocomotive locomotive = entity.getLocomotive();
+		if (locomotive != null) {
+			dto.setLocomotiveId(locomotive.getId());
+		}
 		return dto;
 	}
 }

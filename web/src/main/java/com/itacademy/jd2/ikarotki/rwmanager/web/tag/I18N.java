@@ -2,37 +2,46 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.tag;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.servlet.jsp.JspContext;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class I18N extends SimpleTagSupport {
-    public static final String SESSION_LOCALE_KEY = "current-locale";
+	public static final String SESSION_LOCALE_KEY = "current-locale";
 
-    private final Locale DEFAULT_LOCALE = new Locale("en");
-    private String key;
+	private final Locale DEFAULT_LOCALE = new Locale("en");
+	private String key;
 
-    @Override
-    public void doTag() throws JspException, IOException {
+	@Override
+	public void doTag() throws JspException, IOException {
 
-        final JspContext jspContext = getJspContext();
+		final JspContext jspContext = getJspContext();
 
-        Locale locale = (Locale) jspContext.findAttribute(SESSION_LOCALE_KEY);
-        if (locale == null) {
-            locale = Locale.getDefault();
-        }
-        
-        jspContext.getOut().println(getLocalized(key, locale));
-    }
+		Locale locale = (Locale) jspContext.findAttribute(SESSION_LOCALE_KEY);
+		if (locale == null) {
+			locale = Locale.getDefault();
+		}
 
-    private String getLocalized(String key, Locale locale) {
-        // TODO make localization
-        return key;
-    }
+		jspContext.getOut().println(getLocalized(key, locale));
+	}
 
-    public void setKey(final String key) {
-        this.key = key;
-    }
+	private String getLocalized(String key, Locale locale) {
+
+		ResourceBundle mybundle = ResourceBundle.getBundle("MyLabels", locale);
+
+		try {
+			return mybundle.getString(key);
+		} catch (MissingResourceException e) {
+			return key;
+		}
+
+	}
+
+	public void setKey(final String key) {
+		this.key = key;
+	}
 
 }

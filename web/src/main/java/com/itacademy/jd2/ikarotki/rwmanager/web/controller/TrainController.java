@@ -75,7 +75,7 @@ public class TrainController extends AbstractController<TrainDTO> {
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
 
-		//final ITrain newEntity = trainService.createEntity();
+		// final ITrain newEntity = trainService.createEntity();
 		TrainDTO dto = new TrainDTO();
 		hashMap.put("formModel", dto);
 		loadCommonFormModels(hashMap);
@@ -86,9 +86,9 @@ public class TrainController extends AbstractController<TrainDTO> {
 	public Object save(@Valid @ModelAttribute("formModel") final TrainDTO formModel, final BindingResult result) {
 		if (result.hasErrors()) {
 			final Map<String, Object> hashMap = new HashMap<>();
-            hashMap.put("formModel", formModel);
-            loadCommonFormModels(hashMap);
-            return new ModelAndView("train.edit", hashMap);
+			hashMap.put("formModel", formModel);
+			loadCommonFormModels(hashMap);
+			return new ModelAndView("train.edit", hashMap);
 		} else {
 			final ITrain entity = fromDtoConverter.apply(formModel);
 			trainService.save(entity);
@@ -104,7 +104,7 @@ public class TrainController extends AbstractController<TrainDTO> {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
-		final ITrain dbModel = trainService.get(id);
+		final ITrain dbModel = trainService.getFullInfo(id);
 		final TrainDTO dto = toDtoConverter.apply(dbModel);
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
@@ -119,6 +119,7 @@ public class TrainController extends AbstractController<TrainDTO> {
 
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
+		loadCommonFormModels(hashMap);
 
 		return new ModelAndView("train.edit", hashMap);
 	}

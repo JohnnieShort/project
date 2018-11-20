@@ -67,7 +67,7 @@ public class PassengerDaoImpl extends AbstractDaoImpl<IPassenger, Integer> imple
 			return from.get(Passenger_.updated);
 		case "id":
 			return from.get(Passenger_.id);
-		case "userAccount":
+		case "user_account_id":
 			return from.get(Passenger_.userAccount).get(UserAccount_.id);
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);

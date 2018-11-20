@@ -20,7 +20,7 @@
 		<c:forEach var="train" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${train.id}" /></td>
-				<td><c:out value="${train.locomotive.id}" /></td>	
+				<td><c:out value="${train.locomotiveId}" /></td>	
 				<td><c:out value="${train.track}" /></td>	
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -37,6 +37,7 @@
 		</c:forEach>
 	</tbody>
 </table>
-<jspFragments:paging />
+
 <a class="waves-effect waves-light btn right" href="${baseUrl}/add"><i
 	class="material-icons">add</i></a>
+<jspFragments:paging />

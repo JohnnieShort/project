@@ -44,4 +44,4 @@
 - ask about model-shhmodel naming(modelsChoices);
 - ask about controller mapping (value=/add);
 - ask about spring tags;
-- ask about i18n, SMTP, form train, error page;
+- ask about i18n, SMTP+, form train+, error page;
