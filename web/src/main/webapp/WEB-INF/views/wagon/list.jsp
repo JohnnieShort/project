@@ -22,7 +22,7 @@
 			<tr>
 				<td><c:out value="${wagon.id}" /></td>
 				<td><c:out value="${wagon.wagonType}" /></td>
-				<td><c:out value="${wagon.Train.id}" /></td>
+				<td><c:out value="${wagon.trainId}" /></td>
 				<td><c:out value="${wagon.freightPrice}" /></td>
 				<td><c:out value="${wagon.capacity}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"

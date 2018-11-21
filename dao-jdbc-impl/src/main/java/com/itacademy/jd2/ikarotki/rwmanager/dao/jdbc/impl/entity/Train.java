@@ -2,6 +2,7 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.jdbc.impl.entity;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.TrainType;
 
 public class Train extends BaseEntity implements ITrain {
 	private ILocomotive locomotive;
@@ -25,6 +26,18 @@ public class Train extends BaseEntity implements ITrain {
 
 	public void setTrack(Double track) {
 		this.track = track;
+	}
+
+	@Override
+	public TrainType getTraintype() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setTraintype(TrainType traintype) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

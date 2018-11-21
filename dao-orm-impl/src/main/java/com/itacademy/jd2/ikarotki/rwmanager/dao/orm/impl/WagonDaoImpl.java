@@ -89,11 +89,11 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 			return from.get(Wagon_.updated);
 		case "id":
 			return from.get(Wagon_.id);
-		case "train":
+		case "train_id":
 			return from.get(Wagon_.train).get(Train_.id);
-		case "wagonType":
+		case "wagon_type":
 			return from.get(Wagon_.wagonType);
-		case "freightPrice":
+		case "freight_price":
 			return from.get(Wagon_.freightPrice);
 		case "capacity":
 			return from.get(Wagon_.capacity);

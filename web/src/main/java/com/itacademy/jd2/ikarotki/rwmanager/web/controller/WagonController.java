@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.WagonFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.service.ITrainService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IWagonService;
+import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TrainToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.WagonFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.WagonToDTOConverter;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.TrainDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.WagonDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
@@ -30,14 +37,19 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 @RequestMapping(value = "/wagon")
 public class WagonController extends AbstractController<WagonDTO> {
 	private IWagonService wagonService;
+	private ITrainService trainService;
+	private TrainToDTOConverter trainToDTOConverter;
 	private WagonToDTOConverter toDtoConverter;
 	private WagonFromDTOConverter fromDtoConverter;
 
 	@Autowired
 	private WagonController(IWagonService wagonService, WagonToDTOConverter toDtoConverter,
-			WagonFromDTOConverter fromDtoConverter) {
+			WagonFromDTOConverter fromDtoConverter, ITrainService trainService,
+			TrainToDTOConverter trainToDTOConverter) {
 		super();
 		this.wagonService = wagonService;
+		this.trainService = trainService;
+		this.trainToDTOConverter = trainToDTOConverter;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 	}
@@ -66,17 +78,21 @@ public class WagonController extends AbstractController<WagonDTO> {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		final IWagon newEntity = wagonService.createEntity();
-		WagonDTO dto = toDtoConverter.apply(newEntity);
+		
+		WagonDTO dto = new WagonDTO();
 		hashMap.put("formModel", dto);
+		loadCommonFormModels(hashMap);
 
 		return new ModelAndView("wagon.edit", hashMap);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(@Valid @ModelAttribute("formModel") final WagonDTO formModel, final BindingResult result) {
+	public Object save(@Valid @ModelAttribute("formModel") final WagonDTO formModel, final BindingResult result) {
 		if (result.hasErrors()) {
-			return "wagon.edit";
+			final Map<String, Object> hashMap = new HashMap<>();
+			hashMap.put("formModel", formModel);
+			loadCommonFormModels(hashMap);
+			return new ModelAndView("wagon.edit", hashMap);
 		} else {
 			final IWagon entity = fromDtoConverter.apply(formModel);
 			wagonService.save(entity);
@@ -111,4 +127,14 @@ public class WagonController extends AbstractController<WagonDTO> {
 		return new ModelAndView("wagon.edit", hashMap);
 	}
 
+	private void loadCommonFormModels(final Map<String, Object> hashMap) {
+		TrainFilter filter = new TrainFilter();
+		filter.setFetchLocomotive(true);
+		final List<ITrain> trains = trainService.find(new TrainFilter());
+		final List<TrainDTO> trainsDto = trains.stream().map(trainToDTOConverter).collect(Collectors.toList());
+		List<WagonType> wagonTypes = Arrays.asList(WagonType.values());
+		hashMap.put("wagonTypes", wagonTypes);
+		hashMap.put("trainsDto", trainsDto);
+
+	}
 }

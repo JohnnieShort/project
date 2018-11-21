@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.TrainType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.LocomotiveFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ILocomotiveService;
@@ -60,6 +62,7 @@ public class TrainController extends AbstractController<TrainDTO> {
 		gridState.setSort(sortColumn, "id");
 
 		final TrainFilter filter = new TrainFilter();
+		filter.setFetchLocomotive(true);
 		prepareFilter(gridState, filter);
 
 		final List<ITrain> entities = trainService.find(filter);
@@ -115,7 +118,7 @@ public class TrainController extends AbstractController<TrainDTO> {
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
-		final TrainDTO dto = toDtoConverter.apply(trainService.get(id));
+		final TrainDTO dto = toDtoConverter.apply(trainService.getFullInfo(id));
 
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
@@ -128,7 +131,8 @@ public class TrainController extends AbstractController<TrainDTO> {
 
 		final Map<Integer, String> locomotives = locomotiveService.find(new LocomotiveFilter()).stream()
 				.collect(Collectors.toMap(ILocomotive::getId, ILocomotive::getName));
-
+		List<TrainType> trainTypes = Arrays.asList(TrainType.values());
+		hashMap.put("trainTypes", trainTypes);
 		hashMap.put("modelsLocomotive", locomotives);
 
 	}

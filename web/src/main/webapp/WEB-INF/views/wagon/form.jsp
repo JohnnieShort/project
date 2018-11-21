@@ -8,17 +8,25 @@
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="train" type="text" disabled="${readonly}" />
-                <form:errors path="train" cssClass="red-text" />
-                <label for="train">Train id</label>
+                <form:select path="trainId" disabled="${readonly}" >
+                	<form:option value="0" label="Select train" />
+					<c:forEach var="train" items="${trainsDto}">
+    					<option value="${train.id}">"${train.id}" "${train.trainType}"</option>
+					</c:forEach>
+				</form:select>
+				<form:errors path="trainId" cssClass="red-text" />
+				<label for="trainId">train</label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="wagonType" type="text" disabled="${readonly}" />
-                <form:errors path="wagonType" cssClass="red-text" />
-                <label for="name">wagonType</label>
+                <form:select path="wagonType" disabled="${readonly}" >
+                	<form:option value="0" label="Select wagon type" />
+					<form:options items="${wagonTypes}" />
+				</form:select>
+				<form:errors path="wagonType" cssClass="red-text" />
+				<label for="wagonType">type of wagon</label>
             </div>
         </div>
         

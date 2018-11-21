@@ -7,6 +7,7 @@ import javax.persistence.OneToOne;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.TrainType;
 
 @Entity
 public class Train extends BaseEntity implements ITrain {
@@ -15,6 +16,10 @@ public class Train extends BaseEntity implements ITrain {
 	@Column
 	private Double track;
 	
+	@Column
+	private TrainType trainType;
+	
+
 	
 
 	public Double getTrack() {
@@ -35,9 +40,25 @@ public class Train extends BaseEntity implements ITrain {
 
 	@Override
 	public String toString() {
-		return "Train [locomotive=" + locomotive + ", track=" + track + ", getId()=" + getId() + "]";
+		return "Train [locomotive=" + locomotive + ", track=" + track + ", traintype=" + trainType + ", getId()="
+				+ getId() + "]";
 	}
 
+	@Override
+	public TrainType getTraintype() {
+		
+		return trainType;
+	}
+
+	@Override
+	public void setTraintype(TrainType trainType) {
+		this.trainType = trainType;
+		
+	}
+
+	
+
+	
 	
 
 }

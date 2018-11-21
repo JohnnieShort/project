@@ -7,18 +7,15 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
-
 public class WagonDTO {
 	
 	private Integer id;
 	@NotNull
-	@Range(min = 0)
-	private WagonType wagonType;
+	
+	private String wagonType;
 	@NotNull
 	@Range(min = 0)
-	private ITrain train;
+	private Integer trainId;
 	@NotNull
 	@Digits(integer = 15, fraction = 2)
 	private Double freightPrice;
@@ -63,20 +60,20 @@ public class WagonDTO {
 		this.capacity = capacity;
 	}
 
-	public WagonType getWagonType() {
+	public String getWagonType() {
 		return wagonType;
 	}
 
-	public void setWagonType(WagonType wagonType) {
+	public void setWagonType(String wagonType) {
 		this.wagonType = wagonType;
 	}
 
-	public ITrain getTrain() {
-		return train;
+	public Integer getTrainId() {
+		return trainId;
 	}
 
-	public void setTrain(ITrain train) {
-		this.train = train;
+	public void setTrainId(Integer trainId) {
+		this.trainId = trainId;
 	}
 
 	public Double getFreightPrice() {
@@ -89,8 +86,10 @@ public class WagonDTO {
 
 	@Override
 	public String toString() {
-		return "WagonDTO [id=" + id + ", wagonType=" + wagonType + ", train=" + train + ", freightPrice=" + freightPrice
-				+ ", capacity=" + capacity + ", created=" + created + ", updated=" + updated + "]";
+		return "WagonDTO [id=" + id + ", wagonType=" + wagonType + ", trainId=" + trainId + ", freightPrice="
+				+ freightPrice + ", capacity=" + capacity + ", created=" + created + ", updated=" + updated + "]";
 	}
+
+	
 
 }

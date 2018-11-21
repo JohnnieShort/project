@@ -18,6 +18,17 @@
             </div>
         </div>
         
+         <div class="row">
+            <div class="input-field col s12">
+                <form:select path="trainType" disabled="${readonly}" >
+                	<form:option value="0" label="Select type" />
+					<form:options items="${trainTypes}" />
+				</form:select>
+				<form:errors path="trainType" cssClass="red-text" />
+				<label for="trainType">type of train</label>
+            </div>
+        </div>
+        
         <div class="row">
             <div class="col s6"></div>
             	<div class="col s3">

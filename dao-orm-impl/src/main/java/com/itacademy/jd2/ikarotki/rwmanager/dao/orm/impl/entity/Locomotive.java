@@ -1,5 +1,7 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity;
 
+import javax.persistence.Access;
+import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -9,6 +11,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ILocomotive;
 public class Locomotive extends BaseEntity implements ILocomotive {
 
 	@Column
+	@Access(value = AccessType.PROPERTY)
 	private String name;
 	@Column
 	private Double power;

@@ -19,8 +19,6 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoOrder_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute_;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Station_;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train_;
 
 @Repository
 public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Integer> implements IPassengerRouteDao {
@@ -105,25 +103,16 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 		case "id":
 			return from.get(PassengerRoute_.id);
 		case "train_id":
-			return from.get(PassengerRoute_.train).get(Train_.id);
-		case "station_from_id":
-			return from.get(PassengerRoute_.stationFrom).get(Station_.id);
-		case "station_to_id":
-			return from.get(PassengerRoute_.stationTo).get(Station_.id);
-		case "arrival":
-			return from.get(PassengerRoute_.arrival);
-		case "departure":
-			return from.get(PassengerRoute_.departure);
+			
 
 		case "passenger_route_type":
-			return from.get(PassengerRoute_.passengerRoutetype);
+			return from.get(PassengerRoute_.passengerRouteType);
 
 		case "is_actual":
 			return from.get(PassengerRoute_.isActual);
 		case "frequency":
 			return from.get(PassengerRoute_.frequency);
-		case "places":
-			return from.get(PassengerRoute_.places);
+		
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
 		}

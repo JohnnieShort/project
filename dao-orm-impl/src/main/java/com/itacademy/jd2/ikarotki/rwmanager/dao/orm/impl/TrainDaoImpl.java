@@ -88,8 +88,10 @@ public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements IT
 			return from.get(Train_.updated);
 		case "id":
 			return from.get(Train_.id);
-		case "locomotive":
+		case "locomotive_name":
 			return from.get(Train_.locomotive).get(Locomotive_.id);
+		case "train_type":
+			return from.get(Train_.trainType);
 		default:
 			throw new UnsupportedOperationException("sorting is not supported by column:" + sortColumn);
 		}

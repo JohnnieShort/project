@@ -33,6 +33,11 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/errors/error500.jsp</location>
+	</error-page>
+	
 	<jsp-config>
         <taglib>
             <taglib-uri>my-custom-tags-uri</taglib-uri>
