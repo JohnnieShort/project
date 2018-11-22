@@ -22,11 +22,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.ITrainService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
@@ -39,16 +43,18 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 public class PassengerRouteController extends AbstractController<PassengerRouteDTO> {
 	private IPassengerRouteService passengerRouteService;
 	private IStationService stationService;
+	private ITrainService trainService;
 	private PassengerRouteToDTOConverter toDtoConverter;
 	private StationToDTOConverter stationToDtoConverter;
 	private PassengerRouteFromDTOConverter fromDtoConverter;
 
 	@Autowired
 	private PassengerRouteController(IPassengerRouteService pasengerRouteService, IStationService stationService,
-			PassengerRouteToDTOConverter toDtoConverter, PassengerRouteFromDTOConverter fromDtoConverter,
-			StationToDTOConverter stationToDtoConverter) {
+			ITrainService trainService, PassengerRouteToDTOConverter toDtoConverter,
+			PassengerRouteFromDTOConverter fromDtoConverter, StationToDTOConverter stationToDtoConverter) {
 		super();
 		this.passengerRouteService = pasengerRouteService;
+		this.trainService = trainService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 		this.stationService = stationService;
@@ -79,16 +85,13 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		final IPassengerRoute newEntity = passengerRouteService.createEntity();
-		PassengerRouteDTO dto = toDtoConverter.apply(newEntity);
+
+		PassengerRouteDTO dto = new PassengerRouteDTO();
 		hashMap.put("formModel", dto);
-		List<PassengerRouteType> passengerRouteTypes = new ArrayList<PassengerRouteType>();
-		passengerRouteTypes = Arrays.asList(PassengerRouteType.values());
-		hashMap.put("routeTypeList", passengerRouteTypes);
-		
+		loadCommonFormModels(hashMap);
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
-	
+
 	@RequestMapping(value = "/addSt", method = RequestMethod.GET)
 	public ModelAndView showStForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
@@ -100,7 +103,6 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		hashMap.put("stationsList", stDtos);
 		return new ModelAndView("stations.edit", hashMap);
 	}
-
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String save(@Valid @ModelAttribute("formModel") final PassengerRouteDTO formModel,
@@ -141,4 +143,19 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
 
+	private void loadCommonFormModels(final Map<String, Object> hashMap) {
+		List<PassengerRouteType> passengerRouteTypes = new ArrayList<PassengerRouteType>();
+		passengerRouteTypes = Arrays.asList(PassengerRouteType.values());
+		hashMap.put("passengerRouteTypes", passengerRouteTypes);
+		List<Frequency> frequency = Arrays.asList(Frequency.values());
+		hashMap.put("frequency", frequency);
+
+		final List<ITrain> trains = trainService.find(new TrainFilter());
+		final Map<Integer, String> trainChoices = trains.stream().collect(Collectors.toMap(ITrain::getId, train -> {
+			return train.getId() + " " + train.getTrainType().name();
+		}));
+
+		hashMap.put("trainsChoices", trainChoices);
+
+	}
 }

@@ -13,6 +13,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 
 @Entity
 public class Wagon extends BaseEntity implements IWagon {
+	@Column
 	@Enumerated(EnumType.ORDINAL)
 	private WagonType wagonType;
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Train.class)

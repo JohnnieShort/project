@@ -12,7 +12,7 @@ public interface ITrain extends IBaseEntity {
 	public Double getTrack();
 
 	public void setTrack(Double track);
-	public TrainType getTraintype();
+	public TrainType getTrainType();
 
-	public void setTraintype(TrainType traintype);
+	public void setTrainType(TrainType traintype);
 }

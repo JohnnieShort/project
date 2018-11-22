@@ -16,9 +16,12 @@
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="train" type="text" disabled="${readonly}" />
-                <form:errors path="train" cssClass="red-text" />
-                <label for="train">Train id</label>
+                <form:select path="trainId" disabled="${readonly}">
+					<form:option value="0" label="Select train" />
+					<form:options items="${trainsChoices}" />
+				</form:select>
+                <form:errors path="trainId" cssClass="red-text" />
+                <label for="trainId">Train id</label>
             </div>
         </div>
         
@@ -26,10 +29,10 @@
             <div class="input-field col s12">
                <form:select path="passengerRouteType">
             		<form:option value="0" label="Select type of route" />
-            		<c:forEach var="enum" items="${routeTypeList}">
-    					<option value="${enum}">"${enum}"</option>
-					</c:forEach>
+            		<form:options items="${passengerRouteTypes}" />
             	</form:select>
+            	<form:errors path="passengerRouteType" cssClass="red-text" />
+            	 <label for=passengerRouteType>Train id</label>
             </div>
         </div>
         
@@ -45,10 +48,13 @@
 		</div>
         
         <div class="row">
-            <div class="input-field col s12">
-                <form:input path="frequency" type="text" disabled="${readonly}" />
-                <form:errors path="frequency" cssClass="red-text" />
-                <label for="frequency">Frequency</label>
+             <div class="input-field col s12">
+               <form:select path="frequency">
+            		<form:option value="0" label="Select frequncy" />
+            		<form:options items="${frequency}" />
+            	</form:select>
+            	<form:errors path="frequency" cssClass="red-text" />
+            	 <label for=frequency>frequency</label>
             </div>
         </div>
         

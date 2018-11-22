@@ -6,11 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.ITrainService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.PassengerRouteDTO;
 
 @Component
 public class PassengerRouteFromDTOConverter implements Function<PassengerRouteDTO, IPassengerRoute> {
+	@Autowired
+	private ITrainService trainService;
+	
 	@Autowired
 	private IPassengerRouteService passengerRouteService;
 
@@ -24,10 +31,12 @@ public class PassengerRouteFromDTOConverter implements Function<PassengerRouteDT
 
 		
 
-		entity.setPassengerRouteType(dto.getPassengerRouteType());
-		entity.setTrain(dto.getTrain());
+		entity.setPassengerRouteType(PassengerRouteType.valueOf(dto.getPassengerRouteType()));
+		ITrain train = trainService.createEntity();
+				train.setId(dto.getTrainId());
+		entity.setTrain(train);
 		entity.setIsActual(dto.getIsActual());
-		entity.setFrequency(dto.getFrequency());
+		entity.setFrequency(Frequency.valueOf(dto.getFrequency()));
 		
 
 		return entity;

@@ -112,6 +112,7 @@ public class TrainController extends AbstractController<TrainDTO> {
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
+		loadCommonFormModels(hashMap);
 
 		return new ModelAndView("train.edit", hashMap);
 	}
@@ -131,7 +132,12 @@ public class TrainController extends AbstractController<TrainDTO> {
 
 		final Map<Integer, String> locomotives = locomotiveService.find(new LocomotiveFilter()).stream()
 				.collect(Collectors.toMap(ILocomotive::getId, ILocomotive::getName));
-		List<TrainType> trainTypes = Arrays.asList(TrainType.values());
+		
+		
+        final Map<String, String> trainTypes = Arrays.asList(TrainType.values()).stream()
+                .collect(Collectors.toMap(TrainType::name, TrainType::name));
+
+        
 		hashMap.put("trainTypes", trainTypes);
 		hashMap.put("modelsLocomotive", locomotives);
 

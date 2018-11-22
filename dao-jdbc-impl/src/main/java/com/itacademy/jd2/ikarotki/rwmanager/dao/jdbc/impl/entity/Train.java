@@ -28,14 +28,16 @@ public class Train extends BaseEntity implements ITrain {
 		this.track = track;
 	}
 
+	
+
 	@Override
-	public TrainType getTraintype() {
+	public TrainType getTrainType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setTraintype(TrainType traintype) {
+	public void setTrainType(TrainType traintype) {
 		// TODO Auto-generated method stub
 		
 	}

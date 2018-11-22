@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.TrainType;
-
 public class TrainDTO {
 
 	private Integer id;
@@ -30,8 +28,8 @@ public class TrainDTO {
 		return trainType;
 	}
 
-	public void setTrainType(TrainType trainType) {
-		this.trainType = trainType.name();
+	public void setTrainType(String trainType) {
+		this.trainType = trainType;
 	}
 
 	public Integer getLocomotiveId() {

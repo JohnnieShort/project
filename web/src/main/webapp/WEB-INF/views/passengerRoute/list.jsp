@@ -31,7 +31,7 @@
 				<td><c:out value="${passengerRoute.departure}" /></td>
 				<td><c:out value="${passengerRoute.arrival}" /></td>
 				<td><c:out value="${passengerRoute.passengerRoutetype}" /></td>
-				<td><c:out value="${passengerRoute.train.id}" /></td>
+				<td><c:out value="${passengerRoute.trainId}" /></td>
 				<td><c:out value="${passengerRoute.isActual}" /></td>
 			
 				<td><c:out value="${passengerRoute.frequency}" /></td>

@@ -2,6 +2,8 @@ package com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 
@@ -17,6 +19,7 @@ public class Train extends BaseEntity implements ITrain {
 	private Double track;
 	
 	@Column
+	@Enumerated(EnumType.ORDINAL)
 	private TrainType trainType;
 	
 
@@ -45,13 +48,13 @@ public class Train extends BaseEntity implements ITrain {
 	}
 
 	@Override
-	public TrainType getTraintype() {
+	public TrainType getTrainType() {
 		
 		return trainType;
 	}
 
 	@Override
-	public void setTraintype(TrainType trainType) {
+	public void setTrainType(TrainType trainType) {
 		this.trainType = trainType;
 		
 	}
