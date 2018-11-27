@@ -9,4 +9,6 @@ public interface ITrainDao extends IDao<ITrain, Integer> {
 	List<ITrain> find(TrainFilter filter);
 	
 	long getCount(TrainFilter filter);
+
+	List<Integer> getTainsIds();
 }

@@ -25,4 +25,6 @@ public interface IRouteItemService {
 	long getCount(RouteItemFilter filter);
 
 	IRouteItem getFullInfo(Integer id);
+
+	List<IRouteItem> getItems(Integer routeId);
 }

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITicketDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TicketFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoOrder_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Passenger_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Station_;
@@ -53,7 +52,7 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 		cq.distinct(true); // to avoid duplicate rows in result
 
 		// .. where id=...
-		cq.where(cb.equal(from.get(CargoOrder_.id), id)); // where id=?
+		cq.where(cb.equal(from.get(Ticket_.id), id)); // where id=?
 
 		final TypedQuery<ITicket> q = em.createQuery(cq);
 

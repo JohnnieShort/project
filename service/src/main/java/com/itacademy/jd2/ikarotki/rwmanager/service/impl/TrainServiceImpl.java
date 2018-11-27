@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,5 +90,12 @@ public class TrainServiceImpl implements ITrainService {
 		final ITrain entity = dao.getFullInfo(id);
 		LOGGER.info("requested train: {}", entity);
 		return entity;
+	}
+
+	@Override
+	public List<Integer> getIds() {
+		List<Integer> ids = new ArrayList<>();
+		ids = dao.getTainsIds();
+		return ids;
 	}
 }

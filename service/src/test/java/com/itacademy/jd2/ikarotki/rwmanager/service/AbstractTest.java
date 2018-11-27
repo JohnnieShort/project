@@ -25,6 +25,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.TrainType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 
 @SpringJUnitConfig(locations = "classpath:service-context-test.xml")
@@ -134,6 +135,7 @@ public abstract class AbstractTest {
 		Date date = new Date();
 		entity.setCreated(date);
 		entity.setUpdated(date);
+		entity.setTrainType(TrainType.PASSENGER);
 		entity.setTrack(new BigDecimal(10000.0 * getRANDOM().nextDouble()).setScale(6, RoundingMode.UP).doubleValue());
 		trainService.save(entity);
 		return entity;

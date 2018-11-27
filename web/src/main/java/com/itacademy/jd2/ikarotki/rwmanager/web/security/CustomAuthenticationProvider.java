@@ -30,13 +30,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		final String eMail = authentication.getPrincipal() + "";
 		final String password = authentication.getCredentials() + "";
 
-		// TODO find use by login
+		// TODO find user by login
 		if (!"admin".equals(eMail)) {
 			if (userAccountService.checkPassword(eMail, password)) {
 				IUserAccount userAccount = userAccountService.getByEmail(eMail);
 				final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 				authorities.add(new SimpleGrantedAuthority(userAccount.getRole().toString()));
-				return new ExtendedUsernamePasswordAuthenticationToken(userAccount.getId(), eMail, password,
+				return new ExtendedUsernamePasswordAuthenticationToken(userAccount.getFirstName(),userAccount.getId(), eMail, password,
 						authorities);
 			}
 			throw new BadCredentialsException("1000");
@@ -48,7 +48,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		}
 
 		final int userId = 1; // FIXME: it should be the real user id from DB
-
+		final String name = "Ванюша";
 		List<String> userRoles = new ArrayList<>();// TODO get list of user's
 													// roles
 		userRoles.add("ROLE_ADMIN");
@@ -57,7 +57,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		for (String roleName : userRoles) {
 			authorities.add(new SimpleGrantedAuthority(roleName));
 		}
-		return new ExtendedUsernamePasswordAuthenticationToken(userId, eMail, password, authorities);
+		return new ExtendedUsernamePasswordAuthenticationToken(name, userId, eMail, password, authorities);
 
 	}
 

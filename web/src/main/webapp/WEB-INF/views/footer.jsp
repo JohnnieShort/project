@@ -1,9 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<footer class="page-footer">
+<footer class="page-footer teal lighten-2">
 <c:set var="baseUrl" value="${pageContext.request.contextPath}" />	
 		
 	
-    <div class="container">
+    <div class="container ">
         <div class="row">
             <div class="col l6 s12">
                 <h5 class="white-text">Footer Content</h5>
@@ -17,8 +17,8 @@
             </div>
         </div>
     </div>
-    <div class="footer-copyright">
-        <div class="container">
+    <div class="footer-copyright teal lighten-2">
+        <div class="container ">
              2018 Copyright Text <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
         </div>
     </div>

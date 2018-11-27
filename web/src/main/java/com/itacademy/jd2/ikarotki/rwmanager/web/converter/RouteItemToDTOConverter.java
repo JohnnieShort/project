@@ -16,14 +16,16 @@ public class RouteItemToDTOConverter implements Function<IRouteItem, RouteItemDT
 		dto.setCreated(entity.getCreated());
 		dto.setUpdated(entity.getUpdated());
 
-		dto.setPassengerRoute(entity.getPassengerRoute());
+		dto.setPassengerRouteId(entity.getPassengerRoute().getId());
 		dto.setDeparture(entity.getDeparture());
 		dto.setArrival(entity.getArrival());
-		dto.setStationFrom(entity.getStationFrom());
-		dto.setStationTo(entity.getStationTo());
+		dto.setStationFromId(entity.getStationFrom().getId());
+		dto.setStationFromName(entity.getStationFrom().getName());
+
+		dto.setStationToId(entity.getStationTo().getId());
+		dto.setStationToName(entity.getStationTo().getName());
 
 		dto.setOrdinalNum(entity.getOrdinalNum());
-		
 
 		return dto;
 	}

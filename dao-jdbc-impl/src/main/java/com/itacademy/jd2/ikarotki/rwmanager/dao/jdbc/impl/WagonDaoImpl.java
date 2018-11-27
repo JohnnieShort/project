@@ -7,11 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IWagonDao;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.WagonFilter;
@@ -138,4 +140,14 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+
+	@Override
+	public Map<Integer, Integer> getPlacesByTrain(List<ITrain> trainsIds) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }

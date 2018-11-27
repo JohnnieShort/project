@@ -6,18 +6,19 @@
 <%-- <fmt:setLocale value="${key}" />
 <fmt:setBundle basename="text" /> --%>
 <header>
-	<nav>
-		<div class="nav-wrapper container">
+	<nav bgcolor=teal lighten-2>
+		<div class="nav-wrapper container teal lighten-2">
 		<ul id="dropdown1" class="dropdown-content">
-				<li><mytaglib:i18n key="menu.link.ru"/></li>
+				<li><a href="${baseUrl}?language=ru">RU</a></li>
 				<li class="divider"></li>
-				<li><mytaglib:i18n key="menu.link.en"/></li>
+				<li><a href="${baseUrl}?language=en">EN</a></li>
 				
 			</ul>
 			<ul class="left hide-on-med-and-down">
-				<li><a href="${baseUrl}/">Home</a></li>
+				<li><a href="${baseUrl}/"><mytaglib:i18n key="menu.link.home"/></a></li>
 
-				<li><a href="${baseUrl}/schedule">Schedule</a></li>
+				<li><a href="${baseUrl}/schedule"><mytaglib:i18n key="menu.link.schedule"/></a></li>
+				
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<li><a href="${baseUrl}/administratorPage">Data managing</a></li>
 				</sec:authorize>
@@ -31,11 +32,20 @@
 					<li><a class="right" href="${baseUrl}/login" title="log in"><i
 						class="material-icons">arrow_downward</i></a></li>
 				</sec:authorize>
-				
-				<li>hello, <sec:authentication property="principal" /></li>
+				<sec:authorize access="isAnonymous()">
+				<li><div class="chip">hello, <sec:authentication property="principal" /></div></li>
+				</sec:authorize>
+				<sec:authorize access="!isAnonymous()">
+				<li><div class="chip">hello, <sec:authentication property="name" /></div></li>
+				</sec:authorize>
 				<li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Language<i
 						class="material-icons right">arrow_drop_down</i></a></li>
 			</ul>
 		</div>
 	</nav>
 </header>
+
+
+
+  
+        

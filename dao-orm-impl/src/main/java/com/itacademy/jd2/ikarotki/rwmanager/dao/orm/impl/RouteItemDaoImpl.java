@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IRouteItemDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoOrder_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.RouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.RouteItem_;
@@ -51,7 +50,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		cq.distinct(true); // to avoid duplicate rows in result
 
 		// .. where id=...
-		cq.where(cb.equal(from.get(CargoOrder_.id), id)); // where id=?
+		cq.where(cb.equal(from.get(RouteItem_.id), id)); // where id=?
 
 		final TypedQuery<IRouteItem> q = em.createQuery(cq);
 
@@ -63,7 +62,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 		final CriteriaQuery<IRouteItem> cq = cb.createQuery(IRouteItem.class); // define type of result
-		final Root<RouteItem> from = cq.from(RouteItem.class);// select from brand
+		final Root<RouteItem> from = cq.from(RouteItem.class);// select from route_item
 		cq.select(from); // select what? select *
 
 		if (filter.isFetchPassengerRoute()) {
@@ -131,6 +130,23 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		cq.select(cb.count(from)); // select what? select count(*)
 		final TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult(); // execute query
+	}
+
+	@Override
+	public List<IRouteItem> getItems(Integer routeId) {
+		
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<IRouteItem> cq = cb.createQuery(IRouteItem.class); // define type of result
+		final Root<RouteItem> from = cq.from(RouteItem.class);// select from route_item
+		cq.select(from); // select what? select *
+		cq.where(cb.equal(from.get(PassengerRoute_.id), routeId)); // where passengerRoute.id=?
+		
+
+		final TypedQuery<IRouteItem> q = em.createQuery(cq);
+		
+		return q.getResultList();
+
 	}
 
 }

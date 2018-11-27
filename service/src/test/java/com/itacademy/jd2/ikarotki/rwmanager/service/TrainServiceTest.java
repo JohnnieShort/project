@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -15,6 +16,19 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
 
 public class TrainServiceTest extends AbstractTest {
+	
+	@Test
+	public void testGetTrainsIds() {
+		final int randomObjectsCount = getRandomObjectsCount();
+		for (int i = 0; i < randomObjectsCount; i++) {
+			saveNewTrain();
+		}
+		List<Integer> ids = new ArrayList<Integer>();
+		ids = trainService.getIds();
+		assertNotNull(ids);
+		
+	}
+	
 
 	@Test
 	public void testCreate() {

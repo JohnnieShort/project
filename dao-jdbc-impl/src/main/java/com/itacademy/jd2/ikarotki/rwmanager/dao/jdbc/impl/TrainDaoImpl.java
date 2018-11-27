@@ -128,4 +128,10 @@ public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements IT
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Integer> getTainsIds() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

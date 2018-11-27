@@ -22,18 +22,19 @@ public class I18N extends SimpleTagSupport {
 
 		Locale locale = (Locale) jspContext.findAttribute(SESSION_LOCALE_KEY);
 		if (locale == null) {
-			locale = Locale.getDefault();
+			locale = DEFAULT_LOCALE;
 		}
 
 		jspContext.getOut().println(getLocalized(key, locale));
 	}
 
 	private String getLocalized(String key, Locale locale) {
-
+		
 		ResourceBundle mybundle = ResourceBundle.getBundle("MyLabels", locale);
 
 		try {
-			return mybundle.getString(key);
+			String string = mybundle.getString(key);
+			return string;
 		} catch (MissingResourceException e) {
 			return key;
 		}

@@ -200,4 +200,10 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<IRouteItem> getItems(Integer routeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

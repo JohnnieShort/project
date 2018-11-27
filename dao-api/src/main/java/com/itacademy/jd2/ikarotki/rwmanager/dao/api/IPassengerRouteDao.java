@@ -9,4 +9,6 @@ public interface IPassengerRouteDao extends IDao<IPassengerRoute, Integer> {
 	List<IPassengerRoute> find(PassengerRouteFilter filter);
 	
 	long getCount(PassengerRouteFilter filter);
+
+	
 }

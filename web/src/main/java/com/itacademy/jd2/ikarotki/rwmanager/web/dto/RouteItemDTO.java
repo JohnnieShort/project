@@ -4,35 +4,38 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Range;
-
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class RouteItemDTO {
-	
+
 	private Integer id;
-	
+
 	private Date created;
-	
+
 	private Date updated;
 	@NotNull
-	@Range(min=0)
-	private IPassengerRoute passengerRoute;
+
+	private Integer passengerRouteId;
+	
+	private String stationFromName;
+	
+	private String stationToName;
+
 	@NotNull
-	@Range(min=0)
-	private IStation stationFrom;
+
+	private Integer stationFromId;
 	@NotNull
-	@Range(min=0)
-	private IStation stationTo;
+
+	private Integer stationToId;
 	@NotNull
+	@DateTimeFormat(pattern = "hh:mm a")
 	private Date departure;
 	@NotNull
+	@DateTimeFormat(pattern = "hh:mm a")
 	private Date arrival;
-	@NotNull
-	@Range(min=0)
-	private Integer ordinalNum;
 	
+
+	private Integer ordinalNum;
 
 	public Integer getId() {
 		return id;
@@ -40,6 +43,38 @@ public class RouteItemDTO {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getStationFromName() {
+		return stationFromName;
+	}
+
+	public void setStationFromName(String stationFromName) {
+		this.stationFromName = stationFromName;
+	}
+
+	public String getStationToName() {
+		return stationToName;
+	}
+
+	public void setStationToName(String stationToName) {
+		this.stationToName = stationToName;
+	}
+
+	public Integer getStationFromId() {
+		return stationFromId;
+	}
+
+	public void setStationFromId(Integer stationFromId) {
+		this.stationFromId = stationFromId;
+	}
+
+	public Integer getStationToId() {
+		return stationToId;
+	}
+
+	public void setStationToId(Integer stationToId) {
+		this.stationToId = stationToId;
 	}
 
 	public Date getCreated() {
@@ -58,34 +93,16 @@ public class RouteItemDTO {
 		this.updated = updated;
 	}
 
-	
-
-	public IPassengerRoute getPassengerRoute() {
-		return passengerRoute;
-	}
-
-	public void setPassengerRoute(IPassengerRoute passengerRoute) {
-		this.passengerRoute = passengerRoute;
-	}
-
-	public IStation getStationFrom() {
-		return stationFrom;
-	}
-
-	public void setStationFrom(IStation stationFrom) {
-		this.stationFrom = stationFrom;
-	}
-
-	public IStation getStationTo() {
-		return stationTo;
-	}
-
-	public void setStationTo(IStation stationTo) {
-		this.stationTo = stationTo;
-	}
-
 	public Date getDeparture() {
 		return departure;
+	}
+
+	public Integer getPassengerRouteId() {
+		return passengerRouteId;
+	}
+
+	public void setPassengerRouteId(Integer passengerRouteId) {
+		this.passengerRouteId = passengerRouteId;
 	}
 
 	public void setDeparture(Date departure) {
@@ -110,11 +127,10 @@ public class RouteItemDTO {
 
 	@Override
 	public String toString() {
-		return "RouteItemDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", passengerRoute="
-				+ passengerRoute + ", stationFrom=" + stationFrom + ", stationTo=" + stationTo + ", departure="
-				+ departure + ", arrival=" + arrival + ", ordinalNum=" + ordinalNum + "]";
+		return "RouteItemDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", passengerRouteId="
+				+ passengerRouteId + ", stationFromName=" + stationFromName + ", stationToName=" + stationToName
+				+ ", stationFromId=" + stationFromId + ", stationToId=" + stationToId + ", departure=" + departure
+				+ ", arrival=" + arrival + ", ordinalNum=" + ordinalNum + "]";
 	}
-
-	
 
 }

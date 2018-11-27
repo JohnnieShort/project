@@ -9,4 +9,6 @@ public interface IRouteItemDao extends IDao<IRouteItem, Integer>{
 	List<IRouteItem> find(RouteItemFilter filter);
 	
 	long getCount(RouteItemFilter filter);
+
+	List<IRouteItem> getItems(Integer routeId);
 }

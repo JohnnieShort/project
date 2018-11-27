@@ -90,4 +90,10 @@ public class RouteItemServiceImpl implements IRouteItemService {
 		LOGGER.info("requested route item: {}", entity);
 		return entity;
 	}
+
+	@Override
+	public List<IRouteItem> getItems(Integer routeId) {
+		List<IRouteItem> itemsList = dao.getItems(routeId);
+		return null;
+	}
 }

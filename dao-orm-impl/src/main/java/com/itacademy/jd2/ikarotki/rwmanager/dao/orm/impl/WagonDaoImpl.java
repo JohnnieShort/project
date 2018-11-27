@@ -1,6 +1,8 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,9 +16,9 @@ import org.hibernate.jpa.criteria.OrderImpl;
 import org.springframework.stereotype.Repository;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IWagonDao;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.WagonFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoOrder_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Wagon;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Wagon_;
@@ -49,7 +51,7 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 		cq.distinct(true); // to avoid duplicate rows in result
 
 		// .. where id=...
-		cq.where(cb.equal(from.get(CargoOrder_.id), id)); // where id=?
+		cq.where(cb.equal(from.get(Wagon_.id), id)); // where id=?
 
 		final TypedQuery<IWagon> q = em.createQuery(cq);
 
@@ -108,9 +110,29 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 		final CriteriaQuery<Long> cq = cb.createQuery(Long.class); // define type of result
 		final Root<Wagon> from = cq.from(Wagon.class); // select from wagon
+		
 		cq.select(cb.count(from)); // select what? select count(*)
 		final TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult(); // execute query
+	}
+
+	@Override
+	public Map<Integer, Integer> getPlacesByTrain(List<ITrain> trains) {
+		Map<Integer,Integer> placesBYTrain = new HashMap<Integer, Integer>();
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<Double> cq = cb.createQuery(Double.class);
+		final Root<Wagon> from = cq.from(Wagon.class);
+		
+		
+		cq.multiselect(cb.sum(from.get(Wagon_.capacity)));
+		for(ITrain train: trains) {
+			//from.fetch(Wagon_.train, JoinType.LEFT);
+			cq.where(cb.equal(from.get(Wagon_.train), train));
+			TypedQuery<Double> q = em.createQuery(cq);
+			placesBYTrain.put(train.getId(), q.getSingleResult().intValue());
+		}
+		return placesBYTrain;
 	}
 
 }

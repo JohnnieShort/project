@@ -1,7 +1,9 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IWagonDao;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.WagonFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IWagonService;
@@ -90,5 +93,12 @@ public class WagonServiceImpl implements IWagonService {
 		final IWagon entity = dao.getFullInfo(id);
 		LOGGER.info("requested wagon: {}", entity);
 		return entity;
+	}
+
+	@Override
+	public Map<Integer, Integer> getPlaces(List<ITrain> trains) {
+		Map<Integer, Integer> placesByTrain = new HashMap<Integer, Integer>();
+		placesByTrain = dao.getPlacesByTrain(trains);
+		return placesByTrain;
 	}
 }

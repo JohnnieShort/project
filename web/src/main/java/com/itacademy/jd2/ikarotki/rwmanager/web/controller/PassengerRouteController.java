@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
@@ -29,13 +30,16 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IRouteItemService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITrainService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IWagonService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteToDTOConverter;
+import com.itacademy.jd2.ikarotki.rwmanager.web.converter.RouteItemFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.PassengerRouteDTO;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.StationDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.RouteItemDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
@@ -44,21 +48,28 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 	private IPassengerRouteService passengerRouteService;
 	private IStationService stationService;
 	private ITrainService trainService;
+	private IWagonService wagonService;
+	private IRouteItemService routeItemService;
+	private RouteItemFromDTOConverter routeItemFromDTOConverter;
 	private PassengerRouteToDTOConverter toDtoConverter;
 	private StationToDTOConverter stationToDtoConverter;
 	private PassengerRouteFromDTOConverter fromDtoConverter;
 
 	@Autowired
 	private PassengerRouteController(IPassengerRouteService pasengerRouteService, IStationService stationService,
-			ITrainService trainService, PassengerRouteToDTOConverter toDtoConverter,
-			PassengerRouteFromDTOConverter fromDtoConverter, StationToDTOConverter stationToDtoConverter) {
+			ITrainService trainService, IWagonService wagonService, IRouteItemService routeItemService,
+			PassengerRouteToDTOConverter toDtoConverter, PassengerRouteFromDTOConverter fromDtoConverter,
+			StationToDTOConverter stationToDtoConverter, RouteItemFromDTOConverter routeItemFromDTOConverter) {
 		super();
 		this.passengerRouteService = pasengerRouteService;
+		this.routeItemService = routeItemService;
+		this.routeItemFromDTOConverter = routeItemFromDTOConverter;
 		this.trainService = trainService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 		this.stationService = stationService;
 		this.stationToDtoConverter = stationToDtoConverter;
+		this.wagonService = wagonService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -79,6 +90,14 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 
 		final Map<String, Object> models = new HashMap<>();
 		models.put("gridItems", dtos);
+
+		List<ITrain> trains = new ArrayList<ITrain>();
+
+		trains = trainService.find(new TrainFilter());
+
+		Map<Integer, Integer> places = wagonService.getPlaces(trains);
+		models.put("places", places);
+
 		return new ModelAndView("passengerRoute.list", models);
 	}
 
@@ -92,16 +111,45 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
 
-	@RequestMapping(value = "/addSt", method = RequestMethod.GET)
-	public ModelAndView showStForm() {
+	@RequestMapping(value = "/addSt", method = RequestMethod.POST)
+	public ModelAndView showStForm(@Valid @ModelAttribute("formModel") final PassengerRouteDTO formModel,
+			final BindingResult result) {
+
+		save(formModel, result);
 		final Map<String, Object> hashMap = new HashMap<>();
-		final IPassengerRoute newEntity = passengerRouteService.createEntity();
-		PassengerRouteDTO dto = toDtoConverter.apply(newEntity);
-		hashMap.put("formModel", dto);
-		List<IStation> stationsList = stationService.find(new StationFilter());
-		List<StationDTO> stDtos = stationsList.stream().map(stationToDtoConverter).collect(Collectors.toList());
-		hashMap.put("stationsList", stDtos);
+
+		hashMap.put("passengerRouteFormModelId", formModel.getId());
+		RouteItemDTO routeItemDTO = new RouteItemDTO();
+		routeItemDTO.setPassengerRouteId(formModel.getId());
+		hashMap.put("routeItemFormModel", routeItemDTO);
+		loadStations(hashMap);
+		loadItems(hashMap, formModel.getId());
 		return new ModelAndView("stations.edit", hashMap);
+	}
+
+	@RequestMapping(value = "/saveItem", method = RequestMethod.POST)
+	public ModelAndView saveRouteItem(@Valid @ModelAttribute("formModel") final RouteItemDTO formModel,
+			final BindingResult result) {
+		final Map<String, Object> hashMap = new HashMap<>();
+		if (result.hasErrors()) {
+			hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
+			RouteItemDTO routeItemDTO = new RouteItemDTO();
+			routeItemDTO.setPassengerRouteId(formModel.getPassengerRouteId());
+			hashMap.put("routeItemFormModel", routeItemDTO);
+			loadStations(hashMap);
+			loadItems(hashMap, formModel.getId());
+			return new ModelAndView("stations.edit", hashMap);
+		} else {
+			final IRouteItem entity = routeItemFromDTOConverter.apply(formModel);
+			routeItemService.save(entity);
+			hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
+			RouteItemDTO routeItemDTO = new RouteItemDTO();
+			routeItemDTO.setPassengerRouteId(formModel.getPassengerRouteId());
+			hashMap.put("routeItemFormModel", routeItemDTO);
+			loadStations(hashMap);
+			loadItems(hashMap, formModel.getId());
+			return new ModelAndView("stations.edit", hashMap);
+		}
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
@@ -129,6 +177,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
+		loadCommonFormModels(hashMap);
 
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
@@ -139,6 +188,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
+		loadCommonFormModels(hashMap);
 
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
@@ -158,4 +208,25 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		hashMap.put("trainsChoices", trainChoices);
 
 	}
+
+	private void loadStations(final Map<String, Object> hashMap) {
+		List<IStation> stationsList = stationService.find(new StationFilter());
+		Map<Integer, String> stationChoices = stationsList.stream()
+				.collect(Collectors.toMap(IStation::getId, station -> station.getName()));
+		hashMap.put("stationChoices", stationChoices);
+
+	}
+
+	private void loadItems(Map<String, Object> hashMap, Integer RouteId) {
+		List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
+		itemsList = routeItemService.getItems(RouteId);
+		if (itemsList == null) {
+			return;
+		}
+		Map<Integer, String> itemChoices = itemsList.stream().collect(Collectors.toMap(IRouteItem::getId, routeItem -> {
+			return routeItem.getStationFrom().getName() + " " + routeItem.getStationTo().getName();
+		}));
+		hashMap.put("routeItems", itemChoices);
+	}
+
 }

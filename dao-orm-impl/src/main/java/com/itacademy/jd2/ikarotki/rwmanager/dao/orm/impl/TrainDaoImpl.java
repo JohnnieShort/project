@@ -16,7 +16,6 @@ import org.springframework.stereotype.Repository;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITrainDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoOrder_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Locomotive_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train_;
@@ -48,7 +47,7 @@ public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements IT
 		cq.distinct(true); // to avoid duplicate rows in result
 
 		// .. where id=...
-		cq.where(cb.equal(from.get(CargoOrder_.id), id)); // where id=?
+		cq.where(cb.equal(from.get(Train_.id), id)); // where id=?
 
 		final TypedQuery<ITrain> q = em.createQuery(cq);
 
@@ -106,6 +105,17 @@ public class TrainDaoImpl extends AbstractDaoImpl<ITrain, Integer> implements IT
 		cq.select(cb.count(from)); // select what? select count(*)
 		final TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult(); // execute query
+	}
+
+	@Override
+	public List<Integer> getTainsIds() {
+		final EntityManager em = getEntityManager();
+		final CriteriaBuilder cb = em.getCriteriaBuilder();
+		final CriteriaQuery<Integer> cq = cb.createQuery(Integer.class); // define type of result
+		final Root<Train> from = cq.from(Train.class); // select from train
+		cq.select(from.get(Train_.id));
+		final TypedQuery<Integer> q = em.createQuery(cq);
+		return q.getResultList();
 	}
 
 }

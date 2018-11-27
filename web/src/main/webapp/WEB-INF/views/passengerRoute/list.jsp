@@ -26,16 +26,22 @@
 		<c:forEach var="passengerRoute" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${passengerRoute.id}" /></td>
-				<td><c:out value="${passengerRoutefrom.id}" /></td>
-				<td><c:out value="${passengerRoute.to.id}" /></td>
-				<td><c:out value="${passengerRoute.departure}" /></td>
-				<td><c:out value="${passengerRoute.arrival}" /></td>
-				<td><c:out value="${passengerRoute.passengerRoutetype}" /></td>
+				<td><c:out value=" " /></td> <%--"${passengerRoutefrom.id}"--%>
+				<td><c:out value=" " /></td> <%--"${passengerRoute.to.id}"--%>
+				<td><c:out value=" " /></td> <%--"${passengerRoute.departure}"--%>
+				<td><c:out value=" "  /></td> <%--"${passengerRoute.arrival}"--%>
+				<td><c:out value="${passengerRoute.passengerRouteType}" /></td>
 				<td><c:out value="${passengerRoute.trainId}" /></td>
 				<td><c:out value="${passengerRoute.isActual}" /></td>
 			
 				<td><c:out value="${passengerRoute.frequency}" /></td>
-				<td><c:out value="${passengerRoute.places}" /></td>
+				<td>
+						<c:forEach var="entry" items="${places}" varStatus="loopCounter">
+							<c:if test = "${entry.key == passengerRoute.trainId}">
+         						<c:out value = "${entry.value}"/>
+     						</c:if>
+						</c:forEach>
+				</td> <%--"${passengerRoute.places}"--%>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${passengerRoute.created}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -50,6 +56,7 @@
 		</c:forEach>
 	</tbody>
 </table>
-<jspFragments:paging />
+
 <a class="waves-effect waves-light btn right" href="${baseUrl}/add"><i
 	class="material-icons">add</i></a>
+<jspFragments:paging />

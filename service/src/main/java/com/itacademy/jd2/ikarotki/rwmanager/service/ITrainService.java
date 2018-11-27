@@ -25,4 +25,6 @@ public interface ITrainService {
 	long getCount(TrainFilter filter);
 
 	ITrain getFullInfo(Integer id);
+
+	List<Integer> getIds();
 }

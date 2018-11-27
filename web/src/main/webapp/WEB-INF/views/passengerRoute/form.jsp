@@ -8,7 +8,7 @@
 
 
    
-    <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
+    <form:form class="col s12" method="POST" action="${baseUrl}/addSt" modelAttribute="formModel">
     
     
         <form:input path="id" type="hidden" />
@@ -26,8 +26,8 @@
         </div>
         
         <div class="row">
-            <div class="input-field col s12">
-               <form:select path="passengerRouteType">
+            <div class="input-field col s12" >
+               <form:select path="passengerRouteType" disabled="${readonly}">
             		<form:option value="0" label="Select type of route" />
             		<form:options items="${passengerRouteTypes}" />
             	</form:select>
@@ -49,8 +49,8 @@
         
         <div class="row">
              <div class="input-field col s12">
-               <form:select path="frequency">
-            		<form:option value="0" label="Select frequncy" />
+               <form:select path="frequency" disabled="${readonly}">
+            		<form:option value="0" label="Select frequency" />
             		<form:options items="${frequency}" />
             	</form:select>
             	<form:errors path="frequency" cssClass="red-text" />
@@ -63,7 +63,7 @@
             <div class="col s6"></div>
             <div class="col s3">
                 <c:if test="${!readonly}">
-                    <button class="btn waves-effect waves-light right" type="submit">сохранить</button>
+                    <button class="btn waves-effect waves-light right" type="submit">Next</button>
                 </c:if>
             </div>
             <div class="col s3">

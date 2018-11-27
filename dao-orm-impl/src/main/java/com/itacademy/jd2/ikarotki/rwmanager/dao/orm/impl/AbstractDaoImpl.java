@@ -1,6 +1,7 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,6 +9,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IDao;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.AbstractFilter;
 
 public abstract class AbstractDaoImpl<T, ID> implements IDao<T, ID> {
@@ -86,4 +88,5 @@ public abstract class AbstractDaoImpl<T, ID> implements IDao<T, ID> {
 		return resultList.get(0);
 	}
 
+	
 }

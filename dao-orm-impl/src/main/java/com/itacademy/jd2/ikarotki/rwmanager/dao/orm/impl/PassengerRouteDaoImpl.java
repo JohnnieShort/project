@@ -16,13 +16,12 @@ import org.springframework.stereotype.Repository;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IPassengerRouteDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.CargoOrder_;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute_;
 
 @Repository
 public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Integer> implements IPassengerRouteDao {
-
+	
 	protected PassengerRouteDaoImpl() {
 		super(PassengerRoute.class);
 
@@ -54,7 +53,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 		cq.distinct(true); // to avoid duplicate rows in result
 
 		// .. where id=...
-		cq.where(cb.equal(from.get(CargoOrder_.id), id)); // where id=?
+		cq.where(cb.equal(from.get(PassengerRoute_.id), id)); // where id=?
 
 		final TypedQuery<IPassengerRoute> q = em.createQuery(cq);
 
@@ -132,5 +131,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 		final TypedQuery<Long> q = em.createQuery(cq);
 		return q.getSingleResult(); // execute query
 	}
+
+	
 
 }
