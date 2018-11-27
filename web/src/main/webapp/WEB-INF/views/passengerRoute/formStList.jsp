@@ -47,7 +47,7 @@
         
         <div class="row">
 			<div class="input-field col s12">
-				<form:input path="passengerRouteId" type="text" value="${passengerRouteFormModelId}" disabled="true" />
+				<form:input path="passengerRouteId" value="${passengerRouteFormModelId}" type="hidden"/>
 				<form:errors path="passengerRouteId" cssClass="red-text" />
 				<label for="name">Passenger route id</label>
 			</div>

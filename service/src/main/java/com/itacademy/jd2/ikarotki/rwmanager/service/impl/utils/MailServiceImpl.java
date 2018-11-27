@@ -10,9 +10,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class SendMailTLS {
+import org.springframework.stereotype.Service;
+@Service
+public class MailServiceImpl implements IMailService {
 
-	public static void sendMail(String mail, String Subject, String messageText) {
+	public void sendEmail(String mail, String Subject, String messageText) {
 
 		final String username = "Johnnie.Short@gmail.com";
 		final String password = "TheVictorious1982";
