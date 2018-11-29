@@ -199,19 +199,15 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 
 	@Override
 	public IRouteItem getFullInfo(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("not implemented");
 	}
 
 	@Override
 	public List<IRouteItem> getItems(Integer routeId, RouteItemFilter filter) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new RuntimeException("not implemented");
 	}
 
-	@Override
-	public Map<Integer, String> getStationsNames(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter, boolean isFirst) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
+
+	
 }

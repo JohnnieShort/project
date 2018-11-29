@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,4 +32,6 @@ public interface IRouteItemService {
 	List<IRouteItem> getItems(Integer routeId, RouteItemFilter filter);
 
 	Map<Integer, String> getStationsNames(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter, boolean isFirst);
+
+	Map<Integer, Date> getTime(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter, boolean isDeparture);
 }

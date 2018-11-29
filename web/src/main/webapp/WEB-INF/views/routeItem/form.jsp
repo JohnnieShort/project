@@ -8,25 +8,25 @@
         
          <div class="row">
             <div class="input-field col s12">
-                <form:input path="passengerRoute" type="text" disabled="${readonly}" />
-                <form:errors path="passengerRoute" cssClass="red-text" />
-                <label for="passengerRoute">Passenger route id</label>
+                <form:input path="passengerRouteId" type="text" disabled="${readonly}" />
+                <form:errors path="passengerRouteId" cssClass="red-text" />
+                <label for="passengerRouteId">Passenger route id</label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="stationFrom" type="text" disabled="${readonly}" />
-                <form:errors path="stationFrom" cssClass="red-text" />
-                <label for="stationFrom">Station from id</label>
+                <form:input path="stationFromId" type="text" disabled="${readonly}" />
+                <form:errors path="stationFromId" cssClass="red-text" />
+                <label for="stationFromId">Station from id</label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="stationTo" type="text" disabled="${readonly}" />
-                <form:errors path="stationTo" cssClass="red-text" />
-                <label for="stationTo">Station to id</label>
+                <form:input path="stationToId" type="text" disabled="${readonly}" />
+                <form:errors path="stationToId" cssClass="red-text" />
+                <label for="stationToId">Station to id</label>
             </div>
         </div>
         <div class="input-field col s6">

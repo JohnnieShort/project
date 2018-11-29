@@ -144,9 +144,8 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 	
 
 	@Override
-	public Map<Integer, Integer> getPlacesByTrain(List<ITrain> trainsIds) {
-		// TODO Auto-generated method stub
-		return null;
+	public  Double getPlacesByTrain(ITrain trains) {
+		throw  new RuntimeException("not implemented");
 	}
 
 	

@@ -19,17 +19,32 @@
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="is_actual">is actual</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="frequency">frequency</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="places">places</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
+			
 			<th></th>
 		</tr>
 		<c:forEach var="passengerRoute" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${passengerRoute.id}" /></td>
-				<td><c:out value=" " /></td> <%--"${passengerRoutefrom.id}"--%>
-				<td><c:out value=" " /></td> <%--"${passengerRoute.to.id}"--%>
-				<td><c:out value=" " /></td> <%--"${passengerRoute.departure}"--%>
-				<td><c:out value=" "  /></td> <%--"${passengerRoute.arrival}"--%>
+				<td><c:forEach var="entry" items="${firstStations}" varStatus="loopCounter">
+							<c:if test = "${entry.key == passengerRoute.id}">
+         						<c:out value = "${entry.value}"/>
+     						</c:if>
+						</c:forEach></td> <%--"${passengerRoutefrom.id}"--%>
+				<td><c:forEach var="entry" items="${lastStations}" varStatus="loopCounter">
+							<c:if test = "${entry.key == passengerRoute.id}">
+         						<c:out value = "${entry.value}"/>
+     						</c:if>
+						</c:forEach></td> <%--"${passengerRoute.to.id}"--%>
+				<td><c:forEach var="entry" items="${departures}" varStatus="loopCounter">
+							<c:if test = "${entry.key == passengerRoute.id}">
+         						<fmt:formatDate pattern="yyyy-MM-dd hh-mm" value="${entry.value}" />
+     						</c:if>
+						</c:forEach></td> <%--"${passengerRoute.departure}"--%>
+				<td><c:forEach var="entry" items="${arrivals}" varStatus="loopCounter">
+							<c:if test = "${entry.key == passengerRoute.id}">
+         						<fmt:formatDate pattern="yyyy-MM-dd hh-mm" value="${entry.value}" />
+     						</c:if>
+						</c:forEach></td> <%--"${passengerRoute.arrival}"--%>
 				<td><c:out value="${passengerRoute.passengerRouteType}" /></td>
 				<td><c:out value="${passengerRoute.trainId}" /></td>
 				<td><c:out value="${passengerRoute.isActual}" /></td>
@@ -42,10 +57,7 @@
      						</c:if>
 						</c:forEach>
 				</td> <%--"${passengerRoute.places}"--%>
-				<td><fmt:formatDate pattern="yyyy-MM-dd"
-						value="${passengerRoute.created}" /></td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd"
-						value="${passengerRoute.updated}" /></td>
+				
 				<td class="right"><a class="btn-floating"
 					href="${baseUrl}/${passengerRoute.id}"><i class="material-icons">info</i></a>
 					<a class="btn-floating" href="${baseUrl}/${passengerRoute.id}/edit"><i

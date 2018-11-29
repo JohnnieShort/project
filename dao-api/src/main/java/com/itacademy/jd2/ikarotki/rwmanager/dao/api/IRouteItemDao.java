@@ -14,5 +14,7 @@ public interface IRouteItemDao extends IDao<IRouteItem, Integer>{
 
 	List<IRouteItem> getItems(Integer routeId, RouteItemFilter filter);
 
-	Map<Integer, String> getStationsNames(List<IPassengerRoute> enetities, RouteItemFilter routeItemFilter, boolean isFirst);
+	
+
+	
 }

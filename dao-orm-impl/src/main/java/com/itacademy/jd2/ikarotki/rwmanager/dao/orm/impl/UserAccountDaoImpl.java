@@ -123,7 +123,7 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
 
 		final TypedQuery<IUserAccount> q = em.createQuery(cq);
 
-		return getSingleResult(q);
+		return q.getSingleResult();
 	}
 
 }

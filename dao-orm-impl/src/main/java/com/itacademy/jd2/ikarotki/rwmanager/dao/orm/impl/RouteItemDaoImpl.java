@@ -144,6 +144,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		cq.select(from); // select what? select *
 		cq.where(cb.equal(from.get(RouteItem_.passengerRoute).get(PassengerRoute_.id), routeId)); // where
 		cq.distinct(true); // to avoid duplicate rows in result // passengerRoute.id=?
+		cq.orderBy(cb.asc(from.get(RouteItem_.ordinalNum)));
 		if (filter.isFetchStationFrom()) {
 
 			from.fetch(RouteItem_.stationFrom, JoinType.LEFT);
@@ -160,56 +161,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 
 	}
 
-	@Override
-	public Map<Integer, String> getStationsNames(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter,
-			boolean isFirst) {
-		Map<Integer, String> names = new HashMap<Integer, String>();
-		for (IPassengerRoute entity : entities) {
-			List<IRouteItem> items = getItems(entity.getId(), routeItemFilter);
-			names.put(entity.getId(), getName(isFirst, items, routeItemFilter));
-		}
-		return names;
-	}
+	
 
-	private String getName(boolean isFirst, List<IRouteItem> items, RouteItemFilter filter) {
-		int count;
-		if (isFirst) {
-			count = 0;
-		} else {
-			count = items.size() - 1;
-		}
-		final EntityManager em = getEntityManager();
-		final CriteriaBuilder cb = em.getCriteriaBuilder();
-		final CriteriaQuery<String> cq = cb.createQuery(String.class); // define type of result
-		final Root<RouteItem> from = cq.from(RouteItem.class);// select from route_item
-		cq.distinct(true);
-		if (isFirst) {
-			cq.multiselect(from.get(RouteItem_.stationFrom).get(Station_.name)); // select what? select *
-		} else {
-			cq.multiselect(from.get(RouteItem_.stationTo).get(Station_.name)); // select what? select *
-		}
-		cq.where(cb.equal(from.get(RouteItem_.ordinalNum), count));
-		if (filter.isFetchStationFrom()) {
-
-			// from.fetch(RouteItem_.stationFrom, JoinType.LEFT);
-		}
-
-		if (filter.isFetchStationTo()) {
-
-			// from.fetch(RouteItem_.stationTo, JoinType.LEFT);
-		}
-		final TypedQuery<String> q = em.createQuery(cq);
-
-		return getSingleName(q);
-	}
-
-	protected String getSingleName(final TypedQuery<String> q) {
-		final List<String> resultList = q.getResultList();
-		final int size = resultList.size();
-		if (size != 1) {
-			return "Items of route not specified";
-		}
-		return resultList.get(0);
-	}
-
+	
 }

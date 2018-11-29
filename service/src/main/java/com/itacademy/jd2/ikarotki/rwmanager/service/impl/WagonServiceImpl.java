@@ -96,9 +96,14 @@ public class WagonServiceImpl implements IWagonService {
 	}
 
 	@Override
-	public Map<Integer, Integer> getPlaces(List<ITrain> trains) {
-		Map<Integer, Integer> placesByTrain = new HashMap<Integer, Integer>();
-		placesByTrain = dao.getPlacesByTrain(trains);
+	public Map<Integer, Double> getPlaces(List<ITrain> trains) {
+		Map<Integer, Double> placesByTrain = new HashMap<Integer, Double>();
+		
+		for (ITrain iTrain : trains) {
+			LOGGER.info("requested train places count: {}", iTrain);
+			Double count = dao.getPlacesByTrain(iTrain);
+			placesByTrain.put(iTrain.getId(), count==null?0:count );
+		}
 		return placesByTrain;
 	}
 }

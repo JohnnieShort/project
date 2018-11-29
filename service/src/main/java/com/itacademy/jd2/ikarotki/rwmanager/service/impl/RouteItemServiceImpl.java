@@ -1,6 +1,7 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -100,8 +101,41 @@ public class RouteItemServiceImpl implements IRouteItemService {
 	}
 
 	@Override
-	public Map<Integer, String> getStationsNames(List<IPassengerRoute> enetities, RouteItemFilter routeItemFilter, boolean isFirst) {
-		Map<Integer, String> firstStationsNames = dao.getStationsNames(enetities, routeItemFilter, isFirst);
-		return firstStationsNames;
+	public Map<Integer, String> getStationsNames(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter,
+			boolean isFirst) {
+		Map<Integer, String> names = new HashMap<Integer, String>();
+		for (IPassengerRoute entity : entities) {
+			List<IRouteItem> items = getItems(entity.getId(), routeItemFilter);
+			if (items.isEmpty()) {
+				names.put(entity.getId(), "items of route not specified.");
+				continue;
+			}
+			if (isFirst) {
+				names.put(entity.getId(), items.get(0).getStationFrom().getName());
+			} else {
+				names.put(entity.getId(), items.get(items.size() - 1).getStationTo().getName());
+			}
+		}
+		return names;
 	}
+
+	@Override
+	public Map<Integer, Date> getTime(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter,
+			boolean isDeparture) {
+		Map<Integer, Date> departures = new HashMap<Integer, Date>();
+		for (IPassengerRoute entity : entities) {
+			List<IRouteItem> items = getItems(entity.getId(), routeItemFilter);
+			if (items.isEmpty()) {
+				departures.put(entity.getId(), new Date());
+				continue;
+			}
+			if (isDeparture) {
+				departures.put(entity.getId(), items.get(0).getDeparture());
+			} else {
+				departures.put(entity.getId(), items.get(items.size() - 1).getArrival());
+			}
+		}
+		return departures;
+	}
+	
 }

@@ -68,8 +68,8 @@ public class RouteItemController extends AbstractController<RouteItemDTO> {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		final IRouteItem newEntity = routeItemService.createEntity();
-		RouteItemDTO dto = toDtoConverter.apply(newEntity);
+		
+		RouteItemDTO dto = new RouteItemDTO();
 		hashMap.put("formModel", dto);
 
 		return new ModelAndView("routeItem.edit", hashMap);

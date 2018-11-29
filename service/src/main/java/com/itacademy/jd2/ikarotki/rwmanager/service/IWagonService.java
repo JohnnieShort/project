@@ -28,7 +28,7 @@ public interface IWagonService {
 
 	IWagon getFullInfo(Integer id);
 
-	Map<Integer, Integer> getPlaces(List<ITrain> trains);
+	Map<Integer, Double> getPlaces(List<ITrain> trains);
 
 	
 }

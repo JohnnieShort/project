@@ -117,22 +117,18 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 	}
 
 	@Override
-	public Map<Integer, Integer> getPlacesByTrain(List<ITrain> trains) {
-		Map<Integer,Integer> placesBYTrain = new HashMap<Integer, Integer>();
+	public Double getPlacesByTrain(ITrain train) {
+		Map<Integer,Double> placesBYTrain = new HashMap<Integer, Double>();
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 		final CriteriaQuery<Double> cq = cb.createQuery(Double.class);
 		final Root<Wagon> from = cq.from(Wagon.class);
+		cq.select(cb.sum(from.get(Wagon_.capacity))); // select what? select count(*)
 		
+		cq.where(cb.equal(from.get(Wagon_.train), train));
+		TypedQuery<Double> q = em.createQuery(cq);
 		
-		cq.multiselect(cb.sum(from.get(Wagon_.capacity)));
-		for(ITrain train: trains) {
-			//from.fetch(Wagon_.train, JoinType.LEFT);
-			cq.where(cb.equal(from.get(Wagon_.train), train));
-			TypedQuery<Double> q = em.createQuery(cq);
-			placesBYTrain.put(train.getId(), q.getSingleResult().intValue());
-		}
-		return placesBYTrain;
+		return q.getSingleResult();
 	}
 
 }

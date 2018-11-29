@@ -2,6 +2,7 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,7 +95,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 
 		List<ITrain> trains = new ArrayList<ITrain>();
 		trains = trainService.find(new TrainFilter());
-		Map<Integer, Integer> places = wagonService.getPlaces(trains);
+		Map<Integer, Double> places = wagonService.getPlaces(trains);
 		models.put("places", places);
 		
 		
@@ -105,6 +106,10 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		models.put("firstStations", firstStationsNames);
 		Map<Integer, String> lastStationsNames = routeItemService.getStationsNames(entities, routeItemFilter, false);
 		models.put("lastStations", lastStationsNames);
+		Map<Integer, Date> departures = routeItemService.getTime(entities, routeItemFilter, true);
+		models.put("departures", departures);
+		Map<Integer, Date> arrivals = routeItemService.getTime(entities, routeItemFilter, false);
+		models.put("arrivals", arrivals);
 		return new ModelAndView("passengerRoute.list", models);
 	}
 
