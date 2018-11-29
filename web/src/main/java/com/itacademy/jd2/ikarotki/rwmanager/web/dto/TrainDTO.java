@@ -22,7 +22,15 @@ public class TrainDTO {
 	
 	private String trainType;
 	
-	
+	private Integer version;
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 
 	public String getTrainType() {
 		return trainType;

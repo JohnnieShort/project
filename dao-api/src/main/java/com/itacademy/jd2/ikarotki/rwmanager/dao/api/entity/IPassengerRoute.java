@@ -23,5 +23,7 @@ public interface IPassengerRoute extends IBaseEntity {
 
 	public void setFrequency(Frequency frequency);
 
-	
+	public Integer getVersion();
+
+	public void setVersion(Integer version);
 }

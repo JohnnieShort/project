@@ -1,11 +1,18 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
+import static org.mockito.ArgumentMatchers.anyString;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
@@ -27,10 +34,12 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerR
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.TrainType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
+import com.itacademy.jd2.ikarotki.rwmanager.service.impl.utils.IMailService;
 
 @SpringJUnitConfig(locations = "classpath:service-context-test.xml")
 
 public abstract class AbstractTest {
+	private static final  Logger LOGGER =LoggerFactory.getLogger(AbstractTest.class);
 	@Autowired
 	protected ICargoOrderService cargoOrderService;
 	@Autowired
@@ -55,6 +64,8 @@ public abstract class AbstractTest {
 	protected IUserAccountService userAccountService;
 	@Autowired
 	protected IWagonService wagonService;
+	@Autowired
+    private IMailService mailService;
 
 	private static final Random RANDOM = new Random();
 
@@ -73,6 +84,17 @@ public abstract class AbstractTest {
 		trainService.deleteAll();
 		userAccountService.deleteAll();
 		wagonService.deleteAll();
+		
+		final IMailService spy = Mockito.spy(mailService);
+        Mockito.doAnswer(new Answer<Void>() {
+            @Override
+            public final Void answer(final InvocationOnMock invocation) throws Throwable {
+                LOGGER.info("email sending simulated:{}|{}", invocation.getArguments()[0],invocation.getArguments()[1]);
+                return null;
+            }
+        }).when(spy).sendEmail(anyString(), anyString(), anyString());
+
+        userAccountService.setMailService(spy);
 
 	}
 

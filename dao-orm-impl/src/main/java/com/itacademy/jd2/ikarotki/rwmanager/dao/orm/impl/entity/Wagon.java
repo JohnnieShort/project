@@ -6,6 +6,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
@@ -22,6 +23,21 @@ public class Wagon extends BaseEntity implements IWagon {
 	private Double freightPrice;
 	@Column
 	private Double capacity;
+	@Column
+    @Version
+    private Integer version = 0;
+	
+	@Override
+	public Integer getVersion() {
+		
+		return version;
+	}
+
+	@Override
+	public void setVersion(Integer version) {
+		this.version = version;
+		
+	}
 
 	public Double getCapacity() {
 		return capacity;

@@ -9,15 +9,25 @@ import org.hibernate.validator.constraints.Range;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 
 public class CargoRouteDTO {
-	
+
 	private Integer id;
-	
+
 	private Date created;
-	
+
 	private Date updated;
 	@NotNull
-	@Range(min=0)
+	@Range(min = 0)
 	private ITrain train;
+
+	private Integer version;
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 
 	public Integer getId() {
 		return id;

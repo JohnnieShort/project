@@ -15,4 +15,7 @@ public interface ITrain extends IBaseEntity {
 	public TrainType getTrainType();
 
 	public void setTrainType(TrainType traintype);
+	public Integer getVersion();
+
+	public void setVersion(Integer version);
 }

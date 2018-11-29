@@ -5,6 +5,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IWagon;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.WagonType;
 
 public class Wagon extends BaseEntity implements IWagon {
+	private Integer version;
 	private WagonType wagonType;
 	private ITrain train;
 	private Double freightPrice;
@@ -42,6 +43,18 @@ public class Wagon extends BaseEntity implements IWagon {
 		this.freightPrice = freightPrice;
 	}
 
+	@Override
+	public Integer getVersion() {
+		
+		return version;
+	}
+
+	@Override
+	public void setVersion(Integer version) {
+		this.version = version;
+		
+	}
+	
 	@Override
 	public String toString() {
 		return "Wagon [wagonType=" + wagonType + ", train=" + train + ", freightPrice=" + freightPrice + ", capacity="

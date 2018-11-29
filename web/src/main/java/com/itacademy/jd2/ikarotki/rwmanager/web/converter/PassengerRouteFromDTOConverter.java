@@ -27,7 +27,7 @@ public class PassengerRouteFromDTOConverter implements Function<PassengerRouteDT
 		entity.setId(dto.getId());
 		entity.setCreated(dto.getCreated());
 		entity.setUpdated(dto.getUpdated());
-		
+		entity.setVersion(dto.getVersion());
 
 		
 

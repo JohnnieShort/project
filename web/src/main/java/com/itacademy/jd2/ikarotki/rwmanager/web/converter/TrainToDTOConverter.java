@@ -22,6 +22,7 @@ public class TrainToDTOConverter implements Function<ITrain, TrainDTO> {
 		dto.setUpdated(entity.getUpdated());
 		dto.setTrack(entity.getTrack());
 		dto.setTrainType(entity.getTrainType().name());
+		dto.setVersion(entity.getVersion());
 
 		ILocomotive locomotive = entity.getLocomotive();
 		if (locomotive != null) {

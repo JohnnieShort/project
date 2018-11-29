@@ -27,6 +27,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TrainFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
@@ -92,12 +93,18 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		models.put("gridItems", dtos);
 
 		List<ITrain> trains = new ArrayList<ITrain>();
-
 		trains = trainService.find(new TrainFilter());
-
 		Map<Integer, Integer> places = wagonService.getPlaces(trains);
 		models.put("places", places);
-
+		
+		
+		RouteItemFilter routeItemFilter = new RouteItemFilter();
+		routeItemFilter.setFetchStationFrom(true);
+		routeItemFilter.setFetchStationTo(true);
+		Map<Integer, String> firstStationsNames = routeItemService.getStationsNames(entities, routeItemFilter, true);
+		models.put("firstStations", firstStationsNames);
+		Map<Integer, String> lastStationsNames = routeItemService.getStationsNames(entities, routeItemFilter, false);
+		models.put("lastStations", lastStationsNames);
 		return new ModelAndView("passengerRoute.list", models);
 	}
 
@@ -111,7 +118,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
 
-	@RequestMapping(value = "/addSt", method = RequestMethod.POST)
+	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
 	public ModelAndView showStForm(@Valid @ModelAttribute("formModel") final PassengerRouteDTO formModel,
 			final BindingResult result) {
 
@@ -120,7 +127,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 
 		hashMap.put("passengerRouteFormModelId", formModel.getId());
 		RouteItemDTO routeItemDTO = new RouteItemDTO();
-		routeItemDTO.setPassengerRouteId(formModel.getId());
+		
 		hashMap.put("routeItemFormModel", routeItemDTO);
 		loadStations(hashMap);
 		loadItems(hashMap, formModel.getId());
@@ -134,20 +141,20 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		if (result.hasErrors()) {
 			hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
 			RouteItemDTO routeItemDTO = new RouteItemDTO();
-			routeItemDTO.setPassengerRouteId(formModel.getPassengerRouteId());
 			hashMap.put("routeItemFormModel", routeItemDTO);
 			loadStations(hashMap);
-			loadItems(hashMap, formModel.getId());
+			
+			loadItems(hashMap, formModel.getPassengerRouteId());
 			return new ModelAndView("stations.edit", hashMap);
 		} else {
 			final IRouteItem entity = routeItemFromDTOConverter.apply(formModel);
 			routeItemService.save(entity);
 			hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
 			RouteItemDTO routeItemDTO = new RouteItemDTO();
-			routeItemDTO.setPassengerRouteId(formModel.getPassengerRouteId());
+			
 			hashMap.put("routeItemFormModel", routeItemDTO);
 			loadStations(hashMap);
-			loadItems(hashMap, formModel.getId());
+			loadItems(hashMap, formModel.getPassengerRouteId());
 			return new ModelAndView("stations.edit", hashMap);
 		}
 	}
@@ -217,9 +224,12 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 
 	}
 
-	private void loadItems(Map<String, Object> hashMap, Integer RouteId) {
+	private void loadItems(Map<String, Object> hashMap, Integer routeId) {
 		List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
-		itemsList = routeItemService.getItems(RouteId);
+		RouteItemFilter filter = new RouteItemFilter();
+		filter.setFetchStationFrom(true);
+		filter.setFetchStationTo(true);
+		itemsList = routeItemService.getItems(routeId, filter);
 		if (itemsList == null) {
 			return;
 		}

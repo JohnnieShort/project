@@ -10,7 +10,7 @@
       	<ul class="collection with-header">
         	<li class="collection-header"><h4>Route items</h4></li>
         	<c:forEach var="item" items="${routeItems}" varStatus="loopCounter">
-        		<li class="collection-item" ><div>"${item.value}"<a href="${baseUrl}/${item.key}/deleteItem" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        		<li class="collection-item" ><div>"${item.value}"<a href="${baseUrl}/${item.key}/deleteItem" class="secondary-content"><i class="material-icons">delete</i></a></div></li>
         	</c:forEach>
      	 </ul>
       </div>

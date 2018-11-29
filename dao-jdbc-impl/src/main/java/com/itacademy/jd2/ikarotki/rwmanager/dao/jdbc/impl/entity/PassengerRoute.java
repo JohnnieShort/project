@@ -9,7 +9,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Frequency;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 
 public class PassengerRoute extends BaseEntity implements IPassengerRoute {
-	
+	private Integer version;
 	private IStation stationFrom;
 	private IStation stationTo;
 	private Date departure;
@@ -90,6 +90,18 @@ public class PassengerRoute extends BaseEntity implements IPassengerRoute {
 
 	public void setIsActual(Boolean isActual) {
 		this.isActual = isActual;
+	}
+	
+	@Override
+	public Integer getVersion() {
+		
+		return version;
+	}
+
+	@Override
+	public void setVersion(Integer version) {
+		this.version = version;
+		
 	}
 
 	@Override

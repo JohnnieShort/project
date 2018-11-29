@@ -8,7 +8,8 @@ public interface ICargoRoute extends IBaseEntity {
 
 	public void setTrain(ITrain trainId);
 
-	
+	public Integer getVersion();
 
-	
+	public void setVersion(Integer version);
+
 }

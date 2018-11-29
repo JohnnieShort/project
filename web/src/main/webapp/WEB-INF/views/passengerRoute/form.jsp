@@ -8,10 +8,11 @@
 
 
    
-    <form:form class="col s12" method="POST" action="${baseUrl}/addSt" modelAttribute="formModel">
+    <form:form class="col s12" method="POST" action="${baseUrl}/addItem" modelAttribute="formModel">
     
     
         <form:input path="id" type="hidden" />
+        <form:input path="version" type="hidden" />
           
         
         <div class="row">

@@ -19,4 +19,8 @@ public interface IWagon extends IBaseEntity {
 	public Double getCapacity();
 
 	public void setCapacity(Double capacity);
+	
+	public Integer getVersion();
+
+	public void setVersion(Integer version);
 }

@@ -1,9 +1,11 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
 
@@ -26,5 +28,7 @@ public interface IRouteItemService {
 
 	IRouteItem getFullInfo(Integer id);
 
-	List<IRouteItem> getItems(Integer routeId);
+	List<IRouteItem> getItems(Integer routeId, RouteItemFilter filter);
+
+	Map<Integer, String> getStationsNames(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter, boolean isFirst);
 }

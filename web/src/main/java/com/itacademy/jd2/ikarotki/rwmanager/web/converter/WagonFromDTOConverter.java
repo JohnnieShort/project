@@ -28,6 +28,9 @@ public class WagonFromDTOConverter implements Function<WagonDTO, IWagon> {
 		entity.setCapacity(dto.getCapacity());
 		entity.setCreated(dto.getCreated());
 		entity.setUpdated(dto.getUpdated());
+		
+		entity.setVersion(dto.getVersion());
+		
 		ITrain train = trainService.createEntity();
 		train.setId(dto.getTrainId());
 		entity.setTrain(train);

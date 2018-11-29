@@ -52,6 +52,8 @@ public class RouteItemController extends AbstractController<RouteItemDTO> {
 		gridState.setSort(sortColumn, "id");
 
 		final RouteItemFilter filter = new RouteItemFilter();
+		filter.setFetchStationFrom(true);
+		filter.setFetchStationTo(true);
 		prepareFilter(gridState, filter);
 
 		final List<IRouteItem> entities = routeItemService.find(filter);

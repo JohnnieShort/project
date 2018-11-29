@@ -5,6 +5,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.TrainType;
 
 public class Train extends BaseEntity implements ITrain {
+	private Integer version;
 	private ILocomotive locomotive;
 	private Double track;
 	public ILocomotive getLocomotive() {
@@ -28,7 +29,17 @@ public class Train extends BaseEntity implements ITrain {
 		this.track = track;
 	}
 
-	
+	@Override
+	public Integer getVersion() {
+		
+		return version;
+	}
+
+	@Override
+	public void setVersion(Integer version) {
+		this.version = version;
+		
+	}
 
 	@Override
 	public TrainType getTrainType() {

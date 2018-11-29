@@ -2,6 +2,7 @@ package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IRouteItemDao;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IRouteItemService;
@@ -92,8 +94,14 @@ public class RouteItemServiceImpl implements IRouteItemService {
 	}
 
 	@Override
-	public List<IRouteItem> getItems(Integer routeId) {
-		List<IRouteItem> itemsList = dao.getItems(routeId);
+	public List<IRouteItem> getItems(Integer routeId, RouteItemFilter filter) {
+		List<IRouteItem> itemsList = dao.getItems(routeId, filter);
 		return itemsList;
+	}
+
+	@Override
+	public Map<Integer, String> getStationsNames(List<IPassengerRoute> enetities, RouteItemFilter routeItemFilter, boolean isFirst) {
+		Map<Integer, String> firstStationsNames = dao.getStationsNames(enetities, routeItemFilter, isFirst);
+		return firstStationsNames;
 	}
 }
