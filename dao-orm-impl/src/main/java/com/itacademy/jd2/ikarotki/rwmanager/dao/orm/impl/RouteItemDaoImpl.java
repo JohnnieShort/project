@@ -115,7 +115,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 			return from.get(RouteItem_.arrival);
 		case "departure":
 			return from.get(RouteItem_.departure);
-		case "ordinalNum":
+		case "ordinal_num":
 			return from.get(RouteItem_.ordinalNum);
 
 		default:
@@ -143,7 +143,7 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		final Root<RouteItem> from = cq.from(RouteItem.class);// select from route_item
 		cq.select(from); // select what? select *
 		cq.where(cb.equal(from.get(RouteItem_.passengerRoute).get(PassengerRoute_.id), routeId)); // where
-		cq.distinct(true); // to avoid duplicate rows in result // passengerRoute.id=?
+		
 		cq.orderBy(cb.asc(from.get(RouteItem_.ordinalNum)));
 		if (filter.isFetchStationFrom()) {
 

@@ -2,24 +2,20 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
 
-
+	<h3 class="header">Data managing</h3>
 	
-		<div class="nav-wrapper container">
-			<ul class="left hide-on-med-and-down">
-				
-
-				<li><a href="${baseUrl}/station">Stations</a></li>
-				<li><a href="${baseUrl}/wagon">Wagons</a></li>
-				<li><a href="${baseUrl}/cargoOrder">Cargo orders</a></li>
-				<li><a href="${baseUrl}/cargoRoute">Cargo routes</a></li>
-				<li><a href="${baseUrl}/customer">Customers</a></li>
-				<li><a href="${baseUrl}/locomotive">Locomotives</a></li>
-				<li><a href="${baseUrl}/passenger">Passengers</a></li>
-				<li><a href="${baseUrl}/passengerRoute">Passenger Routes</a></li>
-				<li><a href="${baseUrl}/routeItem">Items of routs</a></li>
-				<li><a href="${baseUrl}/ticket">Tickets</a></li>
-				<li><a href="${baseUrl}/train">Trains</a></li>
-				<li><a href="${baseUrl}/userAccount">Users Accounts</a></li>
-				</ul>
-		</div>
-	
+		
+	<div class="collection">
+        <a href="${baseUrl}/station" class="collection-item">Stations</a>
+        <a href="${baseUrl}/wagon" class="collection-item">Wagons</a>
+        <a href="${baseUrl}/cargoOrder" class="collection-item">Cargo Orders</a>
+        <a href="${baseUrl}/cargoRoute" class="collection-item">Cargo routes</a>
+        <a href="${baseUrl}/customer" class="collection-item">Customers</a>
+        <a href="${baseUrl}/locomotive" class="collection-item">Locomotives</a>
+        <a href="${baseUrl}/passenger" class="collection-item">Passengers</a>
+        <a href="${baseUrl}/passengerRoute" class="collection-item">Passenger Routes</a>
+        <a href="${baseUrl}/routeItem" class="collection-item">Items of routs</a>
+        <a href="${baseUrl}/ticket" class="collection-item">Tickets</a>
+        <a href="${baseUrl}/train" class="collection-item">Trains</a>
+        <a href="${baseUrl}/userAccount" class="collection-item">Users Accounts</a>
+    </div>

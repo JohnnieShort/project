@@ -97,6 +97,11 @@ public class RouteItemServiceImpl implements IRouteItemService {
 	@Override
 	public List<IRouteItem> getItems(Integer routeId, RouteItemFilter filter) {
 		List<IRouteItem> itemsList = dao.getItems(routeId, filter);
+//		int i = 0;
+//		for(IRouteItem item: itemsList) {
+//			item.setOrdinalNum(i);
+//			i++;
+//		}
 		return itemsList;
 	}
 

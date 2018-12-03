@@ -29,16 +29,29 @@
                 <label for="stationToId">Station to id</label>
             </div>
         </div>
+        
         <div class="input-field col s6">
-			<form:input path="arrival" type="text" disabled="${readonly}" cssClass="timepicker" />
-				<form:errors path="arrival" cssClass="red-text" />
-				<label for="arrival">arrival</label>
+			<form:input path="departureDate" type="text" disabled="${readonly}" cssClass="datepicker" />
+				<form:errors path="departureDate" cssClass="red-text" />
+				<label for="departureDate">departure date</label>
 		</div>
         
         <div class="input-field col s6">
-			<form:input path="departure" type="text" disabled="${readonly}" cssClass="timepicker" />
-				<form:errors path="departure" cssClass="red-text" />
-				<label for="soldTime">departure</label>
+			<form:input path="departureTime" type="text" disabled="${readonly}" cssClass="timepicker" />
+				<form:errors path="departureTime" cssClass="red-text" />
+				<label for="departureTime">departure time</label>
+		</div>
+        
+        <div class="input-field col s6">
+			<form:input path="arrivalDate" type="text" disabled="${readonly}" cssClass="datepicker" />
+				<form:errors path="arrivalDate" cssClass="red-text" />
+				<label for="arrivalDate">arrival date</label>
+		</div>
+		
+        <div class="input-field col s6">
+			<form:input path="arrivalTime" type="text" disabled="${readonly}" cssClass="timepicker" />
+				<form:errors path="arrivalTime" cssClass="red-text" />
+				<label for="arrivalTime">arrival time</label>
 		</div>
         
         <div class="row">

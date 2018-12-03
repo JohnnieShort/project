@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -89,6 +90,18 @@ public class PassengerRouteServiceImpl implements IPassengerRouteService {
 		final IPassengerRoute entity = dao.getFullInfo(id);
 		LOGGER.info("requested passenger route: {}", entity);
 		return entity;
+	}
+
+	@Override
+	public List<IPassengerRoute> findActual(PassengerRouteFilter filter) {
+		List<IPassengerRoute> all = dao.find(filter);
+		List<IPassengerRoute> actual = new ArrayList<IPassengerRoute>();
+		for(IPassengerRoute route: all) {
+			if(route.getIsActual()) {
+				actual.add(route);
+			}
+		}
+		return actual;
 	}
 
 	

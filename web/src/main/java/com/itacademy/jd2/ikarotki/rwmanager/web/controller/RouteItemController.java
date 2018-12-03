@@ -94,7 +94,7 @@ public class RouteItemController extends AbstractController<RouteItemDTO> {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
-		final IRouteItem dbModel = routeItemService.get(id);
+		final IRouteItem dbModel = routeItemService.getFullInfo(id);
 		final RouteItemDTO dto = toDtoConverter.apply(dbModel);
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
@@ -105,7 +105,7 @@ public class RouteItemController extends AbstractController<RouteItemDTO> {
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
-		final RouteItemDTO dto = toDtoConverter.apply(routeItemService.get(id));
+		final RouteItemDTO dto = toDtoConverter.apply(routeItemService.getFullInfo(id));
 
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);

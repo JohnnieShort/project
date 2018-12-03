@@ -72,6 +72,16 @@ public class TicketController extends AbstractController<TicketDTO> {
 
 		return new ModelAndView("ticket.edit", hashMap);
 	}
+	
+	@RequestMapping(value = "/{id}/buy", method = RequestMethod.GET)
+	public ModelAndView showTicket(@PathVariable(name = "id", required = true) final Integer id) {
+		final Map<String, Object> hashMap = new HashMap<>();
+		
+		TicketDTO dto = new TicketDTO();
+		hashMap.put("formModel", dto);
+
+		return new ModelAndView("ticket.edit", hashMap);
+	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String save(@Valid @ModelAttribute("formModel") final TicketDTO formModel, final BindingResult result) {

@@ -31,8 +31,10 @@
 				<td><c:out value="${routeItem.stationToId}" /></td>
 				<td><c:out value="${routeItem.passengerRouteId}" /></td>
 				
-				<td><c:out value="${routeItem.departure}" /></td>
-				<td><c:out value="${routeItem.arrival}" /></td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${routeItem.departureDate}"/> 
+							<fmt:formatDate pattern="hh-mm" value="${routeItem.departureTime}"/></td>
+				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${routeItem.arrivalDate}"/> 
+							<fmt:formatDate pattern="hh-mm" value="${routeItem.arrivalTime}"/></td>
 				<td><c:out value="${routeItem.ordinalNum}" /></td>
 			
 				

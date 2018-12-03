@@ -104,13 +104,13 @@ public class TicketDaoImpl extends AbstractDaoImpl<ITicket, Integer> implements 
 			return from.get(Ticket_.updated);
 		case "id":
 			return from.get(Ticket_.id);
-		case "passengerRoute":
+		case "passenger_route_id":
 			return from.get(Ticket_.passengerRoute).get(PassengerRoute_.id);
-		case "passenger":
+		case "passenger_id":
 			return from.get(Ticket_.passenger).get(Passenger_.id);
-		case "stationFrom":
+		case "station_from":
 			return from.get(Ticket_.stationFrom).get(Station_.id);
-		case "stationTo":
+		case "station_to":
 			return from.get(Ticket_.stationTo).get(Station_.id);
 		case "price":
 			return from.get(Ticket_.price);

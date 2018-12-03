@@ -28,5 +28,7 @@ public interface IPassengerRouteService {
 	
 	long getCount(PassengerRouteFilter filter);
 
+	List<IPassengerRoute> findActual(PassengerRouteFilter filter);
+
 	
 }

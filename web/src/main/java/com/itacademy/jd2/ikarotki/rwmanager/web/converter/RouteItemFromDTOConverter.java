@@ -1,5 +1,7 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.converter;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,13 +30,45 @@ public class RouteItemFromDTOConverter implements Function<RouteItemDTO, IRouteI
 		entity.setId(dto.getId());
 		entity.setCreated(dto.getCreated());
 		entity.setUpdated(dto.getUpdated());
-
+		
 		IPassengerRoute pREntity = passengerRouteService.createEntity();
 		pREntity.setId(dto.getPassengerRouteId());
 		entity.setPassengerRoute(pREntity);
-		entity.setDeparture(dto.getDeparture());
-		entity.setArrival(dto.getArrival());
+		
+		
+		final Date departureDate = dto.getDepartureDate();
+        if (departureDate != null) {
+            final Calendar fullDateCalendar = Calendar.getInstance();
+            fullDateCalendar.setTime(departureDate);
 
+            final Date departureTime = dto.getDepartureTime();
+            if (departureTime != null) {
+                final Calendar timeCalendar = Calendar.getInstance();
+                timeCalendar.setTime(departureTime);
+                fullDateCalendar.set(Calendar.HOUR_OF_DAY,
+                        timeCalendar.get(Calendar.HOUR_OF_DAY));
+                fullDateCalendar.set(Calendar.MINUTE, timeCalendar.get(Calendar.MINUTE));
+            }
+
+            entity.setDeparture(fullDateCalendar.getTime());
+        }
+        final Date arrivalDate = dto.getArrivalDate();
+        if (arrivalDate != null) {
+            final Calendar fullDateCalendar = Calendar.getInstance();
+            fullDateCalendar.setTime(arrivalDate);
+
+            final Date arrivalTime = dto.getArrivalTime();
+            if (arrivalTime != null) {
+                final Calendar timeCalendar = Calendar.getInstance();
+                timeCalendar.setTime(arrivalTime);
+                fullDateCalendar.set(Calendar.HOUR_OF_DAY,
+                        timeCalendar.get(Calendar.HOUR_OF_DAY));
+                fullDateCalendar.set(Calendar.MINUTE, timeCalendar.get(Calendar.MINUTE));
+            }
+
+            entity.setArrival(fullDateCalendar.getTime());
+        }
+		
 		IStation stationFrom = stationService.createEntity();
 		stationFrom.setId(dto.getStationFromId());
 		if (dto.getStationFromName() != null) {

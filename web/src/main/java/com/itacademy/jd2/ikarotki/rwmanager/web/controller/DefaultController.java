@@ -45,8 +45,4 @@ public class DefaultController {
 		return "administratorPage";
 	}
 
-	@RequestMapping(value = "/schedule", method = RequestMethod.GET)
-	public String checkSchedule() {
-		return "schedule";
-	}
 }

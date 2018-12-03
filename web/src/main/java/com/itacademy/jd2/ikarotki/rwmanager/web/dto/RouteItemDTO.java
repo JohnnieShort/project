@@ -29,10 +29,18 @@ public class RouteItemDTO {
 	private Integer stationToId;
 	@NotNull
 	@DateTimeFormat(pattern = "hh:mm a")
-	private Date departure;
+	private Date departureTime;
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date departureDate;
+	
+
 	@NotNull
 	@DateTimeFormat(pattern = "hh:mm a")
-	private Date arrival;
+	private Date arrivalTime;
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date arrivalDate;
 	
 
 	private Integer ordinalNum;
@@ -43,6 +51,21 @@ public class RouteItemDTO {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public Date getDepartureDate() {
+		return departureDate;
+	}
+
+	public void setDepartureDate(Date departureDate) {
+		this.departureDate = departureDate;
+	}
+
+	public Date getArrivalDate() {
+		return arrivalDate;
+	}
+
+	public void setArrivalDate(Date arrivalDate) {
+		this.arrivalDate = arrivalDate;
 	}
 
 	public String getStationFromName() {
@@ -93,8 +116,8 @@ public class RouteItemDTO {
 		this.updated = updated;
 	}
 
-	public Date getDeparture() {
-		return departure;
+	public Date getDepartureTime() {
+		return departureTime;
 	}
 
 	public Integer getPassengerRouteId() {
@@ -105,16 +128,16 @@ public class RouteItemDTO {
 		this.passengerRouteId = passengerRouteId;
 	}
 
-	public void setDeparture(Date departure) {
-		this.departure = departure;
+	public void setDepartureTime(Date departure) {
+		this.departureTime = departure;
 	}
 
-	public Date getArrival() {
-		return arrival;
+	public Date getArrivalTime() {
+		return arrivalTime;
 	}
 
-	public void setArrival(Date arrival) {
-		this.arrival = arrival;
+	public void setArrivalTime(Date arrival) {
+		this.arrivalTime = arrival;
 	}
 
 	public Integer getOrdinalNum() {
@@ -129,8 +152,11 @@ public class RouteItemDTO {
 	public String toString() {
 		return "RouteItemDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", passengerRouteId="
 				+ passengerRouteId + ", stationFromName=" + stationFromName + ", stationToName=" + stationToName
-				+ ", stationFromId=" + stationFromId + ", stationToId=" + stationToId + ", departure=" + departure
-				+ ", arrival=" + arrival + ", ordinalNum=" + ordinalNum + "]";
+				+ ", stationFromId=" + stationFromId + ", stationToId=" + stationToId + ", departureTime="
+				+ departureTime + ", departureDate=" + departureDate + ", arrivalTime=" + arrivalTime + ", arrivalDate="
+				+ arrivalDate + ", ordinalNum=" + ordinalNum + "]";
 	}
+
+	
 
 }
