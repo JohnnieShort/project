@@ -1,20 +1,41 @@
+function initMap(points, avgLat, avgLong) {
+	ymaps.ready(function() {
+		debugger;
 
-function init() {
+		var myMap = new ymaps.Map("map", {
+			center : [ avgLat, avgLong ],
+			zoom : 12
+		}, {
+			searchControlProvider : 'yandex#search'
+		});
 
-	var myMap = new ymaps.Map("map", {
-		center : [ 53.90, 27.56 ],
-
-		zoom : 7
+		// Создаем ломаную, используя класс GeoObject.
+		var myGeoObject = new ymaps.GeoObject({
+			// Описываем геометрию геообъекта.
+			geometry : {
+				// Тип геометрии - "Ломаная линия".
+				type : "LineString",
+				// Указываем координаты вершин ломаной.
+				coordinates : points
+			},
+			// Описываем свойства геообъекта.
+			properties : {
+				// Содержимое хинта.
+				hintContent : "I route",
+				// Содержимое балуна.
+				balloonContent : "Look map"
+			}
+		}, {
+			// Задаем опции геообъекта.
+			// Включаем возможность перетаскивания ломаной.
+			draggable : false,
+			// Цвет линии.
+			strokeColor : "#FF0000",
+			// Ширина линии.
+			strokeWidth : 5
+		});
+		// Добавляем линии на карту.
+		myMap.geoObjects.add(myGeoObject);
 	});
-	var myGeoObject = new ymaps.GeoObject({
-		geometry : {
-			type : "Point",
-			coordinates : [ 55.8, 37.8 ]
-		}
-	});
-	var myPlacemark = new ymaps.Placemark([ 55.8, 37.6 ]);
 
-	myMap.geoObjects.add(myGeoObject);
-	myMap.geoObjects.add(myPlacemark);
 }
-ymaps.ready(init);

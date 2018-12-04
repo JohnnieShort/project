@@ -97,8 +97,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		trains = trainService.find(new TrainFilter());
 		Map<Integer, Double> places = wagonService.getPlaces(trains);
 		models.put("places", places);
-		
-		
+
 		RouteItemFilter routeItemFilter = new RouteItemFilter();
 		routeItemFilter.setFetchStationFrom(true);
 		routeItemFilter.setFetchStationTo(true);
@@ -132,7 +131,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 
 		hashMap.put("passengerRouteFormModelId", formModel.getId());
 		RouteItemDTO routeItemDTO = new RouteItemDTO();
-		
+
 		hashMap.put("routeItemFormModel", routeItemDTO);
 		loadStations(hashMap);
 		loadItems(hashMap, formModel.getId());
@@ -148,7 +147,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 			RouteItemDTO routeItemDTO = new RouteItemDTO();
 			hashMap.put("routeItemFormModel", routeItemDTO);
 			loadStations(hashMap);
-			
+
 			loadItems(hashMap, formModel.getPassengerRouteId());
 			return new ModelAndView("stations.edit", hashMap);
 		} else {
@@ -156,7 +155,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 			routeItemService.save(entity);
 			hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
 			RouteItemDTO routeItemDTO = new RouteItemDTO();
-			
+
 			hashMap.put("routeItemFormModel", routeItemDTO);
 			loadStations(hashMap);
 			loadItems(hashMap, formModel.getPassengerRouteId());
@@ -239,8 +238,16 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 			return;
 		}
 		Map<Integer, String> itemChoices = itemsList.stream().collect(Collectors.toMap(IRouteItem::getId, routeItem -> {
-			return routeItem.getStationFrom().getName() + " " + routeItem.getStationTo().getName();
+			return routeItem.getStationFrom().getName() + " -> " + routeItem.getStationTo().getName();
 		}));
+		StringBuilder sb = new StringBuilder();
+		for (IRouteItem item : itemsList) {
+			sb.append(
+					String.format("%s, %s ,", item.getStationFrom().getLatitude(), item.getStationFrom().getLongitude()));
+		}
+	//	sb.append(String.format("%s, %s", itemsList.get(itemsList.size() - 1).getStationTo().getLatitude(),
+		//		itemsList.get(itemsList.size() - 1).getStationTo().getLongitude()));
+		hashMap.put("points", sb.toString());
 		hashMap.put("routeItems", itemChoices);
 	}
 
