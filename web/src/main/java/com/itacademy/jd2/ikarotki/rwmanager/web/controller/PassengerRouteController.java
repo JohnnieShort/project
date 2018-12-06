@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -240,15 +241,32 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		Map<Integer, String> itemChoices = itemsList.stream().collect(Collectors.toMap(IRouteItem::getId, routeItem -> {
 			return routeItem.getStationFrom().getName() + " -> " + routeItem.getStationTo().getName();
 		}));
-		StringBuilder sb = new StringBuilder();
-		for (IRouteItem item : itemsList) {
-			sb.append(
-					String.format("%s, %s ,", item.getStationFrom().getLatitude(), item.getStationFrom().getLongitude()));
-		}
-	//	sb.append(String.format("%s, %s", itemsList.get(itemsList.size() - 1).getStationTo().getLatitude(),
-		//		itemsList.get(itemsList.size() - 1).getStationTo().getLongitude()));
-		hashMap.put("points", sb.toString());
 		hashMap.put("routeItems", itemChoices);
+		double[][] points = new double[itemsList.size()+1][2];
+		double longSum = 0;
+		double latSum = 0;
+//		Iterator<IRouteItem> it = itemsList.iterator();
+//		while (it.hasNext()) {
+//			
+//		}
+		for(int i=0; i<itemsList.size(); i++) {
+			points[i][0] = itemsList.get(i).getStationFrom().getLatitude();
+			points[i][1] = itemsList.get(i).getStationFrom().getLongitude();
+			longSum +=itemsList.get(i).getStationFrom().getLongitude();
+			latSum +=itemsList.get(i).getStationFrom().getLatitude();
+		}
+		points[points.length-1][0] = itemsList.get(itemsList.size()-1).getStationTo().getLatitude();
+		points[points.length-1][1] = itemsList.get(itemsList.size()-1).getStationTo().getLongitude();
+		longSum +=itemsList.get(itemsList.size()-1).getStationFrom().getLongitude();
+		latSum +=itemsList.get(itemsList.size()-1).getStationFrom().getLatitude();
+		double longAvg = 0;
+		double latAvg = 0;
+		longAvg = longSum/points.length;
+		latAvg = latSum/points.length;
+		hashMap.put("points", points);
+		hashMap.put("avgLat", latAvg);
+		hashMap.put("avgLong", longAvg);
+		
 	}
 
 }

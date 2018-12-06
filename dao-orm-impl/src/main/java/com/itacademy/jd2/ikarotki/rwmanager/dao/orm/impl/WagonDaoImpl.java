@@ -1,8 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -118,7 +116,7 @@ public class WagonDaoImpl extends AbstractDaoImpl<IWagon, Integer> implements IW
 
 	@Override
 	public Double getPlacesByTrain(ITrain train) {
-		Map<Integer,Double> placesBYTrain = new HashMap<Integer, Double>();
+		
 		final EntityManager em = getEntityManager();
 		final CriteriaBuilder cb = em.getCriteriaBuilder();
 		final CriteriaQuery<Double> cq = cb.createQuery(Double.class);

@@ -128,8 +128,8 @@
 <script src="${contextPath}/resources/js/init-map.js"></script>
 
 <script type="text/javascript">
-    var points=[ [ 53.688465,23.8178505 ], [ 53.6912013,23.8156865 ], [53.6925243,23.8168004] ];
-    var avgLat=53.688465g; // ${avgLat}
-	var avgLong=23.8178505;
+    var points=${points};
+    var avgLat=${avgLat};
+	var avgLong=${avgLong};
 	initMap(points,avgLat ,avgLong)
 </script>

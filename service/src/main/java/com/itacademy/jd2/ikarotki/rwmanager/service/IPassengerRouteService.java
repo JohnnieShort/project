@@ -1,7 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 

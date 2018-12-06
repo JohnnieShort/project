@@ -11,9 +11,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.AbstractFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoOrderFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 
 public class CargoOrderTest extends AbstractTest {
 

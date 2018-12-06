@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ICustomerDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CustomerFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICustomerService;
 
 @Service
