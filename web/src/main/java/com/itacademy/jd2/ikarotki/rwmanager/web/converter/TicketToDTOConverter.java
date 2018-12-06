@@ -17,12 +17,12 @@ public class TicketToDTOConverter implements Function<ITicket, TicketDTO> {
 		dto.setCreated(entity.getCreated());
 		dto.setUpdated(entity.getUpdated());
 
-		dto.setFrom(entity.getStationFrom());
-		dto.setTo(entity.getStationTo());
+		dto.setStationFromId(entity.getStationFrom().getId());
+		dto.setStationToId(entity.getStationTo().getId());
 
 		dto.setPrice(entity.getPrice());
-		dto.setPassenger(entity.getPassenger());
-		dto.setPassengerRoute(entity.getPassengerRoute());
+		dto.setPassengerId(entity.getPassenger().getId());
+		dto.setPassengerRouteId(entity.getPassengerRoute().getId());
 
 		return dto;
 	}

@@ -3,6 +3,9 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.security;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,14 +35,24 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 		// TODO find user by login
 		if (!"admin".equals(eMail)) {
-			if (userAccountService.checkPassword(eMail, password)) {
-				IUserAccount userAccount = userAccountService.getByEmail(eMail);
+			IUserAccount userAccount = null;
+			//if (userAccountService.checkPassword(eMail, password)) {
+				try {
+				userAccount = userAccountService.getByEmail(eMail);
+				} catch (IllegalArgumentException | NoResultException e) {
+					throw new BadCredentialsException("1000");
+				}
+				String hashed = userAccount.getPassword();
+				if (!BCrypt.checkpw(password, hashed)) {
+					throw new BadCredentialsException("1000");
+				}
+//				userAccountService.checkPassword(eMail, password);
 				final List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 				authorities.add(new SimpleGrantedAuthority(userAccount.getRole().toString()));
 				return new ExtendedUsernamePasswordAuthenticationToken(userAccount.getFirstName(),userAccount.getId(), eMail, password,
 						authorities);
-			}
-			throw new BadCredentialsException("1000");
+			//}
+			//throw new BadCredentialsException("1000");
 		}
 
 		// TODO verify password (DB contains hasn - not a plain password)

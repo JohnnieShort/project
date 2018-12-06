@@ -128,8 +128,8 @@
 <script src="${contextPath}/resources/js/init-map.js"></script>
 
 <script type="text/javascript">
-    var points=${points};
-    var avgLat=${avgLat};
-	var avgLong=${avgLong};
-	initMap(points,avgLat ,avgLong)
+//     var points=${points};
+//     var avgLat=${avgLat};
+// 	var avgLong=${avgLong};
+	initMap(${points},${avgLat} ,${avgLong})
 </script>

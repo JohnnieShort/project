@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
@@ -242,6 +243,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 			return routeItem.getStationFrom().getName() + " -> " + routeItem.getStationTo().getName();
 		}));
 		hashMap.put("routeItems", itemChoices);
+		if (itemsList.size()>0) {
 		double[][] points = new double[itemsList.size()+1][2];
 		double longSum = 0;
 		double latSum = 0;
@@ -263,9 +265,10 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		double latAvg = 0;
 		longAvg = longSum/points.length;
 		latAvg = latSum/points.length;
-		hashMap.put("points", points);
+		hashMap.put("points", new Gson().toJson(points));
 		hashMap.put("avgLat", latAvg);
 		hashMap.put("avgLong", longAvg);
+		}
 		
 	}
 

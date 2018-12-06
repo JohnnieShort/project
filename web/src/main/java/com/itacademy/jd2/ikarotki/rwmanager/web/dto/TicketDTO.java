@@ -7,10 +7,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
-
 public class TicketDTO {
 	
 	private Integer id;
@@ -23,16 +19,16 @@ public class TicketDTO {
 	private Double price;
 	@NotNull
 	@Range(min=0)
-	private IPassenger passenger;
+	private Integer passengerId;
 	@NotNull
 	@Range(min=0)
-	private IPassengerRoute passengerRoute;
+	private Integer passengerRouteId;
 	@NotNull
 	@Range(min=0)
-	private IStation stationFrom;
+	private Integer stationFromId;
 	@NotNull
 	@Range(min=0)
-	private IStation stationTo;
+	private Integer stationToId;
 
 	public Integer getId() {
 		return id;
@@ -66,43 +62,45 @@ public class TicketDTO {
 		this.price = price;
 	}
 
-	public IPassenger getPassenger() {
-		return passenger;
+	public Integer getPassengerId() {
+		return passengerId;
 	}
 
-	public void setPassenger(IPassenger passenger) {
-		this.passenger = passenger;
+	public void setPassengerId(Integer passengerId) {
+		this.passengerId = passengerId;
 	}
 
-	public IPassengerRoute getPassengerRoute() {
-		return passengerRoute;
+	public Integer getPassengerRouteId() {
+		return passengerRouteId;
 	}
 
-	public void setPassengerRoute(IPassengerRoute passengerRoute) {
-		this.passengerRoute = passengerRoute;
+	public void setPassengerRouteId(Integer passengerRouteId) {
+		this.passengerRouteId = passengerRouteId;
 	}
 
-	public IStation getStationFrom() {
-		return stationFrom;
+	public Integer getStationFromId() {
+		return stationFromId;
 	}
 
-	public void setFrom(IStation stationFrom) {
-		this.stationFrom = stationFrom;
+	public void setStationFromId(Integer stationFromId) {
+		this.stationFromId = stationFromId;
 	}
 
-	public IStation getStationTo() {
-		return stationTo;
+	public Integer getStationToId() {
+		return stationToId;
 	}
 
-	public void setTo(IStation stationTo) {
-		this.stationTo = stationTo;
+	public void setStationToId(Integer stationToId) {
+		this.stationToId = stationToId;
 	}
 
 	@Override
 	public String toString() {
 		return "TicketDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", price=" + price
-				+ ", passenger=" + passenger + ", passengerRoute=" + passengerRoute + ", stationFrom=" + stationFrom
-				+ ", stationTo=" + stationTo + "]";
+				+ ", passengerId=" + passengerId + ", passengerRouteId=" + passengerRouteId + ", stationFromId="
+				+ stationFromId + ", stationToId=" + stationToId + "]";
 	}
+
+	
 
 }

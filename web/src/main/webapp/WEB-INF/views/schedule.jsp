@@ -53,11 +53,11 @@
 			
 				<td><c:out value="${passengerRoute.frequency}" /></td>
 				
-				<sec:authorize access="!isAnonymous()">
+				
 				<td class="right"><a class="btn-floating"
 					href="${ticketUrl}/${passengerRoute.id}/buy"><i class="material-icons" title="<mytaglib:i18n key="schedule.title.buy"/>">attach_money</i></a>
 				</td>
-				</sec:authorize>
+				
 			</tr>
 		</c:forEach>
 	</tbody>

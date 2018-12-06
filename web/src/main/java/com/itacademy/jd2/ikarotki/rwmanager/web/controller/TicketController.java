@@ -84,7 +84,7 @@ public class TicketController extends AbstractController<TicketDTO> {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(@Valid @ModelAttribute("formModel") final TicketDTO formModel, final BindingResult result) {
+	public String save(@Valid @ModelAttribute("formModel") final TicketDTO formModel, final BindingResult result,@RequestParam(name = "quantity", required = false) Integer quantity) {
 		if (result.hasErrors()) {
 			return "ticket.edit";
 		} else {
