@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.ITicketDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TicketFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IRouteItemService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 
 @Service
@@ -19,16 +22,21 @@ public class TicketServiceImpl implements ITicketService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(TicketServiceImpl.class);
 
 	private ITicketDao dao;
+	private IRouteItemService routeItemService;
+	private IPassengerRouteService routeService;
+	final private Double PRICE = 1.5;
 
 	@Autowired
-	public TicketServiceImpl(ITicketDao dao) {
+	public TicketServiceImpl(ITicketDao dao, IRouteItemService routeItemService, IPassengerRouteService routeService) {
 		super();
 		this.dao = dao;
+		this.routeItemService = routeItemService;
+		this.routeService = routeService;
 	}
 
 	public TicketServiceImpl() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
@@ -40,6 +48,9 @@ public class TicketServiceImpl implements ITicketService {
 	public void save(final ITicket entity) {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
+		entity.setPassengerRoute(routeService.getFullInfo(entity.getPassengerRoute().getId()));
+		entity.setPrice(calculatePrice(entity.getPassengerRoute().getPassengerRouteType(),
+				entity.getPassengerRoute().getId(), entity.getStationFrom().getId(), entity.getStationTo().getId()));
 		if (entity.getId() == null) {
 			LOGGER.info("new ticket created: {}", entity);
 			entity.setCreated(modifedOn);
@@ -48,6 +59,31 @@ public class TicketServiceImpl implements ITicketService {
 			LOGGER.info("ticket updated: {}", entity);
 			dao.update(entity);
 		}
+	}
+
+	private Double calculatePrice(PassengerRouteType passengerRouteType, Integer routeId,Integer fromId, Integer toId) {
+		routeItemService.getItemsQuantity(routeId, fromId, toId);
+		Double price = PRICE * getMultyplier(passengerRouteType);
+		return price;
+	}
+
+	private Double getMultyplier(PassengerRouteType passengerRouteType) {
+		Double multyplier = null;
+		switch (passengerRouteType) {
+		case SUBURBAN:
+			multyplier = 1.0;
+			break;
+		case INTERCITY:
+			multyplier = 1.5;
+			break;
+		case CROSS_BORDER:
+			multyplier = 2.0;
+			break;
+		default:
+			throw new UnsupportedOperationException("no multyplier for:" + passengerRouteType);
+		}
+
+		return multyplier;
 	}
 
 	@Override

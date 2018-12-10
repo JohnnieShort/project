@@ -105,9 +105,9 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 			return from.get(RouteItem_.passengerRoute).get(PassengerRoute_.id);
 
 		case "station_from":
-			return from.get(RouteItem_.stationFrom).get(Station_.id);
+			return from.get(RouteItem_.stationFrom).get(Station_.name);
 		case "station_to":
-			return from.get(RouteItem_.stationTo).get(Station_.id);
+			return from.get(RouteItem_.stationTo).get(Station_.name);
 		case "arrival":
 			return from.get(RouteItem_.arrival);
 		case "departure":

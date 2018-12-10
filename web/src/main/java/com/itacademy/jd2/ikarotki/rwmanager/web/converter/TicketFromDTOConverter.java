@@ -52,8 +52,8 @@ public class TicketFromDTOConverter implements Function<TicketDTO, ITicket> {
 		}
 		if(dto.getStationToId()!=null) {
 			IStation stationTo = stationService.createEntity();
-			stationTo.setId(dto.getStationFromId());
-			entity.setStationFrom(stationTo);
+			stationTo.setId(dto.getStationToId());
+			entity.setStationTo(stationTo);
 		}
 		
 

@@ -8,4 +8,19 @@ public interface IPassenger extends IBaseEntity {
 
 	public void setUserAccount(IUserAccount userAccount);
 
+	public String getStreet();
+
+	public void setStreet(String street);
+
+	public Integer getBuilding();
+
+	public void setBuilding(Integer building);
+
+	public Integer getApartments();
+
+	public void setApartments(Integer apartments);
+
+	public String getPhone();
+
+	public void setPhone(String phone);
 }

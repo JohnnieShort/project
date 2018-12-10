@@ -142,5 +142,31 @@ public class RouteItemServiceImpl implements IRouteItemService {
 		}
 		return departures;
 	}
+
+	@Override
+	public Integer getItemsQuantity(Integer routeId, Integer fromId, Integer toId) {
+		RouteItemFilter filter = new RouteItemFilter();
+		filter.setFetchStationFrom(true);
+		filter.setFetchStationTo(true);
+		List<IRouteItem> list = getItems(routeId, filter);
+		int from=0;
+		int to=0;
+		for(IRouteItem item: list) {
+			if(item.getStationFrom().getId().equals(fromId)) {
+				from=item.getOrdinalNum();
+			}
+			if(item.getStationTo().getId().equals(toId)) {
+				to=item.getOrdinalNum();
+			}
+		}
+		return to-from+1;
+		
+	}
+
+	@Override
+	public String getRouteName(Integer routeId, RouteItemFilter filter) {
+		List<IRouteItem> items = getItems(routeId, filter);
+		return items.get(0).getStationFrom().getName() +" -> " + items.get(items.size()-1).getStationTo().getName();
+	}
 	
 }

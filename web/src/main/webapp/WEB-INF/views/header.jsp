@@ -3,26 +3,26 @@
 <%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
-<%-- <fmt:setLocale value="${key}" />
-<fmt:setBundle basename="text" /> --%>
+
 <header>
 	<nav>
-		<div class="nav-wrapper container teal lighten-2">
-		<ul id="dropdown1" class="dropdown-content">
-				<li><a href="${baseUrl}?language=ru">RU</a></li>
-				<li class="divider"></li>
-				<li><a href="${baseUrl}?language=en">EN</a></li>
+		<div class="nav-wrapper container purple lighten-4">
+				<ul id="dropdown1" class="dropdown-content">
+					<li><a href="${baseUrl}?language=ru">RU</a></li>
+					<li class="divider"></li>
+					<li><a href="${baseUrl}?language=en">EN</a></li>
 				
-			</ul>
+				</ul>
 			<ul class="left hide-on-med-and-down">
-				<li><a href="${baseUrl}/"><mytaglib:i18n key="menu.link.home"/><i class="material-icons">home</i></a></li>
+				<li><a href="${baseUrl}/"><mytaglib:i18n key="menu.link.home"/><i class="material-icons left" >home</i></a></li>
 
-				<li><a href="${baseUrl}/schedule"><mytaglib:i18n key="menu.link.schedule"/><i class="material-icons">train</i></a></li>
+				<li><a href="${baseUrl}/schedule"><mytaglib:i18n key="menu.link.schedule"/><i class="material-icons left">train</i></a></li>
 				
-				<li><a href="${baseUrl}/cargoOrder/doOrder"><mytaglib:i18n key="menu.link.cargoOrder"/> <i class="material-icons">local_grocery_store</i></a></li>
+				<li><a href="${baseUrl}/cargoOrder/doOrder"><mytaglib:i18n key="menu.link.cargoOrder"/> <i class="material-icons left">local_grocery_store</i></a></li>
+				<li><a href="${baseUrl}/personalPage"><mytaglib:i18n key="menu.link.personalPage"/> <i class="material-icons left">child_care</i></a></li>
 				
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<li><a href="${baseUrl}/administratorPage"><mytaglib:i18n key="menu.link.dataManaging"/></a></li>
+					<li><a href="${baseUrl}/administratorPage"><mytaglib:i18n key="menu.link.dataManaging"/></a></li>
 				</sec:authorize>
 				
 				<sec:authorize access="!isAnonymous()">

@@ -15,7 +15,7 @@ function initSelectElement(htmlElementId, jsonArray) {
 
 	// вставляет новые опции в элемент
 	$.each(jsonArray, function(key, value) {
-		$('#' + htmlElementId).append($("<option></option>").attr("value", value.id).text(value.title));
+		$('#' + htmlElementId).append($("<option></option>").attr("value", value.id).text(value.name));
 	});
 }
 
@@ -29,29 +29,33 @@ function initComboboxes(contextUrl) {
 	// запроса.
 	// текущая строка кода выполнится при загрузке страницы (в соответствии с
 	// местом встави в JSP)
-	$.get(contextUrl + "/ajax-samples/countries", function(countriesArray) {
+	$.get(contextUrl + "/ajax-samples/routes", function(routesDTO) {
 
 		// получив список стран - инициализируем соответствующий комбик
-		initSelectElement('country', countriesArray);
-
+		initSelectElement('passengerRouteId', routesDTO);
+		
 		// вешаем функцию-обработчик на 'onchange' событие на нужные элементы.
 		// получаем выбранный сейчас элемент и строим с его помощь. новый GET
 		// запрос
 		// на сервер
-		$("#country").change(function() {
+		$("#passengerRouteId").change(function() {
 			var selectedId = $(this).val();
-			$.get(contextUrl + "/ajax-samples/regions?countryId=" + selectedId, function(regionsArray) {
-				initSelectElement('region', regionsArray);
+			$.get(contextUrl + "/ajax-samples/fromStations?routeId=" + selectedId, function(stationsFrom) {
+				initSelectElement('stationFromId', stationsFrom);
+			
+			})
+			$.get(contextUrl + "/ajax-samples/toStations?routeId=" + selectedId, function(stationsTo) {
+				initSelectElement('stationToId', stationsTo);
 			})
 		});
 
-		$("#region").change(function() {
-			var selectedId = $(this).val();
-			$.get(contextUrl + "/ajax-samples/cities?regionId=" + selectedId, function(citiesArray) {
-				initSelectElement('city', citiesArray);
+		/*$("#stationFromId").change(function() {
+			var selectedName = $(this).val();
+			$.get(contextUrl + "/ajax-samples/toStations?selectedName=" + selectedName, function(stationsTo) {
+				initSelectElement('stationToId', stationsTo);
 			})
 
-		});
+		});*/
 	});
 	// документация по JQUERY - https://api.jquery.com/
 

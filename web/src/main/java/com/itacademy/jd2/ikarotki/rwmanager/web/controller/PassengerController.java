@@ -67,8 +67,8 @@ public class PassengerController extends AbstractController<PassengerDTO> {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		final IPassenger newEntity = passengerService.createEntity();
-		PassengerDTO dto = toDtoConverter.apply(newEntity);
+		
+		PassengerDTO dto = new PassengerDTO();
 		hashMap.put("formModel", dto);
 
 		return new ModelAndView("passenger.edit", hashMap);

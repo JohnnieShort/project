@@ -4,12 +4,13 @@ function initMap(points, avgLat, avgLong) {
 
 		var myMap = new ymaps.Map("map", {
 			center : [ avgLat, avgLong ],
-			zoom : 12
+			zoom : 8
 		}, {
 			searchControlProvider : 'yandex#search'
 		});
 
 		// Создаем ломаную, используя класс GeoObject.
+		
 		var myGeoObject = new ymaps.GeoObject({
 			// Описываем геометрию геообъекта.
 			geometry : {
@@ -36,6 +37,13 @@ function initMap(points, avgLat, avgLong) {
 		});
 		// Добавляем линии на карту.
 		myMap.geoObjects.add(myGeoObject);
+		var coordinates = points.split(" ");
+		var i;
+
+		for (i = 0; i < 3; i++) {
+  			alert( i );
+		}
+		
 	});
 
 }

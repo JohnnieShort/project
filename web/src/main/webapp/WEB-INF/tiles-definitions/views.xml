@@ -32,6 +32,10 @@
 	<definition name="schedule" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/schedule.jsp" />
 	</definition>
+	
+	<definition name="personalPage" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/personalPage.jsp" />
+	</definition>
 
 	<!-- Lists -->
 
@@ -123,6 +127,10 @@
 	<definition name="ticket.edit" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/ticket/form.jsp" />
 	</definition>
+	
+	<definition name="blankTicket.edit" extends="DefaultTemplate">
+		<put-attribute name="body" value="/WEB-INF/views/ticket/blankForm.jsp" />
+	</definition>
 
 	<definition name="train.edit" extends="DefaultTemplate">
 		<put-attribute name="body" value="/WEB-INF/views/train/form.jsp" />
@@ -140,6 +148,11 @@
 	<definition name="stations.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/passengerRoute/formStList.jsp" />
+	</definition>
+	
+	<definition name="route.details" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/passengerRoute/details.jsp" />
 	</definition>
 
 	<!-- Errors -->

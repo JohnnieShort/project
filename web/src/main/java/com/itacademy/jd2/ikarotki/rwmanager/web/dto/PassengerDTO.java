@@ -6,25 +6,66 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
-
 public class PassengerDTO {
-	
+
 	private Integer id;
-	
+
 	private Date created;
-	
+
 	private Date updated;
 	@NotNull
-	@Range(min=0)
-	private IUserAccount userAccount;
 
-	public IUserAccount getUserAccount() {
-		return userAccount;
+	private Integer userAccountId;
+	@NotNull
+	private String street;
+
+	@NotNull
+	@Range(min=0)
+	private Integer building;
+	@NotNull
+	@Range(min=0)
+	private Integer apartments;
+	@NotNull
+	private String phone;
+
+	public Integer getUserAccountId() {
+		return userAccountId;
 	}
 
-	public void setUserAccount(IUserAccount userAccountId) {
-		this.userAccount = userAccountId;
+	public void setUserAccountId(Integer userAccountId) {
+		this.userAccountId = userAccountId;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public Integer getBuilding() {
+		return building;
+	}
+
+	public void setBuilding(Integer building) {
+		this.building = building;
+	}
+
+	public Integer getApartments() {
+		return apartments;
+	}
+
+	public void setApartments(Integer apartments) {
+		this.apartments = apartments;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 	public Integer getId() {
@@ -53,8 +94,7 @@ public class PassengerDTO {
 
 	@Override
 	public String toString() {
-		return "PassengerDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", userAccount="
-				+ userAccount + "]";
+		return "PassengerDTO [id=" + id + "]";
 	}
 
 }

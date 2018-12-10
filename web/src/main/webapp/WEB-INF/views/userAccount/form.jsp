@@ -12,7 +12,7 @@
                 <label for="eMail">E-Mail</label>
             </div>
         </div>
-        
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
         <div class="row">
             <div class="input-field col s12">
                 <form:input path="password" type="password" disabled="${readonly}" />
@@ -28,7 +28,7 @@
                 <label for="role">Role</label>
             </div>
         </div>
-        
+        </sec:authorize>
         <div class="row">
             <div class="input-field col s12">
                 <form:input path="firstName" type="text" disabled="${readonly}" />

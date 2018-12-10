@@ -5,6 +5,7 @@
 <%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
 
 <c:set var="baseUrl" value="${contextPath}/ticket" />
+<c:set var="ajaxUrl" value="${contextPath}" />
 <h4 class="header">Tickets</h4>
 <table class="bordered highlight">
 	<tbody>
@@ -24,11 +25,11 @@
 		<c:forEach var="ticket" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${ticket.id}" /></td>
-				<td><c:out value="${ticket.passenger.id}" /></td>
-				<td><c:out value="${ticket.passengerRoute.id}" /></td>
+				<td><c:out value="${ticket.passengerId}" /></td>
+				<td><c:out value="${ticket.passengerRouteId}" /></td>
 			
-				<td><c:out value="${ticket.stationFrom.id}" /></td>
-				<td><c:out value="${ticket.StationTo.id}" /></td>
+				<td><c:out value="${ticket.stationFromId}" /></td>
+				<td><c:out value="${ticket.stationToId}" /></td>
 				<td><c:out value="${ticket.price}" /></td>
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -37,7 +38,7 @@
 						value="${ticket.updated}" /></td>
 				<td class="right"><a class="btn-floating"
 					href="${baseUrl}/${ticket.id}"><i class="material-icons">info</i></a>
-					<a class="btn-floating" href="${baseUrl}/${ticket.id}/edit"><i
+					<a class="btn-floating yellow darken-1" href="${baseUrl}/${ticket.id}/edit"><i
 						class="material-icons">edit</i></a> <a
 					class="btn-floating red "
 					href="${baseUrl}/${ticket.id}/delete"><i class="material-icons">delete</i></a></td>
@@ -45,6 +46,7 @@
 		</c:forEach>
 	</tbody>
 </table>
-<jspFragments:paging />
-<a class="waves-effect waves-light btn right" href="${baseUrl}/add"><i
+
+<a class="waves-effect waves-light btn right purple darken-1" href="${ajaxUrl}/ajax-samples"><i
 	class="material-icons">add</i></a>
+<jspFragments:paging />

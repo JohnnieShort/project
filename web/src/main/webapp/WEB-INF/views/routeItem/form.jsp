@@ -72,7 +72,7 @@
                 </c:if>
             </div>
             <div class="col s3">
-                <a class="btn waves-effect waves-light right" href="${baseUrl}">к списку<i class="material-icons right"></i>
+                <a class="btn waves-effect waves-light right" href="${url}">back<i class="material-icons right"></i>
                 </a>
             </div>
         </div>

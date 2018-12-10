@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -56,7 +55,6 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 	private IRouteItemService routeItemService;
 	private RouteItemFromDTOConverter routeItemFromDTOConverter;
 	private PassengerRouteToDTOConverter toDtoConverter;
-	private StationToDTOConverter stationToDtoConverter;
 	private PassengerRouteFromDTOConverter fromDtoConverter;
 
 	@Autowired
@@ -72,7 +70,6 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
 		this.stationService = stationService;
-		this.stationToDtoConverter = stationToDtoConverter;
 		this.wagonService = wagonService;
 	}
 
@@ -183,15 +180,26 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		return "redirect:/passengerRoute";
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
-		final IPassengerRoute dbModel = passengerRouteService.get(id);
+	@RequestMapping(value = "/{id}/details", method = RequestMethod.GET)
+	public ModelAndView viewDetailsFromSchedule(@PathVariable(name = "id", required = true) final Integer id) {
+		final IPassengerRoute dbModel = passengerRouteService.getFullInfo(id);
 		final PassengerRouteDTO dto = toDtoConverter.apply(dbModel);
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
 		loadCommonFormModels(hashMap);
-
+		loadItems(hashMap, id);
+		return new ModelAndView("route.details", hashMap);
+	}
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
+		final IPassengerRoute dbModel = passengerRouteService.getFullInfo(id);
+		final PassengerRouteDTO dto = toDtoConverter.apply(dbModel);
+		final HashMap<String, Object> hashMap = new HashMap<>();
+		hashMap.put("formModel", dto);
+		hashMap.put("readonly", true);
+		loadCommonFormModels(hashMap);
+		loadItems(hashMap, id);
 		return new ModelAndView("passengerRoute.edit", hashMap);
 	}
 
@@ -243,33 +251,33 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 			return routeItem.getStationFrom().getName() + " -> " + routeItem.getStationTo().getName();
 		}));
 		hashMap.put("routeItems", itemChoices);
-		if (itemsList.size()>0) {
-		double[][] points = new double[itemsList.size()+1][2];
-		double longSum = 0;
-		double latSum = 0;
-//		Iterator<IRouteItem> it = itemsList.iterator();
-//		while (it.hasNext()) {
-//			
-//		}
-		for(int i=0; i<itemsList.size(); i++) {
-			points[i][0] = itemsList.get(i).getStationFrom().getLatitude();
-			points[i][1] = itemsList.get(i).getStationFrom().getLongitude();
-			longSum +=itemsList.get(i).getStationFrom().getLongitude();
-			latSum +=itemsList.get(i).getStationFrom().getLatitude();
+		loadPoints(hashMap, itemsList);
+
+	}
+
+	private void loadPoints(Map<String, Object> hashMap, List<IRouteItem> itemsList) {
+		if (itemsList.size() > 0) {
+			double[][] points = new double[itemsList.size() + 1][2];
+			double longSum = 0;
+			double latSum = 0;
+			for (int i = 0; i < itemsList.size(); i++) {
+				points[i][0] = itemsList.get(i).getStationFrom().getLatitude();
+				points[i][1] = itemsList.get(i).getStationFrom().getLongitude();
+				longSum += itemsList.get(i).getStationFrom().getLongitude();
+				latSum += itemsList.get(i).getStationFrom().getLatitude();
+			}
+			points[points.length - 1][0] = itemsList.get(itemsList.size() - 1).getStationTo().getLatitude();
+			points[points.length - 1][1] = itemsList.get(itemsList.size() - 1).getStationTo().getLongitude();
+			longSum += itemsList.get(itemsList.size() - 1).getStationFrom().getLongitude();
+			latSum += itemsList.get(itemsList.size() - 1).getStationFrom().getLatitude();
+			double longAvg = 0;
+			double latAvg = 0;
+			longAvg = longSum / points.length;
+			latAvg = latSum / points.length;
+			hashMap.put("points", new Gson().toJson(points));
+			hashMap.put("avgLat", latAvg);
+			hashMap.put("avgLong", longAvg);
 		}
-		points[points.length-1][0] = itemsList.get(itemsList.size()-1).getStationTo().getLatitude();
-		points[points.length-1][1] = itemsList.get(itemsList.size()-1).getStationTo().getLongitude();
-		longSum +=itemsList.get(itemsList.size()-1).getStationFrom().getLongitude();
-		latSum +=itemsList.get(itemsList.size()-1).getStationFrom().getLatitude();
-		double longAvg = 0;
-		double latAvg = 0;
-		longAvg = longSum/points.length;
-		latAvg = latSum/points.length;
-		hashMap.put("points", new Gson().toJson(points));
-		hashMap.put("avgLat", latAvg);
-		hashMap.put("avgLong", longAvg);
-		}
-		
 	}
 
 }

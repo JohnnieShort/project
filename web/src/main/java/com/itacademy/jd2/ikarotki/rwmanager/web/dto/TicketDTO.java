@@ -2,7 +2,6 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
@@ -14,14 +13,12 @@ public class TicketDTO {
 	private Date created;
 	
 	private Date updated;
-	@NotNull
-	@Digits(integer=15, fraction=2)
+	
 	private Double price;
-	@NotNull
-	@Range(min=0)
+	
 	private Integer passengerId;
 	@NotNull
-	@Range(min=0)
+	
 	private Integer passengerRouteId;
 	@NotNull
 	@Range(min=0)

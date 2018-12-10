@@ -93,10 +93,12 @@ public class RouteItemController extends AbstractController<RouteItemDTO> {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
+	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id, final HttpServletRequest req) {
 		final IRouteItem dbModel = routeItemService.getFullInfo(id);
 		final RouteItemDTO dto = toDtoConverter.apply(dbModel);
 		final HashMap<String, Object> hashMap = new HashMap<>();
+		String url = req.getHeader("referer");
+		hashMap.put("url", url);
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
 

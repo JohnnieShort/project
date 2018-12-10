@@ -90,4 +90,18 @@ public class PassengerServiceImpl implements IPassengerService {
 		LOGGER.info("requested passenger: {}", entity);
 		return entity;
 	}
+
+	@Override
+	public Integer getByUAId(Integer loggedUserId) {
+		Integer passengerId = null;
+		PassengerFilter filter = new PassengerFilter();
+		filter.setFetchUserAccount(true);
+		List<IPassenger> list = find(filter);
+		for(IPassenger passenger: list) {
+			if(passenger.getUserAccount().getId() == loggedUserId) {
+				passengerId = passenger.getId();
+			}
+		}
+		return passengerId;
+	}
 }

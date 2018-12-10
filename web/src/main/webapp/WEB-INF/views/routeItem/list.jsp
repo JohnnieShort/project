@@ -20,15 +20,14 @@
 		
 			
 			
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
+			
 			<th></th>
 		</tr>
 		<c:forEach var="routeItem" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${routeItem.id}" /></td>
-				<td><c:out value="${routeItem.stationFromId}" /></td>
-				<td><c:out value="${routeItem.stationToId}" /></td>
+				<td><c:out value="${routeItem.stationFromName}" /></td>
+				<td><c:out value="${routeItem.stationToName}" /></td>
 				<td><c:out value="${routeItem.passengerRouteId}" /></td>
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd" value="${routeItem.departureDate}"/> 
@@ -39,10 +38,7 @@
 			
 				
 				
-				<td><fmt:formatDate pattern="yyyy-MM-dd"
-						value="${routeItem.created}" /></td>
-				<td><fmt:formatDate pattern="yyyy-MM-dd"
-						value="${routeItem.updated}" /></td>
+				
 				<td class="right"><a class="btn-floating"
 					href="${baseUrl}/${routeItem.id}"><i class="material-icons">info</i></a>
 					<a class="btn-floating" href="${baseUrl}/${routeItem.id}/edit"><i

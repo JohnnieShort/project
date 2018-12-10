@@ -34,4 +34,10 @@ public interface IRouteItemService {
 	Map<Integer, String> getStationsNames(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter, boolean isFirst);
 
 	Map<Integer, Date> getTime(List<IPassengerRoute> entities, RouteItemFilter routeItemFilter, boolean isDeparture);
+
+	Integer getItemsQuantity(Integer routeId, Integer fromId, Integer toId);
+
+	String getRouteName(Integer id, RouteItemFilter filter);
+
+	
 }

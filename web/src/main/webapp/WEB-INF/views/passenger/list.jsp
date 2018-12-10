@@ -11,6 +11,10 @@
 	<tbody>
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="streetid">street</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="building">building</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="apartments">apartments</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="phone">phone</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="user_account_id">user account id</mytaglib:sort-link></th>
 			
 			
@@ -21,7 +25,11 @@
 		<c:forEach var="passenger" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${passenger.id}" /></td>
-				<td><c:out value="${passenger.userAccount.id}" /></td>
+				<td><c:out value="${passenger.street}" /></td>
+				<td><c:out value="${passenger.building}" /></td>
+				<td><c:out value="${passenger.apartments}" /></td>
+				<td><c:out value="${passenger.phone}" /></td>
+				<td><c:out value="${passenger.userAccountId}" /></td>
 				
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
@@ -31,13 +39,13 @@
 				<td class="right"><a class="btn-floating"
 					href="${baseUrl}/${passenger.id}"><i class="material-icons">info</i></a>
 					<a class="btn-floating" href="${baseUrl}/${passenger.id}/edit"><i
-						class="material-icons">edit</i></a> <a
-					class="btn-floating red "
+						class="material-icons">edit</i></a> 
+					<a class="btn-floating red "
 					href="${baseUrl}/${passenger.id}/delete"><i class="material-icons">delete</i></a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-<jspFragments:paging />
-<a class="waves-effect waves-light btn right" href="${baseUrl}/add"><i
+	<a class="waves-effect waves-light btn right" href="${baseUrl}/add"><i
 	class="material-icons">add</i></a>
+<jspFragments:paging />

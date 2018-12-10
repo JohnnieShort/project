@@ -15,6 +15,7 @@
         <intercept-url pattern="/wagon**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/station**" access="!isAnonymous()" /> 
         <intercept-url pattern="/ticket/*/buy**" access="!isAnonymous()" />
+        <intercept-url pattern="/personalPage**" access="!isAnonymous()" />
 
         <form-login login-page="/login" default-target-url="/"
             authentication-failure-url="/login?error"

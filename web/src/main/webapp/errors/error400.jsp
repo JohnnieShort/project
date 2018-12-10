@@ -1,5 +1,5 @@
 <%@ page isErrorPage="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<c:set var="baseUrl" value="${contextPath}" />
+<c:set var="baseUrl" value="${contextPath}/index" />
 <html><title>Error Page</title>
 	<body>
 		Request from ${pageContext.errorData.requestURI} is failed
@@ -11,9 +11,9 @@
 		Exception: ${pageContext.exception}
 		<br/>
 		Message from exception: ${pageContext.exception.message}
+		<br/>
+		<a class="btn waves-effect waves-light right" href="${baseUrl}">back<i class="material-icons right"></i>
+                </a>
 	</body>
 </html>
-нееееееееееету
 
-<a class="btn waves-effect waves-light right" href="${baseUrl}">back<i class="material-icons right"></i>
-                </a>

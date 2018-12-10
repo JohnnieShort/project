@@ -25,4 +25,6 @@ public interface IPassengerService {
 	long getCount(PassengerFilter filter);
 
 	IPassenger getFullInfo(Integer id);
+
+	Integer getByUAId(Integer loggedUserId);
 }

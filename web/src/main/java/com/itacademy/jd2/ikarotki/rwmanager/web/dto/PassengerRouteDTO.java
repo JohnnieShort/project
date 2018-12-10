@@ -12,20 +12,39 @@ public class PassengerRouteDTO {
 
 	private Date updated;
 
+	private String name;
+
 	@NotNull
-	
+
 	private String passengerRouteType;
 	@NotNull
-	
+
 	private Integer trainId;
 	@NotNull
-	
+
 	private Boolean isActual;
 	@NotNull
 
 	private String frequency;
-	
+
 	private Integer version;
+
+	public PassengerRouteDTO(Integer id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public PassengerRouteDTO() {
+
+	}
 
 	public Integer getVersion() {
 		return version;
