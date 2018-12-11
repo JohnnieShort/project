@@ -45,3 +45,11 @@
 - ask about controller mapping (value=/add);
 - ask about spring tags;
 - ask about i18n, SMTP+, form train+, error page;
+
+---------------------------10.12---------------------------
+- i18n failed;
+- personal page failed;
+- ajax failed;
+- iteration js failed;
+- save "back" failed;
+- save userAccount failed;

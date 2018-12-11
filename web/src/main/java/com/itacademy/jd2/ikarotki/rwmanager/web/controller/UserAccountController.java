@@ -64,23 +64,27 @@ public class UserAccountController extends AbstractController<UserAccountDTO> {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView showForm() {
+	public ModelAndView showForm(final HttpServletRequest req) {
 		final Map<String, Object> hashMap = new HashMap<>();
 		final IUserAccount newEntity = userAccountService.createEntity();
 		UserAccountDTO dto = toDtoConverter.apply(newEntity);
 		hashMap.put("formModel", dto);
+		String url = req.getHeader("referer");
+		hashMap.put("url", url);
 
 		return new ModelAndView("userAccount.edit", hashMap);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(@Valid @ModelAttribute("formModel") final UserAccountDTO formModel, final BindingResult result) {
+	public String save(@Valid @ModelAttribute("formModel") final UserAccountDTO formModel, final BindingResult result,
+			final HttpServletRequest req, @RequestParam(name = "pass", required = false) String pass) {
 		if (result.hasErrors()) {
 			return "userAccount.edit";
 		} else {
 			final IUserAccount entity = fromDtoConverter.apply(formModel);
+			entity.setPassword(pass);
 			userAccountService.save(entity);
-			return "redirect:/userAccount";
+			return "redirect:/"+req.getHeader("referer");
 		}
 	}
 
@@ -102,12 +106,15 @@ public class UserAccountController extends AbstractController<UserAccountDTO> {
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
+	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id, 
+			final HttpServletRequest req) {
 		final UserAccountDTO dto = toDtoConverter.apply(userAccountService.get(id));
 
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
-
+		hashMap.put("formModel", dto);
+		String url = req.getHeader("referer");
+		hashMap.put("url", url);
 		return new ModelAndView("userAccount.edit", hashMap);
 	}
 

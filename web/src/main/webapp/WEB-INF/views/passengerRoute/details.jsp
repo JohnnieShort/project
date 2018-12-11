@@ -35,17 +35,6 @@
           
         
         <div class="row">
-            <div class="input-field col s12">
-                <form:select path="trainId" disabled="${readonly}">
-					<form:option value="0" label="Select train" />
-					<form:options items="${trainsChoices}" />
-				</form:select>
-                <form:errors path="trainId" cssClass="red-text" />
-                <label for="trainId">Train id</label>
-            </div>
-        </div>
-        
-        <div class="row">
             <div class="input-field col s12" >
                <form:select path="passengerRouteType" disabled="${readonly}">
             		<form:option value="0" label="Select type of route" />
@@ -55,17 +44,6 @@
             	 <label for=passengerRouteType>Type</label>
             </div>
         </div>
-        
-        <div class="row">
-			<div class="input-field col s12">
-				<div class="switch">
-					<label> not actual <form:checkbox path="isActual" disabled="${readonly}" /> <span
-						class="lever"></span> actual
-					</label>
-				</div>
-				<label class="switch-label">is actual</label> <br />
-			</div>
-		</div>
         
         <div class="row">
              <div class="input-field col s12">
@@ -78,7 +56,18 @@
             </div>
         </div>
         
+        <div class="row">
+            <div class="input-field col s6">
+            
+               	<input id="stationFromId" name="stationFromId" type="text" value="${fromItems}" class="validate">
+          		<label for="stationFromId">from</label>
+            </div>
         
+            <div class="input-field col s6">
+               	<input id="stationToId" name="stationToId" type="text" value="${toItems}" class="validate">
+          		<label for="stationToId">to</label>
+            </div>
+        </div>
         <div class="row">
             <div class="col s6"></div>
             <div class="col s3">
@@ -92,6 +81,8 @@
             </div>
         </div>
     </form:form>
+     	
+    
 </div>
 <script src="${contextPath}/resources/js/init-map.js"></script>
 

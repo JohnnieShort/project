@@ -13,9 +13,9 @@
                 <h5 class="white-text">Links</h5>
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="https://github.com/dzhivushko/G-JD2-09-11_ikarotki">Source files</a></li>
-                    <li><a class="grey-text text-lighten-3" href="https://github.com/dzhivushko/G-JD2-09-11_ikarotki/blob/master/docs/Demorwmanager.png">Mind map</a></li>
-                    <li><a class="grey-text text-lighten-3" href="https://github.com/dzhivushko/G-JD2-09-11_ikarotki/blob/master/docs/DMrwmanager.png">Data model</a></li>
-                    <li><a class="grey-text text-lighten-3" href="">Roles</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://raw.githubusercontent.com/dzhivushko/G-JD2-09-11_ikarotki/master/docs/Demorwmanager.png?token=Akhairy89If54gxJXBhmG0Sr9LXNz4CXks5cF7hqwA%3D%3D">Mind map</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://raw.githubusercontent.com/dzhivushko/G-JD2-09-11_ikarotki/master/docs/DMrwmanager.png?token=AkhaivDj2YkuIuqpNDmZJ017uAuDmR7aks5cF7hDwA%3D%3D">Data model</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://github.com/dzhivushko/G-JD2-09-11_ikarotki/blob/master/docs/Roles.txt">Roles</a></li>
                 </ul>
             </div>
         </div>

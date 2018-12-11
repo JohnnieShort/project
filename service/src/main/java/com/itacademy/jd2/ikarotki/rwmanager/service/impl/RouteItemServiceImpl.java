@@ -159,7 +159,7 @@ public class RouteItemServiceImpl implements IRouteItemService {
 				to=item.getOrdinalNum();
 			}
 		}
-		return to-from+1;
+		return to-from;
 		
 	}
 

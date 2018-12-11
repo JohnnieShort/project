@@ -37,15 +37,10 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 @RequestMapping(value = "/schedule")
 public class ScheduleController extends AbstractController<PassengerRouteDTO>{
 	private IPassengerRouteService passengerRouteService;
-	private IStationService stationService;
 	private ITrainService trainService;
 	private IWagonService wagonService;
 	private IRouteItemService routeItemService;
-	private RouteItemFromDTOConverter routeItemFromDTOConverter;
 	private PassengerRouteToDTOConverter toDtoConverter;
-	private StationToDTOConverter stationToDtoConverter;
-	private PassengerRouteFromDTOConverter fromDtoConverter;
-	
 	@Autowired
 	private ScheduleController(IPassengerRouteService pasengerRouteService, IStationService stationService,
 			ITrainService trainService, IWagonService wagonService, IRouteItemService routeItemService,
@@ -54,12 +49,8 @@ public class ScheduleController extends AbstractController<PassengerRouteDTO>{
 		super();
 		this.passengerRouteService = pasengerRouteService;
 		this.routeItemService = routeItemService;
-		this.routeItemFromDTOConverter = routeItemFromDTOConverter;
 		this.trainService = trainService;
 		this.toDtoConverter = toDtoConverter;
-		this.fromDtoConverter = fromDtoConverter;
-		this.stationService = stationService;
-		this.stationToDtoConverter = stationToDtoConverter;
 		this.wagonService = wagonService;
 	}
 	

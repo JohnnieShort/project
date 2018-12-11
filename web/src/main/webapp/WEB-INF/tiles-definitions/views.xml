@@ -5,151 +5,192 @@
 <tiles-definitions>
 
 
-	<definition name="DefaultTemplate" template="/WEB-INF/views/main-template.jsp">
+	<definition name="DefaultTemplate"
+		template="/WEB-INF/views/main-template.jsp">
 		<put-attribute name="title" value="FaE Rail Ways" />
-		<put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/header.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/footer.jsp" />
 	</definition>
 
 	<definition name="index" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
+		
+		<put-attribute name="body"
+			value="/WEB-INF/views/index.jsp" />
 	</definition>
 
 	<definition name="login" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/login.jsp" />
 	</definition>
 
 	<definition name="register" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/register.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/register.jsp" />
 	</definition>
 
-	<definition name="administratorPage" extends="DefaultTemplate">
+	<definition name="administratorPage"
+		extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/administratorPage.jsp" />
 	</definition>
 
 	<definition name="schedule" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/schedule.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/schedule.jsp" />
 	</definition>
-	
+
 	<definition name="personalPage" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/personalPage.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/personalPage.jsp" />
 	</definition>
 
 	<!-- Lists -->
 
 	<definition name="cargoOrder.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/cargoOrder/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoOrder/list.jsp" />
 	</definition>
 
 	<definition name="cargoRoute.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/cargoRoute/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoRoute/list.jsp" />
 	</definition>
 
 	<definition name="customer.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/customer/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/customer/list.jsp" />
 	</definition>
 
 	<definition name="locomotive.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/locomotive/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/locomotive/list.jsp" />
 	</definition>
 
 	<definition name="passenger.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/passenger/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/passenger/list.jsp" />
 	</definition>
 
-	<definition name="passengerRoute.list" extends="DefaultTemplate">
+	<definition name="passengerRoute.list"
+		extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/passengerRoute/list.jsp" />
 	</definition>
 
 	<definition name="routeItem.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/routeItem/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/routeItem/list.jsp" />
 	</definition>
 
 	<definition name="station.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/station/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/station/list.jsp" />
 	</definition>
 
 	<definition name="ticket.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/ticket/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/ticket/list.jsp" />
 	</definition>
 
 	<definition name="train.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/train/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/train/list.jsp" />
 	</definition>
 
-	<definition name="userAccount.list" extends="DefaultTemplate">
+	<definition name="userAccount.list"
+		extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/userAccount/list.jsp" />
 	</definition>
 
 	<definition name="wagon.list" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/wagon/list.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/wagon/list.jsp" />
 	</definition>
 
 	<!-- Forms -->
 
 	<definition name="cargoOrder.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/cargoOrder/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoOrder/form.jsp" />
 	</definition>
 
 	<definition name="cargoRoute.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/cargoRoute/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoRoute/form.jsp" />
 	</definition>
 
 	<definition name="customer.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/customer/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/customer/form.jsp" />
 	</definition>
 
 	<definition name="locomotive.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/locomotive/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/locomotive/form.jsp" />
 	</definition>
 
 	<definition name="passenger.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/passenger/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/passenger/form.jsp" />
 	</definition>
 
-	<definition name="passengerRoute.edit" extends="DefaultTemplate">
+	<definition name="passengerRoute.edit"
+		extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/passengerRoute/form.jsp" />
 	</definition>
 
 	<definition name="routeItem.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/routeItem/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/routeItem/form.jsp" />
 	</definition>
 
 	<definition name="station.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/station/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/station/form.jsp" />
 	</definition>
 
 	<definition name="ticket.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/ticket/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/ticket/form.jsp" />
 	</definition>
 	
-	<definition name="blankTicket.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/ticket/blankForm.jsp" />
+	<definition name="dbTicket.edit" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/ticket/dbTicket.jsp" />
+	</definition>
+
+	<definition name="blankTicket.edit"
+		extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/ticket/blankForm.jsp" />
 	</definition>
 
 	<definition name="train.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/train/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/train/form.jsp" />
 	</definition>
 
-	<definition name="userAccount.edit" extends="DefaultTemplate">
+	<definition name="userAccount.edit"
+		extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/userAccount/form.jsp" />
 	</definition>
 
 	<definition name="wagon.edit" extends="DefaultTemplate">
-		<put-attribute name="body" value="/WEB-INF/views/wagon/form.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/wagon/form.jsp" />
 	</definition>
 
 	<definition name="stations.edit" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/passengerRoute/formStList.jsp" />
 	</definition>
-	
+
 	<definition name="route.details" extends="DefaultTemplate">
 		<put-attribute name="body"
 			value="/WEB-INF/views/passengerRoute/details.jsp" />
@@ -160,7 +201,8 @@
 	<definition name="errorPage" extends="DefaultTemplate">
 		<put-attribute name="header" value="" />
 		<put-attribute name="footer" value="" />
-		<put-attribute name="body" value="/WEB-INF/views/errorPage.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/errorPage.jsp" />
 	</definition>
 
 

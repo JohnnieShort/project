@@ -26,4 +26,6 @@ public interface ITicketService {
 	long getCount(TicketFilter filter);
 
 	ITicket getFullInfo(Integer id);
+
+	List<ITicket> findByPassenger(TicketFilter ticketFilter, Integer passengerId);
 }

@@ -1,5 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <c:set var="baseUrl" value="${contextPath}/userAccount" />
 <h4 class="header">Edit user account</h4>
 <div class="row">
@@ -18,6 +20,12 @@
                 <form:input path="password" type="password" disabled="${readonly}" />
                 <form:errors path="password" cssClass="red-text" />
                 <label for="password">Password</label>
+            </div>
+        </div>
+         <div class="row">
+            <div class="input-field col s12">
+               	<input id="pass" name="pass" type="text" value="${formModel.password}" class="validate">
+          		<label for="pass">pass</label>
             </div>
         </div>
         
@@ -53,7 +61,7 @@
                 </c:if>
             </div>
             <div class="col s3">
-                <a class="btn waves-effect waves-light right" href="${baseUrl}">к списку<i class="material-icons right"></i>
+                <a class="btn waves-effect waves-light right" href="${url}">back<i class="material-icons right"></i>
                 </a>
             </div>
         </div>

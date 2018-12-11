@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -127,5 +128,19 @@ public class TicketServiceImpl implements ITicketService {
 		final ITicket entity = dao.getFullInfo(id);
 		LOGGER.info("requested ticket: {}", entity);
 		return entity;
+	}
+
+	@Override
+	public List<ITicket> findByPassenger(TicketFilter ticketFilter, Integer passengerId) {
+		List<ITicket> tickets = new ArrayList<ITicket>();
+		tickets = find(ticketFilter);
+		List<ITicket> sortedTickets = new ArrayList<ITicket>();
+		for(ITicket ticket: tickets) {
+			if(ticket.getPassenger().getId() == passengerId) {
+				sortedTickets.add(ticket);
+			}
+		}
+		
+		return sortedTickets;
 	}
 }

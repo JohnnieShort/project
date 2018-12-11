@@ -129,7 +129,7 @@ public class TicketController extends AbstractController<TicketDTO> {
 		hashMap.put("formModel", dto);
 		String url = req.getHeader("referer");
 		hashMap.put("url", url);
-		loadItems(hashMap, id);
+		loadFromToItems(hashMap, id);
 		return new ModelAndView("ticket.edit", hashMap);
 	}
 
@@ -153,15 +153,20 @@ public class TicketController extends AbstractController<TicketDTO> {
 			hashMap.put("apartments", apartments);
 			hashMap.put("phone", phone);
 			hashMap.put("quantity", quantity);
-			loadItems(hashMap, formModel.getPassengerRouteId());
+			loadFromToItems(hashMap, formModel.getPassengerRouteId());
 			return new ModelAndView("ticket.edit", hashMap);
 		} else {
-
-			for (int i = 0; i < quantity; i++) {
+			if (quantity != null) {
+				for (int i = 0; i < quantity; i++) {
+					final ITicket entity = fromDtoConverter.apply(formModel);
+					setPassenger(street, building, apartments, phone, entity);
+					ticketService.save(entity);
+				}
+			} else {
 				final ITicket entity = fromDtoConverter.apply(formModel);
-				setPassenger(street, building, apartments, phone, entity);
 				ticketService.save(entity);
 			}
+
 			return "redirect:/ticket";
 		}
 	}
@@ -196,7 +201,7 @@ public class TicketController extends AbstractController<TicketDTO> {
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
 
-		return new ModelAndView("ticket.edit", hashMap);
+		return new ModelAndView("dbTicket.edit", hashMap);
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
@@ -206,10 +211,10 @@ public class TicketController extends AbstractController<TicketDTO> {
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
 
-		return new ModelAndView("ticket.edit", hashMap);
+		return new ModelAndView("dbTicket.edit", hashMap);
 	}
 
-	private void loadItems(Map<String, Object> hashMap, Integer routeId) {
+	private void loadFromToItems(Map<String, Object> hashMap, Integer routeId) {
 		List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
 		RouteItemFilter filter = new RouteItemFilter();
 		filter.setFetchStationFrom(true);

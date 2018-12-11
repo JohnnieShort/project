@@ -39,7 +39,7 @@ public class MailServiceImpl implements IMailService {
 			message.setSubject(Subject);
 			message.setText(messageText);
 
-			Transport.send(message);
+			//Transport.send(message);
 
 			System.out.println("Done");
 

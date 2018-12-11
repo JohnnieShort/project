@@ -14,7 +14,7 @@
 			<c:forEach begin="1" end="${currentPageGridState.pageCount}" varStatus="loop">
 				<c:choose>
 					<c:when test="${loop.index == currentPageGridState.page}">
-						<li class="active"><a>${loop.index}</a></li>
+						<li class="active purple lighten-4"><a>${loop.index}</a></li>
 					</c:when>
 					<c:otherwise>
 						<li class="waves-effect"><a href="?page=${loop.index}">${loop.index}</a></li>

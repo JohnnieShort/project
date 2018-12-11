@@ -30,6 +30,8 @@ public class PassengerFromDTOConverter implements Function<PassengerDTO, IPassen
 		entity.setUpdated(dto.getUpdated());
 		IUserAccount userAccount= userAccountService.createEntity();
 		userAccount.setId(dto.getUserAccountId()!=null? dto.getUserAccountId(): null);
+		IUserAccount account = userAccountService.createEntity();
+		entity.setUserAccount(account);
 		entity.getUserAccount().setId((dto.getUserAccountId()));
 
 		return entity;

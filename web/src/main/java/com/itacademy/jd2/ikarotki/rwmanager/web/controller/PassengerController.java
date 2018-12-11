@@ -67,7 +67,7 @@ public class PassengerController extends AbstractController<PassengerDTO> {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		
+
 		PassengerDTO dto = new PassengerDTO();
 		hashMap.put("formModel", dto);
 
@@ -75,13 +75,14 @@ public class PassengerController extends AbstractController<PassengerDTO> {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String save(@Valid @ModelAttribute("formModel") final PassengerDTO formModel, final BindingResult result) {
+	public String save(@Valid @ModelAttribute("formModel") final PassengerDTO formModel, final BindingResult result,
+			final HttpServletRequest req) {
 		if (result.hasErrors()) {
 			return "passenger.edit";
 		} else {
 			final IPassenger entity = fromDtoConverter.apply(formModel);
 			passengerService.save(entity);
-			return "redirect:/passenger";
+			return "redirect:/" + req.getHeader("referer");
 		}
 	}
 
@@ -103,12 +104,14 @@ public class PassengerController extends AbstractController<PassengerDTO> {
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
+	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id,
+			final HttpServletRequest req) {
 		final PassengerDTO dto = toDtoConverter.apply(passengerService.get(id));
 
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
-
+		String url = req.getHeader("referer");
+		hashMap.put("url", url);
 		return new ModelAndView("passenger.edit", hashMap);
 	}
 

@@ -91,7 +91,7 @@ public class PassengerDaoImpl extends AbstractDaoImpl<IPassenger, Integer> imple
 
 		final TypedQuery<IPassenger> q = em.createQuery(cq);
 
-		return getSingleResult(q);
+		return q.getSingleResult();
 	}
 
 	@Override

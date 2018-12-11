@@ -21,10 +21,10 @@ public class TicketDTO {
 	
 	private Integer passengerRouteId;
 	@NotNull
-	@Range(min=0)
+	
 	private Integer stationFromId;
 	@NotNull
-	@Range(min=0)
+	
 	private Integer stationToId;
 
 	public Integer getId() {

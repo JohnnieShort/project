@@ -9,7 +9,7 @@
         <form:input path="passengerRouteId" type="hidden" value="${passengerRouteId}"/>
        
         <c:if test = "${empty passengerId}">
-        
+        <h5 class="header">Please edit additional info for the first ticket order</h5>
       	
         	<div class="row">
             	<div class="input-field col s6">
