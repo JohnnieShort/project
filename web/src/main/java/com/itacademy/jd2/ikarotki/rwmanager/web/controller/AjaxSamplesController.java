@@ -42,8 +42,8 @@ public class AjaxSamplesController {
 	private IRouteItemService routeItemService;
 
 	@Autowired
-	private AjaxSamplesController(IPassengerRouteService routeService,
-			PassengerRouteToDTOConverter routeToDTOConverter, IRouteItemService routeItemService, StationToDTOConverter stationToDTOConverter) {
+	private AjaxSamplesController(IPassengerRouteService routeService, PassengerRouteToDTOConverter routeToDTOConverter,
+			IRouteItemService routeItemService, StationToDTOConverter stationToDTOConverter) {
 		this.routeService = routeService;
 		this.routeToDTOConverter = routeToDTOConverter;
 		this.routeItemService = routeItemService;
@@ -57,7 +57,7 @@ public class AjaxSamplesController {
 		for (IPassengerRoute route : routes) {
 			routesDTO.add(routeToDTOConverter.apply(route));
 		}
-		//String json = new Gson().toJson(routesDTO);
+		// String json = new Gson().toJson(routesDTO);
 		return new ResponseEntity<List<PassengerRouteDTO>>(routesDTO, HttpStatus.OK);
 	}
 
@@ -68,7 +68,7 @@ public class AjaxSamplesController {
 		RouteItemFilter filter = new RouteItemFilter();
 		filter.setFetchStationFrom(true);
 		List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
-		for(IRouteItem item: routeItems) {
+		for (IRouteItem item : routeItems) {
 			stationsFrom.add(stationToDTOConverter.apply(item.getStationFrom()));
 		}
 		return new ResponseEntity<List<StationDTO>>(stationsFrom, HttpStatus.OK);
@@ -76,13 +76,17 @@ public class AjaxSamplesController {
 
 	@RequestMapping(value = "/toStations", method = RequestMethod.GET)
 	public ResponseEntity<List<StationDTO>> getStationsTo(
-			@RequestParam(name = "routeId", required = true) final Integer routeId) {
+			@RequestParam(name = "routeId", required = true) final Integer routeId,
+			@RequestParam(name = "selectedName", required = true) final Integer selectedName) {
 		final List<StationDTO> stationsTo = new ArrayList<StationDTO>();
 		RouteItemFilter filter = new RouteItemFilter();
 		filter.setFetchStationTo(true);
 		List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
-		for(IRouteItem item: routeItems) {
-			stationsTo.add(stationToDTOConverter.apply(item.getStationTo()));
+
+		for (IRouteItem item : routeItems) {
+			if (item.getStationFrom().getId() >= selectedName) {
+				stationsTo.add(stationToDTOConverter.apply(item.getStationTo()));
+			}
 		}
 		return new ResponseEntity<List<StationDTO>>(stationsTo, HttpStatus.OK);
 	}

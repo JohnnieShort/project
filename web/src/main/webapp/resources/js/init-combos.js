@@ -39,23 +39,22 @@ function initComboboxes(contextUrl) {
 		// запрос
 		// на сервер
 		$("#passengerRouteId").change(function() {
-			var selectedId = $(this).val();
+			var selectedId = $('#passengerRouteId').val();
 			$.get(contextUrl + "/ajax-samples/fromStations?routeId=" + selectedId, function(stationsFrom) {
 				initSelectElement('stationFromId', stationsFrom);
 			
 			})
-			$.get(contextUrl + "/ajax-samples/toStations?routeId=" + selectedId, function(stationsTo) {
-				initSelectElement('stationToId', stationsTo);
-			})
+			
 		});
 
-		/*$("#stationFromId").change(function() {
+		$("#stationFromId").change(function() {
 			var selectedName = $(this).val();
-			$.get(contextUrl + "/ajax-samples/toStations?selectedName=" + selectedName, function(stationsTo) {
+			var selectedId = $('#passengerRouteId').val();
+			$.get(contextUrl + "/ajax-samples/toStations?selectedName=" + selectedName+"&routeId="+selectedId, function(stationsTo) {
 				initSelectElement('stationToId', stationsTo);
 			})
 
-		});*/
+		});
 	});
 	// документация по JQUERY - https://api.jquery.com/
 

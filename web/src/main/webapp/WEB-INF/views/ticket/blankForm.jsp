@@ -11,7 +11,7 @@
     <form:input path="id" type="hidden" />
         <div class="row">
             <div class="col s12">
-                <form:select path="passengerRouteId" cssClass="browser-default" />
+                <form:select path="passengerRouteId" id="passengerRouteId" cssClass="browser-default" />
             </div>
         </div>
         <div class="row">

@@ -37,12 +37,11 @@ function initMap(points, avgLat, avgLong) {
 		});
 		// Добавляем линии на карту.
 		myMap.geoObjects.add(myGeoObject);
-		var coordinates = points.split(" ");
-		var i;
-
-		for (i = 0; i < 3; i++) {
-  			alert( i );
-		}
+		for (var i = 0; i < 3; i++) {
+//			alert( i );
+		console.log(i);
+	}
+		
 		
 	});
 

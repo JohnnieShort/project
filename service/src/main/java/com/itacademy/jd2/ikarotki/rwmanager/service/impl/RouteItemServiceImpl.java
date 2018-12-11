@@ -97,11 +97,11 @@ public class RouteItemServiceImpl implements IRouteItemService {
 	@Override
 	public List<IRouteItem> getItems(Integer routeId, RouteItemFilter filter) {
 		List<IRouteItem> itemsList = dao.getItems(routeId, filter);
-//		int i = 0;
-//		for(IRouteItem item: itemsList) {
-//			item.setOrdinalNum(i);
-//			i++;
-//		}
+		// int i = 0;
+		// for(IRouteItem item: itemsList) {
+		// item.setOrdinalNum(i);
+		// i++;
+		// }
 		return itemsList;
 	}
 
@@ -149,24 +149,27 @@ public class RouteItemServiceImpl implements IRouteItemService {
 		filter.setFetchStationFrom(true);
 		filter.setFetchStationTo(true);
 		List<IRouteItem> list = getItems(routeId, filter);
-		int from=0;
-		int to=0;
-		for(IRouteItem item: list) {
-			if(item.getStationFrom().getId().equals(fromId)) {
-				from=item.getOrdinalNum();
+		int from = 0;
+		int to = 0;
+		for (IRouteItem item : list) {
+			if (item.getStationFrom().getId().equals(fromId)) {
+				from = item.getOrdinalNum();
 			}
-			if(item.getStationTo().getId().equals(toId)) {
-				to=item.getOrdinalNum();
+			if (item.getStationTo().getId().equals(toId)) {
+				to = item.getOrdinalNum();
 			}
 		}
-		return to-from;
-		
+		return to - from;
+
 	}
 
 	@Override
 	public String getRouteName(Integer routeId, RouteItemFilter filter) {
 		List<IRouteItem> items = getItems(routeId, filter);
-		return items.get(0).getStationFrom().getName() +" -> " + items.get(items.size()-1).getStationTo().getName();
+		if (items.size() == 0) {
+			return null;
+		}
+		return items.get(0).getStationFrom().getName() + " -> " + items.get(items.size() - 1).getStationTo().getName();
 	}
-	
+
 }
