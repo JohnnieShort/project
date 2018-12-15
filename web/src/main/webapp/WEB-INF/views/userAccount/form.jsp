@@ -14,21 +14,16 @@
                 <label for="eMail">E-Mail</label>
             </div>
         </div>
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
+        
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="password" type="password" disabled="${readonly}" />
+                <form:input path="password" type="text" disabled="${readonly}" />
                 <form:errors path="password" cssClass="red-text" />
-                <label for="password">Password</label>
+                <label for="password">password</label>
             </div>
         </div>
-         <div class="row">
-            <div class="input-field col s12">
-               	<input id="pass" name="pass" type="text" value="${formModel.password}" class="validate">
-          		<label for="pass">pass</label>
-            </div>
-        </div>
-        
+         
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
         <div class="row">
             <div class="input-field col s12">
                 <form:input path="role" type="text" disabled="${readonly}" />

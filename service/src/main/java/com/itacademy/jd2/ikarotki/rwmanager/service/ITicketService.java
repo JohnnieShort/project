@@ -27,5 +27,5 @@ public interface ITicketService {
 
 	ITicket getFullInfo(Integer id);
 
-	List<ITicket> findByPassenger(TicketFilter ticketFilter, Integer passengerId);
+	List<ITicket> findByPassengerId(TicketFilter ticketFilter, Integer passengerId);
 }

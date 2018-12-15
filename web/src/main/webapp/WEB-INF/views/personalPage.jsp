@@ -12,6 +12,7 @@
 <h4 class="header">Personal page</h4>
 <h5 class="header">Personal data</h5>
 <div class="row">
+<c:if test = "${not empty user}">
 	<form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="user">
         <form:input path="id" type="hidden" />
                 
@@ -41,7 +42,7 @@
         
        
     </form:form>
-    
+    </c:if>
     <c:if test = "${not empty passenger}">
     	<h5 class="header">Adress</h5>
     		<form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="passenger">
@@ -86,7 +87,13 @@
 		<ul class="collection with-header">
 			<li class="collection-header"><h4>Tickets</h4></li>
 			<c:forEach var="item" items="${tickets}" varStatus="loopCounter">
-				<li class="collection-item">
+				<li class="collection-item"> 
+						<c:forEach var="entry" items="${depArr}" varStatus="loopCounter">
+							<c:if test = "${item.key == entry.key}">
+         						<c:out value = "${entry.value}"/>
+     						</c:if>
+				
+						</c:forEach>
 					<div>
 						"${item.value}"<a href="${ticketUrl}/${item.key}/delete"
 							class="secondary-content"><i class="material-icons">delete</i></a>

@@ -58,12 +58,11 @@
 						</c:forEach>
 				</td> <%--"${passengerRoute.places}"--%>
 				
-				<td class="right"><a class="btn-floating"
-					href="${baseUrl}/${passengerRoute.id}"><i class="material-icons">info</i></a>
-					<a class="btn-floating" href="${baseUrl}/${passengerRoute.id}/edit"><i
-						class="material-icons">edit</i></a> <a
-					class="btn-floating red "
-					href="${baseUrl}/${passengerRoute.id}/delete"><i class="material-icons">delete</i></a></td>
+				<td class="right">
+					<a class="btn-floating"	href="${baseUrl}/${ticket.id}"><i class="material-icons">info</i></a>
+					<a class="btn-floating yellow darken-1" href="${baseUrl}/${ticket.id}/edit"><i class="material-icons">edit</i></a> 
+					<a class="btn-floating red "href="${baseUrl}/${ticket.id}/delete"><i class="material-icons">delete</i></a>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>

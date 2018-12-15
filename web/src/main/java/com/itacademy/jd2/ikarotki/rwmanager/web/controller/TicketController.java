@@ -1,6 +1,7 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,8 +38,12 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IRouteItemService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
+import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteToDTOConverter;
+import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TicketFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TicketToDTOConverter;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.PassengerRouteDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.StationDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.TicketDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.security.AuthHelper;
@@ -49,11 +59,15 @@ public class TicketController extends AbstractController<TicketDTO> {
 	private IUserAccountService userAccountService;
 	private IPassengerRouteService routeService;
 
+	private PassengerRouteToDTOConverter routeToDTOConverter;
+	private StationToDTOConverter stationToDTOConverter;
+
 	@Autowired
 	private TicketController(ITicketService ticketService, TicketToDTOConverter toDtoConverter,
 			TicketFromDTOConverter fromDtoConverter, IPassengerService passengerService,
 			IRouteItemService routeItemService, IUserAccountService userAccountService,
-			IPassengerRouteService routeService) {
+			IPassengerRouteService routeService, PassengerRouteToDTOConverter routeToDTOConverter,
+			StationToDTOConverter stationToDTOConverter) {
 		super();
 		this.ticketService = ticketService;
 		this.toDtoConverter = toDtoConverter;
@@ -62,6 +76,9 @@ public class TicketController extends AbstractController<TicketDTO> {
 		this.routeItemService = routeItemService;
 		this.userAccountService = userAccountService;
 		this.routeService = routeService;
+		this.routeToDTOConverter = routeToDTOConverter;
+
+		this.stationToDTOConverter = stationToDTOConverter;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -85,6 +102,47 @@ public class TicketController extends AbstractController<TicketDTO> {
 		return new ModelAndView("ticket.list", models);
 	}
 
+	@RequestMapping(value = "/routes", method = RequestMethod.GET)
+	public ResponseEntity<List<PassengerRouteDTO>> getRoutes() {
+		final List<PassengerRouteDTO> routesDTO = new ArrayList<PassengerRouteDTO>();
+		List<IPassengerRoute> routes = routeService.find(new PassengerRouteFilter());
+		for (IPassengerRoute route : routes) {
+			routesDTO.add(routeToDTOConverter.apply(route));
+		}
+		// String json = new Gson().toJson(routesDTO);
+		return new ResponseEntity<List<PassengerRouteDTO>>(routesDTO, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/fromStations", method = RequestMethod.GET)
+	public ResponseEntity<List<StationDTO>> getStationsFrom(
+			@RequestParam(name = "routeId", required = true) final Integer routeId) {
+		final List<StationDTO> stationsFrom = new ArrayList<StationDTO>();
+		RouteItemFilter filter = new RouteItemFilter();
+		filter.setFetchStationFrom(true);
+		List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
+		for (IRouteItem item : routeItems) {
+			stationsFrom.add(stationToDTOConverter.apply(item.getStationFrom()));
+		}
+		return new ResponseEntity<List<StationDTO>>(stationsFrom, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/toStations", method = RequestMethod.GET)
+	public ResponseEntity<List<StationDTO>> getStationsTo(
+			@RequestParam(name = "routeId", required = true) final Integer routeId,
+			@RequestParam(name = "selectedName", required = true) final Integer selectedName) {
+		final List<StationDTO> stationsTo = new ArrayList<StationDTO>();
+		RouteItemFilter filter = new RouteItemFilter();
+		filter.setFetchStationTo(true);
+		List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
+
+		for (IRouteItem item : routeItems) {
+			if (item.getStationFrom().getId() >= selectedName) {
+				stationsTo.add(stationToDTOConverter.apply(item.getStationTo()));
+			}
+		}
+		return new ResponseEntity<List<StationDTO>>(stationsTo, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm(final HttpServletRequest req) {
 		final Map<String, Object> hashMap = new HashMap<>();
@@ -103,8 +161,8 @@ public class TicketController extends AbstractController<TicketDTO> {
 		PassengerFilter filter = new PassengerFilter();
 		filter.setFetchUserAccount(true);
 		List<IPassenger> passengers = passengerService.find(filter);
-		Map<Integer, String> passengerChoices = passengers.stream().collect(
-				Collectors.toMap(passenger -> passenger.getId(), passenger -> passenger.getUserAccount().getFirstName()
+		Map<Integer, String> passengerChoices = passengers.stream()
+				.collect(Collectors.toMap(IPassenger::getId, passenger -> passenger.getUserAccount().getFirstName()
 						+ " " + passenger.getUserAccount().getLastName()));
 		hashMap.put("passengerChoices", passengerChoices);
 
@@ -159,14 +217,22 @@ public class TicketController extends AbstractController<TicketDTO> {
 			if (quantity != null) {
 				for (int i = 0; i < quantity; i++) {
 					final ITicket entity = fromDtoConverter.apply(formModel);
-					setPassenger(street, building, apartments, phone, entity);
+					if (entity.getPassenger() == null) {
+						setPassenger(street, building, apartments, phone, entity);
+					}
 					ticketService.save(entity);
 				}
 			} else {
 				final ITicket entity = fromDtoConverter.apply(formModel);
 				ticketService.save(entity);
 			}
-
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+			for (GrantedAuthority authority : authorities) {
+				if (authority.toString().equals("ROLE_USER")) {
+					return "redirect:/personalPage";
+				}
+			}
 			return "redirect:/ticket";
 		}
 	}

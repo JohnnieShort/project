@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.IRouteItemDao;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IRouteItemService;
 
@@ -159,7 +160,8 @@ public class RouteItemServiceImpl implements IRouteItemService {
 				to = item.getOrdinalNum();
 			}
 		}
-		return to - from;
+		int q = to - from + 1;
+		return q;
 
 	}
 
@@ -170,6 +172,23 @@ public class RouteItemServiceImpl implements IRouteItemService {
 			return null;
 		}
 		return items.get(0).getStationFrom().getName() + " -> " + items.get(items.size() - 1).getStationTo().getName();
+	}
+
+	@Override
+	public Map<Integer, String> getDepArr(List<ITicket> tickets) {
+		RouteItemFilter filter = new RouteItemFilter();
+		filter.setFetchStationFrom(true);
+		filter.setFetchStationTo(true);
+		List<IRouteItem> items = find(filter);
+		Map<Integer, String> depArr = new HashMap<Integer, String>();
+		for(ITicket ticket: tickets) {
+			for(IRouteItem item: items) {
+				if(ticket.getPassengerRoute().getId().equals(item.getPassengerRoute().getId())) {
+					depArr.put(ticket.getId(), item.getDeparture() + " " + item.getArrival());
+				}
+			}
+		}
+		return depArr;
 	}
 
 }

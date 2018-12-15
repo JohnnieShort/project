@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,6 +45,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.converter.RouteItemFromDTOConver
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.PassengerRouteDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.RouteItemDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.StationDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
 @Controller
@@ -56,12 +59,14 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 	private RouteItemFromDTOConverter routeItemFromDTOConverter;
 	private PassengerRouteToDTOConverter toDtoConverter;
 	private PassengerRouteFromDTOConverter fromDtoConverter;
+	private StationToDTOConverter stationToDTOConverter;
 
 	@Autowired
 	private PassengerRouteController(IPassengerRouteService pasengerRouteService, IStationService stationService,
 			ITrainService trainService, IWagonService wagonService, IRouteItemService routeItemService,
 			PassengerRouteToDTOConverter toDtoConverter, PassengerRouteFromDTOConverter fromDtoConverter,
-			StationToDTOConverter stationToDtoConverter, RouteItemFromDTOConverter routeItemFromDTOConverter) {
+			StationToDTOConverter stationToDtoConverter, RouteItemFromDTOConverter routeItemFromDTOConverter,
+			StationToDTOConverter stationToDTOConverter) {
 		super();
 		this.passengerRouteService = pasengerRouteService;
 		this.routeItemService = routeItemService;
@@ -71,6 +76,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		this.fromDtoConverter = fromDtoConverter;
 		this.stationService = stationService;
 		this.wagonService = wagonService;
+		this.stationToDTOConverter = stationToDTOConverter;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -188,9 +194,11 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
 		loadCommonFormModels(hashMap);
+		loadItems(hashMap, id);
 		loadFromToItems(hashMap, id);
 		return new ModelAndView("route.details", hashMap);
 	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
 		final IPassengerRoute dbModel = passengerRouteService.getFullInfo(id);
@@ -228,6 +236,23 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 
 		hashMap.put("trainsChoices", trainChoices);
 
+	}
+
+	@RequestMapping(value = "/toStations", method = RequestMethod.GET)
+	public ResponseEntity<List<StationDTO>> getStationsTo(
+			@RequestParam(name = "routeId", required = false) final Integer routeId,
+			@RequestParam(name = "selectedName", required = false) final Integer selectedName) {
+		final List<StationDTO> stationsTo = new ArrayList<StationDTO>();
+		RouteItemFilter filter = new RouteItemFilter();
+		filter.setFetchStationTo(true);
+		List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
+
+		for (IRouteItem item : routeItems) {
+			if (item.getStationFrom().getId() >= selectedName) {
+				stationsTo.add(stationToDTOConverter.apply(item.getStationTo()));
+			}
+		}
+		return new ResponseEntity<List<StationDTO>>(stationsTo, HttpStatus.OK);
 	}
 
 	private void loadStations(final Map<String, Object> hashMap) {
@@ -279,6 +304,7 @@ public class PassengerRouteController extends AbstractController<PassengerRouteD
 			hashMap.put("avgLong", longAvg);
 		}
 	}
+
 	private void loadFromToItems(Map<String, Object> hashMap, Integer routeId) {
 		List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
 		RouteItemFilter filter = new RouteItemFilter();

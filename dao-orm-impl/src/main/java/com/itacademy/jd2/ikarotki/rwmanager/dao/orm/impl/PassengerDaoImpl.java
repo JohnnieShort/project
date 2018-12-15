@@ -66,6 +66,14 @@ public class PassengerDaoImpl extends AbstractDaoImpl<IPassenger, Integer> imple
 			return from.get(Passenger_.updated);
 		case "id":
 			return from.get(Passenger_.id);
+		case "street":
+			return from.get(Passenger_.street);
+		case "building":
+			return from.get(Passenger_.building);
+		case "apartments":
+			return from.get(Passenger_.apartments);
+		case "phone":
+			return from.get(Passenger_.phone);
 		case "user_account_id":
 			return from.get(Passenger_.userAccount).get(UserAccount_.id);
 		default:

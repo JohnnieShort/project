@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -82,7 +86,14 @@ public class PassengerController extends AbstractController<PassengerDTO> {
 		} else {
 			final IPassenger entity = fromDtoConverter.apply(formModel);
 			passengerService.save(entity);
-			return "redirect:/" + req.getHeader("referer");
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+			for (GrantedAuthority authority : authorities) {
+				if (authority.toString().equals("ROLE_USER")) {
+					return "redirect:/personalPage";
+				}
+			}
+			return "redirect:/passenger";
 		}
 	}
 
@@ -93,13 +104,14 @@ public class PassengerController extends AbstractController<PassengerDTO> {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
+	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id,
+			final HttpServletRequest req) {
 		final IPassenger dbModel = passengerService.get(id);
 		final PassengerDTO dto = toDtoConverter.apply(dbModel);
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
-
+		hashMap.put("url", req.getHeader("referer"));
 		return new ModelAndView("passenger.edit", hashMap);
 	}
 

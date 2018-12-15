@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -77,15 +81,23 @@ public class UserAccountController extends AbstractController<UserAccountDTO> {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String save(@Valid @ModelAttribute("formModel") final UserAccountDTO formModel, final BindingResult result,
-			final HttpServletRequest req, @RequestParam(name = "pass", required = false) String pass) {
+			final HttpServletRequest req) {
 		if (result.hasErrors()) {
 			return "userAccount.edit";
 		} else {
 			final IUserAccount entity = fromDtoConverter.apply(formModel);
-			entity.setPassword(pass);
+
 			userAccountService.save(entity);
-			return "redirect:/"+req.getHeader("referer");
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+			for (GrantedAuthority authority : authorities) {
+				if (authority.toString().equals("ROLE_USER")) {
+					return "redirect:/personalPage";
+				}
+			}
+			return "redirect:/userAccount";
 		}
+
 	}
 
 	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
@@ -95,18 +107,20 @@ public class UserAccountController extends AbstractController<UserAccountDTO> {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
+	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id,
+			final HttpServletRequest req) {
 		final IUserAccount dbModel = userAccountService.get(id);
 		final UserAccountDTO dto = toDtoConverter.apply(dbModel);
 		final HashMap<String, Object> hashMap = new HashMap<>();
 		hashMap.put("formModel", dto);
 		hashMap.put("readonly", true);
-
+		String url = req.getHeader("referer");
+		hashMap.put("url", url);
 		return new ModelAndView("userAccount.edit", hashMap);
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id, 
+	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id,
 			final HttpServletRequest req) {
 		final UserAccountDTO dto = toDtoConverter.apply(userAccountService.get(id));
 

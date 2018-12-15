@@ -11,7 +11,7 @@
 	<tbody>
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="streetid">street</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="street">street</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="building">building</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="apartments">apartments</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="phone">phone</mytaglib:sort-link></th>
@@ -36,12 +36,11 @@
 						value="${passenger.created}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${passenger.updated}" /></td>
-				<td class="right"><a class="btn-floating"
-					href="${baseUrl}/${passenger.id}"><i class="material-icons">info</i></a>
-					<a class="btn-floating" href="${baseUrl}/${passenger.id}/edit"><i
-						class="material-icons">edit</i></a> 
-					<a class="btn-floating red "
-					href="${baseUrl}/${passenger.id}/delete"><i class="material-icons">delete</i></a></td>
+				<td class="right">
+					<a class="btn-floating"	href="${baseUrl}/${ticket.id}"><i class="material-icons">info</i></a>
+					<a class="btn-floating yellow darken-1" href="${baseUrl}/${ticket.id}/edit"><i class="material-icons">edit</i></a> 
+					<a class="btn-floating red "href="${baseUrl}/${ticket.id}/delete"><i class="material-icons">delete</i></a>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>

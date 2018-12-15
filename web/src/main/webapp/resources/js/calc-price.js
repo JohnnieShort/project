@@ -11,7 +11,7 @@ function initSelectElement(htmlElementId, jsonArray) {
 		"disabled" : '',
 		"selected" : '',
 		"value" : ''
-	}).text(' -- select an option -- '));
+	}).text(' -- select a station -- '));
 
 	// вставляет новые опции в элемент
 	$.each(jsonArray, function(key, value) {
@@ -19,7 +19,7 @@ function initSelectElement(htmlElementId, jsonArray) {
 	});
 }
 
-function initComboboxes(contextUrl) {
+function calculatePrice(contextUrl) {
 
 	// $ - это ссылка на глобальный jquery Объект. через него можно делать все
 	// "магические штуки", которые тут происходят.
@@ -29,33 +29,36 @@ function initComboboxes(contextUrl) {
 	// запроса.
 	// текущая строка кода выполнится при загрузке страницы (в соответствии с
 	// местом встави в JSP)
-	$.get(contextUrl + "/ticket/routes", function(routesDTO) {
+	//$.get(contextUrl + "/passengerRoute/toStations", function(id) {
 
 		// получив список стран - инициализируем соответствующий комбик
-		initSelectElement('passengerRouteId', routesDTO);
+		//initSelectElement('passengerRouteId', routesDTO);
 		
 		// вешаем функцию-обработчик на 'onchange' событие на нужные элементы.
 		// получаем выбранный сейчас элемент и строим с его помощь. новый GET
 		// запрос
 		// на сервер
-		$("#passengerRouteId").change(function() {
-			var selectedId = $('#passengerRouteId').val();
-			$.get(contextUrl + "/ticket/fromStations?routeId=" + selectedId, function(stationsFrom) {
-				initSelectElement('stationFromId', stationsFrom);
+		debugger;
+		
+		$('#from').change(function() {
+			var selectedId = $(this).val();
+			var routeId = $('#id').val();
+			$.get(contextUrl + "/passengerRoute/toStations?routeId=" + routeId+"&selectedName="+selectedId, function(stationsTo) {
+				initSelectElement('to', stationsTo);
 			
 			})
 			
 		});
 
-		$("#stationFromId").change(function() {
-			var selectedName = $(this).val();
-			var selectedId = $('#passengerRouteId').val();
-			$.get(contextUrl + "/ticket/toStations?selectedName=" + selectedName+"&routeId="+selectedId, function(stationsTo) {
-				initSelectElement('stationToId', stationsTo);
-			})
+		//$("#stationFromId").change(function() {
+			//var selectedName = $(this).val();
+			//var selectedId = $('#passengerRouteId').val();
+			//$.get(contextUrl + "/ticket/toStations?selectedName=" + selectedName+"&routeId="+selectedId, function(stationsTo) {
+				//initSelectElement('stationToId', stationsTo);
+			//})
 
-		});
-	});
+		//});
+	//});
 	// документация по JQUERY - https://api.jquery.com/
 
 	// вот к примеру, где я взял "как сделать GET запрос" -

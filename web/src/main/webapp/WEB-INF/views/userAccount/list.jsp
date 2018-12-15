@@ -23,7 +23,7 @@
 			<tr>
 				<td><c:out value="${userAccount.id}" /></td>
 				<td><c:out value="${userAccount.mail}" /></td>
-				<td><c:out value="${userAccount.password}" /></td>
+				<td><p class="truncate"><c:out value="${userAccount.password}" /></p></td>
 				<td><c:out value="${userAccount.role}" /></td>
 				<td><c:out value="${userAccount.firstName}" /></td>
 				<td><c:out value="${userAccount.lastName}" /></td>

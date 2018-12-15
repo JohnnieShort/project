@@ -63,8 +63,8 @@ public class TicketServiceImpl implements ITicketService {
 	}
 
 	private Double calculatePrice(PassengerRouteType passengerRouteType, Integer routeId,Integer fromId, Integer toId) {
-		routeItemService.getItemsQuantity(routeId, fromId, toId);
-		Double price = PRICE * getMultyplier(passengerRouteType);
+		Integer itemsQuantity = routeItemService.getItemsQuantity(routeId, fromId, toId);
+		Double price = PRICE * getMultyplier(passengerRouteType)*itemsQuantity;
 		return price;
 	}
 
@@ -131,7 +131,7 @@ public class TicketServiceImpl implements ITicketService {
 	}
 
 	@Override
-	public List<ITicket> findByPassenger(TicketFilter ticketFilter, Integer passengerId) {
+	public List<ITicket> findByPassengerId(TicketFilter ticketFilter, Integer passengerId) {
 		List<ITicket> tickets = new ArrayList<ITicket>();
 		tickets = find(ticketFilter);
 		List<ITicket> sortedTickets = new ArrayList<ITicket>();

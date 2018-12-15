@@ -55,17 +55,22 @@
             	 <label for=frequency>frequency</label>
             </div>
         </div>
-        
+       
         <div class="row">
             <div class="input-field col s6">
-            
-               	<input id="stationFromId" name="stationFromId" type="text" value="${fromItems}" class="validate">
-          		<label for="stationFromId">from</label>
-            </div>
-        
+            	<select id="from">
+      				<c:forEach var="myMap" items="${fromItems}">
+      					
+        				<option label="from" value="${myMap.key}"><c:out value="${myMap.value}"/></option>
+      				</c:forEach>
+    			</select>
+    		</div>
             <div class="input-field col s6">
-               	<input id="stationToId" name="stationToId" type="text" value="${toItems}" class="validate">
-          		<label for="stationToId">to</label>
+            	<select id="to">
+      				<!--<c:forEach var="myMap" items="${toItems}">
+        				<option value="${myMap.key}"><c:out value="${myMap.value}"/></option>
+      				</c:forEach>-->
+    			</select>
             </div>
         </div>
         <div class="row">
@@ -85,10 +90,15 @@
     
 </div>
 <script src="${contextPath}/resources/js/init-map.js"></script>
+<script src="${contextPath}/resources/js/calc-price.js"></script>
 
 <script type="text/javascript">
 //     var points=${points};
 //     var avgLat=${avgLat};
 // 	var avgLong=${avgLong};
 	initMap(${points},${avgLat} ,${avgLong})
+	
+</script>
+<script type="text/javascript">
+calculatePrice('${pageContext.request.contextPath}')
 </script>

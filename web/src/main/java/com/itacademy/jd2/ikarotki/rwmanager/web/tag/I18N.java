@@ -1,7 +1,9 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.tag;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
@@ -11,7 +13,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 public class I18N extends SimpleTagSupport {
 	public static final String SESSION_LOCALE_KEY = "current-locale";
-	
+	private static Map<Locale, ResourceBundle> bundles = new HashMap<Locale, ResourceBundle>();
 	private final Locale DEFAULT_LOCALE = new Locale("en");
 	private String key;
 
@@ -29,9 +31,11 @@ public class I18N extends SimpleTagSupport {
 	}
 
 	private String getLocalized(String key, Locale locale) {
-		
-		ResourceBundle mybundle = ResourceBundle.getBundle("MyLabels", locale);
-
+		ResourceBundle mybundle = bundles.get(locale);
+		if (mybundle == null) {
+			mybundle = ResourceBundle.getBundle("MyLabels", locale);
+			bundles.put(locale, mybundle);
+		}
 		try {
 			String string = mybundle.getString(key);
 			return string;
