@@ -11,7 +11,7 @@
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="e_mail">e-mail</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="password">password</mytaglib:sort-link></th>
+		<%-- 	<th><mytaglib:sort-link pageUrl="${baseUrl}" column="password">password</mytaglib:sort-link></th> --%>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="role">role</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="first_name">first name</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="last_name">last name</mytaglib:sort-link></th>
@@ -23,7 +23,7 @@
 			<tr>
 				<td><c:out value="${userAccount.id}" /></td>
 				<td><c:out value="${userAccount.mail}" /></td>
-				<td><p class="truncate"><c:out value="${userAccount.password}" /></p></td>
+				<%-- <td><p class="truncate"><c:out value="${userAccount.password}" /></p></td> --%>
 				<td><c:out value="${userAccount.role}" /></td>
 				<td><c:out value="${userAccount.firstName}" /></td>
 				<td><c:out value="${userAccount.lastName}" /></td>
