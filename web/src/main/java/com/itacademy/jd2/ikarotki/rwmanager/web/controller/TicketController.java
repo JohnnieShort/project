@@ -51,251 +51,252 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.security.AuthHelper;
 @Controller
 @RequestMapping(value = "/ticket")
 public class TicketController extends AbstractController<TicketDTO> {
-	private ITicketService ticketService;
-	private TicketToDTOConverter toDtoConverter;
-	private TicketFromDTOConverter fromDtoConverter;
-	private IPassengerService passengerService;
-	private IRouteItemService routeItemService;
-	private IUserAccountService userAccountService;
-	private IPassengerRouteService routeService;
+    private ITicketService ticketService;
+    private TicketToDTOConverter toDtoConverter;
+    private TicketFromDTOConverter fromDtoConverter;
+    private IPassengerService passengerService;
+    private IRouteItemService routeItemService;
+    private IUserAccountService userAccountService;
+    private IPassengerRouteService routeService;
 
-	private PassengerRouteToDTOConverter routeToDTOConverter;
-	private StationToDTOConverter stationToDTOConverter;
+    private PassengerRouteToDTOConverter routeToDTOConverter;
+    private StationToDTOConverter stationToDTOConverter;
 
-	@Autowired
-	private TicketController(ITicketService ticketService, TicketToDTOConverter toDtoConverter,
-			TicketFromDTOConverter fromDtoConverter, IPassengerService passengerService,
-			IRouteItemService routeItemService, IUserAccountService userAccountService,
-			IPassengerRouteService routeService, PassengerRouteToDTOConverter routeToDTOConverter,
-			StationToDTOConverter stationToDTOConverter) {
-		super();
-		this.ticketService = ticketService;
-		this.toDtoConverter = toDtoConverter;
-		this.fromDtoConverter = fromDtoConverter;
-		this.passengerService = passengerService;
-		this.routeItemService = routeItemService;
-		this.userAccountService = userAccountService;
-		this.routeService = routeService;
-		this.routeToDTOConverter = routeToDTOConverter;
+    @Autowired
+    private TicketController(ITicketService ticketService, TicketToDTOConverter toDtoConverter,
+            TicketFromDTOConverter fromDtoConverter, IPassengerService passengerService,
+            IRouteItemService routeItemService, IUserAccountService userAccountService,
+            IPassengerRouteService routeService, PassengerRouteToDTOConverter routeToDTOConverter,
+            StationToDTOConverter stationToDTOConverter) {
+        super();
+        this.ticketService = ticketService;
+        this.toDtoConverter = toDtoConverter;
+        this.fromDtoConverter = fromDtoConverter;
+        this.passengerService = passengerService;
+        this.routeItemService = routeItemService;
+        this.userAccountService = userAccountService;
+        this.routeService = routeService;
+        this.routeToDTOConverter = routeToDTOConverter;
 
-		this.stationToDTOConverter = stationToDTOConverter;
-	}
+        this.stationToDTOConverter = stationToDTOConverter;
+    }
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView index(final HttpServletRequest req,
-			@RequestParam(name = "page", required = false) final Integer pageNumber,
-			@RequestParam(name = "sort", required = false) final String sortColumn) {
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView index(final HttpServletRequest req,
+            @RequestParam(name = "page", required = false) final Integer pageNumber,
+            @RequestParam(name = "sort", required = false) final String sortColumn) {
 
-		final GridStateDTO gridState = getListDTO(req);
-		gridState.setPage(pageNumber);
-		gridState.setSort(sortColumn, "id");
+        final GridStateDTO gridState = getListDTO(req);
+        gridState.setPage(pageNumber);
+        gridState.setSort(sortColumn, "id");
 
-		final TicketFilter filter = new TicketFilter();
-		prepareFilter(gridState, filter);
+        final TicketFilter filter = new TicketFilter();
+        prepareFilter(gridState, filter);
 
-		final List<ITicket> entities = ticketService.find(filter);
-		List<TicketDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
-		gridState.setTotalCount(ticketService.getCount(filter));
+        final List<ITicket> entities = ticketService.find(filter);
+        List<TicketDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+        gridState.setTotalCount(ticketService.getCount(filter));
 
-		final Map<String, Object> models = new HashMap<>();
-		models.put("gridItems", dtos);
-		return new ModelAndView("ticket.list", models);
-	}
+        final Map<String, Object> models = new HashMap<>();
+        models.put("gridItems", dtos);
+        return new ModelAndView("ticket.list", models);
+    }
 
-	@RequestMapping(value = "/routes", method = RequestMethod.GET)
-	public ResponseEntity<List<PassengerRouteDTO>> getRoutes() {
-		final List<PassengerRouteDTO> routesDTO = new ArrayList<PassengerRouteDTO>();
-		List<IPassengerRoute> routes = routeService.find(new PassengerRouteFilter());
-		for (IPassengerRoute route : routes) {
-			routesDTO.add(routeToDTOConverter.apply(route));
-		}
-		// String json = new Gson().toJson(routesDTO);
-		return new ResponseEntity<List<PassengerRouteDTO>>(routesDTO, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/routes", method = RequestMethod.GET)
+    public ResponseEntity<List<PassengerRouteDTO>> getRoutes() {
+        final List<PassengerRouteDTO> routesDTO = new ArrayList<PassengerRouteDTO>();
+        List<IPassengerRoute> routes = routeService.find(new PassengerRouteFilter());
+        for (IPassengerRoute route : routes) {
+            routesDTO.add(routeToDTOConverter.apply(route));
+        }
+        // String json = new Gson().toJson(routesDTO);
+        return new ResponseEntity<List<PassengerRouteDTO>>(routesDTO, HttpStatus.OK);
+    }
 
-	@RequestMapping(value = "/fromStations", method = RequestMethod.GET)
-	public ResponseEntity<List<StationDTO>> getStationsFrom(
-			@RequestParam(name = "routeId", required = true) final Integer routeId) {
-		final List<StationDTO> stationsFrom = new ArrayList<StationDTO>();
-		RouteItemFilter filter = new RouteItemFilter();
-		filter.setFetchStationFrom(true);
-		List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
-		for (IRouteItem item : routeItems) {
-			stationsFrom.add(stationToDTOConverter.apply(item.getStationFrom()));
-		}
-		return new ResponseEntity<List<StationDTO>>(stationsFrom, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/fromStations", method = RequestMethod.GET)
+    public ResponseEntity<List<StationDTO>> getStationsFrom(
+            @RequestParam(name = "routeId", required = true) final Integer routeId) {
+        final List<StationDTO> stationsFrom = new ArrayList<StationDTO>();
+        RouteItemFilter filter = new RouteItemFilter();
+        filter.setFetchStationFrom(true);
+        List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
+        for (IRouteItem item : routeItems) {
+            stationsFrom.add(stationToDTOConverter.apply(item.getStationFrom()));
+        }
+        return new ResponseEntity<List<StationDTO>>(stationsFrom, HttpStatus.OK);
+    }
 
-	@RequestMapping(value = "/toStations", method = RequestMethod.GET)
-	public ResponseEntity<List<StationDTO>> getStationsTo(
-			@RequestParam(name = "routeId", required = true) final Integer routeId,
-			@RequestParam(name = "selectedName", required = true) final Integer selectedName) {
-		final List<StationDTO> stationsTo = new ArrayList<StationDTO>();
-		RouteItemFilter filter = new RouteItemFilter();
-		filter.setFetchStationTo(true);
-		List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
+    @RequestMapping(value = "/toStations", method = RequestMethod.GET)
+    public ResponseEntity<List<StationDTO>> getStationsTo(
+            @RequestParam(name = "routeId", required = true) final Integer routeId,
+            @RequestParam(name = "selectedName", required = true) final Integer selectedName) {
+        final List<StationDTO> stationsTo = new ArrayList<StationDTO>();
+        RouteItemFilter filter = new RouteItemFilter();
+        filter.setFetchStationTo(true);
+        List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
 
-		for (IRouteItem item : routeItems) {
-			if (item.getStationFrom().getId() >= selectedName) {
-				stationsTo.add(stationToDTOConverter.apply(item.getStationTo()));
-			}
-		}
-		return new ResponseEntity<List<StationDTO>>(stationsTo, HttpStatus.OK);
-	}
+        for (IRouteItem item : routeItems) {
+            if (item.getStationFrom().getId() >= selectedName) {
+                stationsTo.add(stationToDTOConverter.apply(item.getStationTo()));
+            }
+        }
+        return new ResponseEntity<List<StationDTO>>(stationsTo, HttpStatus.OK);
+    }
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView showForm(final HttpServletRequest req) {
-		final Map<String, Object> hashMap = new HashMap<>();
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView showForm(final HttpServletRequest req) {
+        final Map<String, Object> hashMap = new HashMap<>();
 
-		TicketDTO dto = new TicketDTO();
-		hashMap.put("formModel", dto);
-		String url = req.getHeader("referer");
-		hashMap.put("url", url);
-		addRoutes(hashMap);
-		addPassengers(hashMap);
+        TicketDTO dto = new TicketDTO();
+        hashMap.put("formModel", dto);
+        String url = req.getHeader("referer");
+        hashMap.put("url", url);
+        addRoutes(hashMap);
+        addPassengers(hashMap);
 
-		return new ModelAndView("blankTicket.edit", hashMap);
-	}
+        return new ModelAndView("blankTicket.edit", hashMap);
+    }
 
-	private void addPassengers(Map<String, Object> hashMap) {
-		PassengerFilter filter = new PassengerFilter();
-		filter.setFetchUserAccount(true);
-		List<IPassenger> passengers = passengerService.find(filter);
-		Map<Integer, String> passengerChoices = passengers.stream()
-				.collect(Collectors.toMap(IPassenger::getId, passenger -> passenger.getUserAccount().getFirstName()
-						+ " " + passenger.getUserAccount().getLastName()));
-		hashMap.put("passengerChoices", passengerChoices);
+    private void addPassengers(Map<String, Object> hashMap) {
+        PassengerFilter filter = new PassengerFilter();
+        filter.setFetchUserAccount(true);
+        List<IPassenger> passengers = passengerService.find(filter);
+        Map<Integer, String> passengerChoices = passengers.stream()
+                .collect(Collectors.toMap(IPassenger::getId, passenger -> passenger.getUserAccount().getFirstName()
+                        + " " + passenger.getUserAccount().getLastName()));
+        hashMap.put("passengerChoices", passengerChoices);
 
-	}
+    }
 
-	private void addRoutes(Map<String, Object> hashMap) {
-		List<IPassengerRoute> routes = routeService.findActual(new PassengerRouteFilter());
-		Map<Integer, String> routeChoices = routes.stream().collect(Collectors.toMap(route -> route.getId(),
-				route -> route.getId() + " " + route.getPassengerRouteType().toString()));
-		hashMap.put("routeChoices", routeChoices);
+    private void addRoutes(Map<String, Object> hashMap) {
+        List<IPassengerRoute> routes = routeService.findActual(new PassengerRouteFilter());
+        Map<Integer, String> routeChoices = routes.stream().collect(Collectors.toMap(route -> route.getId(),
+                route -> route.getId() + " " + route.getPassengerRouteType().toString()));
+        hashMap.put("routeChoices", routeChoices);
 
-	}
+    }
 
-	@RequestMapping(value = "/{id}/buy", method = RequestMethod.GET)
-	public ModelAndView showTicket(@PathVariable(name = "id", required = true) final Integer id,
-			final HttpServletRequest req) {
-		final Map<String, Object> hashMap = new HashMap<>();
-		Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
-		hashMap.put("passengerId", passengerId);
-		hashMap.put("passengerRouteId", id);
-		TicketDTO dto = new TicketDTO();
-		hashMap.put("formModel", dto);
-		String url = req.getHeader("referer");
-		hashMap.put("url", url);
-		loadFromToItems(hashMap, id);
-		return new ModelAndView("ticket.edit", hashMap);
-	}
+    @RequestMapping(value = "/{id}/buy", method = RequestMethod.GET)
+    public ModelAndView showTicket(@PathVariable(name = "id", required = true) final Integer id,
+            final HttpServletRequest req) {
+        final Map<String, Object> hashMap = new HashMap<>();
+        Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
+        hashMap.put("passengerId", passengerId);
+        hashMap.put("passengerRouteId", id);
+        TicketDTO dto = new TicketDTO();
+        hashMap.put("formModel", dto);
+        String url = req.getHeader("referer");
+        hashMap.put("url", url);
+        loadFromToItems(hashMap, id);
+        return new ModelAndView("ticket.edit", hashMap);
+    }
 
-	@RequestMapping(method = RequestMethod.POST)
-	public Object save(@Valid @ModelAttribute("formModel") final TicketDTO formModel, final BindingResult result,
-			@RequestParam(name = "quantity", required = false) Integer quantity,
-			@RequestParam(name = "street", required = false) String street,
-			@RequestParam(name = "building", required = false) Integer building,
-			@RequestParam(name = "apartments", required = false) Integer apartments,
-			@RequestParam(name = "phone", required = false) String phone, final HttpServletRequest req) {
-		if (result.hasErrors()) {
-			final Map<String, Object> hashMap = new HashMap<>();
-			Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
-			hashMap.put("passengerId", passengerId);
-			TicketDTO dto = new TicketDTO();
-			hashMap.put("formModel", dto);
-			String url = req.getHeader("referer");
-			hashMap.put("url", url);
-			hashMap.put("street", street);
-			hashMap.put("building", building);
-			hashMap.put("apartments", apartments);
-			hashMap.put("phone", phone);
-			hashMap.put("quantity", quantity);
-			loadFromToItems(hashMap, formModel.getPassengerRouteId());
-			return new ModelAndView("ticket.edit", hashMap);
-		} else {
-			if (quantity != null) {
-				for (int i = 0; i < quantity; i++) {
-					final ITicket entity = fromDtoConverter.apply(formModel);
-					if (entity.getPassenger() == null) {
-						setPassenger(street, building, apartments, phone, entity);
-					}
-					ticketService.save(entity);
-				}
-			} else {
-				final ITicket entity = fromDtoConverter.apply(formModel);
-				ticketService.save(entity);
-			}
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-			for (GrantedAuthority authority : authorities) {
-				if (authority.toString().equals("ROLE_USER")) {
-					return "redirect:/personalPage";
-				}
-			}
-			return "redirect:/ticket";
-		}
-	}
+    @RequestMapping(method = RequestMethod.POST)
+    public Object save(@Valid @ModelAttribute("formModel") final TicketDTO formModel, final BindingResult result,
+            @RequestParam(name = "quantity", required = false) Integer quantity,
+            @RequestParam(name = "street", required = false) String street,
+            @RequestParam(name = "building", required = false) Integer building,
+            @RequestParam(name = "apartments", required = false) Integer apartments,
+            @RequestParam(name = "phone", required = false) String phone, final HttpServletRequest req) {
+        if (result.hasErrors()) {
+            final Map<String, Object> hashMap = new HashMap<>();
+            Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
+            hashMap.put("passengerId", passengerId);
+            TicketDTO dto = new TicketDTO();
+            hashMap.put("formModel", dto);
+            String url = req.getHeader("referer");
+            hashMap.put("url", url);
+            hashMap.put("street", street);
+            hashMap.put("building", building);
+            hashMap.put("apartments", apartments);
+            hashMap.put("phone", phone);
+            hashMap.put("quantity", quantity);
+            loadFromToItems(hashMap, formModel.getPassengerRouteId());
+            return new ModelAndView("ticket.edit", hashMap);
+        } else {
+            if (quantity != null) {
+                for (int i = 0; i < quantity; i++) {
+                    final ITicket entity = fromDtoConverter.apply(formModel);
+                    if (entity.getPassenger() == null) {
+                        setPassenger(street, building, apartments, phone, entity);
+                    }
+                    ticketService.save(entity);
+                }
+            } else {
+                final ITicket entity = fromDtoConverter.apply(formModel);
+                // TODO set passenger
+                ticketService.save(entity);
+            }
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            for (GrantedAuthority authority : authorities) {
+                if (authority.toString().equals("ROLE_USER")) {
+                    return "redirect:/personalPage";
+                }
+            }
+            return "redirect:/ticket";
+        }
+    }
 
-	private void setPassenger(String street, Integer building, Integer apartments, String phone, final ITicket entity) {
-		IPassenger passenger = passengerService.createEntity();
-		Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
-		if (passengerId == null) {
-			passenger.setUserAccount(userAccountService.get(AuthHelper.getLoggedUserId()));
-			passenger.setStreet(street);
-			passenger.setBuilding(building);
-			passenger.setApartments(apartments);
-			passenger.setPhone(phone);
-			passengerService.save(passenger);
-		}
-		passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
-		passenger = passengerService.get(passengerId);
-		entity.setPassenger(passenger);
-	}
+    private void setPassenger(String street, Integer building, Integer apartments, String phone, final ITicket entity) {
+        IPassenger passenger = passengerService.createEntity();
+        Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
+        if (passengerId == null) {
+            passenger.setUserAccount(userAccountService.get(AuthHelper.getLoggedUserId()));
+            passenger.setStreet(street);
+            passenger.setBuilding(building);
+            passenger.setApartments(apartments);
+            passenger.setPhone(phone);
+            passengerService.save(passenger);
+        }
+        passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
+        passenger = passengerService.get(passengerId);
+        entity.setPassenger(passenger);
+    }
 
-	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
-	public String delete(@PathVariable(name = "id", required = true) final Integer id) {
-		ticketService.delete(id);
-		return "redirect:/ticket";
-	}
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable(name = "id", required = true) final Integer id) {
+        ticketService.delete(id);
+        return "redirect:/ticket";
+    }
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
-		final ITicket dbModel = ticketService.get(id);
-		final TicketDTO dto = toDtoConverter.apply(dbModel);
-		final HashMap<String, Object> hashMap = new HashMap<>();
-		hashMap.put("formModel", dto);
-		hashMap.put("readonly", true);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
+        final ITicket dbModel = ticketService.get(id);
+        final TicketDTO dto = toDtoConverter.apply(dbModel);
+        final HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("formModel", dto);
+        hashMap.put("readonly", true);
 
-		return new ModelAndView("dbTicket.edit", hashMap);
-	}
+        return new ModelAndView("dbTicket.edit", hashMap);
+    }
 
-	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
-		final TicketDTO dto = toDtoConverter.apply(ticketService.get(id));
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
+        final TicketDTO dto = toDtoConverter.apply(ticketService.get(id));
 
-		final HashMap<String, Object> hashMap = new HashMap<>();
-		hashMap.put("formModel", dto);
+        final HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("formModel", dto);
 
-		return new ModelAndView("dbTicket.edit", hashMap);
-	}
+        return new ModelAndView("dbTicket.edit", hashMap);
+    }
 
-	private void loadFromToItems(Map<String, Object> hashMap, Integer routeId) {
-		List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
-		RouteItemFilter filter = new RouteItemFilter();
-		filter.setFetchStationFrom(true);
-		filter.setFetchStationTo(true);
-		itemsList = routeItemService.getItems(routeId, filter);
-		if (itemsList == null) {
-			return;
-		}
-		Map<Integer, String> fromChoices = itemsList.stream().collect(Collectors.toMap(
-				routeItem -> routeItem.getStationFrom().getId(), routeItem -> routeItem.getStationFrom().getName()));
-		hashMap.put("fromItems", fromChoices);
-		Map<Integer, String> toChoices = itemsList.stream().collect(Collectors
-				.toMap(routeItem -> routeItem.getStationTo().getId(), routeItem -> routeItem.getStationTo().getName()));
-		hashMap.put("toItems", toChoices);
+    private void loadFromToItems(Map<String, Object> hashMap, Integer routeId) {
+        List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
+        RouteItemFilter filter = new RouteItemFilter();
+        filter.setFetchStationFrom(true);
+        filter.setFetchStationTo(true);
+        itemsList = routeItemService.getItems(routeId, filter);
+        if (itemsList == null) {
+            return;
+        }
+        Map<Integer, String> fromChoices = itemsList.stream().collect(Collectors.toMap(
+                routeItem -> routeItem.getStationFrom().getId(), routeItem -> routeItem.getStationFrom().getName()));
+        hashMap.put("fromItems", fromChoices);
+        Map<Integer, String> toChoices = itemsList.stream().collect(Collectors
+                .toMap(routeItem -> routeItem.getStationTo().getId(), routeItem -> routeItem.getStationTo().getName()));
+        hashMap.put("toItems", toChoices);
 
-	}
+    }
 
 }

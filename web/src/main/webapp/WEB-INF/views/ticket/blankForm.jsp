@@ -46,7 +46,7 @@
             <div class="col s3">
                 <a class="btn waves-effect waves-light right light-blue" href="${url}">back<i class="material-icons right"></i>
                 </a>
-            </di
+            </div>
     </form:form>
 </div>
 

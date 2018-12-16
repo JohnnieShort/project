@@ -38,5 +38,5 @@
 </table>
 
 <a class="waves-effect waves-light btn right purple darken-1" href="${baseUrl}/add"><i
-	class="material-icons">add</i></a>
+    class="material-icons">add</i></a>
 <jspFragments:paging />

@@ -4,100 +4,104 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Range;
-
 public class TicketDTO {
-	
-	private Integer id;
-	
-	private Date created;
-	
-	private Date updated;
-	
-	private Double price;
-	
-	private Integer passengerId;
-	@NotNull
-	
-	private Integer passengerRouteId;
-	@NotNull
-	
-	private Integer stationFromId;
-	@NotNull
-	
-	private Integer stationToId;
 
-	public Integer getId() {
-		return id;
-	}
+    private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    private Date created;
 
-	public Date getCreated() {
-		return created;
-	}
+    private Date updated;
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    private Double price;
 
-	public Date getUpdated() {
-		return updated;
-	}
+    // private PassengerDTO passenger;
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
+    private Integer passengerId;
+    @NotNull
 
-	public Double getPrice() {
-		return price;
-	}
+    private Integer passengerRouteId;
+    @NotNull
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+    private Integer stationFromId;
+    @NotNull
 
-	public Integer getPassengerId() {
-		return passengerId;
-	}
+    private Integer stationToId;
 
-	public void setPassengerId(Integer passengerId) {
-		this.passengerId = passengerId;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getPassengerRouteId() {
-		return passengerRouteId;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setPassengerRouteId(Integer passengerRouteId) {
-		this.passengerRouteId = passengerRouteId;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public Integer getStationFromId() {
-		return stationFromId;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public void setStationFromId(Integer stationFromId) {
-		this.stationFromId = stationFromId;
-	}
+    public Date getUpdated() {
+        return updated;
+    }
 
-	public Integer getStationToId() {
-		return stationToId;
-	}
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 
-	public void setStationToId(Integer stationToId) {
-		this.stationToId = stationToId;
-	}
+    public Double getPrice() {
+        return price;
+    }
 
-	@Override
-	public String toString() {
-		return "TicketDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", price=" + price
-				+ ", passengerId=" + passengerId + ", passengerRouteId=" + passengerRouteId + ", stationFromId="
-				+ stationFromId + ", stationToId=" + stationToId + "]";
-	}
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 
-	
+    public Integer getPassengerId() {
+        return passengerId;
+    }
 
+    public void setPassengerId(Integer passengerId) {
+        this.passengerId = passengerId;
+    }
+
+    public Integer getPassengerRouteId() {
+        return passengerRouteId;
+    }
+
+    public void setPassengerRouteId(Integer passengerRouteId) {
+        this.passengerRouteId = passengerRouteId;
+    }
+
+    public Integer getStationFromId() {
+        return stationFromId;
+    }
+
+    public void setStationFromId(Integer stationFromId) {
+        this.stationFromId = stationFromId;
+    }
+
+    public Integer getStationToId() {
+        return stationToId;
+    }
+
+    public void setStationToId(Integer stationToId) {
+        this.stationToId = stationToId;
+    }
+
+    @Override
+    public String toString() {
+        return "TicketDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", price=" + price
+                + ", passengerId=" + passengerId + ", passengerRouteId=" + passengerRouteId + ", stationFromId="
+                + stationFromId + ", stationToId=" + stationToId + "]";
+    }
+
+    /*
+     * public PassengerDTO getPassenger() { return passenger; }
+     * 
+     * public void setPassenger(PassengerDTO passenger) { this.passenger =
+     * passenger; }
+     */
 }

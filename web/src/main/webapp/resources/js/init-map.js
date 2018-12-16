@@ -1,6 +1,5 @@
 function initMap(points, avgLat, avgLong) {
 	ymaps.ready(function() {
-		debugger;
 
 		var myMap = new ymaps.Map("map", {
 			center : [ avgLat, avgLong ],

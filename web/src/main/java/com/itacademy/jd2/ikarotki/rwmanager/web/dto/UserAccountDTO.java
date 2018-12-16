@@ -2,106 +2,84 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 
 public class UserAccountDTO {
-	
-	private Integer id;
-	
-	private Date created;
-	
-	private Date updated;
-	@Email
-	private String mail;
-	@NotNull
-	@Size(min = 1, max = 60)
-	private String password;
-	
-	@Enumerated(EnumType.ORDINAL)
-	private Role role;
-	@NotNull
-	@Size(min = 1, max = 50)
-	private String firstName;
-	@NotNull
-	@Size(min = 1, max = 50)
-	private String lastName;
 
-	public String getMail() {
-		return mail;
-	}
+    private Integer id;
 
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
+    private Date created;
 
-	public String getPassword() {
-		return password;
-	}
+    private Date updated;
+    @Email
+    @NotBlank
+    private String mail;
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    private Role role;
+    @Size(min = 1, max = 50)
+    private String firstName;
+    @Size(min = 1, max = 50)
+    private String lastName;
 
-	public Role getRole() {
-		return role;
-	}
+    public String getMail() {
+        return mail;
+    }
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public Role getRole() {
+        return role;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public Date getCreated() {
-		return created;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Date getUpdated() {
-		return updated;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	@Override
-	public String toString() {
-		return "UserAccountDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", eMail=" + mail
-				+ ", password=" + password + ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName
-				+ "]";
-	}
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 
 }

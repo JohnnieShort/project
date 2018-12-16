@@ -35,11 +35,6 @@
 			value="/WEB-INF/views/register.jsp" />
 	</definition>
 
-	<definition name="administratorPage"
-		extends="DefaultTemplate">
-		<put-attribute name="body"
-			value="/WEB-INF/views/administratorPage.jsp" />
-	</definition>
 
 	<definition name="schedule" extends="DefaultTemplate">
 		<put-attribute name="body"

@@ -16,43 +16,40 @@ import org.springframework.web.servlet.ModelAndView;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.UserAccountFromDTOConverter;
-import com.itacademy.jd2.ikarotki.rwmanager.web.converter.UserAccountToDTOConverter;
-import com.itacademy.jd2.ikarotki.rwmanager.web.dto.UserAccountDTO;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.RegistrationDataDTO;
 
 @Controller
 @RequestMapping(value = "/register")
 public class RegisterController {
-	private IUserAccountService userAccountService;
-	private UserAccountToDTOConverter toDtoConverter;
-	private UserAccountFromDTOConverter fromDtoConverter;
+    private IUserAccountService userAccountService;
+    private UserAccountFromDTOConverter fromDtoConverter;
 
-	@Autowired
-	private RegisterController(IUserAccountService userAccountService, UserAccountToDTOConverter toDtoConverter,
-			UserAccountFromDTOConverter fromDtoConverter) {
-		super();
-		this.userAccountService = userAccountService;
-		this.toDtoConverter = toDtoConverter;
-		this.fromDtoConverter = fromDtoConverter;
-	}
-	
-	@RequestMapping( method = RequestMethod.GET)
-	public ModelAndView showForm() {
-		final Map<String, Object> hashMap = new HashMap<>();
-		final IUserAccount newEntity = userAccountService.createEntity();
-		UserAccountDTO dto = toDtoConverter.apply(newEntity);
-		hashMap.put("formModel", dto);
+    @Autowired
+    private RegisterController(IUserAccountService userAccountService, UserAccountFromDTOConverter fromDtoConverter) {
+        super();
+        this.userAccountService = userAccountService;
+        this.fromDtoConverter = fromDtoConverter;
+    }
 
-		return new ModelAndView("register", hashMap);
-	}
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView showForm() {
+        final Map<String, Object> hashMap = new HashMap<>();
+        hashMap.put("formModel", new RegistrationDataDTO());
+        // hashMap.put("registrationMode", true);
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String save(@Valid @ModelAttribute("formModel") final UserAccountDTO formModel, final BindingResult result) {
-		if (result.hasErrors()) {
-			return "register";
-		} else {
-			final IUserAccount entity = fromDtoConverter.apply(formModel);
-			userAccountService.save(entity);
-			return "redirect:/login";
-		}
-	}
+        return new ModelAndView("register", hashMap);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public String save(@Valid @ModelAttribute("formModel") final RegistrationDataDTO formModel,
+            final BindingResult result) {
+        if (result.hasErrors()) {
+            return "register";
+        } else {
+            final IUserAccount entity = fromDtoConverter.apply(formModel);
+            entity.setPassword(formModel.getPassword());
+            userAccountService.save(entity);
+            return "redirect:/login";
+        }
+    }
 }

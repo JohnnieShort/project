@@ -11,22 +11,22 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.UserAccountDTO;
 
 @Component
 public class UserAccountFromDTOConverter implements Function<UserAccountDTO, IUserAccount> {
-	@Autowired
-	private IUserAccountService userAccountService;
+    @Autowired
+    private IUserAccountService userAccountService;
 
-	@Override
-	public IUserAccount apply(final UserAccountDTO dto) {
-		final IUserAccount entity = userAccountService.createEntity();
-		entity.setId(dto.getId());
-		entity.setCreated(dto.getCreated());
-		entity.setUpdated(dto.getUpdated());
+    @Override
+    public IUserAccount apply(final UserAccountDTO dto) {
+        final IUserAccount entity = userAccountService.createEntity();
+        entity.setId(dto.getId());
+        entity.setCreated(dto.getCreated());
+        entity.setUpdated(dto.getUpdated());
 
-		entity.setEMail(dto.getMail());
-		entity.setPassword(dto.getPassword());
-		entity.setRole(dto.getRole());
-		entity.setFirstName(dto.getFirstName());
-		entity.setLastName(dto.getLastName());
+        entity.setEMail(dto.getMail());
+        // entity.setPassword(dto.getPassword());
+        entity.setRole(dto.getRole());
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
 
-		return entity;
-	}
+        return entity;
+    }
 }

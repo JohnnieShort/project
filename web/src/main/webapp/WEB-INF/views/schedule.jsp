@@ -15,10 +15,10 @@
 	<tbody>
 		<tr>
 			
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from_id"><mytaglib:i18n key="schedule.title.columnStationFrom"/></mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to_id"><mytaglib:i18n key="schedule.title.columnStationTo"/></mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="departure"><mytaglib:i18n key="schedule.title.departure"/></mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="arrival"><mytaglib:i18n key="schedule.title.arrival"/></mytaglib:sort-link></th>
+			<th><mytaglib:i18n key="schedule.title.columnStationFrom"/></th>
+			<th><mytaglib:i18n key="schedule.title.columnStationTo"/></th>
+			<th><mytaglib:i18n key="schedule.title.departure"/></th>
+			<th><mytaglib:i18n key="schedule.title.arrival"/></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_type"><mytaglib:i18n key="schedule.title.routeType"/></mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="frequency"><mytaglib:i18n key="schedule.title.frequency"/></mytaglib:sort-link></th>
 			

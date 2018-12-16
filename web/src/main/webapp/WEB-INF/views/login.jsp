@@ -34,11 +34,12 @@
                     <button class="btn waves-effect waves-light " type="submit">войти</button>
                 </div>
             </div>
+            <div class="row">
+                <div class="col s12 center">
+                    <a href="${baseUrl}/register">Register</a>
+                </div>
+            </div>
         </form>
     </div>
     <div class="col s3"></div>
-    
 </div>
-<div class="row">
-	<a href="${baseUrl}/register">Register</a>
-</div>     
