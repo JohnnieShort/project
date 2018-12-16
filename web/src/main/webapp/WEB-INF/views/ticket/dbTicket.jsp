@@ -16,9 +16,14 @@
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="passengerRouteId" type="text" disabled="${readonly}" />
+                
+                 <form:select path="passengerRouteId" disabled="${readonly}">
+                    <form:options items="${passengerRoutesChoices}" />
+                </form:select>
                 <form:errors path="passengerRouteId" cssClass="red-text" />
                 <label for="passengerRouteId">passengerRouteId</label>
+                
+                
             </div>
         </div>
         <div class="row">

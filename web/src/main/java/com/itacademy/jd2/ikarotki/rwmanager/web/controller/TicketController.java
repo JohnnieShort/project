@@ -265,7 +265,7 @@ public class TicketController extends AbstractController<TicketDTO> {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
-        final ITicket dbModel = ticketService.get(id);
+        final ITicket dbModel = ticketService.getFullInfo(id);
         final TicketDTO dto = toDtoConverter.apply(dbModel);
         final HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("formModel", dto);
@@ -276,10 +276,12 @@ public class TicketController extends AbstractController<TicketDTO> {
 
     @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
     public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
-        final TicketDTO dto = toDtoConverter.apply(ticketService.get(id));
+        final TicketDTO dto = toDtoConverter.apply(ticketService.getFullInfo(id));
 
         final HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("formModel", dto);
+
+        loadCommonFormModels(hashMap);
 
         return new ModelAndView("dbTicket.edit", hashMap);
     }
@@ -299,6 +301,15 @@ public class TicketController extends AbstractController<TicketDTO> {
         Map<Integer, String> toChoices = itemsList.stream().collect(Collectors
                 .toMap(routeItem -> routeItem.getStationTo().getId(), routeItem -> routeItem.getStationTo().getName()));
         hashMap.put("toItems", toChoices);
+
+    }
+
+    private void loadCommonFormModels(final Map<String, Object> hashMap) {
+        final List<IPassengerRoute> routes = routeService.getAll();
+
+        final Map<Integer, Integer> models = routes.stream()
+                .collect(Collectors.toMap(IPassengerRoute::getId, IPassengerRoute::getId));
+        hashMap.put("passengerRoutesChoices", models);
 
     }
 
