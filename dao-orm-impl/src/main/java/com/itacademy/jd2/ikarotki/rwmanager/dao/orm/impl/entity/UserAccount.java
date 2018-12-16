@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.Role;
 
@@ -20,6 +23,17 @@ public class UserAccount extends BaseEntity implements IUserAccount {
     private String firstName;
     @Column
     private String lastName;
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "userAccount", targetEntity = Passenger.class)
+    private IPassenger passanger;
+
+    public IPassenger getPassanger() {
+        return passanger;
+    }
+
+    public void setPassanger(IPassenger passanger) {
+        this.passanger = passanger;
+    }
 
     @Override
     public String getEMail() {

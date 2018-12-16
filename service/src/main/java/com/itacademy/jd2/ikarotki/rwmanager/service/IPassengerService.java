@@ -8,23 +8,25 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerFilter;
 
 public interface IPassengerService {
-	IPassenger get(Integer id);
+    IPassenger get(Integer id);
 
-	List<IPassenger> getAll();
-	@Transactional
-	void save(IPassenger entity);
-	@Transactional
-	void delete(Integer id);
-	@Transactional
-	void deleteAll();
+    List<IPassenger> getAll();
 
-	IPassenger createEntity();
+    @Transactional
+    void save(IPassenger entity);
 
-	List<IPassenger> find(PassengerFilter filter);
-	
-	long getCount(PassengerFilter filter);
+    @Transactional
+    void delete(Integer id);
 
-	IPassenger getFullInfo(Integer id);
+    @Transactional
+    void deleteAll();
 
-	Integer getByUAId(Integer loggedUserId);
+    IPassenger createEntity();
+
+    List<IPassenger> find(PassengerFilter filter);
+
+    long getCount(PassengerFilter filter);
+
+    IPassenger getFullInfo(Integer id);
+
 }

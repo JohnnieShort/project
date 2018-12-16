@@ -3,98 +3,85 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 import java.util.Date;
 
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Range;
+import javax.validation.constraints.Size;
 
 public class PassengerDTO {
 
-	private Integer id;
+    private Integer id;
 
-	private Date created;
+    private Date created;
 
-	private Date updated;
-	@NotNull
+    private Date updated;
 
-	private Integer userAccountId;
-	@NotNull
-	private String street;
+    @Size(min = 1, max = 30)
+    private String street;
 
-	@NotNull
-	@Range(min=0)
-	private Integer building;
-	@NotNull
-	@Range(min=0)
-	private Integer apartments;
-	@NotNull
-	private String phone;
+    @NotNull
+    private Integer building;
+    @NotNull
+    private Integer apartments;
+    @Size(min = 1, max = 20)
+    private String phone;
 
-	public Integer getUserAccountId() {
-		return userAccountId;
-	}
+    public String getStreet() {
+        return street;
+    }
 
-	public void setUserAccountId(Integer userAccountId) {
-		this.userAccountId = userAccountId;
-	}
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-	public String getStreet() {
-		return street;
-	}
+    public Integer getBuilding() {
+        return building;
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public void setBuilding(Integer building) {
+        this.building = building;
+    }
 
-	public Integer getBuilding() {
-		return building;
-	}
+    public Integer getApartments() {
+        return apartments;
+    }
 
-	public void setBuilding(Integer building) {
-		this.building = building;
-	}
+    public void setApartments(Integer apartments) {
+        this.apartments = apartments;
+    }
 
-	public Integer getApartments() {
-		return apartments;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public void setApartments(Integer apartments) {
-		this.apartments = apartments;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public Date getCreated() {
-		return created;
-	}
+    public Date getUpdated() {
+        return updated;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 
-	public Date getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
-
-	@Override
-	public String toString() {
-		return "PassengerDTO [id=" + id + "]";
-	}
+    @Override
+    public String toString() {
+        return "PassengerDTO [id=" + id + "]";
+    }
 
 }

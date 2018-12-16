@@ -29,6 +29,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
@@ -38,7 +39,9 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IRouteItemService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ITicketService;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
+import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerRouteToDTOConverter;
+import com.itacademy.jd2.ikarotki.rwmanager.web.converter.PassengerToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.StationToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TicketFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.TicketToDTOConverter;
@@ -60,6 +63,13 @@ public class TicketController extends AbstractController<TicketDTO> {
     private IPassengerRouteService routeService;
 
     private PassengerRouteToDTOConverter routeToDTOConverter;
+
+    @Autowired
+    private PassengerFromDTOConverter passengerFromDTOConverter;
+
+    @Autowired
+    private PassengerToDTOConverter passengerToDTOConverter;
+
     private StationToDTOConverter stationToDTOConverter;
 
     @Autowired
@@ -91,6 +101,9 @@ public class TicketController extends AbstractController<TicketDTO> {
         gridState.setSort(sortColumn, "id");
 
         final TicketFilter filter = new TicketFilter();
+        filter.setFetchPassenger(true);
+        filter.setFetchPassengerRoute(true);
+
         prepareFilter(gridState, filter);
 
         final List<ITicket> entities = ticketService.find(filter);
@@ -180,10 +193,15 @@ public class TicketController extends AbstractController<TicketDTO> {
     public ModelAndView showTicket(@PathVariable(name = "id", required = true) final Integer id,
             final HttpServletRequest req) {
         final Map<String, Object> hashMap = new HashMap<>();
-        Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
-        hashMap.put("passengerId", passengerId);
-        hashMap.put("passengerRouteId", id);
+        IPassenger iPassenger = passengerService.get(AuthHelper.getLoggedUserId());
         TicketDTO dto = new TicketDTO();
+        if (iPassenger != null) {
+            hashMap.put("passengerId", iPassenger.getId());
+            dto.setPassenger(passengerToDTOConverter.apply(iPassenger));
+        }
+
+        hashMap.put("passengerRouteId", id);
+
         hashMap.put("formModel", dto);
         String url = req.getHeader("referer");
         hashMap.put("url", url);
@@ -193,38 +211,21 @@ public class TicketController extends AbstractController<TicketDTO> {
 
     @RequestMapping(method = RequestMethod.POST)
     public Object save(@Valid @ModelAttribute("formModel") final TicketDTO formModel, final BindingResult result,
-            @RequestParam(name = "quantity", required = false) Integer quantity,
-            @RequestParam(name = "street", required = false) String street,
-            @RequestParam(name = "building", required = false) Integer building,
-            @RequestParam(name = "apartments", required = false) Integer apartments,
-            @RequestParam(name = "phone", required = false) String phone, final HttpServletRequest req) {
+            @RequestParam(name = "quantity", required = false) Integer quantity, final HttpServletRequest req) {
         if (result.hasErrors()) {
             final Map<String, Object> hashMap = new HashMap<>();
-            Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
-            hashMap.put("passengerId", passengerId);
-            TicketDTO dto = new TicketDTO();
-            hashMap.put("formModel", dto);
+            IPassenger iPassenger = passengerService.get(AuthHelper.getLoggedUserId());
+            hashMap.put("passengerId", iPassenger == null ? null : iPassenger.getId());
+            hashMap.put("formModel", formModel);
             String url = req.getHeader("referer");
             hashMap.put("url", url);
-            hashMap.put("street", street);
-            hashMap.put("building", building);
-            hashMap.put("apartments", apartments);
-            hashMap.put("phone", phone);
-            hashMap.put("quantity", quantity);
             loadFromToItems(hashMap, formModel.getPassengerRouteId());
             return new ModelAndView("ticket.edit", hashMap);
         } else {
-            if (quantity != null) {
-                for (int i = 0; i < quantity; i++) {
-                    final ITicket entity = fromDtoConverter.apply(formModel);
-                    if (entity.getPassenger() == null) {
-                        setPassenger(street, building, apartments, phone, entity);
-                    }
-                    ticketService.save(entity);
-                }
-            } else {
+            IPassenger passenger = savePassengerIfNew(formModel);
+            for (int i = 0; i < quantity; i++) {
                 final ITicket entity = fromDtoConverter.apply(formModel);
-                // TODO set passenger
+                entity.setPassenger(passenger);
                 ticketService.save(entity);
             }
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -238,20 +239,22 @@ public class TicketController extends AbstractController<TicketDTO> {
         }
     }
 
-    private void setPassenger(String street, Integer building, Integer apartments, String phone, final ITicket entity) {
-        IPassenger passenger = passengerService.createEntity();
-        Integer passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
+    private IPassenger savePassengerIfNew(TicketDTO ticketDTO) {
+        IPassenger passenger;
+        Integer passengerId = ticketDTO.getPassengerId();
         if (passengerId == null) {
-            passenger.setUserAccount(userAccountService.get(AuthHelper.getLoggedUserId()));
-            passenger.setStreet(street);
-            passenger.setBuilding(building);
-            passenger.setApartments(apartments);
-            passenger.setPhone(phone);
+            passenger = passengerFromDTOConverter.apply(ticketDTO.getPassenger());
+            IUserAccount account = userAccountService.createEntity();
+            account.setId(AuthHelper.getLoggedUserId());
+            passenger.setUserAccount(account);
             passengerService.save(passenger);
+        } else {
+            passenger = passengerService.createEntity();
+            passenger.setId(passengerId);
         }
-        passengerId = passengerService.getByUAId(AuthHelper.getLoggedUserId());
-        passenger = passengerService.get(passengerId);
-        entity.setPassenger(passenger);
+
+        return passenger;
+
     }
 
     @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)

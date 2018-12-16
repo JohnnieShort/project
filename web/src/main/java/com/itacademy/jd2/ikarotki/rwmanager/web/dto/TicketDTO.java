@@ -2,6 +2,8 @@ package com.itacademy.jd2.ikarotki.rwmanager.web.dto;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 public class TicketDTO {
@@ -14,17 +16,21 @@ public class TicketDTO {
 
     private Double price;
 
-    // private PassengerDTO passenger;
+    @Min(1)
+    private Integer quantity;
+
+    @Valid
+    private PassengerDTO passenger = new PassengerDTO();
 
     private Integer passengerId;
-    @NotNull
 
+    @NotNull
     private Integer passengerRouteId;
-    @NotNull
 
+    @NotNull
     private Integer stationFromId;
-    @NotNull
 
+    @NotNull
     private Integer stationToId;
 
     public Integer getId() {
@@ -98,10 +104,20 @@ public class TicketDTO {
                 + stationFromId + ", stationToId=" + stationToId + "]";
     }
 
-    /*
-     * public PassengerDTO getPassenger() { return passenger; }
-     * 
-     * public void setPassenger(PassengerDTO passenger) { this.passenger =
-     * passenger; }
-     */
+    public PassengerDTO getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(PassengerDTO passenger) {
+        this.passenger = passenger;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
 }
