@@ -15,9 +15,9 @@ public class CustomerToDTOConverter implements Function<ICustomer, CustomerDTO> 
 		dto.setId(entity.getId());
 		dto.setCreated(entity.getCreated());
 		dto.setUpdated(entity.getUpdated());
-
-		dto.setUserAccount(entity.getUserAccount());
-
+		if (entity.getUserAccount() != null) {
+			dto.setUserAccountId(entity.getUserAccount().getId() != null ? entity.getUserAccount().getId() : null);
+		}
 		return dto;
 	}
 }

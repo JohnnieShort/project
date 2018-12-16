@@ -106,10 +106,12 @@ public class RouteItemController extends AbstractController<RouteItemDTO> {
 	}
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
+	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id, final HttpServletRequest req) {
 		final RouteItemDTO dto = toDtoConverter.apply(routeItemService.getFullInfo(id));
 
 		final HashMap<String, Object> hashMap = new HashMap<>();
+		String url = req.getHeader("referer");
+		hashMap.put("url", url);
 		hashMap.put("formModel", dto);
 
 		return new ModelAndView("routeItem.edit", hashMap);

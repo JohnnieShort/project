@@ -55,10 +55,10 @@
 				<td><c:out value="${passengerRoute.frequency}" /></td>
 				
 				
-				<td class="right"><a class="btn-floating"
+				<td class="right"><a class="btn-floating  green lighten-3"
 					href="${ticketUrl}/${passengerRoute.id}/buy"><i class="material-icons" title="<mytaglib:i18n key="schedule.title.buy"/>">attach_money</i></a>
 				</td>
-				<td class="right"><a class="btn-floating"
+				<td class="right"><a class="btn-floating yellow darken-1"
 					href="${routeUrl}/${passengerRoute.id}/details"><i class="material-icons" title="<mytaglib:i18n key="schedule.title.details"/>">info</i></a>
 				</td>
 			</tr>

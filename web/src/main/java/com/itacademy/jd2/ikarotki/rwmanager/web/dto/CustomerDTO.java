@@ -17,14 +17,14 @@ public class CustomerDTO {
 	private Date updated;
 	@NotNull
 	@Range(min=0)
-	private IUserAccount userAccount;
+	private Integer userAccountId;
 
-	public IUserAccount getUserAccount() {
-		return userAccount;
+	public Integer getUserAccountId() {
+		return userAccountId;
 	}
 
-	public void setUserAccount(IUserAccount userAccountId) {
-		this.userAccount = userAccountId;
+	public void setUserAccountId(Integer userAccountId) {
+		this.userAccountId = userAccountId;
 	}
 
 	public Integer getId() {
@@ -53,8 +53,10 @@ public class CustomerDTO {
 
 	@Override
 	public String toString() {
-		return "CustomerDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", userAccount="
-				+ userAccount + "]";
+		return "CustomerDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", userAccountId="
+				+ userAccountId + "]";
 	}
+
+	
 
 }

@@ -1,11 +1,8 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.persistence.NoResultException;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassenger;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IUserAccount;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TicketFilter;
@@ -71,28 +67,34 @@ public class PersonalPageController {
 			hashMap.put("passenger", passengerDTO);
 			passengerId = passenger.getId();
 		} catch (NullPointerException | NoResultException e) {
-			LOGGER.warn("no passenger found", e);
+			LOGGER.warn("no passenger found");
 		}
 		hashMap.put("readonly", true);
 
 		if (passengerId != null) {
-			TicketFilter ticketFilter = new TicketFilter();
-			ticketFilter.setFetchPassenger(true);
-			ticketFilter.setFetchPassengerRoute(true);
-			ticketFilter.setFetchStationFrom(true);
-			ticketFilter.setFetchStationTo(true);
-			List<ITicket> tickets = ticketService.findByPassengerId(ticketFilter, passengerId);
-
-			Map<Integer, String> ticketsDTO = tickets.stream()
-					.collect(Collectors.toMap(ITicket::getId, ticket -> ticket.getStationFrom().getName() + "->"
-							+ ticket.getStationTo().getName() + " price: " + ticket.getPrice()));
-			hashMap.put("tickets", ticketsDTO);
-			Map<Integer, String> depArr = itemService.getDepArr(tickets);
+			getTime(hashMap, passengerId);
 			
-			hashMap.put("depArr", depArr);
 		}
 
 		return new ModelAndView("personalPage", hashMap);
+	}
+
+	private void getTime(Map<String, Object> hashMap, Integer passengerId) {
+		TicketFilter ticketFilter = new TicketFilter();
+		ticketFilter.setFetchPassenger(true);
+		ticketFilter.setFetchPassengerRoute(true);
+		ticketFilter.setFetchStationFrom(true);
+		ticketFilter.setFetchStationTo(true);
+		List<ITicket> tickets = ticketService.findByPassengerId(ticketFilter, passengerId);
+
+		Map<Integer, String> ticketsDTO = tickets.stream()
+				.collect(Collectors.toMap(ITicket::getId, ticket -> ticket.getStationFrom().getName() + "->"
+						+ ticket.getStationTo().getName() + " price: " + ticket.getPrice()));
+		hashMap.put("tickets", ticketsDTO);
+		Map<Integer, String> departure = itemService.getDeparture(tickets);
+		hashMap.put("departure", departure);
+		Map<Integer, String> arrival = itemService.getArrival(tickets);
+		hashMap.put("arrival", arrival);
 	}
 
 }

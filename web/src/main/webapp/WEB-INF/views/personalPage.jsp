@@ -36,7 +36,7 @@
                 <form:errors path="Mail" cssClass="red-text" />
                 <label for="eMail">E-Mail</label>
             </div>
-            <a class="btn-floating" href="${userUrl}/${user.id}/edit"><i
+            <a class="btn-floating yellow darken-1" href="${userUrl}/${user.id}/edit"><i
 						class="material-icons">edit</i></a>
         </div>
         
@@ -88,7 +88,13 @@
 			<li class="collection-header"><h4>Tickets</h4></li>
 			<c:forEach var="item" items="${tickets}" varStatus="loopCounter">
 				<li class="collection-item"> 
-						<c:forEach var="entry" items="${depArr}" varStatus="loopCounter">
+						<c:forEach var="entry" items="${departure}" varStatus="loopCounter">
+							<c:if test = "${item.key == entry.key}">
+         						<c:out value = "${entry.value}"/>
+     						</c:if>
+				
+						</c:forEach>
+						<c:forEach var="entry" items="${arrival}" varStatus="loopCounter">
 							<c:if test = "${item.key == entry.key}">
          						<c:out value = "${entry.value}"/>
      						</c:if>

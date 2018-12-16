@@ -20,10 +20,10 @@ public class CargoRouteFromDTOConverter implements Function<CargoRouteDTO, ICarg
 		entity.setId(dto.getId());
 		entity.setCreated(dto.getCreated());
 		entity.setUpdated(dto.getUpdated());
-		
+
 		entity.setVersion(dto.getVersion());
 
-		entity.setTrain(dto.getTrain());
+		entity.getTrain().setId(dto.getTrainId() != null ? dto.getTrainId() : null);
 
 		return entity;
 	}

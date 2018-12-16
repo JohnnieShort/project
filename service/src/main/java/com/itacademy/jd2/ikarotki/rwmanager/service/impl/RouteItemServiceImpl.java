@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -175,20 +176,47 @@ public class RouteItemServiceImpl implements IRouteItemService {
 	}
 
 	@Override
-	public Map<Integer, String> getDepArr(List<ITicket> tickets) {
+	public Map<Integer, String> getDeparture(List<ITicket> tickets) {
 		RouteItemFilter filter = new RouteItemFilter();
 		filter.setFetchStationFrom(true);
 		filter.setFetchStationTo(true);
+		filter.setFetchPassengerRoute(true);
 		List<IRouteItem> items = find(filter);
-		Map<Integer, String> depArr = new HashMap<Integer, String>();
+		Map<Integer, String> departure = new HashMap<Integer, String>();
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd  'at' HH:mm:ss ");
 		for(ITicket ticket: tickets) {
 			for(IRouteItem item: items) {
-				if(ticket.getPassengerRoute().getId().equals(item.getPassengerRoute().getId())) {
-					depArr.put(ticket.getId(), item.getDeparture() + " " + item.getArrival());
+				if(ticket.getPassengerRoute().getId()==(item.getPassengerRoute().getId())) {
+					if(item.getStationFrom().getId()==(ticket.getStationFrom().getId())){
+					departure.put(ticket.getId(), "departure: " + dateFormat.format(item.getDeparture()));
+					}
 				}
 			}
 		}
-		return depArr;
+		return departure;
 	}
+
+	@Override
+	public Map<Integer, String> getArrival(List<ITicket> tickets) {
+		RouteItemFilter filter = new RouteItemFilter();
+		filter.setFetchStationFrom(true);
+		filter.setFetchStationTo(true);
+		filter.setFetchPassengerRoute(true);
+		List<IRouteItem> items = find(filter);
+		Map<Integer, String> departure = new HashMap<Integer, String>();
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd  'at' HH:mm:ss ");
+		for(ITicket ticket: tickets) {
+			for(IRouteItem item: items) {
+				if(ticket.getPassengerRoute().getId()==(item.getPassengerRoute().getId())) {
+					if(item.getStationTo().getId()==(ticket.getStationTo().getId())){
+					departure.put(ticket.getId(), "arrival: " + dateFormat.format(item.getArrival()));
+					}
+				}
+			}
+		}
+		return departure;	}
+
 
 }

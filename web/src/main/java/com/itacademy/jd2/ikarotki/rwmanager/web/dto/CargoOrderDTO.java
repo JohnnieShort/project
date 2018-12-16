@@ -7,9 +7,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoRoute;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICustomer;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 
 public class CargoOrderDTO {
@@ -21,19 +18,19 @@ public class CargoOrderDTO {
 	private Date updated;
 	@NotNull
 	@Range(min=0)
-	private ICargoRoute cargoRoute;
+	private Integer cargoRouteId;
 	@NotNull
 	@Range(min=0)
-	private ICustomer customer;
+	private Integer customerId;
 	@NotNull
-	@Range(min=0, max=2)
+	
 	private CargoType cargoType;
 	@NotNull
 	@Range(min=0)
-	private IStation stationFrom;
+	private Integer stationFromId;
 	@NotNull
 	@Range(min=0)
-	private IStation stationTo;
+	private Integer stationToId;
 	@NotNull
 	private Date date;
 	@NotNull
@@ -75,52 +72,12 @@ public class CargoOrderDTO {
 		this.updated = updated;
 	}
 
-	public ICargoRoute getCargoRoute() {
-		return cargoRoute;
-	}
-
-	public void setCargoRoute(ICargoRoute cargoRoute) {
-		this.cargoRoute = cargoRoute;
-	}
-
-	public ICustomer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(ICustomer customer) {
-		this.customer = customer;
-	}
-
 	public CargoType getCargoType() {
 		return cargoType;
 	}
 
 	public void setCargoType(CargoType cargoType) {
 		this.cargoType = cargoType;
-	}
-
-	public IStation getStationFrom() {
-		return stationFrom;
-	}
-
-	public void setStationFrom(IStation stationFrom) {
-		this.stationFrom = stationFrom;
-	}
-
-	public IStation getStationTo() {
-		return stationTo;
-	}
-
-	public void setStationTo(IStation stationTo) {
-		this.stationTo = stationTo;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
 	}
 
 	public Double getWeight() {
@@ -131,11 +88,52 @@ public class CargoOrderDTO {
 		this.weight = weight;
 	}
 
+	public Integer getCargoRouteId() {
+		return cargoRouteId;
+	}
+
+	public void setCargoRouteId(Integer cargoRouteId) {
+		this.cargoRouteId = cargoRouteId;
+	}
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public Integer getStationFromId() {
+		return stationFromId;
+	}
+
+	public void setStationFromId(Integer stationFromId) {
+		this.stationFromId = stationFromId;
+	}
+
+	public Integer getStationToId() {
+		return stationToId;
+	}
+
+	public void setStationToId(Integer stationToId) {
+		this.stationToId = stationToId;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
-		return "CargoOrderDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", cargoRoute="
-				+ cargoRoute + ", customer=" + customer + ", cargoType=" + cargoType + ", stationFrom=" + stationFrom
-				+ ", stationTo=" + stationTo + ", date=" + date + ", weight=" + weight + ", price=" + price + "]";
+		return "CargoOrderDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", cargoRouteId="
+				+ cargoRouteId + ", customerId=" + customerId + ", cargoType=" + cargoType + ", stationFromId="
+				+ stationFromId + ", stationToId=" + stationToId + ", date=" + date + ", weight=" + weight + ", price="
+				+ price + "]";
 	}
 
 }

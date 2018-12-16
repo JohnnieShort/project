@@ -1,5 +1,6 @@
 package com.itacademy.jd2.ikarotki.rwmanager.web.controller;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ICargoOrder;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IStation;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.CargoType;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.CargoOrderFilter;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.StationFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.ICargoOrderService;
+import com.itacademy.jd2.ikarotki.rwmanager.service.IStationService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CargoOrderFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.CargoOrderToDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.CargoOrderDTO;
@@ -32,14 +37,16 @@ public class CargoOrderController extends AbstractController<CargoOrderDTO> {
 	private ICargoOrderService cargoOrderService;
 	private CargoOrderToDTOConverter toDtoConverter;
 	private CargoOrderFromDTOConverter fromDtoConverter;
+	private IStationService stationService;
 
 	@Autowired
 	private CargoOrderController(ICargoOrderService cargoOrderService, CargoOrderToDTOConverter toDtoConverter,
-			CargoOrderFromDTOConverter fromDtoConverter) {
+			CargoOrderFromDTOConverter fromDtoConverter, IStationService stationService) {
 		super();
 		this.cargoOrderService = cargoOrderService;
 		this.toDtoConverter = toDtoConverter;
 		this.fromDtoConverter = fromDtoConverter;
+		this.stationService = stationService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -62,15 +69,37 @@ public class CargoOrderController extends AbstractController<CargoOrderDTO> {
 		models.put("gridItems", dtos);
 		return new ModelAndView("cargoOrder.list", models);
 	}
-
+	@RequestMapping(value = "/doOrder", method = RequestMethod.GET)
+	public ModelAndView showBlank() {
+		final Map<String, Object> hashMap = new HashMap<>();
+		
+		CargoOrderDTO dto = new CargoOrderDTO();
+		hashMap.put("formModel", dto);
+		loadCargoTypes(hashMap);
+		loadStations(hashMap);
+		return new ModelAndView("cargoOrder.create", hashMap);
+	}
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm() {
 		final Map<String, Object> hashMap = new HashMap<>();
-		final ICargoOrder newEntity = cargoOrderService.createEntity();
-		CargoOrderDTO dto = toDtoConverter.apply(newEntity);
+		CargoOrderDTO dto = new CargoOrderDTO();
 		hashMap.put("formModel", dto);
-
+		loadCargoTypes(hashMap);
+		loadStations(hashMap);
 		return new ModelAndView("cargoOrder.edit", hashMap);
+	}
+
+	private void loadCargoTypes(Map<String, Object> hashMap) {
+		List<CargoType> types = Arrays.asList(CargoType.values());
+		hashMap.put("cargoTypes", types);
+	}
+	
+	private void loadStations(final Map<String, Object> hashMap) {
+		List<IStation> stationsList = stationService.find(new StationFilter());
+		Map<Integer, String> stationChoices = stationsList.stream()
+				.collect(Collectors.toMap(IStation::getId, station -> station.getName()));
+		hashMap.put("stationChoices", stationChoices);
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

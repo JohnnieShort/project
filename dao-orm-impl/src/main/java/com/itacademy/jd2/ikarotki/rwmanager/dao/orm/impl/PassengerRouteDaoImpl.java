@@ -18,6 +18,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.PassengerRouteFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.PassengerRoute_;
+import com.itacademy.jd2.ikarotki.rwmanager.dao.orm.impl.entity.Train_;
 
 @Repository
 public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Integer> implements IPassengerRouteDao {
@@ -70,7 +71,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 																							// result
 		final Root<PassengerRoute> from = cq.from(PassengerRoute.class);// select
 																		// from
-																		// brand
+																		// passenger route
 		cq.select(from); // select what? select *
 
 		if (filter.isFetchTrain()) {
@@ -102,7 +103,7 @@ public class PassengerRouteDaoImpl extends AbstractDaoImpl<IPassengerRoute, Inte
 		case "id":
 			return from.get(PassengerRoute_.id);
 		case "train_id":
-			
+			return from.get(Train_.id);
 
 		case "passenger_route_type":
 			return from.get(PassengerRoute_.passengerRouteType);

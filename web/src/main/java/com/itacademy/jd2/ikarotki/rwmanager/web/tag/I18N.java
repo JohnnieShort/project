@@ -14,7 +14,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 public class I18N extends SimpleTagSupport {
 	public static final String SESSION_LOCALE_KEY = "current-locale";
 	private static Map<Locale, ResourceBundle> bundles = new HashMap<Locale, ResourceBundle>();
-	private final Locale DEFAULT_LOCALE = new Locale("en");
+	private final Locale DEFAULT_LOCALE = new Locale("ru");
 	private String key;
 
 	@Override

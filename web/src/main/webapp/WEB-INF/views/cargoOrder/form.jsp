@@ -7,16 +7,16 @@
         <form:input path="id" type="hidden" />
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="cargoRoute" type="text" disabled="${readonly}" />
-                <form:errors path="cargoRoute" cssClass="red-text" />
-                <label for="cargoRoute">Cargo route id</label>
+                <form:input path="cargoRouteId" type="text" disabled="${readonly}" />
+                <form:errors path="cargoRouteId" cssClass="red-text" />
+                <label for="cargoRouteId">Cargo route id</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="customer" type="text" disabled="${readonly}" />
-                <form:errors path="customer" cssClass="red-text" />
-                <label for="customer">Customer id</label>
+                <form:input path="customerId" type="text" disabled="${readonly}" />
+                <form:errors path="customerId" cssClass="red-text" />
+                <label for="customerId">Customer id</label>
             </div>
         </div>
         <div class="row">
@@ -29,17 +29,17 @@
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="stationFrom" type="text" disabled="${readonly}" />
-                <form:errors path="stationFrom" cssClass="red-text" />
-                <label for="stationFrom">Station from id</label>
+                <form:input path="stationFromId" type="text" disabled="${readonly}" />
+                <form:errors path="stationFromId" cssClass="red-text" />
+                <label for="stationFromId">Station from id</label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s12">
-                <form:input path="stationTo" type="text" disabled="${readonly}" />
-                <form:errors path="stationTo" cssClass="red-text" />
-                <label for="stationTo">Station to id</label>
+                <form:input path="stationToId" type="text" disabled="${readonly}" />
+                <form:errors path="stationToId" cssClass="red-text" />
+                <label for="stationToId">Station to id</label>
             </div>
         </div>
         
@@ -75,7 +75,7 @@
                 </c:if>
             </div>
             <div class="col s3">
-                <a class="btn waves-effect waves-light right" href="${baseUrl}">к списку<i class="material-icons right"></i>
+                <a class="btn waves-effect waves-light right light-blue" href="${baseUrl}">к списку<i class="material-icons right"></i>
                 </a>
             </div>
         </div>

@@ -121,6 +121,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/cargoOrder/form.jsp" />
 	</definition>
+	
+	<definition name="cargoOrder.create" extends="DefaultTemplate">
+		<put-attribute name="body"
+			value="/WEB-INF/views/cargoOrder/showOrder.jsp" />
+	</definition>
 
 	<definition name="cargoRoute.edit" extends="DefaultTemplate">
 		<put-attribute name="body"

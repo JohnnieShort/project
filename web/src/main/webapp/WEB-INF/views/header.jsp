@@ -19,7 +19,7 @@
 				<li><a href="${baseUrl}/schedule"><mytaglib:i18n key="menu.link.schedule"/><i class="material-icons left">train</i></a></li>
 				
 				<li><a href="${baseUrl}/cargoOrder/doOrder"><mytaglib:i18n key="menu.link.cargoOrder"/> <i class="material-icons left">local_grocery_store</i></a></li>
-				<li><a href="${baseUrl}/personalPage"><mytaglib:i18n key="menu.link.personalPage"/> <i class="material-icons left">child_care</i></a></li>
+				<li><a href="${baseUrl}/personalPage"><mytaglib:i18n key="menu.link.personalPage"/> <i class="material-icons left">face</i></a></li>
 				
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<li><a href="${baseUrl}/administratorPage"><mytaglib:i18n key="menu.link.dataManaging"/></a></li>

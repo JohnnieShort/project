@@ -16,6 +16,9 @@
         <intercept-url pattern="/station**" access="!isAnonymous()" /> 
         <intercept-url pattern="/ticket/*/buy**" access="!isAnonymous()" />
         <intercept-url pattern="/personalPage**" access="!isAnonymous()" />
+        <intercept-url pattern="/cargoOrder**" access="!isAnonymous()" />
+        <intercept-url pattern="/cargoOrder/doOrder**" access="!isAnonymous()" />
+        
 
         <form-login login-page="/login" default-target-url="/"
             authentication-failure-url="/login?error"

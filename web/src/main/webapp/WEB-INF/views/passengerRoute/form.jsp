@@ -20,7 +20,7 @@
 								<li class="collection-item">
 									<div>
 										"${item.value}"<a href="${itemUrl}/${item.key}"
-										class="secondary-content"><i class="material-icons">info</i></a>
+										class="secondary-content"><i class="material-icons ">info</i></a>
 									</div>
 								</li>
 							</c:forEach>
@@ -87,11 +87,11 @@
             <div class="col s6"></div>
             <div class="col s3">
                 <c:if test="${!readonly}">
-                    <button class="btn waves-effect waves-light right" type="submit">Next</button>
+                    <button class="btn waves-effect waves-light right green darken-3" type="submit">Next</button>
                 </c:if>
             </div>
             <div class="col s3">
-                <a class="btn waves-effect waves-light right" href="${baseUrl}">к списку<i class="material-icons right"></i>
+                <a class="btn waves-effect waves-light right light-blue" href="${baseUrl}">к списку<i class="material-icons right"></i>
                 </a>
             </div>
         </div>

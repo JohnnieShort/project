@@ -47,7 +47,12 @@ public class UserAccountServiceImpl implements IUserAccountService {
 	public void save(final IUserAccount entity) {
 		final Date modifedOn = new Date();
 		entity.setUpdated(modifedOn);
-		entity.setPassword(Password.hashPassword(entity.getPassword()));
+		if (entity.getId() != null) {
+			boolean isHashed = entity.getPassword().toString().equals(get(entity.getId()).getPassword().toString());
+			if (!isHashed) {
+				entity.setPassword(Password.hashPassword(entity.getPassword()));
+			}
+		} else entity.setPassword(Password.hashPassword(entity.getPassword()));
 		if (entity.getRole() == null) {
 			entity.setRole(Role.ROLE_USER);
 		}

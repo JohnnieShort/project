@@ -41,11 +41,11 @@
             <div class="col s6"></div>
             <div class="col s3">
                 <c:if test="${!readonly}">
-                    <button class="btn waves-effect waves-light right" type="submit">сохранить</button>
+                    <button class="btn waves-effect waves-light right green darken-3" type="submit">сохранить</button>
                 </c:if>
             </div>
             <div class="col s3">
-                <a class="btn waves-effect waves-light right" href="${baseUrl}">к списку<i class="material-icons right"></i>
+                <a class="btn waves-effect waves-light right light-blue" href="${baseUrl}">к списку<i class="material-icons right"></i>
                 </a>
             </div>
         </div>

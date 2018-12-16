@@ -27,16 +27,16 @@
 						value="${locomotive.created}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${locomotive.updated}" /></td>
-				<td class="right"><a class="btn-floating"
-					href="${baseUrl}/${locomotive.id}"><i class="material-icons">info</i></a>
-					<a class="btn-floating" href="${baseUrl}/${locomotive.id}/edit"><i
-						class="material-icons">edit</i></a> <a
-					class="btn-floating red "
-					href="${baseUrl}/${locomotive.id}/delete"><i class="material-icons">delete</i></a></td>
+				<td class="right">
+					<a class="btn-floating"	href="${baseUrl}/${locomotive.id}"><i class="material-icons">info</i></a>
+					<a class="btn-floating yellow darken-1" href="${baseUrl}/${locomotive.id}/edit"><i class="material-icons">edit</i></a> 
+					<a class="btn-floating red "href="${baseUrl}/${locomotive.id}/delete"><i class="material-icons">delete</i></a>
+				</td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
-<jspFragments:paging />
-<a class="waves-effect waves-light btn right" href="${baseUrl}/add"><i
+
+<a class="waves-effect waves-light btn right purple darken-1" href="${baseUrl}/add"><i
 	class="material-icons">add</i></a>
+<jspFragments:paging />

@@ -21,7 +21,7 @@ public class CustomerFromDTOConverter implements Function<CustomerDTO, ICustomer
 		entity.setCreated(dto.getCreated());
 		entity.setUpdated(dto.getUpdated());
 
-		entity.setUserAccount(dto.getUserAccount());
+		entity.getUserAccount().setId(dto.getUserAccountId() != null? dto.getUserAccountId(): null);
 
 		return entity;
 	}

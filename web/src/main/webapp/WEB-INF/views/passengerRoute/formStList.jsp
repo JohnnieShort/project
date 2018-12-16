@@ -111,13 +111,13 @@
 			<div class="col s6"></div>
 			<div class="col s3">
 				<c:if test="${!readonly}">
-					<button class="btn waves-effect waves-light right" type="submit">Add
+					<button class="btn waves-effect waves-light right green darken-3" type="submit">Add
 						route item</button>
 				</c:if>
 			</div>
 
 			<div class="col s3">
-				<a class="btn waves-effect waves-light right" href="${baseUrl}">к
+				<a class="btn waves-effect waves-light right light-blue" href="${baseUrl}">к
 					списку<i class="material-icons right"></i>
 				</a>
 			</div>

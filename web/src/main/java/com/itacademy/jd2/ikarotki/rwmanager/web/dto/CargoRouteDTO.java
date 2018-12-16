@@ -6,8 +6,6 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITrain;
-
 public class CargoRouteDTO {
 
 	private Integer id;
@@ -17,7 +15,7 @@ public class CargoRouteDTO {
 	private Date updated;
 	@NotNull
 	@Range(min = 0)
-	private ITrain train;
+	private Integer trainId;
 
 	private Integer version;
 
@@ -53,17 +51,20 @@ public class CargoRouteDTO {
 		this.updated = updated;
 	}
 
-	public ITrain getTrain() {
-		return train;
+	public Integer getTrainId() {
+		return trainId;
 	}
 
-	public void setTrain(ITrain train) {
-		this.train = train;
+	public void setTrainId(Integer trainId) {
+		this.trainId = trainId;
 	}
 
 	@Override
 	public String toString() {
-		return "CargoRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", train=" + train + "]";
+		return "CargoRouteDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", trainId=" + trainId
+				+ ", version=" + version + "]";
 	}
+
+	
 
 }

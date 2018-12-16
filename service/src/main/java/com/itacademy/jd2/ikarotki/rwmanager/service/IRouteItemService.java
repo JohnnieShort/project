@@ -10,7 +10,6 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IPassengerRoute;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.IRouteItem;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.ITicket;
 import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.RouteItemFilter;
-import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.TicketFilter;
 
 public interface IRouteItemService {
 	IRouteItem get(Integer id);
@@ -41,7 +40,11 @@ public interface IRouteItemService {
 
 	String getRouteName(Integer id, RouteItemFilter filter);
 
-	Map<Integer, String> getDepArr(List<ITicket> tickets);
+	
+
+	Map<Integer, String> getDeparture(List<ITicket> tickets);
+
+	Map<Integer, String> getArrival(List<ITicket> tickets);
 
 	
 }
