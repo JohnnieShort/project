@@ -74,9 +74,6 @@
 <script src="${contextPath}/resources/js/init-map.js"></script>
 <script src="${contextPath}/resources/js/route-details.js"></script>
 <script type="text/javascript">
-//     var points=${points};
-//     var avgLat=${avgLat};
-// 	var avgLong=${avgLong};
 initMap(${points},${avgLat} ,${avgLong})
 	
 initComboboxes('${pageContext.request.contextPath}')
