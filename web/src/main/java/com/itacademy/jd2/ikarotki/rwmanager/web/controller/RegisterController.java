@@ -49,7 +49,7 @@ public class RegisterController {
             final IUserAccount entity = fromDtoConverter.apply(formModel);
             entity.setPassword(formModel.getPassword());
             userAccountService.save(entity);
-            return "redirect:/login";
+            return "redirect:/index";
         }
     }
 }

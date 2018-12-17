@@ -5,16 +5,16 @@
 <%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
 
 <c:set var="baseUrl" value="${contextPath}/locomotive" />
-<h4 class="header">Locomotives</h4>
+<h4 class="header"><mytaglib:i18n key="page.content.locomotives" /></h4>
 <table class="bordered highlight">
 	<tbody>
 		<tr>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="name">name</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="power">power</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id"><mytaglib:i18n key="page.content.id" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="name"><mytaglib:i18n key="page.content.name" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="power"><mytaglib:i18n key="page.content.power" /></mytaglib:sort-link></th>
 			
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created"><mytaglib:i18n key="page.content.created" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated"><mytaglib:i18n key="page.content.updated" /></mytaglib:sort-link></th>
 			<th></th>
 		</tr>
 		<c:forEach var="locomotive" items="${gridItems}" varStatus="loopCounter">

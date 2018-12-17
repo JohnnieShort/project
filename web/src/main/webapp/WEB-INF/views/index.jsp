@@ -22,10 +22,10 @@ body {
 	<div class="parallax-container">
       <div class="parallax"><img src="https://i.pinimg.com/originals/99/3d/7b/993d7b98cc0f2b9e563ca7039258806d.jpg"></div>
     </div>
-	<div class="section white">
+	<div class="section purple lighten-5">
       <div class="row container">
-        <h2 class="header">Parallax</h2>
-        <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+        <h2 class="header"><mytaglib:i18n key="index.title.header" /></h2>
+        
       </div>
     </div>
     <div class="parallax-container">

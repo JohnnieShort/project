@@ -1,18 +1,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <%@page
 	import="com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType"%>
 <c:set var="baseUrl" value="${contextPath}/passengerRoute" />
 <c:set var="itemUrl" value="${contextPath}/routeItem" />
 
-<h4 class="header">Edit items of passenger route</h4>
+<h4 class="header"><c:if test="${!readonly}"><mytaglib:i18n key="page.content.edit" /></c:if> <mytaglib:i18n key="page.content.routeItems" /></h4>
 <div class="row">
 	<div class="col s8">
 		<div id="map" style="width: 600px; height: 400px"></div>
 	</div>
 	<div class="col s4">
 		<ul class="collection with-header">
-			<li class="collection-header"><h4>Route items</h4></li>
+			<li class="collection-header"><h4><mytaglib:i18n key="page.content.routeItems" /></h4></li>
 			<c:forEach var="item" items="${routeItems}" varStatus="loopCounter">
 				<li class="collection-item"><div>
 						"${item.value}"<a href="${itemUrl}/${item.key}/delete"
@@ -36,22 +37,22 @@
 		<div class="row">
 			<div class="input-field col s12">
 				<form:select path="stationFromId" disabled="${readonly}">
-					<form:option value="0" label="Select station from" />
+					
 					<form:options items="${stationChoices}" />
 				</form:select>
 				<form:errors path="stationFromId" cssClass="red-text" />
-				<label for="stationFromId">Station from</label>
+				<label for="stationFromId"><mytaglib:i18n key="page.content.stationFrom" /></label>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s12">
 				<form:select path="stationToId" disabled="${readonly}">
-					<form:option value="0" label="Select station to" />
+					
 					<form:options items="${stationChoices}" />
 				</form:select>
 				<form:errors path="stationToId" cssClass="red-text" />
-				<label for="stationToId">Station to</label>
+				<label for="stationToId"><mytaglib:i18n key="page.content.stationTo" /></label>
 			</div>
 		</div>
 
@@ -60,7 +61,7 @@
 				<form:input path="passengerRouteId"
 					value="${passengerRouteFormModelId}" type="hidden" />
 				<form:errors path="passengerRouteId" cssClass="red-text" />
-				<label for="name">Passenger route id
+				<label for="name"><mytaglib:i18n key="page.content.passengerRoute" />
 					"${passengerRouteFormModelId}"</label>
 			</div>
 		</div>
@@ -70,14 +71,14 @@
 				<form:input path="departureDate" type="text" disabled="${readonly}"
 					cssClass="datepicker" />
 				<form:errors path="departureDate" cssClass="red-text" />
-				<label for="departureDate">departure date for "from"-station</label>
+				<label for="departureDate"><mytaglib:i18n key="page.content.departureDateFrom" /></label>
 			</div>
 
 			<div class="input-field col s6">
 				<form:input path="departureTime" type="text" disabled="${readonly}"
 					cssClass="timepicker" />
 				<form:errors path="departureTime" cssClass="red-text" />
-				<label for="departureTime">departure time for "from"-station</label>
+				<label for="departureTime"><mytaglib:i18n key="page.content.departureTimeFrom" /></label>
 			</div>
 		</div>
 
@@ -86,14 +87,14 @@
 				<form:input path="arrivalDate" type="text" disabled="${readonly}"
 					cssClass="datepicker" />
 				<form:errors path="arrivalDate" cssClass="red-text" />
-				<label for="arrivalDate">arrival date for "to"-station</label>
+				<label for="arrivalDate"><mytaglib:i18n key="page.content.arrivalDateFrom" /></label>
 			</div>
 
 			<div class="input-field col s6">
 				<form:input path="arrivalTime" type="text" disabled="${readonly}"
 					cssClass="timepicker" />
 				<form:errors path="arrivalTime" cssClass="red-text" />
-				<label for="arrivalTime">arrival time for "to"-station</label>
+				<label for="arrivalTime"><mytaglib:i18n key="page.content.arrivalTimeFrom" /></label>
 			</div>
 		</div>
 
@@ -103,7 +104,7 @@
 			<div class="input-field col s12">
 				<form:input path="ordinalNum" type="text" disabled="${readonly}" />
 				<form:errors path="ordinalNum" cssClass="red-text" />
-				<label for="ordinalNum">Ordinal number</label>
+				<label for="ordinalNum"><mytaglib:i18n key="page.content.ordinal" /></label>
 			</div>
 		</div>
 
@@ -111,14 +112,12 @@
 			<div class="col s6"></div>
 			<div class="col s3">
 				<c:if test="${!readonly}">
-					<button class="btn waves-effect waves-light right green darken-3" type="submit">Add
-						route item</button>
+					<button class="btn waves-effect waves-light right green darken-3" type="submit"><mytaglib:i18n key="page.content.save" /></button>
 				</c:if>
 			</div>
 
 			<div class="col s3">
-				<a class="btn waves-effect waves-light right light-blue" href="${baseUrl}">к
-					списку<i class="material-icons right"></i>
+				<a class="btn waves-effect waves-light right light-blue" href="${baseUrl}"><mytaglib:i18n key="page.content.toList" /><i class="material-icons right"></i>
 				</a>
 			</div>
 		</div>

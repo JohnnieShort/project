@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="baseUrl" value="${contextPath}/ticket" />
 
-<h4 class="header">Edit Ticket</h4>
+<h4 class="header"><c:if test="${!readonly}">Edit</c:if> Ticket</h4>
 
 
 <div style="margin: 10px;">

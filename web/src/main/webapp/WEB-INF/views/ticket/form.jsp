@@ -1,13 +1,13 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="baseUrl" value="${contextPath}/ticket" />
-<h4 class="header">Edit ticket</h4>
+<h4 class="header"><c:if test="${!readonly}">Edit</c:if> ticket</h4>
 <div class="row">
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
         <form:input path="id" type="hidden" />
         <form:input path="passengerId" type="hidden" value="${passengerId}" />
         <form:input path="passengerRouteId" type="hidden" value="${passengerRouteId}" />
-        <h5 class="header">Please edit additional info for the first ticket order</h5>
+        <h5 class="header">Please check additional info for the ticket order</h5>
         <div class="row">
             <div class="input-field col s6">
                 <form:input path="passenger.street" type="text" disabled="${readonly}" />

@@ -29,5 +29,7 @@ public interface IPassengerRouteService {
 
 	List<IPassengerRoute> findActual(PassengerRouteFilter filter);
 
+	IPassengerRoute getLatest();
+
 	
 }

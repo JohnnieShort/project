@@ -1,0 +1,2 @@
+email: user@1, password - user, role - user;
+admin: admin@1, password - admin, role - admin;

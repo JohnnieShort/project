@@ -1,10 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <%@page import="com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType"%>
 <c:set var="baseUrl" value="${contextPath}/passengerRoute" />
 <c:set var="itemUrl" value="${contextPath}/routeItem" />
 
-<h4 class="header">Edit passenger route</h4>
+<h4 class="header"><c:if test="${!readonly}"><mytaglib:i18n key="page.content.edit" /></c:if> <mytaglib:i18n key="page.content.passengerRoute" /></h4>
 	
 <div class="row">
 	<c:if test = "${readonly}">
@@ -41,22 +42,22 @@
         <div class="row">
             <div class="input-field col s12">
                 <form:select path="trainId" disabled="${readonly}">
-					<form:option value="0" label="Select train" />
+					
 					<form:options items="${trainsChoices}" />
 				</form:select>
                 <form:errors path="trainId" cssClass="red-text" />
-                <label for="trainId">Train id</label>
+                <label for="trainId"><mytaglib:i18n key="page.content.train" /></label>
             </div>
         </div>
         
         <div class="row">
             <div class="input-field col s12" >
                <form:select path="passengerRouteType" disabled="${readonly}">
-            		<form:option value="0" label="Select type of route" />
+            		
             		<form:options items="${passengerRouteTypes}" />
             	</form:select>
             	<form:errors path="passengerRouteType" cssClass="red-text" />
-            	 <label for=passengerRouteType>Train id</label>
+            	 <label for=passengerRouteType><mytaglib:i18n key="page.content.passRouteType" /></label>
             </div>
         </div>
         
@@ -67,18 +68,18 @@
 						class="lever"></span> actual
 					</label>
 				</div>
-				<label class="switch-label">is actual</label> <br />
+				<label class="switch-label"><mytaglib:i18n key="page.content.actual" /></label> <br />
 			</div>
 		</div>
         
         <div class="row">
              <div class="input-field col s12">
                <form:select path="frequency" disabled="${readonly}">
-            		<form:option value="0" label="Select frequency" />
+            		
             		<form:options items="${frequency}" />
             	</form:select>
             	<form:errors path="frequency" cssClass="red-text" />
-            	 <label for=frequency>frequency</label>
+            	 <label for=frequency><mytaglib:i18n key="page.content.frequency" /></label>
             </div>
         </div>
         
@@ -87,11 +88,11 @@
             <div class="col s6"></div>
             <div class="col s3">
                 <c:if test="${!readonly}">
-                    <button class="btn waves-effect waves-light right green darken-3" type="submit">Next</button>
+                    <button class="btn waves-effect waves-light right green darken-3" type="submit"><mytaglib:i18n key="page.content.save" /></button>
                 </c:if>
             </div>
             <div class="col s3">
-                <a class="btn waves-effect waves-light right light-blue" href="${baseUrl}">к списку<i class="material-icons right"></i>
+                <a class="btn waves-effect waves-light right light-blue" href="${baseUrl}"><mytaglib:i18n key="page.content.toList" /><i class="material-icons right"></i>
                 </a>
             </div>
         </div>

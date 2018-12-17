@@ -1,16 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <footer class="page-footer purple lighten-4">
 <c:set var="baseUrl" value="${pageContext.request.contextPath}" />	
 		
 	
     <div class="container ">
         <div class="row">
-            <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-            </div>
+            
             <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
+                <h5 class="white-text"><mytaglib:i18n key="footer.content.links" /></h5>
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="https://github.com/dzhivushko/G-JD2-09-11_ikarotki">Source files</a></li>
                     <li><a class="grey-text text-lighten-3" href="https://raw.githubusercontent.com/dzhivushko/G-JD2-09-11_ikarotki/master/docs/Demorwmanager.png?token=Akhairy89If54gxJXBhmG0Sr9LXNz4CXks5cF7hqwA%3D%3D">Mind map</a></li>
@@ -22,7 +20,7 @@
     </div>
     <div class="footer-copyright  purple lighten-3">
         <div class="container ">
-             2018 Copyright Text <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+             <mytaglib:i18n key="footer.content.copyright" />
         </div>
     </div>
 </footer>

@@ -11,31 +11,52 @@
 	<tbody>
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_id">passenger id</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id">passenger route id</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_id">passenger</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id">passenger route</mytaglib:sort-link></th>
 			
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from">station from</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to">station to</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="price">price</mytaglib:sort-link></th>
 			
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
+			<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>--%>
 			<th></th>
 		</tr>
 		<c:forEach var="ticket" items="${gridItems}" varStatus="loopCounter">
 			<tr>
 				<td><c:out value="${ticket.id}" /></td>
-				<td><c:out value="${ticket.passengerId}" /></td>
+				<td>
+					<c:forEach var="entry" items="${passengerChoices}" varStatus="loopCounter">
+						<c:if test = "${entry.key == ticket.passengerId}">	
+							<c:out value="${entry.value}" />
+						</c:if>
+					</c:forEach>
+				</td>
 				<td><c:out value="${ticket.passengerRouteId}" /></td>
 			
-				<td><c:out value="${ticket.stationFromId}" /></td>
-				<td><c:out value="${ticket.stationToId}" /></td>
+				
+				<td>
+					<c:forEach var="entry" items="${stationsChoices}" varStatus="loopCounter">
+						<c:if test = "${entry.key == ticket.stationFromId}">	
+							<c:out value="${entry.value}" />
+						</c:if>
+					</c:forEach>
+				</td>				
+				
+				
+				
+				<td><c:forEach var="entry" items="${stationsChoices}" varStatus="loopCounter">
+						<c:if test = "${entry.key == ticket.stationToId}">	
+							<c:out value="${entry.value}" />
+						</c:if>
+					</c:forEach>
+				</td>
 				<td><c:out value="${ticket.price}" /></td>
 				
-				<td><fmt:formatDate pattern="yyyy-MM-dd"
+				<%--<td><fmt:formatDate pattern="yyyy-MM-dd"
 						value="${ticket.created}" /></td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
-						value="${ticket.updated}" /></td>
+						value="${ticket.updated}" /></td>--%>
 				<td class="right">
 					<a class="btn-floating"	href="${baseUrl}/${ticket.id}"><i class="material-icons">info</i></a>
 					<%-- <a class="btn-floating yellow darken-1" href="${baseUrl}/${ticket.id}/edit"><i class="material-icons">edit</i></a> --%> 

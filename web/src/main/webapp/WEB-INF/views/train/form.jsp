@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="baseUrl" value="${contextPath}/train" />
-<h4 class="header">Edit train</h4>
+<h4 class="header"><c:if test="${!readonly}">Edit</c:if> train</h4>
 <div class="row">
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
         <form:input path="id" type="hidden" />

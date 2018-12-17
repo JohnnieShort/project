@@ -79,7 +79,7 @@ public class PassengerRouteServiceImpl implements IPassengerRouteService {
 	public List<IPassengerRoute> find(PassengerRouteFilter filter) {
 		return dao.find(filter);
 	}
-	
+
 	@Override
 	public long getCount(PassengerRouteFilter filter) {
 		return dao.getCount(filter);
@@ -96,14 +96,28 @@ public class PassengerRouteServiceImpl implements IPassengerRouteService {
 	public List<IPassengerRoute> findActual(PassengerRouteFilter filter) {
 		List<IPassengerRoute> all = dao.find(filter);
 		List<IPassengerRoute> actual = new ArrayList<IPassengerRoute>();
-		for(IPassengerRoute route: all) {
-			if(route.getIsActual()) {
+		for (IPassengerRoute route : all) {
+			if (route.getIsActual()) {
 				actual.add(route);
 			}
 		}
 		return actual;
 	}
 
-	
+	@Override
+	public IPassengerRoute getLatest() {
+		List<IPassengerRoute> routes = find(new PassengerRouteFilter());
+		IPassengerRoute latest = null;
+		Date latestCreated = routes.get(0).getCreated();
+		for(IPassengerRoute route: routes) {
+			if(route.getCreated().after(latestCreated)){
+				latest = route;
+				latestCreated = route.getCreated();
+			}
+		}
+		
+		return latest;
+		
+ 	}
 
 }

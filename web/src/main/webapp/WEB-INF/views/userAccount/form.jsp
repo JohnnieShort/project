@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <c:set var="baseUrl" value="${contextPath}/userAccount" />
-<h4 class="header">Edit user account</h4>
+<h4 class="header"><c:if test="${!readonly}">Edit</c:if> user account</h4>
 <div class="row">
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
         <form:input path="id" type="hidden" />

@@ -1,7 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="baseUrl" value="${contextPath}/cargoRoute" />
-<h4 class="header">Edit cargo Route</h4>
+<h4 class="header"><c:if test="${!readonly}">Edit</c:if> cargo Route</h4>
 <div class="row">
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
         <form:input path="id" type="hidden" />

@@ -1,18 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <c:set var="baseUrl" value="${pageContext.request.contextPath}" />
-<h2>Login with Username and Password</h2>
+<h2><mytaglib:i18n key="login.content.header" /></h2>
 <div class="row">
     <div class="col s3"></div>
     <div class="col s6">
         <form name='loginForm' action="<c:url value='login' />" method='POST'>
             <div class="row">
                 <div class="input-field col s12 center">
-                    <input type='text' name='username' value=''> <label for="username">E-Mail:</label>
+                    <input type='text' name='username' value=''> <label for="username"><mytaglib:i18n key="login.content.eMAil" /></label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 center">
-                    <input type='password' name='password' /><label for="password">Password:</label>
+                    <input type='password' name='password' /><label for="password"><mytaglib:i18n key="login.content.pass" /></label>
                 </div>
             </div>
             <c:if test="${not empty error}">
@@ -31,12 +32,12 @@
             </c:if>
             <div class="row">
                 <div class="col s12 center">
-                    <button class="btn waves-effect waves-light " type="submit">войти</button>
+                    <button class="btn waves-effect waves-light " type="submit"><mytaglib:i18n key="login.content.submit" /></button>
                 </div>
             </div>
             <div class="row">
                 <div class="col s12 center">
-                    <a href="${baseUrl}/register">Register</a>
+                    <a href="${baseUrl}/register"><mytaglib:i18n key="login.content.register" /></a>
                 </div>
             </div>
         </form>

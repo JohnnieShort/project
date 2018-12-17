@@ -11,7 +11,7 @@
 		<tr>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="locomotive_name">locomotive</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="track">track</mytaglib:sort-link></th>
+			<%--<th><mytaglib:sort-link pageUrl="${baseUrl}" column="track">track</mytaglib:sort-link></th>--%>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="train_type">type</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
 			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
@@ -21,7 +21,7 @@
 			<tr>
 				<td><c:out value="${train.id}" /></td>
 				<td><c:out value="${train.locomotiveName}" /></td>	
-				<td><c:out value="${train.track}" /></td>	
+				<%--<td><c:out value="${train.track}" /></td>--%>	
 				<td><c:out value="${train.trainType}" /></td>
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd"

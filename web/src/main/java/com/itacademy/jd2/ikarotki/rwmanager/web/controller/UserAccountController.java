@@ -27,6 +27,7 @@ import com.itacademy.jd2.ikarotki.rwmanager.dao.api.filter.UserAccountFilter;
 import com.itacademy.jd2.ikarotki.rwmanager.service.IUserAccountService;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.UserAccountFromDTOConverter;
 import com.itacademy.jd2.ikarotki.rwmanager.web.converter.UserAccountToDTOConverter;
+import com.itacademy.jd2.ikarotki.rwmanager.web.dto.RegistrationDataDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.UserAccountDTO;
 import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 
@@ -70,13 +71,13 @@ public class UserAccountController extends AbstractController<UserAccountDTO> {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public ModelAndView showForm(final HttpServletRequest req) {
 		final Map<String, Object> hashMap = new HashMap<>();
-		final IUserAccount newEntity = userAccountService.createEntity();
-		UserAccountDTO dto = toDtoConverter.apply(newEntity);
+		
+		RegistrationDataDTO dto = new RegistrationDataDTO();
 		hashMap.put("formModel", dto);
 		String url = req.getHeader("referer");
 		hashMap.put("url", url);
 
-		return new ModelAndView("userAccount.edit", hashMap);
+		return new ModelAndView("register", hashMap);
 	}
 
 	@RequestMapping(method = RequestMethod.POST)

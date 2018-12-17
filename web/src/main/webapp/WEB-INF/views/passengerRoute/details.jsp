@@ -1,10 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <%@page import="com.itacademy.jd2.ikarotki.rwmanager.dao.api.entity.base.enums.PassengerRouteType"%>
 <c:set var="baseUrl" value="${contextPath}/passengerRoute" />
 <c:set var="scheduleUrl" value="${contextPath}/schedule" />
 <c:set var="itemUrl" value="${contextPath}/routeItem" />
-<h4 class="header">Details</h4>
+<h4 class="header"><mytaglib:i18n key="index.title.details" /></h4>
 <div class="row">
     <div class="row">
         <div class="col s8">
@@ -12,7 +13,7 @@
         </div>
         <div class="col s4">
             <ul class="collection with-header">
-                <li class="collection-header"><h4>Route items</h4></li>
+                <li class="collection-header"><h4><mytaglib:i18n key="index.title.routeItems" /></h4></li>
                 <c:forEach var="item" items="${routeItems}" varStatus="loopCounter">
                     <li class="collection-item"><div>
                             "${item.value}"<a href="${itemUrl}/${item.key}" class="secondary-content"><i class="material-icons">info</i></a>
@@ -31,7 +32,7 @@
                     <form:options items="${passengerRouteTypes}" />
                 </form:select>
                 <form:errors path="passengerRouteType" cssClass="red-text" />
-                <label for=passengerRouteType>Type</label>
+                <label for=passengerRouteType><mytaglib:i18n key="index.title.passRouteType" /></label>
             </div>
         </div>
         <div class="row">
@@ -41,7 +42,7 @@
                     <form:options items="${frequency}" />
                 </form:select>
                 <form:errors path="frequency" cssClass="red-text" />
-                <label for=frequency>frequency</label>
+                <label for=frequency><mytaglib:i18n key="index.title.frequency" /></label>
             </div>
         </div>
         <div class="row">
@@ -61,11 +62,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col s6">Price: <span id="price">0</span><span>руб.</span></div>
+            <div class="col s6"><mytaglib:i18n key="index.title.price" />: <span id="price">0</span><span> руб.</span></div>
             <div class="col s3">
             </div>
             <div class="col s3">
-                <a class="btn waves-effect waves-light right" href="${scheduleUrl}">к расписанию<i class="material-icons right"></i>
+                <a class="btn waves-effect waves-light right" href="${scheduleUrl}"><mytaglib:i18n key="index.title.toList" /><i class="material-icons right"></i>
                 </a>
             </div>
         </div>

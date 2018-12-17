@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class RouteItemDTO {
@@ -16,9 +17,9 @@ public class RouteItemDTO {
 	@NotNull
 
 	private Integer passengerRouteId;
-	
+	@NotNull
 	private String stationFromName;
-	
+	@NotNull
 	private String stationToName;
 
 	@NotNull
@@ -27,21 +28,21 @@ public class RouteItemDTO {
 	@NotNull
 
 	private Integer stationToId;
-	@NotNull
+	
 	@DateTimeFormat(pattern = "hh:mm a")
 	private Date departureTime;
-	@NotNull
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date departureDate;
 	
 
-	@NotNull
+	
 	@DateTimeFormat(pattern = "hh:mm a")
 	private Date arrivalTime;
-	@NotNull
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date arrivalDate;
-	
+	@NotNull
 
 	private Integer ordinalNum;
 

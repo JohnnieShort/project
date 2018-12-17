@@ -92,13 +92,13 @@ public class UserAccountDaoImpl extends AbstractDaoImpl<IUserAccount, Integer> i
             return UserAccount_.updated;
         case "id":
             return UserAccount_.id;
-        case "eMail":
+        case "e_mail":
             return UserAccount_.eMail;
         case "password":
             return UserAccount_.password;
-        case "firstName":
+        case "first_name":
             return UserAccount_.firstName;
-        case "lastName":
+        case "last_name":
             return UserAccount_.lastName;
         case "role":
             return UserAccount_.role;

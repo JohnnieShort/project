@@ -6,20 +6,20 @@
 
 
 <c:set var="baseUrl" value="${contextPath}/passenger" />
-<h4 class="header">Passengers</h4>
+<h4 class="header"><mytaglib:i18n key="page.content.passengers" /></h4>
 <table class="bordered highlight">
 	<tbody>
 		<tr>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="street">street</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="building">building</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="apartments">apartments</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="phone">phone</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="user_account_id">user account id</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id"><mytaglib:i18n key="page.content.id" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="street"><mytaglib:i18n key="page.content.street" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="building"><mytaglib:i18n key="page.content.building" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="apartments"><mytaglib:i18n key="page.content.apartments" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="phone"><mytaglib:i18n key="page.content.phone" /></mytaglib:sort-link></th>
 			
 			
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created">created</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated">updated</mytaglib:sort-link></th>
+			
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="created"><mytaglib:i18n key="page.content.save" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="updated"><mytaglib:i18n key="page.content.toList" /></mytaglib:sort-link></th>
 			<th></th>
 		</tr>
 		<c:forEach var="passenger" items="${gridItems}" varStatus="loopCounter">
@@ -29,7 +29,7 @@
 				<td><c:out value="${passenger.building}" /></td>
 				<td><c:out value="${passenger.apartments}" /></td>
 				<td><c:out value="${passenger.phone}" /></td>
-				<td><c:out value="${passenger.userAccountId}" /></td>
+				
 				
 				
 				<td><fmt:formatDate pattern="yyyy-MM-dd"
