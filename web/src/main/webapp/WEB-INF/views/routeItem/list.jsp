@@ -5,18 +5,18 @@
 <%@ taglib prefix="jspFragments" tagdir="/WEB-INF/tags"%>
 
 <c:set var="baseUrl" value="${contextPath}/routeItem" />
-<h4 class="header">Items of Routes</h4>
+<h4 class="header"><mytaglib:i18n key="page.content.routeItems" /></h4>
 <table class="bordered highlight">
 	<tbody>
 		<tr>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id">id</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from">station from</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to">station to</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id">passenger route</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="id"><mytaglib:i18n key="page.content.id" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_from"><mytaglib:i18n key="page.content.stationFrom" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="station_to"><mytaglib:i18n key="page.content.stationTo" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="passenger_route_id"><mytaglib:i18n key="page.content.passengerRoute" /></mytaglib:sort-link></th>
 			
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="departure">departure</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="arrival">arrival</mytaglib:sort-link></th>
-			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="ordinal_num">ordinal number</mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="departure"><mytaglib:i18n key="page.content.departure" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="arrival"><mytaglib:i18n key="page.content.arrival" /></mytaglib:sort-link></th>
+			<th><mytaglib:sort-link pageUrl="${baseUrl}" column="ordinal_num"><mytaglib:i18n key="page.content.ordinal" /></mytaglib:sort-link></th>
 		
 			
 			
