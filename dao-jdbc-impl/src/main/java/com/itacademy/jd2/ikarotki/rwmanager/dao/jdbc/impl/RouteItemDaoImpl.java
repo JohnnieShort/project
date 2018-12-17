@@ -205,6 +205,11 @@ public class RouteItemDaoImpl extends AbstractDaoImpl<IRouteItem, Integer> imple
 		throw new RuntimeException("not implemented");
 	}
 
+	@Override
+	public IRouteItem getLastItem(Integer routeId) {
+		throw new RuntimeException("not implemented");
+	}
+
 	
 
 	
