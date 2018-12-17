@@ -100,13 +100,6 @@
 
 
 
-		<div class="row">
-			<div class="input-field col s12">
-				<form:input path="ordinalNum" type="text" disabled="${readonly}" />
-				<form:errors path="ordinalNum" cssClass="red-text" />
-				<label for="ordinalNum"><mytaglib:i18n key="page.content.ordinal" /></label>
-			</div>
-		</div>
 
 		<div class="row">
 			<div class="col s6"></div>

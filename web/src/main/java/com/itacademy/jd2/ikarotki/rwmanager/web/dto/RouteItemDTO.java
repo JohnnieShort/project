@@ -13,8 +13,8 @@ public class RouteItemDTO {
     private Date created;
 
     private Date updated;
-    @NotNull
 
+    @NotNull
     private Integer passengerRouteId;
     private String stationFromName;
     private String stationToName;
@@ -41,7 +41,6 @@ public class RouteItemDTO {
     @NotNull
     private Date arrivalDate;
 
-    @NotNull
     private Integer ordinalNum;
 
     public Integer getId() {

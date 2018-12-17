@@ -17,26 +17,25 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.RouteItemDTO;
 
 @Component
 public class RouteItemFromDTOConverter implements Function<RouteItemDTO, IRouteItem> {
-	@Autowired
-	private IRouteItemService routeItemService;
-	@Autowired
-	private IPassengerRouteService passengerRouteService;
-	@Autowired
-	private IStationService stationService;
+    @Autowired
+    private IRouteItemService routeItemService;
+    @Autowired
+    private IPassengerRouteService passengerRouteService;
+    @Autowired
+    private IStationService stationService;
 
-	@Override
-	public IRouteItem apply(final RouteItemDTO dto) {
-		final IRouteItem entity = routeItemService.createEntity();
-		entity.setId(dto.getId());
-		entity.setCreated(dto.getCreated());
-		entity.setUpdated(dto.getUpdated());
-		
-		IPassengerRoute pREntity = passengerRouteService.createEntity();
-		pREntity.setId(dto.getPassengerRouteId());
-		entity.setPassengerRoute(pREntity);
-		
-		
-		final Date departureDate = dto.getDepartureDate();
+    @Override
+    public IRouteItem apply(final RouteItemDTO dto) {
+        final IRouteItem entity = routeItemService.createEntity();
+        entity.setId(dto.getId());
+        entity.setCreated(dto.getCreated());
+        entity.setUpdated(dto.getUpdated());
+
+        IPassengerRoute pREntity = passengerRouteService.createEntity();
+        pREntity.setId(dto.getPassengerRouteId());
+        entity.setPassengerRoute(pREntity);
+
+        final Date departureDate = dto.getDepartureDate();
         if (departureDate != null) {
             final Calendar fullDateCalendar = Calendar.getInstance();
             fullDateCalendar.setTime(departureDate);
@@ -45,8 +44,7 @@ public class RouteItemFromDTOConverter implements Function<RouteItemDTO, IRouteI
             if (departureTime != null) {
                 final Calendar timeCalendar = Calendar.getInstance();
                 timeCalendar.setTime(departureTime);
-                fullDateCalendar.set(Calendar.HOUR_OF_DAY,
-                        timeCalendar.get(Calendar.HOUR_OF_DAY));
+                fullDateCalendar.set(Calendar.HOUR_OF_DAY, timeCalendar.get(Calendar.HOUR_OF_DAY));
                 fullDateCalendar.set(Calendar.MINUTE, timeCalendar.get(Calendar.MINUTE));
             }
 
@@ -61,30 +59,27 @@ public class RouteItemFromDTOConverter implements Function<RouteItemDTO, IRouteI
             if (arrivalTime != null) {
                 final Calendar timeCalendar = Calendar.getInstance();
                 timeCalendar.setTime(arrivalTime);
-                fullDateCalendar.set(Calendar.HOUR_OF_DAY,
-                        timeCalendar.get(Calendar.HOUR_OF_DAY));
+                fullDateCalendar.set(Calendar.HOUR_OF_DAY, timeCalendar.get(Calendar.HOUR_OF_DAY));
                 fullDateCalendar.set(Calendar.MINUTE, timeCalendar.get(Calendar.MINUTE));
             }
 
             entity.setArrival(fullDateCalendar.getTime());
         }
-		
-		IStation stationFrom = stationService.createEntity();
-		stationFrom.setId(dto.getStationFromId());
-		if (dto.getStationFromName() != null) {
-			stationFrom.setName(dto.getStationFromName());
-		}
-		entity.setStationFrom(stationFrom);
 
-		IStation stationTo = stationService.createEntity();
-		stationTo.setId(dto.getStationToId());
-		if (dto.getStationToName() != null) {
-			stationTo.setName(dto.getStationToName());
-		}
-		entity.setStationTo(stationTo);
+        IStation stationFrom = stationService.createEntity();
+        stationFrom.setId(dto.getStationFromId());
+        if (dto.getStationFromName() != null) {
+            stationFrom.setName(dto.getStationFromName());
+        }
+        entity.setStationFrom(stationFrom);
 
-		entity.setOrdinalNum(dto.getOrdinalNum());
+        IStation stationTo = stationService.createEntity();
+        stationTo.setId(dto.getStationToId());
+        if (dto.getStationToName() != null) {
+            stationTo.setName(dto.getStationToName());
+        }
+        entity.setStationTo(stationTo);
 
-		return entity;
-	}
+        return entity;
+    }
 }
