@@ -65,8 +65,5 @@
 		</c:forEach>
 	</tbody>
 </table>
-		<sec:authorize access="isAnonymous()">
-				<a href="${loginUrl}"><h5><mytaglib:i18n key="schedule.title.authTitle"/></h3></a>
-		</sec:authorize>
 
 <jspFragments:paging />
