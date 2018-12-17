@@ -1,6 +1,5 @@
 package com.itacademy.jd2.ikarotki.rwmanager.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,108 +15,101 @@ import com.itacademy.jd2.ikarotki.rwmanager.service.IPassengerRouteService;
 
 @Service
 public class PassengerRouteServiceImpl implements IPassengerRouteService {
-	private static final Logger LOGGER = LoggerFactory.getLogger(PassengerRouteServiceImpl.class);
-	private IPassengerRouteDao dao;
+    private static final Logger LOGGER = LoggerFactory.getLogger(PassengerRouteServiceImpl.class);
+    private IPassengerRouteDao dao;
 
-	@Autowired
-	public PassengerRouteServiceImpl(IPassengerRouteDao dao) {
-		super();
-		this.dao = dao;
-	}
+    @Autowired
+    public PassengerRouteServiceImpl(IPassengerRouteDao dao) {
+        super();
+        this.dao = dao;
+    }
 
-	public PassengerRouteServiceImpl() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public PassengerRouteServiceImpl() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
-	@Override
-	public IPassengerRoute createEntity() {
-		return dao.createEntity();
-	}
+    @Override
+    public IPassengerRoute createEntity() {
+        return dao.createEntity();
+    }
 
-	@Override
-	public void save(final IPassengerRoute entity) {
-		final Date modifedOn = new Date();
-		entity.setUpdated(modifedOn);
-		if (entity.getId() == null) {
-			LOGGER.info("new passenger route created: {}", entity);
-			entity.setCreated(modifedOn);
-			dao.insert(entity);
-		} else {
-			LOGGER.info("passenger route updated: {}", entity);
-			dao.update(entity);
-		}
-	}
+    @Override
+    public void save(final IPassengerRoute entity) {
+        final Date modifedOn = new Date();
+        entity.setUpdated(modifedOn);
+        if (entity.getId() == null) {
+            LOGGER.info("new passenger route created: {}", entity);
+            entity.setCreated(modifedOn);
+            dao.insert(entity);
+        } else {
+            LOGGER.info("passenger route updated: {}", entity);
+            dao.update(entity);
+        }
+    }
 
-	@Override
-	public IPassengerRoute get(final Integer id) {
-		final IPassengerRoute entity = dao.get(id);
-		LOGGER.info("requested passenger route: {}", entity);
-		return entity;
-	}
+    @Override
+    public IPassengerRoute get(final Integer id) {
+        final IPassengerRoute entity = dao.get(id);
+        LOGGER.info("requested passenger route: {}", entity);
+        return entity;
+    }
 
-	@Override
-	public void delete(final Integer id) {
-		dao.delete(id);
-		LOGGER.info("passenger route ID: {} was deleted", id);
-	}
+    @Override
+    public void delete(final Integer id) {
+        dao.delete(id);
+        LOGGER.info("passenger route ID: {} was deleted", id);
+    }
 
-	@Override
-	public void deleteAll() {
-		dao.deleteAll();
-		LOGGER.warn("All passenger routes were deleted");
-	}
+    @Override
+    public void deleteAll() {
+        dao.deleteAll();
+        LOGGER.warn("All passenger routes were deleted");
+    }
 
-	@Override
-	public List<IPassengerRoute> getAll() {
-		final List<IPassengerRoute> all = dao.selectAll();
-		LOGGER.debug("requested list of passenger routes {}", all);
-		return all;
-	}
+    @Override
+    public List<IPassengerRoute> getAll() {
+        final List<IPassengerRoute> all = dao.selectAll();
+        LOGGER.debug("requested list of passenger routes {}", all);
+        return all;
+    }
 
-	@Override
-	public List<IPassengerRoute> find(PassengerRouteFilter filter) {
-		return dao.find(filter);
-	}
+    @Override
+    public List<IPassengerRoute> find(PassengerRouteFilter filter) {
+        return dao.find(filter);
+    }
 
-	@Override
-	public long getCount(PassengerRouteFilter filter) {
-		return dao.getCount(filter);
-	}
+    @Override
+    public long getCount(PassengerRouteFilter filter) {
+        return dao.getCount(filter);
+    }
 
-	@Override
-	public IPassengerRoute getFullInfo(Integer id) {
-		final IPassengerRoute entity = dao.getFullInfo(id);
-		LOGGER.info("requested passenger route: {}", entity);
-		return entity;
-	}
+    @Override
+    public IPassengerRoute getFullInfo(Integer id) {
+        final IPassengerRoute entity = dao.getFullInfo(id);
+        LOGGER.info("requested passenger route: {}", entity);
+        return entity;
+    }
 
-	@Override
-	public List<IPassengerRoute> findActual(PassengerRouteFilter filter) {
-		List<IPassengerRoute> all = dao.find(filter);
-		List<IPassengerRoute> actual = new ArrayList<IPassengerRoute>();
-		for (IPassengerRoute route : all) {
-			if (route.getIsActual()) {
-				actual.add(route);
-			}
-		}
-		return actual;
-	}
+    @Override
+    public List<IPassengerRoute> findActual(PassengerRouteFilter filter) {
+        return dao.find(filter);
+    }
 
-	@Override
-	public IPassengerRoute getLatest() {
-		List<IPassengerRoute> routes = find(new PassengerRouteFilter());
-		IPassengerRoute latest = null;
-		Date latestCreated = routes.get(0).getCreated();
-		for(IPassengerRoute route: routes) {
-			if(route.getCreated().after(latestCreated)){
-				latest = route;
-				latestCreated = route.getCreated();
-			}
-		}
-		
-		return latest;
-		
- 	}
+    @Override
+    public IPassengerRoute getLatest() {
+        List<IPassengerRoute> routes = find(new PassengerRouteFilter());
+        IPassengerRoute latest = null;
+        Date latestCreated = routes.get(0).getCreated();
+        for (IPassengerRoute route : routes) {
+            if (route.getCreated().after(latestCreated)) {
+                latest = route;
+                latestCreated = route.getCreated();
+            }
+        }
+
+        return latest;
+
+    }
 
 }

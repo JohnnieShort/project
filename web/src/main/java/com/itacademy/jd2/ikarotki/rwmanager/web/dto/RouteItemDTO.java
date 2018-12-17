@@ -4,160 +4,148 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class RouteItemDTO {
 
-	private Integer id;
+    private Integer id;
 
-	private Date created;
+    private Date created;
 
-	private Date updated;
-	@NotNull
+    private Date updated;
+    @NotNull
 
-	private Integer passengerRouteId;
-	@NotNull
-	private String stationFromName;
-	@NotNull
-	private String stationToName;
+    private Integer passengerRouteId;
+    private String stationFromName;
+    private String stationToName;
 
-	@NotNull
+    @NotNull
+    private Integer stationFromId;
 
-	private Integer stationFromId;
-	@NotNull
+    @NotNull
+    private Integer stationToId;
 
-	private Integer stationToId;
-	
-	@DateTimeFormat(pattern = "hh:mm a")
-	private Date departureTime;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date departureDate;
-	
+    @DateTimeFormat(pattern = "hh:mm a")
+    @NotNull
+    private Date departureTime;
 
-	
-	@DateTimeFormat(pattern = "hh:mm a")
-	private Date arrivalTime;
-	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date arrivalDate;
-	@NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
+    private Date departureDate;
 
-	private Integer ordinalNum;
+    @DateTimeFormat(pattern = "hh:mm a")
+    @NotNull
+    private Date arrivalTime;
 
-	public Integer getId() {
-		return id;
-	}
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull
+    private Date arrivalDate;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public Date getDepartureDate() {
-		return departureDate;
-	}
+    @NotNull
+    private Integer ordinalNum;
 
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Date getArrivalDate() {
-		return arrivalDate;
-	}
+    public Date getCreated() {
+        return created;
+    }
 
-	public void setArrivalDate(Date arrivalDate) {
-		this.arrivalDate = arrivalDate;
-	}
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 
-	public String getStationFromName() {
-		return stationFromName;
-	}
+    public Date getUpdated() {
+        return updated;
+    }
 
-	public void setStationFromName(String stationFromName) {
-		this.stationFromName = stationFromName;
-	}
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 
-	public String getStationToName() {
-		return stationToName;
-	}
+    public Integer getPassengerRouteId() {
+        return passengerRouteId;
+    }
 
-	public void setStationToName(String stationToName) {
-		this.stationToName = stationToName;
-	}
+    public void setPassengerRouteId(Integer passengerRouteId) {
+        this.passengerRouteId = passengerRouteId;
+    }
 
-	public Integer getStationFromId() {
-		return stationFromId;
-	}
+    public String getStationFromName() {
+        return stationFromName;
+    }
 
-	public void setStationFromId(Integer stationFromId) {
-		this.stationFromId = stationFromId;
-	}
+    public void setStationFromName(String stationFromName) {
+        this.stationFromName = stationFromName;
+    }
 
-	public Integer getStationToId() {
-		return stationToId;
-	}
+    public String getStationToName() {
+        return stationToName;
+    }
 
-	public void setStationToId(Integer stationToId) {
-		this.stationToId = stationToId;
-	}
+    public void setStationToName(String stationToName) {
+        this.stationToName = stationToName;
+    }
 
-	public Date getCreated() {
-		return created;
-	}
+    public Integer getStationFromId() {
+        return stationFromId;
+    }
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+    public void setStationFromId(Integer stationFromId) {
+        this.stationFromId = stationFromId;
+    }
 
-	public Date getUpdated() {
-		return updated;
-	}
+    public Integer getStationToId() {
+        return stationToId;
+    }
 
-	public void setUpdated(Date updated) {
-		this.updated = updated;
-	}
+    public void setStationToId(Integer stationToId) {
+        this.stationToId = stationToId;
+    }
 
-	public Date getDepartureTime() {
-		return departureTime;
-	}
+    public Date getDepartureTime() {
+        return departureTime;
+    }
 
-	public Integer getPassengerRouteId() {
-		return passengerRouteId;
-	}
+    public void setDepartureTime(Date departureTime) {
+        this.departureTime = departureTime;
+    }
 
-	public void setPassengerRouteId(Integer passengerRouteId) {
-		this.passengerRouteId = passengerRouteId;
-	}
+    public Date getDepartureDate() {
+        return departureDate;
+    }
 
-	public void setDepartureTime(Date departure) {
-		this.departureTime = departure;
-	}
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
 
-	public Date getArrivalTime() {
-		return arrivalTime;
-	}
+    public Date getArrivalTime() {
+        return arrivalTime;
+    }
 
-	public void setArrivalTime(Date arrival) {
-		this.arrivalTime = arrival;
-	}
+    public void setArrivalTime(Date arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
 
-	public Integer getOrdinalNum() {
-		return ordinalNum;
-	}
+    public Date getArrivalDate() {
+        return arrivalDate;
+    }
 
-	public void setOrdinalNum(Integer ordinalNum) {
-		this.ordinalNum = ordinalNum;
-	}
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
 
-	@Override
-	public String toString() {
-		return "RouteItemDTO [id=" + id + ", created=" + created + ", updated=" + updated + ", passengerRouteId="
-				+ passengerRouteId + ", stationFromName=" + stationFromName + ", stationToName=" + stationToName
-				+ ", stationFromId=" + stationFromId + ", stationToId=" + stationToId + ", departureTime="
-				+ departureTime + ", departureDate=" + departureDate + ", arrivalTime=" + arrivalTime + ", arrivalDate="
-				+ arrivalDate + ", ordinalNum=" + ordinalNum + "]";
-	}
+    public Integer getOrdinalNum() {
+        return ordinalNum;
+    }
 
-	
+    public void setOrdinalNum(Integer ordinalNum) {
+        this.ordinalNum = ordinalNum;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
 }

@@ -52,290 +52,297 @@ import com.itacademy.jd2.ikarotki.rwmanager.web.dto.list.GridStateDTO;
 @Controller
 @RequestMapping(value = "/passengerRoute")
 public class PassengerRouteController extends AbstractController<PassengerRouteDTO> {
-	private IPassengerRouteService passengerRouteService;
-	private IStationService stationService;
-	private ITrainService trainService;
-	private ITicketService ticketService;
-	private IWagonService wagonService;
-	private IRouteItemService routeItemService;
-	private RouteItemFromDTOConverter routeItemFromDTOConverter;
-	private PassengerRouteToDTOConverter toDtoConverter;
-	private PassengerRouteFromDTOConverter fromDtoConverter;
-	private StationToDTOConverter stationToDTOConverter;
+    private IPassengerRouteService passengerRouteService;
+    private IStationService stationService;
+    private ITrainService trainService;
+    private ITicketService ticketService;
+    private IWagonService wagonService;
+    private IRouteItemService routeItemService;
+    private RouteItemFromDTOConverter routeItemFromDTOConverter;
+    private PassengerRouteToDTOConverter toDtoConverter;
+    private PassengerRouteFromDTOConverter fromDtoConverter;
+    private StationToDTOConverter stationToDTOConverter;
 
-	@Autowired
-	private PassengerRouteController(IPassengerRouteService pasengerRouteService, IStationService stationService,
-			ITrainService trainService, IWagonService wagonService, IRouteItemService routeItemService,
-			PassengerRouteToDTOConverter toDtoConverter, PassengerRouteFromDTOConverter fromDtoConverter,
-			StationToDTOConverter stationToDtoConverter, RouteItemFromDTOConverter routeItemFromDTOConverter,
-			StationToDTOConverter stationToDTOConverter, ITicketService ticketService) {
-		super();
-		this.passengerRouteService = pasengerRouteService;
-		this.routeItemService = routeItemService;
-		this.routeItemFromDTOConverter = routeItemFromDTOConverter;
-		this.trainService = trainService;
-		this.toDtoConverter = toDtoConverter;
-		this.fromDtoConverter = fromDtoConverter;
-		this.stationService = stationService;
-		this.wagonService = wagonService;
-		this.stationToDTOConverter = stationToDTOConverter;
-		this.ticketService = ticketService;
-	}
+    @Autowired
+    private PassengerRouteController(IPassengerRouteService pasengerRouteService, IStationService stationService,
+            ITrainService trainService, IWagonService wagonService, IRouteItemService routeItemService,
+            PassengerRouteToDTOConverter toDtoConverter, PassengerRouteFromDTOConverter fromDtoConverter,
+            StationToDTOConverter stationToDtoConverter, RouteItemFromDTOConverter routeItemFromDTOConverter,
+            StationToDTOConverter stationToDTOConverter, ITicketService ticketService) {
+        super();
+        this.passengerRouteService = pasengerRouteService;
+        this.routeItemService = routeItemService;
+        this.routeItemFromDTOConverter = routeItemFromDTOConverter;
+        this.trainService = trainService;
+        this.toDtoConverter = toDtoConverter;
+        this.fromDtoConverter = fromDtoConverter;
+        this.stationService = stationService;
+        this.wagonService = wagonService;
+        this.stationToDTOConverter = stationToDTOConverter;
+        this.ticketService = ticketService;
+    }
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView index(final HttpServletRequest req,
-			@RequestParam(name = "page", required = false) final Integer pageNumber,
-			@RequestParam(name = "sort", required = false) final String sortColumn) {
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView index(final HttpServletRequest req,
+            @RequestParam(name = "page", required = false) final Integer pageNumber,
+            @RequestParam(name = "sort", required = false) final String sortColumn) {
 
-		final GridStateDTO gridState = getListDTO(req);
-		gridState.setPage(pageNumber);
-		gridState.setSort(sortColumn, "id");
+        final GridStateDTO gridState = getListDTO(req);
+        gridState.setPage(pageNumber);
+        gridState.setSort(sortColumn, "id");
 
-		final PassengerRouteFilter filter = new PassengerRouteFilter();
-		prepareFilter(gridState, filter);
+        final PassengerRouteFilter filter = new PassengerRouteFilter();
+        prepareFilter(gridState, filter);
 
-		final List<IPassengerRoute> entities = passengerRouteService.find(filter);
-		List<PassengerRouteDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
-		gridState.setTotalCount(passengerRouteService.getCount(filter));
+        final List<IPassengerRoute> entities = passengerRouteService.find(filter);
+        List<PassengerRouteDTO> dtos = entities.stream().map(toDtoConverter).collect(Collectors.toList());
+        gridState.setTotalCount(passengerRouteService.getCount(filter));
 
-		final Map<String, Object> models = new HashMap<>();
-		models.put("gridItems", dtos);
+        final Map<String, Object> models = new HashMap<>();
+        models.put("gridItems", dtos);
 
-		List<ITrain> trains = new ArrayList<ITrain>();
-		trains = trainService.find(new TrainFilter());
-		Map<Integer, Double> places = wagonService.getPlaces(trains);
-		models.put("places", places);
+        List<ITrain> trains = new ArrayList<ITrain>();
+        trains = trainService.find(new TrainFilter());
+        Map<Integer, Double> places = wagonService.getPlaces(trains);
+        models.put("places", places);
 
-		RouteItemFilter routeItemFilter = new RouteItemFilter();
-		routeItemFilter.setFetchStationFrom(true);
-		routeItemFilter.setFetchStationTo(true);
-		Map<Integer, String> firstStationsNames = routeItemService.getStationsNames(entities, routeItemFilter, true);
-		models.put("firstStations", firstStationsNames);
-		Map<Integer, String> lastStationsNames = routeItemService.getStationsNames(entities, routeItemFilter, false);
-		models.put("lastStations", lastStationsNames);
-		Map<Integer, Date> departures = routeItemService.getTime(entities, routeItemFilter, true);
-		models.put("departures", departures);
-		Map<Integer, Date> arrivals = routeItemService.getTime(entities, routeItemFilter, false);
-		models.put("arrivals", arrivals);
-		return new ModelAndView("passengerRoute.list", models);
-	}
+        RouteItemFilter routeItemFilter = new RouteItemFilter();
+        routeItemFilter.setFetchStationFrom(true);
+        routeItemFilter.setFetchStationTo(true);
+        Map<Integer, String> firstStationsNames = routeItemService.getStationsNames(entities, routeItemFilter, true);
+        models.put("firstStations", firstStationsNames);
+        Map<Integer, String> lastStationsNames = routeItemService.getStationsNames(entities, routeItemFilter, false);
+        models.put("lastStations", lastStationsNames);
+        Map<Integer, Date> departures = routeItemService.getTime(entities, routeItemFilter, true);
+        models.put("departures", departures);
+        Map<Integer, Date> arrivals = routeItemService.getTime(entities, routeItemFilter, false);
+        models.put("arrivals", arrivals);
+        return new ModelAndView("passengerRoute.list", models);
+    }
 
-	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView showForm() {
-		final Map<String, Object> hashMap = new HashMap<>();
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public ModelAndView showForm() {
+        final Map<String, Object> hashMap = new HashMap<>();
 
-		PassengerRouteDTO dto = new PassengerRouteDTO();
-		hashMap.put("formModel", dto);
-		loadCommonFormModels(hashMap);
-		return new ModelAndView("passengerRoute.edit", hashMap);
-	}
+        PassengerRouteDTO dto = new PassengerRouteDTO();
+        hashMap.put("formModel", dto);
+        loadCommonFormModels(hashMap);
+        return new ModelAndView("passengerRoute.edit", hashMap);
+    }
 
-	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
-	public ModelAndView showStForm(@Valid @ModelAttribute("formModel") final PassengerRouteDTO formModel,
-			final BindingResult result) {
+    @RequestMapping(value = "/addItem", method = RequestMethod.POST)
+    public ModelAndView showStForm(@Valid @ModelAttribute("formModel") final PassengerRouteDTO formModel,
+            final BindingResult result) {
 
-		save(formModel, result);
-		final Map<String, Object> hashMap = new HashMap<>();
-		IPassengerRoute route = passengerRouteService.getLatest();
-		hashMap.put("passengerRouteFormModelId", route.getId());
-		RouteItemDTO routeItemDTO = new RouteItemDTO();
+        if (result.hasErrors()) {
+            final Map<String, Object> hashMap = new HashMap<>();
+            loadCommonFormModels(hashMap);
+            return new ModelAndView("passengerRoute.edit", hashMap);
+        } else {
+            final IPassengerRoute entity = fromDtoConverter.apply(formModel);
+            passengerRouteService.save(entity);
 
-		hashMap.put("routeItemFormModel", routeItemDTO);
-		loadStations(hashMap);
-		loadItems(hashMap, formModel.getId());
-		return new ModelAndView("stations.edit", hashMap);
-	}
+            final Map<String, Object> hashMap = new HashMap<>();
+            IPassengerRoute route = passengerRouteService.getLatest();
+            hashMap.put("passengerRouteFormModelId", route.getId());
+            RouteItemDTO routeItemDTO = new RouteItemDTO();
 
-	@RequestMapping(value = "/saveItem", method = RequestMethod.POST)
-	public ModelAndView saveRouteItem(@Valid @ModelAttribute("formModel") final RouteItemDTO formModel,
-			final BindingResult result) {
-		final Map<String, Object> hashMap = new HashMap<>();
-		if (result.hasErrors()) {
-			hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
-			RouteItemDTO routeItemDTO = new RouteItemDTO();
-			hashMap.put("routeItemFormModel", routeItemDTO);
-			loadStations(hashMap);
+            hashMap.put("formModel", routeItemDTO);
+            loadStations(hashMap);
+            loadItems(hashMap, formModel.getId());
+            return new ModelAndView("stations.edit", hashMap);
+        }
+    }
 
-			loadItems(hashMap, formModel.getPassengerRouteId());
-			return new ModelAndView("stations.edit", hashMap);
-		} else {
-			final IRouteItem entity = routeItemFromDTOConverter.apply(formModel);
-			routeItemService.save(entity);
-			hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
-			RouteItemDTO routeItemDTO = new RouteItemDTO();
+    @RequestMapping(value = "/saveItem", method = RequestMethod.POST)
+    public ModelAndView saveRouteItem(@Valid @ModelAttribute("formModel") final RouteItemDTO formModel,
+            final BindingResult result) {
+        final Map<String, Object> hashMap = new HashMap<>();
+        if (result.hasErrors()) {
+            hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
+            hashMap.put("formModel", formModel);
+            loadStations(hashMap);
 
-			hashMap.put("routeItemFormModel", routeItemDTO);
-			loadStations(hashMap);
-			loadItems(hashMap, formModel.getPassengerRouteId());
-			return new ModelAndView("stations.edit", hashMap);
-		}
-	}
+            loadItems(hashMap, formModel.getPassengerRouteId());
+            return new ModelAndView("stations.edit", hashMap);
+        } else {
+            final IRouteItem entity = routeItemFromDTOConverter.apply(formModel);
+            routeItemService.save(entity);
+            hashMap.put("passengerRouteFormModelId", formModel.getPassengerRouteId());
+            RouteItemDTO routeItemDTO = new RouteItemDTO();
 
-	@RequestMapping(method = RequestMethod.POST)
-	public Object save(@Valid @ModelAttribute("formModel") final PassengerRouteDTO formModel,
-			final BindingResult result) {
-		if (result.hasErrors()) {
-			final Map<String, Object> hashMap = new HashMap<>();
-			loadCommonFormModels(hashMap);
-			return new ModelAndView("passengerRoute.edit", hashMap);
-		} else {
-			final IPassengerRoute entity = fromDtoConverter.apply(formModel);
-			passengerRouteService.save(entity);
-			return "redirect:/passengerRoute";
-		}
-	}
+            hashMap.put("formModel", routeItemDTO);
+            loadStations(hashMap);
+            loadItems(hashMap, formModel.getPassengerRouteId());
+            return new ModelAndView("stations.edit", hashMap);
+        }
+    }
 
-	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
-	public String delete(@PathVariable(name = "id", required = true) final Integer id) {
-		passengerRouteService.delete(id);
-		return "redirect:/passengerRoute";
-	}
+    @RequestMapping(method = RequestMethod.POST)
+    public Object save(@Valid @ModelAttribute("formModel") final PassengerRouteDTO formModel,
+            final BindingResult result) {
+        if (result.hasErrors()) {
+            final Map<String, Object> hashMap = new HashMap<>();
+            loadCommonFormModels(hashMap);
+            return new ModelAndView("passengerRoute.edit", hashMap);
+        } else {
+            final IPassengerRoute entity = fromDtoConverter.apply(formModel);
+            passengerRouteService.save(entity);
+            return "redirect:/passengerRoute";
+        }
+    }
 
-	@RequestMapping(value = "/{id}/details", method = RequestMethod.GET)
-	public ModelAndView viewDetailsFromSchedule(@PathVariable(name = "id", required = true) final Integer id) {
-		final IPassengerRoute dbModel = passengerRouteService.getFullInfo(id);
-		final PassengerRouteDTO dto = toDtoConverter.apply(dbModel);
-		final HashMap<String, Object> hashMap = new HashMap<>();
-		hashMap.put("formModel", dto);
-		hashMap.put("readonly", true);
-		loadCommonFormModels(hashMap);
-		loadItems(hashMap, id);
-		loadFromToItems(hashMap, id);
-		return new ModelAndView("route.details", hashMap);
-	}
+    @RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable(name = "id", required = true) final Integer id) {
+        passengerRouteService.delete(id);
+        return "redirect:/passengerRoute";
+    }
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
-		final IPassengerRoute dbModel = passengerRouteService.getFullInfo(id);
-		final PassengerRouteDTO dto = toDtoConverter.apply(dbModel);
-		final HashMap<String, Object> hashMap = new HashMap<>();
-		hashMap.put("formModel", dto);
-		hashMap.put("readonly", true);
-		loadCommonFormModels(hashMap);
-		loadItems(hashMap, id);
-		return new ModelAndView("passengerRoute.edit", hashMap);
-	}
+    @RequestMapping(value = "/{id}/details", method = RequestMethod.GET)
+    public ModelAndView viewDetailsFromSchedule(@PathVariable(name = "id", required = true) final Integer id) {
+        final IPassengerRoute dbModel = passengerRouteService.getFullInfo(id);
+        final PassengerRouteDTO dto = toDtoConverter.apply(dbModel);
+        final HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("formModel", dto);
+        hashMap.put("readonly", true);
+        loadCommonFormModels(hashMap);
+        loadItems(hashMap, id);
+        loadFromToItems(hashMap, id);
+        return new ModelAndView("route.details", hashMap);
+    }
 
-	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
-		final PassengerRouteDTO dto = toDtoConverter.apply(passengerRouteService.get(id));
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView viewDetails(@PathVariable(name = "id", required = true) final Integer id) {
+        final IPassengerRoute dbModel = passengerRouteService.getFullInfo(id);
+        final PassengerRouteDTO dto = toDtoConverter.apply(dbModel);
+        final HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("formModel", dto);
+        hashMap.put("readonly", true);
+        loadCommonFormModels(hashMap);
+        loadItems(hashMap, id);
+        return new ModelAndView("passengerRoute.edit", hashMap);
+    }
 
-		final HashMap<String, Object> hashMap = new HashMap<>();
-		hashMap.put("formModel", dto);
-		loadCommonFormModels(hashMap);
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    public ModelAndView edit(@PathVariable(name = "id", required = true) final Integer id) {
+        final PassengerRouteDTO dto = toDtoConverter.apply(passengerRouteService.get(id));
 
-		return new ModelAndView("passengerRoute.edit", hashMap);
-	}
+        final HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("formModel", dto);
+        loadCommonFormModels(hashMap);
 
-	private void loadCommonFormModels(final Map<String, Object> hashMap) {
-		List<PassengerRouteType> passengerRouteTypes = new ArrayList<PassengerRouteType>();
-		passengerRouteTypes = Arrays.asList(PassengerRouteType.values());
-		hashMap.put("passengerRouteTypes", passengerRouteTypes);
-		List<Frequency> frequency = Arrays.asList(Frequency.values());
-		hashMap.put("frequency", frequency);
+        return new ModelAndView("passengerRoute.edit", hashMap);
+    }
 
-		final List<ITrain> trains = trainService.find(new TrainFilter());
-		final Map<Integer, String> trainChoices = trains.stream().collect(Collectors.toMap(ITrain::getId, train -> {
-			return train.getId() + " " + train.getTrainType().name();
-		}));
+    private void loadCommonFormModels(final Map<String, Object> hashMap) {
+        List<PassengerRouteType> passengerRouteTypes = new ArrayList<PassengerRouteType>();
+        passengerRouteTypes = Arrays.asList(PassengerRouteType.values());
+        hashMap.put("passengerRouteTypes", passengerRouteTypes);
+        List<Frequency> frequency = Arrays.asList(Frequency.values());
+        hashMap.put("frequency", frequency);
 
-		hashMap.put("trainsChoices", trainChoices);
+        final List<ITrain> trains = trainService.find(new TrainFilter());
+        final Map<Integer, String> trainChoices = trains.stream().collect(Collectors.toMap(ITrain::getId, train -> {
+            return train.getId() + " " + train.getTrainType().name();
+        }));
 
-	}
+        hashMap.put("trainsChoices", trainChoices);
 
-	@RequestMapping(value = "/toStations", method = RequestMethod.GET)
-	public ResponseEntity<List<StationDTO>> getStationsTo(
-			@RequestParam(name = "routeId", required = false) final Integer routeId,
-			@RequestParam(name = "selectedName", required = false) final Integer selectedName) {
-		final List<StationDTO> stationsTo = new ArrayList<StationDTO>();
-		RouteItemFilter filter = new RouteItemFilter();
-		filter.setFetchStationTo(true);
-		List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
+    }
 
-		for (IRouteItem item : routeItems) {
-			if (item.getStationFrom().getId() >= selectedName) {
-				stationsTo.add(stationToDTOConverter.apply(item.getStationTo()));
-			}
-		}
-		return new ResponseEntity<List<StationDTO>>(stationsTo, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/toStations", method = RequestMethod.GET)
+    public ResponseEntity<List<StationDTO>> getStationsTo(
+            @RequestParam(name = "routeId", required = false) final Integer routeId,
+            @RequestParam(name = "selectedName", required = false) final Integer selectedName) {
+        final List<StationDTO> stationsTo = new ArrayList<StationDTO>();
+        RouteItemFilter filter = new RouteItemFilter();
+        filter.setFetchStationTo(true);
+        List<IRouteItem> routeItems = routeItemService.getItems(routeId, filter);
 
-	@RequestMapping(value = "/getPrice", method = RequestMethod.GET)
-	public ResponseEntity<Double> getPrice(@RequestParam(name = "routeId", required = true) final Integer routeId,
-			@RequestParam(name = "selectedFrom", required = true) final Integer selectedFrom,
-			@RequestParam(name = "selectedTo", required = true) final Integer selectedTo) {
+        for (IRouteItem item : routeItems) {
+            if (item.getStationFrom().getId() >= selectedName) {
+                stationsTo.add(stationToDTOConverter.apply(item.getStationTo()));
+            }
+        }
+        return new ResponseEntity<List<StationDTO>>(stationsTo, HttpStatus.OK);
+    }
 
-		Double price = null;
-		IPassengerRoute route = passengerRouteService.getFullInfo(routeId);
-		price = ticketService.calculatePrice(route.getPassengerRouteType(), routeId, selectedFrom, selectedTo);
-		return new ResponseEntity<Double>(price, HttpStatus.OK);
-	}
+    @RequestMapping(value = "/getPrice", method = RequestMethod.GET)
+    public ResponseEntity<Double> getPrice(@RequestParam(name = "routeId", required = true) final Integer routeId,
+            @RequestParam(name = "selectedFrom", required = true) final Integer selectedFrom,
+            @RequestParam(name = "selectedTo", required = true) final Integer selectedTo) {
 
-	private void loadStations(final Map<String, Object> hashMap) {
-		List<IStation> stationsList = stationService.find(new StationFilter());
-		Map<Integer, String> stationChoices = stationsList.stream()
-				.collect(Collectors.toMap(IStation::getId, station -> station.getName()));
-		hashMap.put("stationChoices", stationChoices);
+        Double price = null;
+        IPassengerRoute route = passengerRouteService.getFullInfo(routeId);
+        price = ticketService.calculatePrice(route.getPassengerRouteType(), routeId, selectedFrom, selectedTo);
+        return new ResponseEntity<Double>(price, HttpStatus.OK);
+    }
 
-	}
+    private void loadStations(final Map<String, Object> hashMap) {
+        List<IStation> stationsList = stationService.find(new StationFilter());
+        Map<Integer, String> stationChoices = stationsList.stream()
+                .collect(Collectors.toMap(IStation::getId, station -> station.getName()));
+        hashMap.put("stationChoices", stationChoices);
 
-	private void loadItems(Map<String, Object> hashMap, Integer routeId) {
-		List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
-		RouteItemFilter filter = new RouteItemFilter();
-		filter.setFetchStationFrom(true);
-		filter.setFetchStationTo(true);
-		itemsList = routeItemService.getItems(routeId, filter);
-		if (itemsList == null) {
-			return;
-		}
-		Map<Integer, String> itemChoices = itemsList.stream().collect(Collectors.toMap(IRouteItem::getId, routeItem -> {
-			return routeItem.getStationFrom().getName() + " -> " + routeItem.getStationTo().getName();
-		}));
-		hashMap.put("routeItems", itemChoices);
-		loadPoints(hashMap, itemsList);
+    }
 
-	}
+    private void loadItems(Map<String, Object> hashMap, Integer routeId) {
+        List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
+        RouteItemFilter filter = new RouteItemFilter();
+        filter.setFetchStationFrom(true);
+        filter.setFetchStationTo(true);
+        itemsList = routeItemService.getItems(routeId, filter);
+        if (itemsList == null) {
+            return;
+        }
+        Map<Integer, String> itemChoices = itemsList.stream().collect(Collectors.toMap(IRouteItem::getId, routeItem -> {
+            return routeItem.getStationFrom().getName() + " -> " + routeItem.getStationTo().getName();
+        }));
+        hashMap.put("routeItems", itemChoices);
+        loadPoints(hashMap, itemsList);
 
-	private void loadPoints(Map<String, Object> hashMap, List<IRouteItem> itemsList) {
-		if (itemsList.size() > 0) {
-			double[][] points = new double[itemsList.size() + 1][2];
-			double longSum = 0;
-			double latSum = 0;
-			for (int i = 0; i < itemsList.size(); i++) {
-				points[i][0] = itemsList.get(i).getStationFrom().getLatitude();
-				points[i][1] = itemsList.get(i).getStationFrom().getLongitude();
-				longSum += itemsList.get(i).getStationFrom().getLongitude();
-				latSum += itemsList.get(i).getStationFrom().getLatitude();
-			}
-			points[points.length - 1][0] = itemsList.get(itemsList.size() - 1).getStationTo().getLatitude();
-			points[points.length - 1][1] = itemsList.get(itemsList.size() - 1).getStationTo().getLongitude();
-			longSum += itemsList.get(itemsList.size() - 1).getStationFrom().getLongitude();
-			latSum += itemsList.get(itemsList.size() - 1).getStationFrom().getLatitude();
-			double longAvg = 0;
-			double latAvg = 0;
-			longAvg = longSum / points.length;
-			latAvg = latSum / points.length;
-			hashMap.put("points", new Gson().toJson(points));
-			hashMap.put("avgLat", latAvg);
-			hashMap.put("avgLong", longAvg);
-		}
-	}
+    }
 
-	private void loadFromToItems(Map<String, Object> hashMap, Integer routeId) {
-		List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
-		RouteItemFilter filter = new RouteItemFilter();
-		filter.setFetchStationFrom(true);
-		filter.setFetchStationTo(true);
-		itemsList = routeItemService.getItems(routeId, filter);
-		if (itemsList == null) {
-			return;
-		}
-		Map<Integer, String> fromChoices = itemsList.stream().collect(Collectors.toMap(
-				routeItem -> routeItem.getStationFrom().getId(), routeItem -> routeItem.getStationFrom().getName()));
-		hashMap.put("fromItems", fromChoices);
-		Map<Integer, String> toChoices = itemsList.stream().collect(Collectors
-				.toMap(routeItem -> routeItem.getStationTo().getId(), routeItem -> routeItem.getStationTo().getName()));
-		hashMap.put("toItems", toChoices);
+    private void loadPoints(Map<String, Object> hashMap, List<IRouteItem> itemsList) {
+        if (itemsList.size() > 0) {
+            double[][] points = new double[itemsList.size() + 1][2];
+            double longSum = 0;
+            double latSum = 0;
+            for (int i = 0; i < itemsList.size(); i++) {
+                points[i][0] = itemsList.get(i).getStationFrom().getLatitude();
+                points[i][1] = itemsList.get(i).getStationFrom().getLongitude();
+                longSum += itemsList.get(i).getStationFrom().getLongitude();
+                latSum += itemsList.get(i).getStationFrom().getLatitude();
+            }
+            points[points.length - 1][0] = itemsList.get(itemsList.size() - 1).getStationTo().getLatitude();
+            points[points.length - 1][1] = itemsList.get(itemsList.size() - 1).getStationTo().getLongitude();
+            longSum += itemsList.get(itemsList.size() - 1).getStationFrom().getLongitude();
+            latSum += itemsList.get(itemsList.size() - 1).getStationFrom().getLatitude();
+            double longAvg = 0;
+            double latAvg = 0;
+            longAvg = longSum / points.length;
+            latAvg = latSum / points.length;
+            hashMap.put("points", new Gson().toJson(points));
+            hashMap.put("avgLat", latAvg);
+            hashMap.put("avgLong", longAvg);
+        }
+    }
 
-	}
+    private void loadFromToItems(Map<String, Object> hashMap, Integer routeId) {
+        List<IRouteItem> itemsList = new ArrayList<IRouteItem>();
+        RouteItemFilter filter = new RouteItemFilter();
+        filter.setFetchStationFrom(true);
+        filter.setFetchStationTo(true);
+        itemsList = routeItemService.getItems(routeId, filter);
+        if (itemsList == null) {
+            return;
+        }
+        Map<Integer, String> fromChoices = itemsList.stream().collect(Collectors.toMap(
+                routeItem -> routeItem.getStationFrom().getId(), routeItem -> routeItem.getStationFrom().getName()));
+        hashMap.put("fromItems", fromChoices);
+        Map<Integer, String> toChoices = itemsList.stream().collect(Collectors
+                .toMap(routeItem -> routeItem.getStationTo().getId(), routeItem -> routeItem.getStationTo().getName()));
+        hashMap.put("toItems", toChoices);
+
+    }
 }

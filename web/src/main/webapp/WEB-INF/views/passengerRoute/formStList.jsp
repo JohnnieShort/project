@@ -29,7 +29,7 @@
 
 <div class="row">
 	<form:form class="col s12" method="POST" action="${baseUrl}/saveItem"
-		modelAttribute="routeItemFormModel">
+		modelAttribute="formModel">
 
 		<form:input path="id" type="hidden" />
 
