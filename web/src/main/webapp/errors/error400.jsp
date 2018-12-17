@@ -1,5 +1,6 @@
 <%@ page isErrorPage="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<c:set var="baseUrl" value="${contextPath}/index" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="baseUrl" value="${contextPath}" />
 <html><title>Error Page</title>
 	<body>
 		Request from ${pageContext.errorData.requestURI} is failed

@@ -1,4 +1,5 @@
 <%@ page isErrorPage="true" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html><title>Error Page</title>
 	<body>
 		Request from ${pageContext.errorData.requestURI} is failed
@@ -10,5 +11,8 @@
 		Exception: ${pageContext.exception}
 		<br/>
 		Message from exception: ${pageContext.exception.message}
+        <br/>
+        <a class="btn waves-effect waves-light right" href="${baseUrl}">back<i class="material-icons right"></i>
+                </a>
 	</body>
 </html>

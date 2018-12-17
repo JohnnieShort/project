@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="mytaglib" uri="my-custom-tags-uri"%>
 <c:set var="baseUrl" value="${contextPath}/register" />
-<c:set var="homeUrl" value="${contextPath}/index" />
+<c:set var="homeUrl" value="${contextPath}" />
 <h4 class="header"><mytaglib:i18n key="register.content.header" /></h4>
 <div class="row">
     <form:form class="col s12" method="POST" action="${baseUrl}" modelAttribute="formModel">
@@ -51,7 +51,7 @@
                 <button class="btn waves-effect waves-light" type="submit"><mytaglib:i18n key="register.content.submit" /></button>
             </div>
             <div class="col s6 left-align">
-                <button class="btn waves-effect waves-light light-blue " href="${homeUrl}" type="button"><mytaglib:i18n key="register.content.home" /></button>
+                <a class="btn waves-effect waves-light light-blue " href="${homeUrl}" ><mytaglib:i18n key="register.content.home" /></a>
             </div>
         </div>
     </form:form>
